@@ -5,8 +5,8 @@
   export let widget:PdWidget
 </script>
 
-<g transform="translate({widget.x},{widget.y})">
-  <rect width={widget.width * 4.0} height={widget.height * 4.0}/>
+<g transform="translate({widget.box.origin.x},{widget.box.origin.y})">
+  <rect width={widget.box.size.width} height={widget.box.size.height}/>
   <text x={3} y={16}>{widget.text}</text>
   <text x={3} y={-4} class="annotation">{widget.klass} # {widget.id}</text>
   <g>
@@ -14,7 +14,7 @@
       <Port {port} />
     {/each}
   </g>
-  <g transform="translate(0,20)">
+  <g transform="translate(0, {widget.box.size.height})">
     {#each widget.outlets as port}
       <Port {port} />
     {/each}

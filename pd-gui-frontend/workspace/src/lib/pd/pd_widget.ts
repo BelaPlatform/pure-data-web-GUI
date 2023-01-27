@@ -1,3 +1,5 @@
+import * as G from './geometry'
+
 export enum IOLetScope {
   Input, Output
 }
@@ -17,8 +19,9 @@ export class PdWidget {
   inlets: IOLet[] = []
   outlets: IOLet[] = []
   text: string = ''
-  width: number = 0
-  height: number = 0
+  box: G.Rect
 
-  constructor(public id:string, public klass: string, public x: number = 0, public y: number = 0) { }
+  constructor(public id:string, public klass: string, x: number = 0, y: number = 0) { 
+    this.box = new G.Rect(new G.Point(x, y), new G.Size(0, 0))
+  }
 }

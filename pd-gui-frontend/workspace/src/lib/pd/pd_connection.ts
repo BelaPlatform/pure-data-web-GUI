@@ -1,6 +1,5 @@
+import * as G from './geometry'
+
 export class PdConnection {
-  constructor(public id:string, 
-      public from_x:number = 0, public from_y:number = 0,
-      public to_x:number = 0, public to_y:number = 0) {
-  }
+  constructor(public id:string,  public from:G.Point = G.NullPoint(), public to:G.Point = G.NullPoint()) { }
 }

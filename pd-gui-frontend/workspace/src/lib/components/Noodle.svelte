@@ -3,10 +3,10 @@
 
   export let connection:PdConnection
 
-  $: x1 = connection.from_x
-  $: x2 = connection.to_x
-  $: y1 = connection.from_y
-  $: y2 = connection.to_y
+  $: x1 = connection.from.x
+  $: x2 = connection.to.x
+  $: y1 = connection.from.y
+  $: y2 = connection.to.y
   $: distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2))
   $: offset = distance / 4
   //$: offset = 24

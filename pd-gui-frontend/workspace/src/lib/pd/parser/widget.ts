@@ -109,16 +109,16 @@ function parse_properties(message:string) : Property[] {
 }
 
 function parse_config(message:string) {
-  console.log('parse_config')
+  // console.log('parse_config')
   const tokens = message.split(' ')
   const widget_id = tokens.at(1) || ""
   const pd_ = get(pd)
   const object = pd_.widget_or_connection_with_id(widget_id)
-  console.log(object)
+  // console.log(object)
   // if (!widget) { return }
   const properties = parse_properties(message)
   if (object instanceof PdWidget) {
-    console.log(properties)
+    // console.log(properties)
     properties.forEach(p => {
       switch(p.key) {
         case 'text': {
@@ -126,13 +126,23 @@ function parse_config(message:string) {
         } break;
         case 'size': {
           const size_tokens = p.value.split(' ')
-          object.width = parseFloat(size_tokens[0].trim())
-          object.height = parseFloat(size_tokens[1].trim())
+          object.box.size.width = parseFloat(size_tokens[0].trim()) * 4.0
+          object.box.size.height = parseFloat(size_tokens[1].trim()) * 4.0
         } break;
       }
     })
-  } else {
-    console.log('is a connection')
+  } else if (object instanceof PdConnection) {
+    properties.forEach(p => {
+      switch(p.key) {
+        case 'position': {
+          const coordinate_tokens = p.value.split(' ')
+          object.from.x = parseFloat(coordinate_tokens[0].trim())
+          object.from.y = parseFloat(coordinate_tokens[1].trim())
+          object.to.x = parseFloat(coordinate_tokens[2].trim())
+          object.to.y = parseFloat(coordinate_tokens[3].trim())
+        } break;
+      }
+    })
   }
 }
 

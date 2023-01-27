@@ -3,7 +3,8 @@
 
   import { pd } from '$lib/pd/pd'
   import Node from './Node.svelte'
-    import { IOLetScope, IOLetType } from '$lib/pd/pd_widget';
+  import Noodle from './Noodle.svelte'
+  import { IOLetScope, IOLetType } from '$lib/pd/pd_widget';
 
   $: canvas = $pd.active_canvas
   $: widgets = $canvas.widgets
@@ -19,7 +20,10 @@
 
   <svg xmlns="http://www.w3.org/2000/svg">
     {#each $widgets as widget(widget.id)}
-      <Node widget={widget} />
+      <Node {widget} />
+    {/each}
+    {#each $connections as connection}
+      <Noodle {connection} />
     {/each}
   </svg>
 
@@ -27,7 +31,9 @@
   <ul>
     {#each $connections as connection(connection.id)}
     <li>
-      {connection.id}
+      {connection.id}<br>
+      {connection.from.x} {connection.from.y}<br>
+      {connection.to.x} {connection.to.y}<br>
     </li>
     {/each}
   </ul>
