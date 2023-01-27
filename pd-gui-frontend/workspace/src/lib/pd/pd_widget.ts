@@ -16,6 +16,7 @@ export type IOLet = {
 export class PdWidget {
   inlets: IOLet[] = []
   outlets: IOLet[] = []
+  text: string = ''
 
   constructor(public id:string, public klass: string, public x: number = 0, public y: number = 0) { }
 }

@@ -23,26 +23,6 @@
     {/each}
   </svg>
 
-  <h2>widgets</h2>
-  <ul>
-    {#each $widgets as widget(widget.id)}
-    <li>
-      {widget.id} {widget.klass} &lbrace; {widget.x} {widget.y} &rbrace;<br/>
-      <!-- {widget.inlets.length} {widget.outlets.length} -->
-      inlets: &lbrace;
-      {#each widget.inlets as inlet}
-        {inlet.type == IOLetType.Message ? 'Message' : 'Signal'},&nbsp;
-      {/each}
-      &rbrace;<br/>
-      outlets: &lbrace;
-      {#each widget.outlets as outlet}
-        {outlet.type == IOLetType.Message ? 'Message' : 'Signal'},&nbsp;
-      {/each}
-      &rbrace;
-    </li>
-    {/each}
-  </ul>
-
   <h2>connections</h2>
   <ul>
     {#each $connections as connection(connection.id)}

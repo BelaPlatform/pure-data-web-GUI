@@ -71,6 +71,43 @@ function parse_create_iolets(message:string, scope:IOLetScope) {
   }
 }
 
+type Property = {
+  key: string
+  value: string
+}
+
+function parse_properties(message:string) : Property[] {
+  // console.log(tokens)
+  // let idx = 0
+  const properties:Property[] = []
+  let idx = 0
+  
+  while (message.length != 0) {
+    let key = ''
+    let value = ''
+    const key_start = message.indexOf('-')
+    const key_end = message.indexOf('{')
+    if (key_start != -1 && key_end != -1) {
+      key = message.slice(key_start+1, key_end).trim()
+    } else {
+      return properties
+    }
+    // console.log(`key: ${key}`)
+    message = message.slice(key_end + 1)
+    // const value_start = message.indexOf('{')
+    const value_end = message.indexOf('}')
+    if (value_end != -1) {
+      value = message.slice(0, value_end).trim()
+    } else {
+      return properties
+    }
+    // console.log(`value: ${value}`)
+    message = message.slice(value_end)
+    properties.push({key, value})    
+  }
+  return properties
+}
+
 function parse_config(message:string) {
   console.log('parse_config')
   const tokens = message.split(' ')
@@ -79,8 +116,16 @@ function parse_config(message:string) {
   const object = pd_.widget_or_connection_with_id(widget_id)
   console.log(object)
   // if (!widget) { return }
+  const properties = parse_properties(message)
   if (object instanceof PdWidget) {
-    console.log('is a widget')
+    console.log(properties)
+    properties.forEach(p => {
+      switch(p.key) {
+        case 'text': {
+          object.text = p.value
+        } break;
+      }
+    })
   } else {
     console.log('is a connection')
   }
