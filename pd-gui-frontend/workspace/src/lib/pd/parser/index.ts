@@ -3,9 +3,7 @@ import { parse_canvas_message } from './canvas'
 import { parse_widget_message } from './widget'
 
 export function parse(full_message:string) {
-  console.log('parse')
-  console.log(full_message)
-
+  // console.log(full_message)
   const messages = full_message.split(';\n')
   // console.log(messages)
   messages.forEach(message => {

@@ -18,7 +18,6 @@ export class Pd {
   use_io(io:IO) {
     this.io = io
     this.io.on_message = (event:MessageEvent) => {
-      console.log(event.data)
       parse(event.data)
     }
   }

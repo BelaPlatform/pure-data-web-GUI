@@ -35,14 +35,17 @@
 <div class="wrap" class:visible={show_console}>
   <ul id="messages" bind:this={message_container}>
     {#each $messages as message}
-      {#if message.isIncoming}    
+      {#if message.isIncoming}
         <li class="message">
-          {message.content} {message.repeat_count}
+          {#if message.repeat_count != 0}
+            [{message.repeat_count}]
+          {/if}
+          {message.content}
         </li>
       {:else}
-      <li class="message outgoing" on:click={_ => on_set_message(message.content)} on:keydown={_ => on_set_message(message.content)}>
-        {message.content}
-      </li>
+        <li class="message outgoing" on:click={_ => on_set_message(message.content)} on:keydown={_ => on_set_message(message.content)}>
+          {message.content}
+        </li>
       {/if}
     {/each}
   </ul>

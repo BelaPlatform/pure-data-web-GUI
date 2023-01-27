@@ -18,7 +18,10 @@ export function parse_window_message(message:string) {
     // console.log(left_brace)
     const right_brace = message.indexOf('}')
     // console.log(right_brace)
-    const message_payload = message.substring(left_brace + 1, right_brace)
+    const message_payload = message.substring(left_brace + 1, right_brace).trim()
+    if (message_payload.length == 0) {
+      return
+    }
     PdMessages.push(message_payload)
     // console.log(post)
   }  

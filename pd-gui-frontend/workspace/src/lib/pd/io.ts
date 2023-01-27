@@ -15,7 +15,7 @@ export class WebSocketIO extends IO {
     this.socket = new WebSocket(address)
     this.socket.onmessage = (event:MessageEvent) => {
       this.on_message(event)
-    }    
+    }
   }
 
   send(message:string) {
