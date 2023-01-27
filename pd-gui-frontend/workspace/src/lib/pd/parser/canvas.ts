@@ -15,12 +15,12 @@ export function parse_canvas_message(message:string) {
   }
 
   if (message.startsWith("pdtk_canvas_setparents")) {
-    console.log('pdtk_setparents')
+    // console.log('pdtk_setparents')
   }
 
   if (message.startsWith("pdtk_canvas_reflecttitle")) {
-    console.log('pdtk_canvas_reflecttitle')
-    console.log(message)
+    // console.log('pdtk_canvas_reflecttitle')
+    // console.log(message)
     const tokens = message.split(' ')
     const id = tokens.at(1) || ""
     const canvas = pd_.canvas_with_id(id)
@@ -29,7 +29,7 @@ export function parse_canvas_message(message:string) {
       return
     }
     const title = (tokens.at(3) || "").replace('{', '').replace('}', '')
-    console.log(title)
+    // console.log(title)
     canvas.title = title
   }
 }

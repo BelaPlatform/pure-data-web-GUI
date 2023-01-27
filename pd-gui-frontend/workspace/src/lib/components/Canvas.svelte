@@ -2,11 +2,13 @@
   import { onMount } from 'svelte'
 
   import { pd } from '$lib/pd/pd'
+  import Node from './Node.svelte'
+    import { IOLetScope, IOLetType } from '$lib/pd/pd_widget';
 
   $: canvas = $pd.active_canvas
   $: widgets = $canvas.widgets
   $: connections = $canvas.connections
-  
+
   onMount(() => {
     console.log('Canavs::onMount')
   })
@@ -15,12 +17,28 @@
 <div class="wrap">
   {$canvas.title} {$canvas.id}
 
+  <svg xmlns="http://www.w3.org/2000/svg">
+    {#each $widgets as widget(widget.id)}
+      <Node widget={widget} />
+    {/each}
+  </svg>
+
   <h2>widgets</h2>
   <ul>
     {#each $widgets as widget(widget.id)}
     <li>
-      {widget.id} {widget.klass} &lbrace; {widget.x} {widget.y} &rbrace;
-      {widget.inlets} {widget.outlets}
+      {widget.id} {widget.klass} &lbrace; {widget.x} {widget.y} &rbrace;<br/>
+      <!-- {widget.inlets.length} {widget.outlets.length} -->
+      inlets: &lbrace;
+      {#each widget.inlets as inlet}
+        {inlet.type == IOLetType.Message ? 'Message' : 'Signal'},&nbsp;
+      {/each}
+      &rbrace;<br/>
+      outlets: &lbrace;
+      {#each widget.outlets as outlet}
+        {outlet.type == IOLetType.Message ? 'Message' : 'Signal'},&nbsp;
+      {/each}
+      &rbrace;
     </li>
     {/each}
   </ul>
@@ -42,5 +60,9 @@
 
   li {
     list-style: none;
+  }
+
+  svg {
+    height: 360px;
   }
 </style>

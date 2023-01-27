@@ -5,6 +5,7 @@ import { PdCanvas } from './pd_canvas'
 import { IO, NullIO } from './io'
 import type { PatchFile } from '$lib/stores/patches'
 import type { PdWidget } from './pd_widget'
+import type { PdConnection } from './pd_connection'
 
 const NullCanvas = new PdCanvas('nil')
 
@@ -56,7 +57,6 @@ export class Pd {
 
   widget_with_id(id:string): PdWidget|null {
     for(let canvas of get(this.canvases)) {
-      console.log(canvas)
       for (let widget of get(canvas.widgets)) {
         if (widget.id == id) {
           return widget
@@ -65,6 +65,23 @@ export class Pd {
     }
     return null
   }
+
+  widget_or_connection_with_id(id:string): PdWidget|PdConnection|null {
+    for(let canvas of get(this.canvases)) {
+      for (let widget of get(canvas.widgets)) {
+        if (widget.id == id) {
+          return widget
+        }
+      }
+      for (let connection of get(canvas.connections)) {
+        if (connection.id == id) {
+          return connection
+        }
+      }
+    }
+    return null
+  }
+
 }
 
 export const pd = writable<Pd>(new Pd())

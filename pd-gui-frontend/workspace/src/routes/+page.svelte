@@ -3,14 +3,9 @@
 
   import { pd } from '$lib/pd/pd'
   import { WebSocketIO } from '$lib/pd/io'
-  
   import { available_patches } from '$lib/stores/patches'
   import Console from '$lib/components/Console.svelte'
   import Canvas from '$lib/components/Canvas.svelte'
-
-  let patches = [
-    "/home/hase/Documents/Pd/hello.pd"
-  ]
 
   async function on_send_message(event:CustomEvent) {
     const message = event.detail
@@ -19,9 +14,6 @@
     $pd.send(message)
   }
 
-  $: canvases = $pd.canvases
-
-  let open_patch_form:HTMLFormElement
   let selected_patch:any
   async function on_open_patch() {
     $pd.open_patch(selected_patch)
@@ -32,6 +24,8 @@
   onMount(()  => {
     $pd.use_io(new WebSocketIO('ws://localhost:8081'))
   })
+
+  $: canvases = $pd.canvases
 </script>
 
 <div class="l2r">
@@ -51,10 +45,10 @@
 </div>
 
 <div>
-  <form on:submit|preventDefault={_ => on_open_patch()} bind:this={open_patch_form}>
+  <form on:submit|preventDefault={_ => on_open_patch()}>
     <select bind:value={selected_patch} name="patch" id="patch">
       {#each $available_patches as patch}
-      <option value={patch}>{patch.file}</option>
+        <option value={patch}>{patch.file}</option>
       {/each}
     </select>
     <button type="submit">Open</button>
