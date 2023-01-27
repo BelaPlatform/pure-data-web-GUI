@@ -1,0 +1,32 @@
+{
+	"name": "workspace",
+	"version": "1.0.0",
+	"description": "",
+	"private": true,
+	"os": [
+		"linux"
+	],
+	"packageManager": "pnpm@7.24.3",
+	"engines": {
+		"node:": "^19.4",
+		"pnpm": "^7.24.3"
+	},
+	"main": "dist/main.js",
+	"scripts": {
+		"start:watch": "tsc-watch --onSuccess \"node .\"",
+		"build": "tsc main.ts",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/node": "^18.11.18",
+		"@types/ws": "^8.5.4",
+		"tsc-watch": "^6.0.0",
+		"typescript": "^4.9.4"
+	},
+	"dependencies": {
+		"ws": "^8.12.0"
+	}
+}
