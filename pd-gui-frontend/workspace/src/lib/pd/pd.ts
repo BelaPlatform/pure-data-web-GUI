@@ -4,6 +4,7 @@ import { parse } from './parser'
 import { PdCanvas } from './pd_canvas'
 import { IO, NullIO } from './io'
 import type { PatchFile } from '$lib/stores/patches'
+import type { PdWidget } from './pd_widget'
 
 const NullCanvas = new PdCanvas('nil')
 
@@ -12,17 +13,13 @@ export class Pd {
   canvases = writable<PdCanvas[]>([])
   active_canvas = writable<PdCanvas>(NullCanvas)
 
-  constructor() {
-    console.log('Pd')
-  }
+  constructor() {}
 
   use_io(io:IO) {
     this.io = io
     this.io.on_message = (event:MessageEvent) => {
       console.log(event.data)
       parse(event.data)
-      // console.log(typeof event.data)
-      // posts_ = [{data: event.data}].concat(posts_)
     }
   }
 
@@ -47,12 +44,7 @@ export class Pd {
     }
   }
 
-  ping() {
-    console.log('ping')
-  }
-
   new_canvas_with_id(id:string) {
-    // console.log('PdtkCanvasList::push')
     this.canvases.update((cs:PdCanvas[]) => {
       cs = cs.concat([new PdCanvas(id)])
       return cs
@@ -61,6 +53,18 @@ export class Pd {
 
   canvas_with_id(id:string) {
     return get(this.canvases).find(canvas => canvas.id == id)
+  }
+
+  widget_with_id(id:string): PdWidget|null {
+    for(let canvas of get(this.canvases)) {
+      console.log(canvas)
+      for (let widget of get(canvas.widgets)) {
+        if (widget.id == id) {
+          return widget
+        }
+      }
+    }
+    return null
   }
 }
 

@@ -15,7 +15,7 @@ const server = net.createServer((client) => {
     console.log('client disconnected')
   })
   client.on('data', (data) => {
-    console.log(`pd said ${data}`)
+    console.log(`${data}`)
     if (ws_client) {
       ws_client.send(`${data}`)
     }

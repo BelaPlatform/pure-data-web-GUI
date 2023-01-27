@@ -17,6 +17,7 @@ export class PdMessageList {
 
   push(content:string, direction:Direction = Direction.Incoming) {
     const message = new PdMessage(content, direction)
+    
     this.messages.update((ms:PdMessage[]) => {
       ms = ms.concat([message])
       return ms

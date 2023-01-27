@@ -2,6 +2,7 @@ import { get } from 'svelte/store'
 
 import { pd } from '../pd'
 import { PdWidget } from '../pd_widget'
+import { PdConnection } from '../pd_connection'
 
 function parse_create(message:string) {
   console.log('::pdwidget::create')
@@ -11,8 +12,6 @@ function parse_create(message:string) {
   const klass = tokens.at(1) || ""
   const id = tokens.at(2) || ""
   const canvas_id = (tokens.at(3) || "").split('.c')[0]
-  const x = tokens.at(4) || ""
-  const y = tokens.at(5) || ""
 
   const pd_ = get(pd)
   const canvas = pd_.canvas_with_id(canvas_id)
@@ -22,8 +21,11 @@ function parse_create(message:string) {
   }
 
   if (klass == 'connection') {
-    // console.log("klass == 'connection'")
+    const connection = new PdConnection(id)
+    canvas.add_connection(connection)
   } else {
+    const x = tokens.at(4) || ""
+    const y = tokens.at(5) || ""
     const widget = new PdWidget(id, klass, parseInt(x), parseInt(y))
     canvas.add_widget(widget)
     // console.log(widget)
@@ -31,13 +33,21 @@ function parse_create(message:string) {
 }
 
 function parse_create_inlets(message:string) {
-  console.log('parse_create_inlets')
-  console.log(message)
+  const tokens = message.split(' ')
+  const widget_id = tokens.at(1) || ""
+  const pd_ = get(pd)
+  const widget = pd_.widget_with_id(widget_id)
+  if (!widget) { return }
+  widget.inlets++
 }
 
 function parse_create_outlets(message:string) {
-  console.log('parse_create_outlets')
-  console.log(message)
+  const tokens = message.split(' ')
+  const widget_id = tokens.at(1) || ""
+  const pd_ = get(pd)
+  const widget = pd_.widget_with_id(widget_id)
+  if (!widget) { return }
+  widget.outlets++
 }
 
 export function parse_widget_message(message:string) {
