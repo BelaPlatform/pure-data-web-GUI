@@ -6,9 +6,9 @@
 </script>
 
 <g transform="translate({widget.x},{widget.y})">
-  <rect width={120} height={24}/>
+  <rect width={widget.width * 4.0} height={widget.height * 4.0}/>
   <text x={3} y={16}>{widget.text}</text>
-  <text x={3} y={40} class="annotation">{widget.klass} # {widget.id}</text>
+  <text x={3} y={-4} class="annotation">{widget.klass} # {widget.id}</text>
   <g>
     {#each widget.inlets as port}
       <Port {port} />

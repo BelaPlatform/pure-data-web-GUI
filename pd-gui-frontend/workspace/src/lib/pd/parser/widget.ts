@@ -124,6 +124,11 @@ function parse_config(message:string) {
         case 'text': {
           object.text = p.value
         } break;
+        case 'size': {
+          const size_tokens = p.value.split(' ')
+          object.width = parseFloat(size_tokens[0].trim())
+          object.height = parseFloat(size_tokens[1].trim())
+        } break;
       }
     })
   } else {
