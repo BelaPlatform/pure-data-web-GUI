@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { pd } from '../pd'
-import { PdWidget, IOLetScope, IOLet, IOLetType } from '../pd_widget'
+import { PdWidget, IOLetScope, type IOLet, IOLetType } from '../pd_widget'
 import { PdConnection } from '../pd_connection'
 
 function parse_create(message:string) {
@@ -40,11 +40,15 @@ function parse_create(message:string) {
 function parse_create_iolets(message:string, scope:IOLetScope) {
   const tokens = message.split(' ')
   const widget_id = tokens.at(1) || ""
+  const pd_ = get(pd)
+  const widget = pd_.widget_with_id(widget_id)
+  if (!widget) { return }
 
   const iolets:IOLet[] = []
   const left_brace = message.indexOf('{')
   const right_brace = message.indexOf('}')
   const let_descriptors = message.substring(left_brace+1, right_brace).split(' ')
+  let index = 0
   let_descriptors.forEach(d => {
     // console.log(d)
     const trimmed = d.trim()
@@ -52,13 +56,11 @@ function parse_create_iolets(message:string, scope:IOLetScope) {
       return
     }
     const type = parseFloat(trimmed) == 0.0 ? IOLetType.Message : IOLetType.Signal
-    iolets.push(new IOLet(scope, type))
+    iolets.push({index, widget, scope, type})
+    ++index
   })
   // console.log(let_descriptors)
 
-  const pd_ = get(pd)
-  const widget = pd_.widget_with_id(widget_id)
-  if (!widget) { return }
   switch (scope) {
     case IOLetScope.Input:
       widget.inlets = iolets

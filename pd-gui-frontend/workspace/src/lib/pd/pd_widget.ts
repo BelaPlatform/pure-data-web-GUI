@@ -6,8 +6,11 @@ export enum IOLetType {
   Message, Signal
 }
 
-export class IOLet {
-  constructor(public scope: IOLetScope, public type: IOLetType) {}
+export type IOLet = {
+  index: number
+  widget: PdWidget
+  scope: IOLetScope
+  type: IOLetType
 }
 
 export class PdWidget {
