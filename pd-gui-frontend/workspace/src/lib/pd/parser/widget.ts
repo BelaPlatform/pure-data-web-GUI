@@ -128,10 +128,11 @@ function parse_config(message:string) {
       switch(p.key) {
         case 'position': {
           const coordinate_tokens = p.value.split(' ')
-          object.from.x = parseFloat(coordinate_tokens[0].trim())
-          object.from.y = parseFloat(coordinate_tokens[1].trim())
-          object.to.x = parseFloat(coordinate_tokens[2].trim())
-          object.to.y = parseFloat(coordinate_tokens[3].trim())
+          const from_x = parseFloat(coordinate_tokens[0].trim())
+          const from_y = parseFloat(coordinate_tokens[1].trim())
+          const to_x = parseFloat(coordinate_tokens[2].trim())
+          const to_y = parseFloat(coordinate_tokens[3].trim())
+          object.set_coordinates(from_x, from_y, to_x, to_y)
         } break;
       }
     })
