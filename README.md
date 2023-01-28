@@ -1,23 +1,23 @@
-# overview
+# Overview
 
 To make Pd send it's gui procotol data to us, we have to give it a TCP port at startup
 
 `pd -guiport 56026`
 
-On the frontend side, we have to use WebSockets, though. Thus, we need a shim between pd and the frontend.
+On the frontend side, we have to use WebSockets though. Thus, we need a shim between Pd and the frontend.
 
 
-# setup pd
+# Setup Pd
 
-currently, the core->gui cummunication is a PR of a POC by umlaeute 
+currently, the core→gui communication is a PR of a POC by umlaeute 
 https://github.com/pure-data/pure-data/pull/1765
 
-## get pd code
+## Get Pd code
 
 https://github.com/umlaeute/pure-data.git
 check out branch remotes/origin/feature/1695/draft-1
 
-## build & install
+## Build & install
 
 `./autogen.sh`
 
@@ -28,7 +28,7 @@ check out branch remotes/origin/feature/1695/draft-1
 `sudo make install`
 
 
-# run it
+# Run it
 
 the order of steps is important
 
@@ -38,23 +38,23 @@ the order of steps is important
 
 `./run-dev.sh`
 
-### inside docker
+### Inside Docker
 
 dvlpr@frontend:/workspace$ `pnpm start:watch`
 
 
-## start pd
+## Start Pd
 
 `/opt/pd-gui/bin/pd -guiport 56026`
 
 
-## run the frontend
+## Run the Frontend
 
 `cd pd-gui-frontend`
 
 `./run-dev.sh`
 
-### inside docker
+### Inside Docker
 
 dvlpr@frontend:/workspace$ `pnpm start:watch`
 
