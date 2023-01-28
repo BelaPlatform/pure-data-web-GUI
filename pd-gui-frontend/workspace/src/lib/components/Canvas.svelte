@@ -26,7 +26,29 @@
     $canvas.send_motion(event.offsetX, event.offsetY)
   }
 
+  function on_keydown(event:KeyboardEvent) {
+    console.log(event)
+    // which is deprecated
+    // console.log(event.which)
+    
+    // keyCode is deprecated
+    // console.log(event.keyCode)
+
+    // code represents the actual key on a keyboard
+    // keyboard layouts are not atken into account
+    // console.log(event.code)
+
+    // key: what's that?
+    console.log(event.key)
+  }
+
+  function on_keyup(event:KeyboardEvent) {
+    console.log(event)
+  }  
+  
 </script>
+
+<svelte:window on:keydown={on_keydown} on:keyup={on_keyup}/>
 
 <div class="wrap">
   <svg xmlns="http://www.w3.org/2000/svg"

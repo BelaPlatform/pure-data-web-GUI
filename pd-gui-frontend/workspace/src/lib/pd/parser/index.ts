@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 
 import { pd } from '$lib/stores/pd'
 import { parse_window_message } from './window'
-import { parse_canvas_message } from './canvas'
+import { parse_pdtk_canvas_message, parse_canvas_message } from './canvas'
 import { parse_widget_message } from './widget'
 
 export function parse(full_message:string) {
@@ -16,6 +16,10 @@ export function parse(full_message:string) {
     }
 
     if (message.startsWith("pdtk_canvas")) {
+      parse_pdtk_canvas_message(message)
+    }
+
+    if (message.startsWith("::pd::canvas")) {
       parse_canvas_message(message)
     }
 
