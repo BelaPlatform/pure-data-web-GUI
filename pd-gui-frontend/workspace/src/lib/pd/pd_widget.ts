@@ -52,4 +52,8 @@ export class PdWidget {
   set_text(txt:string) {
     this.text.update(_ => { return txt })
   }
+
+  set_is_activated(value:boolean) {
+    this.is_activated.update(_ => { return value })
+  }
 }

@@ -158,7 +158,7 @@ function parse_bang_or_toggle_activate(message:string) {
   }
   
   const value = tokens.at(2) || "0"
-  object.is_activated.update(_ => parseInt(value) == 1)
+  object.set_is_activated(parseInt(value) == 1)
   // console.log(object)
 }
 

@@ -52,7 +52,7 @@ export class Pd {
     this.send(message)
   }
 
-  send_motion(x: number, y: number, button: number) {
+  send_motion(x: number, y: number) {
     const canvas_id = get(this.active_canvas).id
     const message = `${canvas_id} motion ${x * 1.0} ${y * 1.0} 0;`
     this.send(message)

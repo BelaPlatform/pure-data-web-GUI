@@ -9,8 +9,6 @@
 
   async function on_send_message(event:CustomEvent) {
     const message = event.detail
-    // console.log(`message ${message}`)
-    // socket.send(message)
     $pd.send(message)
   }
 
@@ -29,6 +27,17 @@
   $: canvases = $pd.canvases
 </script>
 
+<header>
+  <form on:submit|preventDefault={_ => on_open_patch()}>
+    <select bind:value={selected_patch} name="patch" id="patch">
+      {#each $available_patches as patch}
+        <option value={patch}>{patch.file}</option>
+      {/each}
+    </select>
+    <button type="submit">Open</button>
+  </form>
+</header>
+
 <div class="l2r">
   <aside>
     <ul class="canvas-list">
@@ -45,21 +54,15 @@
   </main>
 </div>
 
-<div>
-  <form on:submit|preventDefault={_ => on_open_patch()}>
-    <select bind:value={selected_patch} name="patch" id="patch">
-      {#each $available_patches as patch}
-        <option value={patch}>{patch.file}</option>
-      {/each}
-    </select>
-    <button type="submit">Open</button>
-  </form>
-</div>
 <footer>
   <Console show_console={true} on:send_message={(event) => on_send_message(event)} />
 </footer>
 
 <style lang="scss">
+  header {
+    margin-bottom: 12px;
+  }
+
   .l2r {
     border: #f00 solid thin;
     display: flex;
@@ -77,7 +80,7 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: 240px;
+    width: 144px;
 
     li {
       text-decoration: underline;

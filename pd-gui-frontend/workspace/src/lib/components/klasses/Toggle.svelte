@@ -12,10 +12,10 @@
 
 <style lang="scss">
   line {
-    stroke: #000;
+    stroke: #fff;
     stroke-width: 0.5;
     &.is_activated {
-      stroke: #fff;
+      stroke: #000;
     }
   }
 </style>

@@ -40,7 +40,7 @@
   </svg>
   <br>
   
-  {$canvas.title} {$canvas.id}
+  <!-- {$canvas.title} {$canvas.id}
   <h4>widgets</h4>
   <ul>
   {#each $widgets as widget(widget.id)}
@@ -58,23 +58,23 @@
       {connection.id} &lbrace;({connection.from.x}/{connection.from.y}), ({connection.to.x} {connection.to.y})&rbrace;
     </li>
     {/each}
-  </ul>
+  </ul> -->
 </div>
 
 <style lang="scss">
-  .wrap {
-    background-color: #def;
-  }
+  // .wrap {
+  //   background-color: #def;
+  // }
 
-  h4 {
-    margin: 0;
-  }
+  // h4 {
+  //   margin: 0;
+  // }
 
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
+  // ul {
+  //   list-style: none;
+  //   margin: 0;
+  //   padding: 0;
+  // }
 
   svg {
     width: 100%;
