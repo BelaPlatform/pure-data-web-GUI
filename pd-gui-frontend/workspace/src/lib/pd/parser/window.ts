@@ -24,5 +24,5 @@ export function parse_window_message(message:string) {
     }
     PdMessages.push(message_payload)
     // console.log(post)
-  }  
+  }
 }

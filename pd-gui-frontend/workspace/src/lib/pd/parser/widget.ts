@@ -159,6 +159,22 @@ function parse_config(message:string) {
   }
 }
 
+function parse_bang_or_toggle_activate(message:string) {
+  // console.log('parse_bang_activate')
+  // console.log(message)
+  const tokens = message.split(' ')
+  const widget_id = tokens.at(1) || ""
+  const pd_ = get(pd)
+  const object = pd_.widget_with_id(widget_id)
+  if (!object) {
+    return
+  }
+  
+  const value = tokens.at(2) || "0"
+  object.is_activated.update(_ => parseInt(value) == 1)
+  // console.log(object)
+}
+
 export function parse_widget_message(message:string) {
   if (message.startsWith("::pdwidget::create_inlets")) {
     parse_create_iolets(message, IOLetScope.Input)
@@ -189,5 +205,10 @@ export function parse_widget_message(message:string) {
 
   if (message.startsWith("::pdwidget::create_outlets")) {
     // console.log('::pdwidget::create_outlets')
+  }
+
+  if (message.startsWith("::pdwidget::bang::activate") 
+    || message.startsWith("::pdwidget::toggle::activate")) {
+    parse_bang_or_toggle_activate(message)
   }
 }
