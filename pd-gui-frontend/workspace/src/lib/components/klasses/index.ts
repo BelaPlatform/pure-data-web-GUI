@@ -2,6 +2,7 @@ import Object from './Object.svelte'
 import Bang from './Bang.svelte'
 import Toggle from './Toggle.svelte'
 import Message from './Message.svelte'
+import Comment from './Comment.svelte'
 
 export class Klass {
   constructor(public name:string, public impl:any) {}
@@ -16,6 +17,7 @@ export class KlassLibrary_ {
       new Klass("bang", Bang),
       new Klass("toggle", Toggle),
       new Klass("message", Message),
+      new Klass("comment", Comment),
     ]
   }
 
