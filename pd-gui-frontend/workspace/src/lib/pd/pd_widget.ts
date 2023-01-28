@@ -1,6 +1,7 @@
 import { writable, get } from 'svelte/store'
 
 import * as G from './geometry'
+import { Klass, KlassLibrary } from '$lib/components/klasses'
 
 export enum IOLetScope {
   Input, Output
@@ -31,9 +32,11 @@ export class PdWidget {
   text: string = ''
   box: G.Rect
   is_activated = writable<boolean>(false)
+  klass: Klass
 
-  constructor(public id:string, public klass: string, x: number = 0, y: number = 0) { 
+  constructor(public id:string, public klassname: string, x: number = 0, y: number = 0) { 
     this.box = new G.Rect(new G.Point(x, y), new G.Size(0, 0))
+    this.klass = KlassLibrary.klass_for_klassname(this.klassname)
   }
 
   add_iolet(scope: IOLetScope, type: IOLetType) {

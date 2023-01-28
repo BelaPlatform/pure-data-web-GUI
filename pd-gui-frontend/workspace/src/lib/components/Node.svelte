@@ -3,22 +3,14 @@
   import type { PdWidget } from '$lib/pd/pd_widget'
 
   export let widget:PdWidget
-  $: is_activated = widget.is_activated
 </script>
 
 <g transform="translate({widget.box.origin.x},{widget.box.origin.y})">
   <rect width={widget.box.size.width} height={widget.box.size.height}/>
-  <text x={3} y={16}>
-    {#if widget.klass == 'bang'}
-      {$is_activated ? 'B' : ''}
-    {:else if widget.klass == 'toggle'}
-      {$is_activated ? 'X' : ''}
-    {:else} 
-      {widget.text}
-    {/if}
-  </text>
 
-  <text x={3} y={-4} class="annotation">{widget.klass} # {widget.id}</text>
+  <svelte:component this={widget.klass.impl} {widget} />
+
+  <text x={3} y={-4} class="annotation">{widget.id}</text>
   <g>
     {#each widget.inlets as port}
       <Port {port} />
