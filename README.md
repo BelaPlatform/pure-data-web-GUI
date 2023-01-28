@@ -20,16 +20,44 @@ check out branch remotes/origin/feature/1695/draft-1
 ## build & install
 
 `./autogen.sh`
+
 `./configure --enable-fftw --enable-libpd --enable-libpd-instance --prefix=/opt/pd-gui`
+
 `make`
+
 `sudo make install`
 
 
-# build the shim
+# run it
 
-`cmake -S . -B cmake-build-debug -G Ninja`
-`cmake --build cmake-build-debug`
+the order of steps is important
+
+## run the shim
+
+`cd pd-gui-shim`
+
+`./run-dev.sh`
+
+### inside docker
+
+dvlpr@frontend:/workspace$ `pnpm start:watch`
 
 
-# run the frontend
+## start pd
+
+`/opt/pd-gui/bin/pd -guiport 56026`
+
+
+## run the frontend
+
+`cd pd-gui-frontend`
+
+`./run-dev.sh`
+
+### inside docker
+
+dvlpr@frontend:/workspace$ `pnpm start:watch`
+
+visit http://localhost:5173
+
 
