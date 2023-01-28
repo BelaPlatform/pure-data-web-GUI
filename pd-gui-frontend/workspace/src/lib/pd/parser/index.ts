@@ -1,9 +1,12 @@
+import { get } from 'svelte/store'
+
+import { pd } from '../pd'
 import { parse_window_message } from './window'
 import { parse_canvas_message } from './canvas'
 import { parse_widget_message } from './widget'
 
 export function parse(full_message:string) {
-  // console.log(full_message)
+  console.log(full_message)
   const messages = full_message.split(';\n')
   // console.log(messages)
   messages.forEach(message => {
@@ -18,6 +21,10 @@ export function parse(full_message:string) {
 
     if (message.startsWith("::pdwidget")) {
       parse_widget_message(message)
+    }
+
+    if (message.startsWith("pdtk_ping")) {
+      get(pd).send_ping()
     }
   })
 }

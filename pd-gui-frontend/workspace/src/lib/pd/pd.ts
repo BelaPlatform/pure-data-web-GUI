@@ -35,6 +35,11 @@ export class Pd {
     this.send(message)
   }
 
+  send_ping() {
+    const message = "pd ping;"
+    this.send(message)
+  }
+
   open_patch(patch:PatchFile) {
     const split_idx = patch.file.lastIndexOf('/')
     const path = patch.file.substring(0, split_idx + 1)
