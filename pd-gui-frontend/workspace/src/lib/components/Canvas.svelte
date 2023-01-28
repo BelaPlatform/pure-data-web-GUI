@@ -11,13 +11,11 @@
   $: connections = $canvas.connections
 
   onMount(() => {
-    console.log('Canavs::onMount')
+    // console.log('Canavs::onMount')
   })
 </script>
 
 <div class="wrap">
-  {$canvas.title} {$canvas.id}
-
   <svg xmlns="http://www.w3.org/2000/svg">
     {#each $widgets as widget(widget.id)}
       <Node {widget} />
@@ -26,14 +24,21 @@
       <Noodle {connection} />
     {/each}
   </svg>
+  <br>
+  
+  {$canvas.title} {$canvas.id}
+  <h4>widgets</h4>
+  <ul>
+  {#each $widgets as widget(widget.id)}
+    <li>{widget.klass} {widget.text} {widget.id} ({widget.box.size.width}/{widget.box.size.height})</li>
+  {/each}
+  </ul>
 
-  <h2>connections</h2>
+  <h4>connections</h4>
   <ul>
     {#each $connections as connection(connection.id)}
     <li>
-      {connection.id}<br>
-      {connection.from.x} {connection.from.y}<br>
-      {connection.to.x} {connection.to.y}<br>
+      {connection.id} &lbrace;({connection.from.x}/{connection.from.y}), ({connection.to.x} {connection.to.y})&rbrace;
     </li>
     {/each}
   </ul>
@@ -44,11 +49,19 @@
     background-color: #def;
   }
 
-  li {
+  h4 {
+    margin: 0;
+  }
+
+  ul {
     list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
   svg {
+    width: 100%;
     height: 360px;
+    border: #0f0 solid thin;
   }
 </style>

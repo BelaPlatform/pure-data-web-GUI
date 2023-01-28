@@ -1,5 +1,6 @@
 export abstract class IO {
   on_message:Function = () => {}
+  on_open:Function = () => {}
   abstract send(message:string) : void
 }
 
@@ -13,6 +14,9 @@ export class WebSocketIO extends IO {
   constructor(address:string) {
     super()
     this.socket = new WebSocket(address)
+    this.socket.onopen = () => {
+      this.on_open()
+    }
     this.socket.onmessage = (event:MessageEvent) => {
       this.on_message(event)
     }

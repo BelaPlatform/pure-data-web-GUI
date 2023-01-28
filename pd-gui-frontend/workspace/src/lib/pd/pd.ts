@@ -18,6 +18,9 @@ export class Pd {
 
   use_io(io:IO) {
     this.io = io
+    this.io.on_open = () => {
+      this.send_init_sequence()
+    }
     this.io.on_message = (event:MessageEvent) => {
       parse(event.data)
     }
@@ -25,6 +28,11 @@ export class Pd {
 
   send(message:string) {
     this.io.send(message)
+  }
+
+  send_init_sequence() {
+    const message = "pd init /home/hase/Workspace/AIL/bela2-develop/proto/pd-gui/pure-data 0  8 5 10 10 6 13 12 7 15 16 10 19 24 14 29 37 22 44 17 10 20 20 12 24 24 14 29 32 19 38 47 28 56 73 44 86;"
+    this.send(message)
   }
 
   open_patch(patch:PatchFile) {

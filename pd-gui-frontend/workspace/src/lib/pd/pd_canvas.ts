@@ -6,10 +6,10 @@ import type { PdWidget } from './pd_widget'
 
 export class PdCanvas {
   title: string = ""
-  is_mapped: boolean = false
   widgets = writable<PdWidget[]>([])
   connections = writable<PdConnection[]>([])
-
+  is_mapped: boolean = false
+  edit_mode: boolean = true
   constructor(public id: string) {}
 
   add_widget(widget:PdWidget) {

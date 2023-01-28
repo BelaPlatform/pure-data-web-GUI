@@ -110,6 +110,7 @@ function parse_properties(message:string) : Property[] {
 
 function parse_config(message:string) {
   // console.log('parse_config')
+  console.log(message)
   const tokens = message.split(' ')
   const widget_id = tokens.at(1) || ""
   const pd_ = get(pd)
@@ -126,8 +127,8 @@ function parse_config(message:string) {
         } break;
         case 'size': {
           const size_tokens = p.value.split(' ')
-          object.box.size.width = parseFloat(size_tokens[0].trim()) * 4.0
-          object.box.size.height = parseFloat(size_tokens[1].trim()) * 4.0
+          object.box.size.width = parseFloat(size_tokens[0].trim())// * 4.0
+          object.box.size.height = parseFloat(size_tokens[1].trim())// * 4.0
         } break;
       }
     })

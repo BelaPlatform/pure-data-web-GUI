@@ -23,6 +23,7 @@
   // otherwise, svelte's server-side-prerendering would try to instantiate the WS and fail
   onMount(()  => {
     $pd.use_io(new WebSocketIO('ws://localhost:8081'))
+    // $pd.send_init_sequence()
   })
 
   $: canvases = $pd.canvases

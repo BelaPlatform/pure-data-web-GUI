@@ -23,8 +23,15 @@
 
 <style lang="scss">
   rect {
-    stroke: #f00;
+    stroke: #666;
     fill: #fff;
+    shape-rendering: crispEdges;
+  }
+
+  text {
+    user-select: none;
+    font-family: 'DejaVu Sans Mono', 'Courier New', Courier, monospace;
+    font-size: 12px;
   }
 
   .annotation {
