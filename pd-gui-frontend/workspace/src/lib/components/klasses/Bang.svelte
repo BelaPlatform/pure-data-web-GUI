@@ -1,10 +1,12 @@
 <script lang="ts">
   import type { PdWidget } from '$lib/pd/pd_widget'
+  import NodeBase from './NodeBase.svelte'
 
   export let widget:PdWidget
   $: is_activated = widget.is_activated
 </script>
 
+<NodeBase {widget} />
 <circle r={6} cx={7} cy={7} class:is_activated={$is_activated} />
 
 <style lang="scss">

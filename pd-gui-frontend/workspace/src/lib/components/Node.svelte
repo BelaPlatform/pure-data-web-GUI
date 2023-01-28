@@ -6,10 +6,7 @@
 </script>
 
 <g transform="translate({widget.box.origin.x},{widget.box.origin.y})">
-  <rect width={widget.box.size.width} height={widget.box.size.height}/>
-
   <svelte:component this={widget.klass.impl} {widget} />
-
   <text x={3} y={-4} class="annotation">{widget.id}</text>
   <g>
     {#each widget.inlets as port}
@@ -24,12 +21,6 @@
 </g>
 
 <style lang="scss">
-  rect {
-    stroke: #666;
-    fill: #fff;
-    shape-rendering: crispEdges;
-  }
-
   text {
     user-select: none;
     font-family: 'DejaVu Sans Mono', 'Courier New', Courier, monospace;
