@@ -3,6 +3,8 @@ import Bang from './Bang.svelte'
 import Toggle from './Toggle.svelte'
 import Message from './Message.svelte'
 import Comment from './Comment.svelte'
+import Radio from './Radio.svelte'
+import FloatAtom from './FloatAtom.svelte'
 
 export class Klass {
   constructor(public name:string, public impl:any) {}
@@ -18,6 +20,8 @@ export class KlassLibrary_ {
       new Klass("toggle", Toggle),
       new Klass("message", Message),
       new Klass("comment", Comment),
+      new Klass("radio", Radio),
+      new Klass("floatatom", FloatAtom),
     ]
   }
 

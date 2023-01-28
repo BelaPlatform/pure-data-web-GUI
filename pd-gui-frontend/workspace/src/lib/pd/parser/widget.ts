@@ -57,32 +57,17 @@ function parse_create_iolets(message:string, scope:IOLetScope) {
     const index = 0
     const type = parseInt(tokens[2]) == 0 ? IOLetType.Message : IOLetType.Signal
     widget.add_iolet(scope, type)
-    // iolets.push({index, widget, scope, type})
   } else {
     const let_descriptors = message.substring(left_brace+1, right_brace).split(' ')
-    //let index = 0
     let_descriptors.forEach(d => {
-      // console.log(d)
       const trimmed = d.trim()
       if (trimmed.length == 0) {
         return
       }
       const type = parseFloat(trimmed) == 0.0 ? IOLetType.Message : IOLetType.Signal
-      //iolets.push({index, widget, scope, type})
-      // ++index
       widget.add_iolet(scope, type)
     })
   }
-  // console.log(let_descriptors)
-
-  // switch (scope) {
-  //   case IOLetScope.Input:
-  //     widget.inlets = iolets
-  //     break;
-  //   case IOLetScope.Output:
-  //     widget.outlets = iolets
-  //     break;
-  // }
 }
 
 type Property = {

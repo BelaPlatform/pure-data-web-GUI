@@ -15,7 +15,7 @@ const server = net.createServer((client) => {
     console.log('client disconnected')
   })
   client.on('data', (data) => {
-    // console.log(`${data}`)
+    console.log(`${data}`)
     if (ws_client) {
       ws_client.send(`${data}`)
     }
@@ -56,7 +56,7 @@ wss.on('connection', function connection(ws) {
   console.log('connection')
   ws_client = ws
   ws.on('message', function message(data) {
-    console.log('received: %s', data);
+    // console.log('received: %s', data);
     // ws.send(`OK : ${data}`);
     const stringified_data = `${data}`
     pd_client.write(stringified_data)

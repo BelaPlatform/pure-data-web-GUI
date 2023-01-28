@@ -7,7 +7,7 @@
 
 <g transform="translate({widget.box.origin.x},{widget.box.origin.y})">
   <svelte:component this={widget.klass.impl} {widget} />
-  <text x={3} y={-4} class="annotation">{widget.id}</text>
+  <text x={3} y={-4} class="annotation">{widget.klassname} # {widget.id}</text>
   <g>
     {#each widget.inlets as port}
       <Port {port} />
