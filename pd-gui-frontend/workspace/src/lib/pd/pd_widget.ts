@@ -1,4 +1,4 @@
-import { writable, type Writable } from 'svelte/store'
+import { writable, get, type Writable } from 'svelte/store'
 
 import * as G from './geometry'
 import { Klass, KlassLibrary } from '$lib/components/klasses'
@@ -17,11 +17,12 @@ export class IOLet {
   constructor(public index: number, public widget: PdWidget, public scope: IOLetScope, public type: IOLetType) {}
 
   get box() : G.Rect {
-    const available_width = this.widget.box.size.width - IOLet.Size.width
+    const parent_box = get(this.widget.box)
+    const available_width = parent_box.size.width - IOLet.Size.width
     const n_iolets = this.widget.iolets_with_scope(this.scope).length
     const distribution = this.index == 0 ? 0 : this.index / (n_iolets - 1)
     const x =  distribution * available_width
-    const y = this.scope == IOLetScope.Input ? 0 : this.widget.box.size.height - IOLet.Size.height - 1
+    const y = this.scope == IOLetScope.Input ? 0 : parent_box.size.height - IOLet.Size.height - 1
     return new G.Rect(new G.Point(x, y), IOLet.Size);
   }
 }
@@ -30,12 +31,12 @@ export class PdWidget {
   inlets: IOLet[] = []
   outlets: IOLet[] = []
   text = writable<string>('')
-  box: G.Rect
+  box: Writable<G.Rect>
   is_activated = writable<boolean>(false)
   klass: Klass
 
   constructor(public id:string, public klassname: string, x: number = 0, y: number = 0) { 
-    this.box = new G.Rect(new G.Point(x, y), new G.Size(0, 0))
+    this.box = writable<G.Rect>(new G.Rect(new G.Point(x, y), new G.Size(0, 0)))
     this.klass = KlassLibrary.klass_for_klassname(this.klassname)
   }
 
@@ -56,4 +57,29 @@ export class PdWidget {
   set_is_activated(value:boolean) {
     this.is_activated.update(_ => { return value })
   }
+
+  set_origin(x:number, y:number) {
+    this.box.update(b => {
+      b.origin.x = x
+      b.origin.y = y
+      return b
+    })
+  }
+
+  displace_origin(x:number, y:number) {
+    this.box.update(b => {
+      b.origin.x += x
+      b.origin.y += y
+      return b
+    })
+  }
+
+  set_size(width:number, height:number) {
+    this.box.update(b => {
+      b.size.width = width
+      b.size.height = height
+      return b
+    })
+    this.box = this.box
+  }  
 }

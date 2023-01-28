@@ -76,11 +76,7 @@ type Property = {
 }
 
 function parse_properties(message:string) : Property[] {
-  // console.log(tokens)
-  // let idx = 0
   const properties:Property[] = []
-  let idx = 0
-  
   while (message.length != 0) {
     let key = ''
     let value = ''
@@ -91,17 +87,16 @@ function parse_properties(message:string) : Property[] {
     } else {
       return properties
     }
-    // console.log(`key: ${key}`)
+
     message = message.slice(key_end + 1)
-    // const value_start = message.indexOf('{')
     const value_end = message.indexOf('}')
     if (value_end != -1) {
       value = message.slice(0, value_end).trim()
     } else {
       return properties
     }
-    // console.log(`value: ${value}`)
     message = message.slice(value_end)
+
     properties.push({key, value})    
   }
   return properties
@@ -114,8 +109,6 @@ function parse_config(message:string) {
   const widget_id = tokens.at(1) || ""
   const pd_ = get(pd)
   const object = pd_.widget_or_connection_with_id(widget_id)
-  // console.log(object)
-  // if (!widget) { return }
   const properties = parse_properties(message)
   if (object instanceof PdWidget) {
     // console.log(properties)
@@ -126,8 +119,7 @@ function parse_config(message:string) {
         } break;
         case 'size': {
           const size_tokens = p.value.split(' ')
-          object.box.size.width = parseFloat(size_tokens[0].trim())// * 4.0
-          object.box.size.height = parseFloat(size_tokens[1].trim())// * 4.0
+          object.set_size(parseFloat(size_tokens[0].trim()), parseFloat(size_tokens[1].trim()))
         } break;
       }
     })
@@ -156,10 +148,26 @@ function parse_bang_or_toggle_activate(message:string) {
   if (!object) {
     return
   }
-  
+
   const value = tokens.at(2) || "0"
   object.set_is_activated(parseInt(value) == 1)
   // console.log(object)
+}
+
+function parse_displace(message:string) {
+  // console.log('parse_displace')
+  const tokens = message.split(' ')
+  const widget_id = tokens.at(1) || ""
+  // console.log(tokens)
+  const pd_ = get(pd)
+  const widget = pd_.widget_with_id(widget_id)
+  if (!widget) {
+    return
+  }
+
+  const x = parseInt(tokens.at(2) || "0")
+  const y = parseInt(tokens.at(3) || "0")
+  widget.displace_origin(x, y)
 }
 
 export function parse_widget_message(message:string) {
@@ -197,5 +205,9 @@ export function parse_widget_message(message:string) {
   if (message.startsWith("::pdwidget::bang::activate") 
     || message.startsWith("::pdwidget::toggle::activate")) {
     parse_bang_or_toggle_activate(message)
+  }
+
+  if (message.startsWith("::pdwidget::displace")) {
+    parse_displace(message)
   }
 }

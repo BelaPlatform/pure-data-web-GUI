@@ -1,15 +1,18 @@
 <script lang="ts">
+  import { onMount } from 'svelte'
+
   import type { PdWidget } from '$lib/pd/pd_widget'
 
   export let widget:PdWidget
   export let text_only:boolean = false
 
   $: text = widget.text
+  $: box = widget.box
 </script>
 
 <g>
   {#if !text_only}
-    <rect width={widget.box.size.width} height={widget.box.size.height} />
+    <rect width={$box.size.width} height={$box.size.height} />
   {/if}
 
   {#if $text != ""}

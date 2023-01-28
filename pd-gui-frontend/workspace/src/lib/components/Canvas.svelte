@@ -71,12 +71,12 @@
   <ul>
   {#each $widgets as widget(widget.id)}
     <li>
-      {widget.klass} {widget.text} {widget.id} ({widget.box.size.width}/{widget.box.size.height})
+      {widget.klass} {widget.text} {widget.id} ({get(widget.box).size.width}/{get(widget.box).size.height})
       ins: {widget.inlets.length} outs: {widget.outlets.length}
     </li>
   {/each}
-  </ul>
-
+  </ul> -->
+  <!-- 
   <h4>connections</h4>
   <ul>
     {#each $connections as connection(connection.id)}
