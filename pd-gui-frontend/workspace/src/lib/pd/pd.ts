@@ -46,6 +46,18 @@ export class Pd {
     this.send(message)
   }
 
+  send_mouse_up(x: number, y: number, button: number) {
+    const canvas_id = get(this.active_canvas).id
+    const message = `${canvas_id} mouseup ${x * 1.0} ${y * 1.0} 1 0;`
+    this.send(message)
+  }
+
+  send_motion(x: number, y: number, button: number) {
+    const canvas_id = get(this.active_canvas).id
+    const message = `${canvas_id} motion ${x * 1.0} ${y * 1.0} 0;`
+    this.send(message)
+  }
+
   open_patch(patch:PatchFile) {
     const split_idx = patch.file.lastIndexOf('/')
     const path = patch.file.substring(0, split_idx + 1)

@@ -6,17 +6,15 @@
   import Noodle from './Noodle.svelte'
 
   function on_mousedown(event:MouseEvent) {
-    // console.log('on_mousedown')
-    // console.log(event)
     $pd.send_mouse_down(event.offsetX, event.offsetY, event.button)
   }
 
   function on_mouseup(event:MouseEvent) {
-    // console.log('on_mouseup')
+    $pd.send_mouse_up(event.offsetX, event.offsetY, event.button)
   }
 
   function on_mousemove(event:MouseEvent) {
-    // console.log('on_mousemove')
+    $pd.send_motion(event.offsetX, event.offsetY)
   }
 
   $: canvas = $pd.active_canvas
