@@ -35,6 +35,6 @@
   }
 
   .annotation {
-    font-size: small;
+    font-size: 8px;
   }
 </style>
