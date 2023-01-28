@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte"
 
-  import { pd } from '$lib/pd/pd'
+  import { pd } from '$lib/stores/pd'
   import { WebSocketIO } from '$lib/pd/io'
   import { available_patches } from '$lib/stores/patches'
   import Console from '$lib/components/Console.svelte'
@@ -21,7 +21,6 @@
   // otherwise, svelte's server-side-prerendering would try to instantiate the WS and fail
   onMount(()  => {
     $pd.use_io(new WebSocketIO('ws://localhost:8081'))
-    // $pd.send_init_sequence()
   })
 
   $: canvases = $pd.canvases

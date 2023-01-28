@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { pd } from '../pd'
+import { pd } from '$lib/stores/pd'
 import { PdWidget, IOLetScope, type IOLet, IOLetType } from '../pd_widget'
 import { PdConnection } from '../pd_connection'
 

@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { pd } from '../pd'
+import { pd } from '$lib/stores/pd'
 
 export function parse_canvas_message(message:string) {
   const pd_ = get(pd)

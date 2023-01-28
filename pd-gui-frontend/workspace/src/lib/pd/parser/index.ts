@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { pd } from '../pd'
+import { pd } from '$lib/stores/pd'
 import { parse_window_message } from './window'
 import { parse_canvas_message } from './canvas'
 import { parse_widget_message } from './widget'

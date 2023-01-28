@@ -1,29 +1,31 @@
 <script lang="ts">
   import { onMount } from 'svelte'
+  import { get } from 'svelte/store'
 
-  import { pd } from '$lib/pd/pd'
+  import { app } from '$lib/stores/app'
+  import { pd } from '$lib/stores/pd'
   import Node from './Node.svelte'
   import Noodle from './Noodle.svelte'
-
-  function on_mousedown(event:MouseEvent) {
-    $pd.send_mouse_down(event.offsetX, event.offsetY, event.button)
-  }
-
-  function on_mouseup(event:MouseEvent) {
-    $pd.send_mouse_up(event.offsetX, event.offsetY, event.button)
-  }
-
-  function on_mousemove(event:MouseEvent) {
-    $pd.send_motion(event.offsetX, event.offsetY)
-  }
 
   $: canvas = $pd.active_canvas
   $: widgets = $canvas.widgets
   $: connections = $canvas.connections
+  $: edit_mode = $canvas.edit_mode
 
-  onMount(() => {
-    // console.log('Canavs::onMount')
-  })
+  const {show_debug} = app
+
+  function on_mousedown(event:MouseEvent) {
+    $canvas.send_mouse_down(event.offsetX, event.offsetY, event.button)
+  }
+
+  function on_mouseup(event:MouseEvent) {
+    $canvas.send_mouse_up(event.offsetX, event.offsetY, event.button)
+  }
+
+  function on_mousemove(event:MouseEvent) {
+    $canvas.send_motion(event.offsetX, event.offsetY)
+  }
+
 </script>
 
 <div class="wrap">
@@ -59,6 +61,10 @@
     </li>
     {/each}
   </ul> -->
+
+  <input type="checkbox" id="show_debug" bind:checked={$show_debug} /><label for="show_debug">Debug</label><br>
+  <input type="checkbox" id="edit_mode" bind:checked={$edit_mode} /><label for="edit_mode">Edit Mode</label><br>
+
 </div>
 
 <style lang="scss">
@@ -78,7 +84,7 @@
 
   svg {
     width: 100%;
-    height: 360px;
-    border: #0f0 solid thin;
+    height: 480px;
+    // border: #0f0 solid thin;
   }
 </style>

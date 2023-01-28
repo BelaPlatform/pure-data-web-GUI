@@ -1,4 +1,4 @@
-import { writable, get } from 'svelte/store'
+import { writable, type Writable, get } from 'svelte/store'
 
 import { parse } from './parser'
 import { PdCanvas } from './pd_canvas'
@@ -7,14 +7,14 @@ import type { PatchFile } from '$lib/stores/patches'
 import type { PdWidget } from './pd_widget'
 import type { PdConnection } from './pd_connection'
 
-const NullCanvas = new PdCanvas('nil')
-
 export class Pd {
   io: IO = new NullIO()
   canvases = writable<PdCanvas[]>([])
-  active_canvas = writable<PdCanvas>(NullCanvas)
+  active_canvas: Writable<PdCanvas>
 
-  constructor() {}
+  constructor() {
+    this.active_canvas = writable<PdCanvas>(new PdCanvas('nil', this))
+  }
 
   use_io(io:IO) {
     this.io = io
@@ -40,24 +40,6 @@ export class Pd {
     this.send(message)
   }
 
-  send_mouse_down(x: number, y: number, button: number) {
-    const canvas_id = get(this.active_canvas).id
-    const message = `${canvas_id} mouse ${x * 1.0} ${y * 1.0} 1 0;`
-    this.send(message)
-  }
-
-  send_mouse_up(x: number, y: number, button: number) {
-    const canvas_id = get(this.active_canvas).id
-    const message = `${canvas_id} mouseup ${x * 1.0} ${y * 1.0} 1 0;`
-    this.send(message)
-  }
-
-  send_motion(x: number, y: number) {
-    const canvas_id = get(this.active_canvas).id
-    const message = `${canvas_id} motion ${x * 1.0} ${y * 1.0} 0;`
-    this.send(message)
-  }
-
   open_patch(patch:PatchFile) {
     const split_idx = patch.file.lastIndexOf('/')
     const path = patch.file.substring(0, split_idx + 1)
@@ -77,7 +59,7 @@ export class Pd {
 
   new_canvas_with_id(id:string) {
     this.canvases.update((cs:PdCanvas[]) => {
-      cs = cs.concat([new PdCanvas(id)])
+      cs = cs.concat([new PdCanvas(id, this)])
       return cs
     })
   }
@@ -112,7 +94,4 @@ export class Pd {
     }
     return null
   }
-
 }
-
-export const pd = writable<Pd>(new Pd())
