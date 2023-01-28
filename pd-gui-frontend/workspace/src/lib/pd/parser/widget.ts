@@ -122,7 +122,7 @@ function parse_config(message:string) {
     properties.forEach(p => {
       switch(p.key) {
         case 'text': {
-          object.text = p.value
+          object.set_text(p.value)
         } break;
         case 'size': {
           const size_tokens = p.value.split(' ')

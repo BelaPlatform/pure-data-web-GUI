@@ -1,4 +1,4 @@
-import { writable, get } from 'svelte/store'
+import { writable, type Writable } from 'svelte/store'
 
 import * as G from './geometry'
 import { Klass, KlassLibrary } from '$lib/components/klasses'
@@ -29,7 +29,7 @@ export class IOLet {
 export class PdWidget {
   inlets: IOLet[] = []
   outlets: IOLet[] = []
-  text: string = ''
+  text = writable<string>('')
   box: G.Rect
   is_activated = writable<boolean>(false)
   klass: Klass
@@ -47,5 +47,9 @@ export class PdWidget {
 
   iolets_with_scope(scope:IOLetScope) {
     return scope == IOLetScope.Input ? this.inlets : this.outlets
+  }
+
+  set_text(txt:string) {
+    this.text.update(_ => { return txt })
   }
 }

@@ -3,6 +3,8 @@
 
   export let widget:PdWidget
   export let text_only:boolean = false
+
+  $: text = widget.text
 </script>
 
 <g>
@@ -10,9 +12,9 @@
     <rect width={widget.box.size.width} height={widget.box.size.height} />
   {/if}
 
-  {#if widget.text != ""}
+  {#if $text != ""}
     <text x={3} y={14}>
-      {widget.text}
+      {$text}
     </text>
   {/if}
 </g>
