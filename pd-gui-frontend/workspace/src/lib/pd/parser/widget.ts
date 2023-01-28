@@ -35,9 +35,13 @@ function parse_create(message:string) {
 // examples:
 // ::pdwidget::create_inlets 0x1b729b0 {0.000000 } ;
 // ::pdwidget::create_inlets 0x1b72b90 {0.000000 0.000000 0.000000 } ;
+// ::pdwidget::create_inlets 0x25925f0 0 
 // ::pdwidget::create_outlets 0x1b72b90 {0.000000 } ;
 // ::pdwidget::create_outlets 0x1b729b0 {0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 } ;
+// ::pdwidget::create_outlets 0x25925f0 0 
 function parse_create_iolets(message:string, scope:IOLetScope) {
+  // console.log('parse_create_iolets')
+  // console.log(message)
   const tokens = message.split(' ')
   const widget_id = tokens.at(1) || ""
   const pd_ = get(pd)
@@ -47,18 +51,26 @@ function parse_create_iolets(message:string, scope:IOLetScope) {
   const iolets:IOLet[] = []
   const left_brace = message.indexOf('{')
   const right_brace = message.indexOf('}')
-  const let_descriptors = message.substring(left_brace+1, right_brace).split(' ')
-  let index = 0
-  let_descriptors.forEach(d => {
-    // console.log(d)
-    const trimmed = d.trim()
-    if (trimmed.length == 0) {
-      return
-    }
-    const type = parseFloat(trimmed) == 0.0 ? IOLetType.Message : IOLetType.Signal
+  
+  // there's just one iolet, sent as an int
+  if (left_brace == -1) {
+    const index = 0
+    const type = parseInt(tokens[2]) == 0 ? IOLetType.Message : IOLetType.Signal
     iolets.push({index, widget, scope, type})
-    ++index
-  })
+  } else {
+    const let_descriptors = message.substring(left_brace+1, right_brace).split(' ')
+    let index = 0
+    let_descriptors.forEach(d => {
+      // console.log(d)
+      const trimmed = d.trim()
+      if (trimmed.length == 0) {
+        return
+      }
+      const type = parseFloat(trimmed) == 0.0 ? IOLetType.Message : IOLetType.Signal
+      iolets.push({index, widget, scope, type})
+      ++index
+    })
+  }
   // console.log(let_descriptors)
 
   switch (scope) {
@@ -110,7 +122,7 @@ function parse_properties(message:string) : Property[] {
 
 function parse_config(message:string) {
   // console.log('parse_config')
-  console.log(message)
+  // console.log(message)
   const tokens = message.split(' ')
   const widget_id = tokens.at(1) || ""
   const pd_ = get(pd)

@@ -30,7 +30,10 @@
   <h4>widgets</h4>
   <ul>
   {#each $widgets as widget(widget.id)}
-    <li>{widget.klass} {widget.text} {widget.id} ({widget.box.size.width}/{widget.box.size.height})</li>
+    <li>
+      {widget.klass} {widget.text} {widget.id} ({widget.box.size.width}/{widget.box.size.height})
+      ins: {widget.inlets.length} outs: {widget.outlets.length}
+    </li>
   {/each}
   </ul>
 

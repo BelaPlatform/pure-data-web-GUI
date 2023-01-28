@@ -9,12 +9,12 @@
   <rect width={widget.box.size.width} height={widget.box.size.height}/>
   <text x={3} y={16}>{widget.text}</text>
   <text x={3} y={-4} class="annotation">{widget.klass} # {widget.id}</text>
-  <g>
+  <g transform="translate(0, {0.5})">
     {#each widget.inlets as port}
       <Port {port} />
     {/each}
   </g>
-  <g transform="translate(0, {widget.box.size.height})">
+  <g transform="translate(0, {widget.box.size.height - 2.5})">
     {#each widget.outlets as port}
       <Port {port} />
     {/each}
