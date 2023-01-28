@@ -4,7 +4,20 @@
   import { pd } from '$lib/pd/pd'
   import Node from './Node.svelte'
   import Noodle from './Noodle.svelte'
-  import { IOLetScope, IOLetType } from '$lib/pd/pd_widget';
+
+  function on_mousedown(event:MouseEvent) {
+    // console.log('on_mousedown')
+    // console.log(event)
+    $pd.send_mouse_down(event.offsetX, event.offsetY, event.button)
+  }
+
+  function on_mouseup(event:MouseEvent) {
+    // console.log('on_mouseup')
+  }
+
+  function on_mousemove(event:MouseEvent) {
+    // console.log('on_mousemove')
+  }
 
   $: canvas = $pd.active_canvas
   $: widgets = $canvas.widgets
@@ -16,7 +29,10 @@
 </script>
 
 <div class="wrap">
-  <svg xmlns="http://www.w3.org/2000/svg">
+  <svg xmlns="http://www.w3.org/2000/svg"
+    on:mousedown={on_mousedown}
+    on:mousemove={on_mousemove}
+    on:mouseup={on_mouseup}>
     {#each $widgets as widget(widget.id)}
       <Node {widget} />
     {/each}
