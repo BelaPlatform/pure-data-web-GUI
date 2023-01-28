@@ -11,6 +11,7 @@
   $: widgets = $canvas.widgets
   $: connections = $canvas.connections
   $: edit_mode = $canvas.edit_mode
+  $: cursor = $canvas.cursor
 
   const {show_debug} = app
 
@@ -54,7 +55,8 @@
   <svg xmlns="http://www.w3.org/2000/svg"
     on:mousedown={on_mousedown}
     on:mousemove={on_mousemove}
-    on:mouseup={on_mouseup}>
+    on:mouseup={on_mouseup}
+    class={$cursor}>
     {#each $widgets as widget(widget.id)}
       <Node {widget} />
     {/each}
@@ -107,6 +109,29 @@
   svg {
     width: 100%;
     height: 480px;
-    // border: #0f0 solid thin;
+
+    &.runmode_nothing {
+      cursor: inherit;
+    }
+
+    &.editmode_nothing {
+      cursor: inherit;
+    }
+
+    &.runmode_clickme {
+      cursor: pointer;
+    }
+
+    &.editmode_resize {
+      cursor: ew-resize;
+    }
+
+    &.editmode_connect {
+      cursor: grab;
+    }
+
+    &.editmode_disconnect {
+      cursor: no-drop;
+    }
   }
 </style>

@@ -20,7 +20,7 @@
   }
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  , "forwardPorts": [56026]
+  , "forwardPorts": [8081, 56026]
 
   , "extensions": [
     
