@@ -19,12 +19,12 @@
   </text>
 
   <text x={3} y={-4} class="annotation">{widget.klass} # {widget.id}</text>
-  <g transform="translate(0, {0.5})">
+  <g>
     {#each widget.inlets as port}
       <Port {port} />
     {/each}
   </g>
-  <g transform="translate(0, {widget.box.size.height - 2.5})">
+  <g>
     {#each widget.outlets as port}
       <Port {port} />
     {/each}
