@@ -1,8 +1,8 @@
 import { writable, get } from 'svelte/store'
 
 import type { Pd } from './pd'
-import type { PdConnection } from './pd_connection'
-import type { PdWidget } from './pd_widget'
+import { PdConnection } from './pd_connection'
+import { PdWidget } from './pd_widget'
 
 
 export class PdCanvas {
@@ -19,18 +19,48 @@ export class PdCanvas {
     })
   }
 
-  add_widget(widget:PdWidget) {
+  create_widget(id:string, klassname:string, x:number, y:number) {
+    const widget = new PdWidget(id, this, klassname, x, y)
+    this.add_widget(widget)
+  }
+
+  private add_widget(widget: PdWidget) {
     this.widgets.update(ws => {
       ws.push(widget)
       return ws
     })
   }
 
-  add_connection(connection:PdConnection) {
+  create_connection(id: string) {
+    const connection = new PdConnection(id, this)
+    this.add_connection(connection)
+  }
+
+  private add_connection(connection:PdConnection) {
     this.connections.update(cs => {
       cs.push(connection)
       return cs
     })
+  }
+
+  destroy(object: PdWidget|PdConnection) {
+    if (object instanceof PdWidget) {
+      this.widgets.update(ws => {
+        ws = ws.filter((obj) => {
+          return obj.id != object.id
+        })
+        return ws
+      })
+    }
+
+    if (object instanceof PdConnection) {
+      this.connections.update(cs => {
+        cs = cs.filter((obj) => {
+          return obj.id != object.id
+        })
+        return cs
+      })
+    }    
   }
 
   set_cursor(cursor_name:string) {
@@ -64,9 +94,17 @@ export class PdCanvas {
     this.pd.send(message)
   }
 
-  send_key(key: string, keydown: boolean) {
+  private send_key(key: string, keydown: boolean) {
     const message = `${this.id} key ${keydown ? 1 : 0} ${key} 0;`
     this.pd.send(message)
+  }
+
+  send_key_down(key: string) {
+    this.send_key(key, true)
+  }
+
+  send_key_up(key: string) {
+    this.send_key(key, false)
   }
 
   toggle_edit_mode() {

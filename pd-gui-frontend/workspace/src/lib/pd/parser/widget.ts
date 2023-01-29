@@ -21,14 +21,11 @@ function parse_create(message:string) {
   }
 
   if (klass == 'connection') {
-    const connection = new PdConnection(id)
-    canvas.add_connection(connection)
+    canvas.create_connection(id)
   } else {
     const x = tokens.at(4) || ""
     const y = tokens.at(5) || ""
-    const widget = new PdWidget(id, klass, parseInt(x), parseInt(y))
-    canvas.add_widget(widget)
-    // console.log(widget)
+    canvas.create_widget(id, klass, parseInt(x), parseInt(y))
   }
 }
 
@@ -48,7 +45,6 @@ function parse_create_iolets(message:string, scope:IOLetScope) {
   const widget = pd_.widget_with_id(widget_id)
   if (!widget) { return }
 
-  const iolets:IOLet[] = []
   const left_brace = message.indexOf('{')
   const right_brace = message.indexOf('}')
   
@@ -186,6 +182,14 @@ function parse_moveto(message:string) {
 }
 
 
+function parse_destroy(message: string) {
+  const tokens = message.split(' ')
+  const object_id = tokens.at(1) || ""
+  const pd_ = get(pd)
+  const object = pd_.widget_or_connection_with_id(object_id)
+  object?.canvas.destroy(object)
+}
+
 export function parse_widget_message(message:string) {
   if (message.startsWith("::pdwidget::create_inlets")) {
     parse_create_iolets(message, IOLetScope.Input)
@@ -229,5 +233,9 @@ export function parse_widget_message(message:string) {
 
   if (message.startsWith("::pdwidget::moveto")) {
     parse_moveto(message)
+  }
+
+  if (message.startsWith("::pdwidget::destroy")) {
+    parse_destroy(message)
   }
 }

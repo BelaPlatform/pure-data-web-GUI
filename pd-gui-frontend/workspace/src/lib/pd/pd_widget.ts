@@ -1,5 +1,6 @@
 import { writable, get, type Writable } from 'svelte/store'
 
+import type { PdCanvas } from './pd_canvas'
 import * as G from './geometry'
 import { Klass, KlassLibrary } from '$lib/components/klasses'
 
@@ -35,7 +36,7 @@ export class PdWidget {
   is_activated = writable<boolean>(false)
   klass: Klass
 
-  constructor(public id:string, public klassname: string, x: number = 0, y: number = 0) { 
+  constructor(public id: string, public canvas: PdCanvas, public klassname: string, x: number = 0, y: number = 0) { 
     this.box = writable<G.Rect>(new G.Rect(new G.Point(x, y), new G.Size(0, 0)))
     this.klass = KlassLibrary.klass_for_klassname(this.klassname)
   }

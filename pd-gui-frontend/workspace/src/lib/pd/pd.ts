@@ -7,6 +7,7 @@ import type { PatchFile } from '$lib/stores/patches'
 import type { PdWidget } from './pd_widget'
 import type { PdConnection } from './pd_connection'
 
+
 export class Pd {
   io: IO = new NullIO()
   canvases = writable<PdCanvas[]>([])
@@ -68,7 +69,7 @@ export class Pd {
     return get(this.canvases).find(canvas => canvas.id == id)
   }
 
-  widget_with_id(id:string): PdWidget|null {
+  widget_with_id(id:string): PdWidget | null {
     for(let canvas of get(this.canvases)) {
       for (let widget of get(canvas.widgets)) {
         if (widget.id == id) {

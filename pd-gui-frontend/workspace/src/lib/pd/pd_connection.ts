@@ -1,11 +1,13 @@
 import { writable } from 'svelte/store'
+
 import * as G from './geometry'
+import type { PdCanvas } from './pd_canvas'
 
 export class PdConnection {
   from = writable<G.Point>(G.NullPoint())
   to = writable<G.Point>(G.NullPoint())
 
-  constructor(public id:string) { }
+  constructor(public id: string, public canvas: PdCanvas) { }
 
   set_coordinates(from_x:number, from_y:number, to_x:number, to_y:number) {
     this.from.update(_ => {

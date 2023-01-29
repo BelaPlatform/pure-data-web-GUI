@@ -45,8 +45,19 @@
 
     if (event.key == 'Control') {
       const key = event.location == 1 ? 'Control_L' : 'Control_R'
-      $canvas.send_key(key, true)
+      $canvas.send_key_down(key)
     }
+
+    if (event.key == 'Delete') {
+      $canvas.send_key_down('127')
+    }
+
+    if (event.key == 'Backspace') {
+      $canvas.send_key_down('8')
+    }
+
+    console.log(event)
+    console.log(event.key)
   }
 
   function on_keyup(event:KeyboardEvent) {
@@ -55,9 +66,9 @@
 
     if (event.key == 'Control') {
       const key = event.location == 1 ? 'Control_L' : 'Control_R'
-      $canvas.send_key(key, false)
+      $canvas.send_key_up(key)
     }
-  }  
+  }
   
 </script>
 
