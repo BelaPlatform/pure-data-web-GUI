@@ -28,6 +28,8 @@ export class IOLet {
   }
 }
 
+export type WidgetState = 'normal' | 'edit' | 'broken'
+
 export class PdWidget {
   inlets: IOLet[] = []
   outlets: IOLet[] = []
@@ -35,6 +37,7 @@ export class PdWidget {
   box: Writable<G.Rect>
   is_activated = writable<boolean>(false)
   is_selected = writable<boolean>(false)
+  state = writable<WidgetState>('normal')
   klass: Klass
 
   constructor(public id: string, public canvas: PdCanvas, public klassname: string, x: number = 0, y: number = 0) { 
@@ -48,23 +51,27 @@ export class PdWidget {
     this.iolets_with_scope(scope).push(iolet)
   }
 
-  iolets_with_scope(scope:IOLetScope) {
+  iolets_with_scope(scope: IOLetScope) {
     return scope == IOLetScope.Input ? this.inlets : this.outlets
   }
 
-  set_text(txt:string) {
-    this.text.update(_ => { return txt })
+  set_text(txt: string) {
+    this.text.update(_ => txt)
   }
 
-  set_is_activated(value:boolean) {
-    this.is_activated.update(_ => { return value })
+  set_is_activated(value: boolean) {
+    this.is_activated.update(_ => value)
   }
 
-  set_is_selected(value:boolean) {
-    this.is_selected.update(_ => { return value })
+  set_is_selected(value: boolean) {
+    this.is_selected.update(_ => value)
   }
 
-  set_origin(x:number, y:number) {
+  set_state(state: WidgetState) {
+    this.state.update(_ => state)
+  }
+
+  set_origin(x: number, y: number) {
     this.box.update(b => {
       b.origin.x = x
       b.origin.y = y
@@ -72,7 +79,7 @@ export class PdWidget {
     })
   }
 
-  displace_origin(x:number, y:number) {
+  displace_origin(x: number, y: number) {
     this.box.update(b => {
       b.origin.x += x
       b.origin.y += y
@@ -80,7 +87,7 @@ export class PdWidget {
     })
   }
 
-  set_size(width:number, height:number) {
+  set_size(width: number, height: number) {
     this.box.update(b => {
       if (width < 0) {
         b.origin.x = b.bottom_right().x + width

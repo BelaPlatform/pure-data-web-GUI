@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { pd } from '$lib/stores/pd'
-import { PdWidget, IOLetScope, type IOLet, IOLetType } from '../pd_widget'
+import { PdWidget, IOLetScope, IOLetType, type WidgetState } from '../pd_widget'
 import { PdConnection } from '../pd_connection'
 
 function parse_create(message:string) {
@@ -98,6 +98,19 @@ function parse_properties(message:string) : Property[] {
   return properties
 }
 
+function widget_state_from_string(state: string) : WidgetState {
+  switch(state) {
+    case 'normal':
+      return 'normal'
+    case 'edit':
+      return 'edit'
+    case 'broken':
+      return 'broken'
+    default:
+      return 'normal'
+  }
+}
+
 function parse_config(message:string) {
   // console.log('parse_config')
   // console.log(message)
@@ -116,6 +129,10 @@ function parse_config(message:string) {
         case 'size': {
           const size_tokens = p.value.split(' ')
           object.set_size(parseFloat(size_tokens[0].trim()), parseFloat(size_tokens[1].trim()))
+        } break;
+        case 'state': {
+          const state = widget_state_from_string(p.value)
+          object.set_state(state)
         } break;
       }
     })

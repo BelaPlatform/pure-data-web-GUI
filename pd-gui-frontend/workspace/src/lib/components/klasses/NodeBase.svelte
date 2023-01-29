@@ -9,14 +9,15 @@
   $: text = widget.text
   $: box = widget.box
   $: selected = widget.is_selected
+  $: state = widget.state
 </script>
 
 <g>
   {#if poly}
-    <polyline points={poly} class:selected={$selected}  class:no_bg={no_bg} />
+    <polyline points={poly} class:selected={$selected} class:no_bg={no_bg} />
   {:else}
     {#if !text_only}
-      <rect width={$box.size.width} height={$box.size.height} class:no_bg={no_bg} class:selected={$selected} />    
+      <rect width={$box.size.width} height={$box.size.height} class:no_bg={no_bg} class:selected={$selected} class="{$state}"/>
     {/if}
   {/if}
 
@@ -39,6 +40,16 @@
 
     &.selected {
       stroke: #00f;
+    }
+  }
+
+  rect {
+    &.edit {
+      stroke-dasharray: 3 3;
+    }
+
+    &.broken {
+      stroke-dasharray: 6 6;
     }
   }
 
