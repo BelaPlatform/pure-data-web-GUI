@@ -34,6 +34,7 @@ export class PdWidget {
   text = writable<string>('')
   box: Writable<G.Rect>
   is_activated = writable<boolean>(false)
+  is_selected = writable<boolean>(false)
   klass: Klass
 
   constructor(public id: string, public canvas: PdCanvas, public klassname: string, x: number = 0, y: number = 0) { 
@@ -57,6 +58,10 @@ export class PdWidget {
 
   set_is_activated(value:boolean) {
     this.is_activated.update(_ => { return value })
+  }
+
+  set_is_selected(value:boolean) {
+    this.is_selected.update(_ => { return value })
   }
 
   set_origin(x:number, y:number) {

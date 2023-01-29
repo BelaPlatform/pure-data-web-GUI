@@ -9,11 +9,12 @@
 
   $: text = widget.text
   $: box = widget.box
+  $: selected = widget.is_selected
 </script>
 
 <g>
   {#if !text_only}
-    <rect width={$box.size.width} height={$box.size.height} class:no_bg={no_bg} />
+    <rect width={$box.size.width} height={$box.size.height} class:no_bg={no_bg} class:selected={$selected} />
   {/if}
 
   {#if $text != ""}
@@ -31,6 +32,10 @@
 
     &.no_bg {
       fill: none;
+    }
+
+    &.selected {
+      stroke: #00f;
     }
   }
 

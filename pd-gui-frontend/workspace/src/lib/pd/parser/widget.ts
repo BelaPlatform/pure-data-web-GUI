@@ -190,6 +190,18 @@ function parse_destroy(message: string) {
   object?.canvas.destroy(object)
 }
 
+function parse_select(message: string) {
+  const tokens = message.split(' ')
+  const object_id = tokens.at(1) || ""
+  const pd_ = get(pd)
+  const object = pd_.widget_or_connection_with_id(object_id)
+  if (!object) {
+    return
+  }
+  const selected = parseInt(tokens.at(2) || "0") == 1
+  object.set_is_selected(selected)
+}
+
 export function parse_widget_message(message:string) {
   if (message.startsWith("::pdwidget::create_inlets")) {
     parse_create_iolets(message, IOLetScope.Input)
@@ -237,5 +249,9 @@ export function parse_widget_message(message:string) {
 
   if (message.startsWith("::pdwidget::destroy")) {
     parse_destroy(message)
+  }
+
+  if (message.startsWith("::pdwidget::select")) {
+    parse_select(message)
   }
 }
