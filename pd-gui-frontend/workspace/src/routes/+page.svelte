@@ -43,8 +43,10 @@
       {#each $canvases as canvas}
         <li 
           on:click={_ => $pd.map_canvas_with_id(canvas.id)}
-          on:keypress={_ => $pd.map_canvas_with_id(canvas.id)}>
-          {canvas.id} {canvas.title}</li>
+          on:keypress={_ => $pd.map_canvas_with_id(canvas.id)}
+          >
+          {canvas.title} <button on:click={$pd.close(canvas)}>x</button>
+        </li>
       {/each}
     </ul>
   </aside>

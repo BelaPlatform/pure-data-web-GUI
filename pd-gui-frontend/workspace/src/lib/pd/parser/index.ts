@@ -30,5 +30,16 @@ export function parse(full_message:string) {
     if (message.startsWith("pdtk_ping")) {
       get(pd).send_ping()
     }
+
+    if (message.startsWith("destroy")) {
+      const tokens = message.split(' ')
+      const canvas_id = tokens.at(1) || "0"
+      const pd_ = get(pd)
+      const canvas = pd_.canvas_with_id(canvas_id)
+      if (!canvas) {
+        return
+      }
+      pd_.destroy(canvas)
+    }
   })
 }

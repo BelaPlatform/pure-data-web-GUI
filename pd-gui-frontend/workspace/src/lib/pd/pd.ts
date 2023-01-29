@@ -27,7 +27,7 @@ export class Pd {
     }
   }
 
-  send(message:string) {
+  send(message: string) {
     this.io.send(message)
   }
 
@@ -41,7 +41,7 @@ export class Pd {
     this.send(message)
   }
 
-  open_patch(patch:PatchFile) {
+  open_patch(patch: PatchFile) {
     const split_idx = patch.file.lastIndexOf('/')
     const path = patch.file.substring(0, split_idx + 1)
     const file = patch.file.substring(split_idx + 1)
@@ -49,7 +49,12 @@ export class Pd {
     this.send(message)
   }
 
-  map_canvas_with_id(canvas_id:string) {
+  close(canvas: PdCanvas) {
+    const message = `${canvas.id} menuclose 0;`
+    this.send(message)
+  }
+
+  map_canvas_with_id(canvas_id: string) {
     const message = `${canvas_id} map 1;`
     this.send(message)
     const canvas = this.canvas_with_id(canvas_id)
@@ -58,18 +63,25 @@ export class Pd {
     }
   }
 
-  new_canvas_with_id(id:string) {
-    this.canvases.update((cs:PdCanvas[]) => {
+  new_canvas_with_id(id: string) {
+    this.canvases.update((cs: PdCanvas[]) => {
       cs = cs.concat([new PdCanvas(id, this)])
       return cs
     })
   }
 
-  canvas_with_id(id:string) {
+  destroy(canvas: PdCanvas) {
+    this.canvases.update((cs: PdCanvas[]) => {
+      cs = cs.filter(c => c.id != canvas.id)
+      return cs
+    })
+  }
+
+  canvas_with_id(id: string) {
     return get(this.canvases).find(canvas => canvas.id == id)
   }
 
-  widget_with_id(id:string): PdWidget | null {
+  widget_with_id(id: string): PdWidget | null {
     for(let canvas of get(this.canvases)) {
       for (let widget of get(canvas.widgets)) {
         if (widget.id == id) {
@@ -80,7 +92,7 @@ export class Pd {
     return null
   }
 
-  widget_or_connection_with_id(id:string): PdWidget|PdConnection|null {
+  widget_or_connection_with_id(id: string): PdWidget|PdConnection|null {
     for(let canvas of get(this.canvases)) {
       for (let widget of get(canvas.widgets)) {
         if (widget.id == id) {
