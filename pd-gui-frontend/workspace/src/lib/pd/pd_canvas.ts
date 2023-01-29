@@ -94,17 +94,17 @@ export class PdCanvas {
     this.pd.send(message)
   }
 
-  private send_key(key: string, keydown: boolean) {
-    const message = `${this.id} key ${keydown ? 1 : 0} ${key} 0;`
+  private send_key(key: string, keydown: boolean, modifiers: number) {
+    const message = `${this.id} key ${keydown ? 1 : 0} ${key} ${modifiers};`
     this.pd.send(message)
   }
 
-  send_key_down(key: string) {
-    this.send_key(key, true)
+  send_key_down(key: string, modifiers: number = 0) {
+    this.send_key(key, true, modifiers)
   }
 
   send_key_up(key: string) {
-    this.send_key(key, false)
+    this.send_key(key, false, 0)
   }
 
   on_toggle_edit_mode() {

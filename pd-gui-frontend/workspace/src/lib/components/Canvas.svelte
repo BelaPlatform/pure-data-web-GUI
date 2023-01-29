@@ -92,6 +92,23 @@
       $canvas.send_key_down(key)
     }
 
+    const modifiers = (event.shiftKey ? 1 : 0) + (event.ctrlKey ? 2 : 0) + (event.altKey ? 4 : 0)
+    if (event.key == 'ArrowLeft') {
+      $canvas.send_key_down('Left', modifiers)
+    }
+
+    if (event.key == 'ArrowRight') {
+      $canvas.send_key_down('Right', modifiers)
+    }
+
+    if (event.key == 'ArrowUp') {
+      $canvas.send_key_down('Up', modifiers)
+    }
+
+    if (event.key == 'ArrowDown') {
+      $canvas.send_key_down('Down', modifiers)
+    }
+
     if (event.key == 'Delete') {
       $canvas.send_key_down('127')
     }
