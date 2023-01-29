@@ -14,16 +14,20 @@
   $: offset = 24
   // $: path = `M ${x1} ${y1} C ${x1} ${y1 + offset}, ${x2} ${y2 - offset}, ${x2} ${y2}`
   $: path = `M ${x1} ${y1}, ${x2} ${y2}`
+  $: selected = connection.is_selected
 </script>
 
-<path d={path} />
+<path d={path} class:selected={$selected} />
 
-<style>
+<style lang="scss">
   path {
-    /* stroke: #aaa; */
     stroke: #666;
     stroke-width: 1px;
     fill: transparent;
     shape-rendering: crispEdges;
+
+    &.selected {
+      stroke: #00f;
+    }
   }
 </style>
