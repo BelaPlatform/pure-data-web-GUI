@@ -38,7 +38,6 @@
       return
     }
 
-    // if not a shortcut, forward the key to pd
     if (event.key == 'Control') {
       const key = event.location == 1 ? 'Control_L' : 'Control_R'
       $canvas.send_key(key, true)
@@ -46,7 +45,13 @@
   }
 
   function on_keyup(event:KeyboardEvent) {
+    console.log('on_keyup')
     console.log(event)
+
+    if (event.key == 'Control') {
+      const key = event.location == 1 ? 'Control_L' : 'Control_R'
+      $canvas.send_key(key, false)
+    }
   }  
   
 </script>

@@ -61,7 +61,8 @@ export class PdCanvas {
   }
 
   send_key(key: string, keydown: boolean) {
-    const message = `${this.id} key ${key} ${keydown ? 1 : 0} 0;`
+    const message = `${this.id} key ${keydown ? 1 : 0} ${key} 0;`
+    console.log(message)
     this.pd.send(message)
   }
 
