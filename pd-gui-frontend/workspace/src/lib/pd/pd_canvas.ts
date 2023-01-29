@@ -156,6 +156,11 @@ export class PdCanvas {
     this.pd.send(message)
   }
 
+  on_select_all() {
+    const message = `${this.id} selectall;`
+    this.pd.send(message)
+  }
+
   handle_popup(x: number, y: number, has_properties: boolean, has_open: boolean) {
     const origin = new G.Point(x, y)
     const show = true

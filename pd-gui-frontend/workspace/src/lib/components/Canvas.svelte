@@ -94,6 +94,12 @@
       return
     }
 
+    if (event.key == 'a' && event.ctrlKey) {
+      event.preventDefault()
+      $canvas.on_select_all()
+      return
+    }
+
     if (event.key == 'Control') {
       const key = event.location == 1 ? 'Control_L' : 'Control_R'
       $canvas.send_key_down(key)
@@ -150,7 +156,7 @@
 
 <div class="wrap">
   <PopUp canvas={$canvas} />
-  
+
   <svg xmlns="http://www.w3.org/2000/svg"
     on:mousedown={on_mousedown}
     on:mousemove={on_mousemove}
