@@ -5,6 +5,7 @@
 
   export let widget:PdWidget
   export let text_only:boolean = false
+  export let no_bg:boolean = false
 
   $: text = widget.text
   $: box = widget.box
@@ -12,7 +13,7 @@
 
 <g>
   {#if !text_only}
-    <rect width={$box.size.width} height={$box.size.height} />
+    <rect width={$box.size.width} height={$box.size.height} class:no_bg={no_bg} />
   {/if}
 
   {#if $text != ""}
@@ -27,6 +28,10 @@
     stroke: #666;
     fill: #fff;
     shape-rendering: crispEdges;
+
+    &.no_bg {
+      fill: none;
+    }
   }
 
   text {

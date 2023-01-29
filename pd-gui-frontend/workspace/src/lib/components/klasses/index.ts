@@ -6,6 +6,7 @@ import Comment from './Comment.svelte'
 import Radio from './Radio.svelte'
 import FloatAtom from './FloatAtom.svelte'
 import SymbolAtom from './SymbolAtom.svelte'
+import Rubberband from './Rubberband.svelte'
 
 export class Klass {
   constructor(public name:string, public impl:any) {}
@@ -24,6 +25,7 @@ export class KlassLibrary_ {
       new Klass("radio", Radio),
       new Klass("floatatom", FloatAtom),
       new Klass("symbolatom", SymbolAtom),
+      new Klass("selection", Rubberband),
     ]
   }
 
