@@ -107,14 +107,44 @@ export class PdCanvas {
     this.send_key(key, false)
   }
 
-  toggle_edit_mode() {
+  on_toggle_edit_mode() {
     this.edit_mode.update(value => {
       return !value
     })
   }
 
-  save() {
+  on_save() {
     const message = `${this.id} menusave;`
+    this.pd.send(message)
+  }
+
+  on_create_object() {
+    const message = `${this.id} obj 0;`
+    this.pd.send(message)
+  }
+
+  on_create_message() {
+    const message = `${this.id} msg 0;`
+    this.pd.send(message)
+  }
+
+  on_create_number() {
+    const message = `${this.id} floatatom 0;`
+    this.pd.send(message)
+  }
+
+  on_create_comment() {
+    const message = `${this.id} text 0;`
+    this.pd.send(message)
+  }
+
+  on_create_bang() {
+    const message = `${this.id} bng;`
+    this.pd.send(message)
+  }
+
+  on_create_toggle() {
+    const message = `${this.id} toggle;`
     this.pd.send(message)
   }
 }
