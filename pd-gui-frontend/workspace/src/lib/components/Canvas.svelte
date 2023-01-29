@@ -29,18 +29,19 @@
 
   function on_keydown(event:KeyboardEvent) {
     console.log(event)
-    // which is deprecated
-    // console.log(event.which)
-    
-    // keyCode is deprecated
-    // console.log(event.keyCode)
-
-    // code represents the actual key on a keyboard
-    // keyboard layouts are not atken into account
-    // console.log(event.code)
-
-    // key: what's that?
     console.log(event.key)
+
+    // first, see if it's a shortcut
+    if (event.key == 'e' && event.ctrlKey) {
+      $canvas.toggle_edit_mode()
+      event.preventDefault()
+    }
+
+    // if not a shortcut, forward the key to pd
+    if (event.key == 'Control') {
+      const key = event.location == 1 ? 'Control_L' : 'Control_R'
+      $canvas.send_key(key, true)
+    }
   }
 
   function on_keyup(event:KeyboardEvent) {

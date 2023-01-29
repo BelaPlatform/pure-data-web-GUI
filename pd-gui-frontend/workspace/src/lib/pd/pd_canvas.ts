@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { writable, get } from 'svelte/store'
 
 import type { Pd } from './pd'
 import type { PdConnection } from './pd_connection'
@@ -63,5 +63,11 @@ export class PdCanvas {
   send_key(key: string, keydown: boolean) {
     const message = `${this.id} key ${key} ${keydown ? 1 : 0} 0;`
     this.pd.send(message)
+  }
+
+  toggle_edit_mode() {
+    this.edit_mode.update(value => {
+      return !value
+    })
   }
 }
