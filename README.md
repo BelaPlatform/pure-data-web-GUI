@@ -40,7 +40,13 @@ the order of steps is important
 
 ### Inside Docker
 
-dvlpr@frontend:/workspace$ `pnpm start:watch`
+#### install dependencies
+
+dvlpr@shim:/workspace$ `pnpm install`
+
+#### run
+
+dvlpr@shim:/workspace$ `pnpm start:watch`
 
 
 ## Start Pd
@@ -55,6 +61,12 @@ dvlpr@frontend:/workspace$ `pnpm start:watch`
 `./run-dev.sh`
 
 ### Inside Docker
+
+#### install dependencies
+
+dvlpr@frontend:/workspace$ `pnpm install`
+
+#### run
 
 dvlpr@frontend:/workspace$ `pnpm start:watch`
 
