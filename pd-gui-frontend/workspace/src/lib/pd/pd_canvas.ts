@@ -162,7 +162,6 @@ export class PdCanvas {
     this.popup.update(_ => {
       return {show, origin, has_properties, has_open}
     })
-    console.log(get(this.popup))
   }
 
   on_dismiss_popup() {
@@ -170,5 +169,12 @@ export class PdCanvas {
       p.show = false
       return p
     })
+  }
+
+  on_dismiss_popup_with_result(value: number) {
+    const popup_ = get(this.popup)
+    const message = `${this.id} done-popup ${value} ${popup_.origin.x} ${popup_.origin.y};`
+    this.pd.send(message)
+    this.on_dismiss_popup()
   }
 }

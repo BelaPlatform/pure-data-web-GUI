@@ -1,25 +1,47 @@
 <script lang="ts">
+	import OutClick from 'svelte-outclick'
+
   import type { PdCanvas } from '$lib/pd/pd_canvas'
 
   export let canvas:PdCanvas
 
   $: popup = canvas.popup
 
-  function on_mousedown() {
-    console.log('on_mousedown')
-    $popup.show = false
+  function on_clicked_properties() {
+    canvas.on_dismiss_popup_with_result(0)
   }
+
+  function on_clicked_open() {
+    canvas.on_dismiss_popup_with_result(1)
+  }
+
+  function on_clicked_help() {
+    canvas.on_dismiss_popup_with_result(2)
+  }
+
 </script>
 
-<svelte:window on:mousedown={on_mousedown} />
-
-<div class="wrap" style:--x={$popup.origin.x + 156}px  style:--y={$popup.origin.y + 48}px class:visible={$popup.show}>
-  <ul>
-    <li class:disabled={!$popup.has_properties}>Properties</li>
-    <li class:disabled={!$popup.has_open}>Open</li>
-    <li>Help</li>
-  </ul>
-</div>
+<OutClick on:outclick={_ => canvas.on_dismiss_popup()}>
+  <div class="wrap" style:--x={$popup.origin.x + 144}px  style:--y={$popup.origin.y + 32}px class:visible={$popup.show}>
+    <ul>
+      <li class:disabled={!$popup.has_properties}
+        on:click={on_clicked_properties}
+        on:keydown={on_clicked_properties}
+        >
+        Properties</li>
+      <li class:disabled={!$popup.has_open}
+        on:click={on_clicked_open}
+        on:keydown={on_clicked_open}
+        >
+        Open</li>
+      <li
+        on:click={on_clicked_help}
+        on:keydown={on_clicked_help}
+        >
+        Help</li>
+    </ul>
+  </div>
+</OutClick> 
 
 <style lang="scss">
   .wrap {
