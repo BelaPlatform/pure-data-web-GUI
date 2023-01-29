@@ -28,13 +28,14 @@
   }
 
   function on_keydown(event:KeyboardEvent) {
-    console.log(event)
-    console.log(event.key)
+    // console.log(event)
+    // console.log(event.key)
 
     // first, see if it's a shortcut
     if (event.key == 'e' && event.ctrlKey) {
-      $canvas.toggle_edit_mode()
       event.preventDefault()
+      $canvas.toggle_edit_mode()
+      return
     }
 
     // if not a shortcut, forward the key to pd

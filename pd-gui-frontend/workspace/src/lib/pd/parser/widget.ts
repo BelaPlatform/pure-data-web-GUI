@@ -171,6 +171,21 @@ function parse_displace(message:string) {
   widget.displace_origin(x, y)
 }
 
+function parse_moveto(message:string) {
+  const tokens = message.split(' ')
+  const widget_id = tokens.at(1) || ""
+  const pd_ = get(pd)
+  const widget = pd_.widget_with_id(widget_id)
+  if (!widget) {
+    return
+  }
+
+  const x = parseInt(tokens.at(3) || "0")
+  const y = parseInt(tokens.at(4) || "0")
+  widget.set_origin(x, y)
+}
+
+
 export function parse_widget_message(message:string) {
   if (message.startsWith("::pdwidget::create_inlets")) {
     parse_create_iolets(message, IOLetScope.Input)
@@ -210,5 +225,9 @@ export function parse_widget_message(message:string) {
 
   if (message.startsWith("::pdwidget::displace")) {
     parse_displace(message)
+  }
+
+  if (message.startsWith("::pdwidget::moveto")) {
+    parse_moveto(message)
   }
 }
