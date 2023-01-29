@@ -146,19 +146,37 @@ export class PdCanvas {
     this.pd.send(message)
   }
 
-  on_create_bang() {
-    const message = `${this.id} bng;`
+  private send_simple_command(command: string) {
+    const message = `${this.id} ${command};`
     this.pd.send(message)
+  }
+
+  on_create_bang() {
+    this.send_simple_command('bng')
   }
 
   on_create_toggle() {
-    const message = `${this.id} toggle;`
-    this.pd.send(message)
+    this.send_simple_command('toggle')
   }
 
   on_select_all() {
-    const message = `${this.id} selectall;`
-    this.pd.send(message)
+    this.send_simple_command('selectall')
+  }
+
+  on_copy() {
+    this.send_simple_command('copy')
+  }
+
+  on_paste() {
+    this.send_simple_command('paste')
+  }
+
+  on_cut() {
+    this.send_simple_command('cut')
+  }
+
+  on_undo() {
+    this.send_simple_command('undo')
   }
 
   handle_popup(x: number, y: number, has_properties: boolean, has_open: boolean) {
