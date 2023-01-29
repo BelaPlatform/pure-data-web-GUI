@@ -179,6 +179,18 @@ export class PdCanvas {
     this.send_simple_command('undo')
   }
 
+  on_duplicate() {
+    this.send_simple_command('duplicate')
+  }
+
+  on_tidy() {
+    this.send_simple_command('tidy')
+  }
+
+  on_connect_selection() {
+    this.send_simple_command('connect_selection')
+  }
+  
   handle_popup(x: number, y: number, has_properties: boolean, has_open: boolean) {
     const origin = new G.Point(x, y)
     const show = true

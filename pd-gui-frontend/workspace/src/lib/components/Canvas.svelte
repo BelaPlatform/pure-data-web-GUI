@@ -124,6 +124,24 @@
       return
     }
 
+    if (event.key == 'd' && event.ctrlKey) {
+      event.preventDefault()
+      $canvas.on_duplicate()
+      return
+    }
+
+    if (event.key == 'R' && event.ctrlKey) {
+      event.preventDefault()
+      $canvas.on_tidy()
+      return
+    }
+
+    if (event.key == 'k' && event.ctrlKey) {
+      event.preventDefault()
+      $canvas.on_connect_selection()
+      return
+    }
+
     if (event.key == 'Control') {
       const key = event.location == 1 ? 'Control_L' : 'Control_R'
       $canvas.send_key_down(key)
