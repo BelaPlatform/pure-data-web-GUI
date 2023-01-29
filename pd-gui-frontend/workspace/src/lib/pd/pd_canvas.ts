@@ -45,8 +45,12 @@ export class PdCanvas {
     this.pd.send(message)
   }
 
-  send_mouse_down(x: number, y: number, button: number) {
-    const message = `${this.id} mouse ${x * 1.0} ${y * 1.0} 1 0;`
+  // modifers:
+  // CTRL = 2
+  // ALT = 4
+  // CTRL + ALT = 6
+  send_mouse_down(x: number, y: number, button: number, modifiers: number) {
+    const message = `${this.id} mouse ${x * 1.0} ${y * 1.0} ${button} ${modifiers};`
     this.pd.send(message)
   }
 
@@ -55,14 +59,13 @@ export class PdCanvas {
     this.pd.send(message)
   }
 
-  send_motion(x: number, y: number) {
-    const message = `${this.id} motion ${x * 1.0} ${y * 1.0} 0;`
+  send_motion(x: number, y: number, modifiers: number) {
+    const message = `${this.id} motion ${x * 1.0} ${y * 1.0} ${modifiers};`
     this.pd.send(message)
   }
 
   send_key(key: string, keydown: boolean) {
     const message = `${this.id} key ${keydown ? 1 : 0} ${key} 0;`
-    console.log(message)
     this.pd.send(message)
   }
 

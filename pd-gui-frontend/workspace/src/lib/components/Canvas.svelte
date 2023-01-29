@@ -16,7 +16,8 @@
   const {show_debug} = app
 
   function on_mousedown(event:MouseEvent) {
-    $canvas.send_mouse_down(event.offsetX, event.offsetY, event.button)
+    const modifiers = (event.ctrlKey ? 2 : 0) + (event.altKey ? 4 : 0)
+    $canvas.send_mouse_down(event.offsetX, event.offsetY, event.button, modifiers)
   }
 
   function on_mouseup(event:MouseEvent) {
@@ -24,7 +25,11 @@
   }
 
   function on_mousemove(event:MouseEvent) {
-    $canvas.send_motion(event.offsetX, event.offsetY)
+    // console.log(event)
+    // console.log(event.ctrlKey)
+    // console.log(event.altKey)
+    const modifiers = (event.ctrlKey ? 2 : 0) + (event.altKey ? 4 : 0)
+    $canvas.send_motion(event.offsetX, event.offsetY, modifiers)
   }
 
   function on_keydown(event:KeyboardEvent) {
@@ -45,8 +50,8 @@
   }
 
   function on_keyup(event:KeyboardEvent) {
-    console.log('on_keyup')
-    console.log(event)
+    // console.log('on_keyup')
+    // console.log(event)
 
     if (event.key == 'Control') {
       const key = event.location == 1 ? 'Control_L' : 'Control_R'
@@ -122,11 +127,11 @@
     }
 
     &.editmode_nothing {
-      cursor: inherit;
+      cursor: pointer;
     }
 
     &.runmode_clickme {
-      cursor: pointer;
+      cursor: inherit;
     }
 
     &.editmode_resize {
