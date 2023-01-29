@@ -77,10 +77,19 @@ export class PdWidget {
 
   set_size(width:number, height:number) {
     this.box.update(b => {
-      b.size.width = width
-      b.size.height = height
+      if (width < 0) {
+        b.origin.x = b.bottom_right().x + width
+        b.size.width = Math.abs(width)
+      } else {
+        b.size.width = width
+      }
+      if (height < 0) {
+        b.origin.y = b.bottom_right().y + height
+        b.size.height = Math.abs(height)
+      } else {
+        b.size.height = height
+      }
       return b
     })
-    this.box = this.box
-  }  
+  }
 }
