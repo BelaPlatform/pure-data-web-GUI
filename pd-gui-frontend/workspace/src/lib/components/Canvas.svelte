@@ -100,8 +100,14 @@
       $canvas.send_key_down('8')
     }
 
-    console.log(event)
-    console.log(event.key)
+    if (event.key == ' ') {
+      $canvas.send_key_down('32')
+    }
+
+    if (event.code.startsWith('Key')) {
+      const ascii = event.key.charCodeAt(0)
+      $canvas.send_key_down(`${ascii}`)
+    }
   }
 
   function on_keyup(event:KeyboardEvent) {
