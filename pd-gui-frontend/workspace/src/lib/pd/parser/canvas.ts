@@ -3,34 +3,41 @@ import { get } from 'svelte/store'
 import { pd } from '$lib/stores/pd'
 
 export function parse_pdtk_canvas_message(message:string) {
+  const tokens = message.split(' ')
+  const id = tokens.at(1) || ""  
   const pd_ = get(pd)
-  if (message.startsWith("pdtk_canvas_new")) {
-    const tokens = message.split(' ')
-    const id = tokens.at(1) || ""
-    get(pd).handle_new_canvas_with_id(id)
 
+  if (message.startsWith("pdtk_canvas_new")) {
+    get(pd).handle_new_canvas_with_id(id)
     // this canvas has just been opened by us
     // send a map message on user's behalf
     pd_.on_map_canvas_with_id(id)
+    return
   }
 
   if (message.startsWith("pdtk_canvas_setparents")) {
     // console.log('pdtk_setparents')
+    return
+  }
+
+  const canvas = pd_.canvas_with_id(id)
+  if (!canvas) {
+    console.log(`no canvas with id ${id}`)
+    return
   }
 
   if (message.startsWith("pdtk_canvas_reflecttitle")) {
-    // console.log('pdtk_canvas_reflecttitle')
-    // console.log(message)
-    const tokens = message.split(' ')
-    const id = tokens.at(1) || ""
-    const canvas = pd_.canvas_with_id(id)
-    if (!canvas) {
-      console.log(`no canvas with id ${id}`)
-      return
-    }
     const title = (tokens.at(3) || "").replace('{', '').replace('}', '')
-    // console.log(title)
     canvas.title = title
+    return
+  }
+
+  if (message.startsWith("pdtk_canvas_popup")) {
+    const x = parseInt(tokens.at(2) || "0")
+    const y = parseInt(tokens.at(3) || "0")
+    const has_properties = parseInt(tokens.at(4) || "0") == 1
+    const has_open = parseInt(tokens.at(5) || "0") == 1
+    canvas.handle_popup(x, y, has_properties, has_open)
   }
 }
 

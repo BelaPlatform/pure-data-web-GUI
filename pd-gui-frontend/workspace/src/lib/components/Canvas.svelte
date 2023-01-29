@@ -1,11 +1,9 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
-  import { get } from 'svelte/store'
-
   import { app } from '$lib/stores/app'
   import { pd } from '$lib/stores/pd'
   import Node from './Node.svelte'
   import Noodle from './Noodle.svelte'
+  import PopUp from './PopUp.svelte'
 
   $: canvas = $pd.active_canvas
   $: widgets = $canvas.widgets
@@ -16,8 +14,17 @@
   const {show_debug} = app
 
   function on_mousedown(event:MouseEvent) {
+    if (event.button != 0) {
+      return
+    }
+    const button = 1
     const modifiers = (event.ctrlKey ? 2 : 0) + (event.altKey ? 4 : 0)
-    $canvas.send_mouse_down(event.offsetX, event.offsetY, event.button, modifiers)
+    // const button = event.button == 2 ? 3 : 1
+    $canvas.send_mouse_down(event.offsetX, event.offsetY, button, modifiers)
+  }
+
+  function on_contextmenu(event:MouseEvent) {
+    $canvas.send_mouse_down(event.offsetX, event.offsetY, 3, 8)
   }
 
   function on_mouseup(event:MouseEvent) {
@@ -142,10 +149,13 @@
 <svelte:window on:keydown={on_keydown} on:keyup={on_keyup}/>
 
 <div class="wrap">
+  <PopUp canvas={$canvas} />
+  
   <svg xmlns="http://www.w3.org/2000/svg"
     on:mousedown={on_mousedown}
     on:mousemove={on_mousemove}
     on:mouseup={on_mouseup}
+    on:contextmenu|preventDefault={on_contextmenu}
     class={$cursor}>
     {#each $widgets as widget(widget.id)}
       <Node {widget} />

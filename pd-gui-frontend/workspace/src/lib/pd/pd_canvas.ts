@@ -1,9 +1,16 @@
 import { writable, get } from 'svelte/store'
+import * as G from './geometry'
 
 import type { Pd } from './pd'
 import { PdConnection } from './pd_connection'
 import { PdWidget } from './pd_widget'
 
+export type PopUp = {
+  show: boolean
+  origin: G.Point
+  has_properties: boolean
+  has_open: boolean
+}
 
 export class PdCanvas {
   title: string = ""
@@ -12,6 +19,7 @@ export class PdCanvas {
   is_mapped: boolean = false
   edit_mode = writable<boolean>(false)
   cursor = writable<string>('runmode_nothing')
+  popup = writable<PopUp>({show: false, origin: G.NullPoint(), has_properties: false, has_open: false})
 
   constructor(public id: string, public pd: Pd) {
     this.edit_mode.subscribe(value => {
@@ -146,5 +154,21 @@ export class PdCanvas {
   on_create_toggle() {
     const message = `${this.id} toggle;`
     this.pd.send(message)
+  }
+
+  handle_popup(x: number, y: number, has_properties: boolean, has_open: boolean) {
+    const origin = new G.Point(x, y)
+    const show = true
+    this.popup.update(_ => {
+      return {show, origin, has_properties, has_open}
+    })
+    console.log(get(this.popup))
+  }
+
+  on_dismiss_popup() {
+    this.popup.update(p => {
+      p.show = false
+      return p
+    })
   }
 }

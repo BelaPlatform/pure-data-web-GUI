@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
-
   import { app } from '$lib/stores/app'
   import Port from './Port.svelte'
   import type { PdWidget } from '$lib/pd/pd_widget'
