@@ -10,20 +10,7 @@
   $: right_x = $box.size.width
   $: top_y = 0
   $: bottom_y = $box.size.height
-  $: points = `${left_x}, ${top_y} ${right_x}, ${top_y} ${right_x - offset}, ${top_y + offset} ${right_x - offset}, ${bottom_y - offset} ${right_x}, ${bottom_y} ${left_x}, ${bottom_y} ${left_x}, ${top_y}`
-  $: selected = widget.is_selected
+  $: poly = `${left_x}, ${top_y} ${right_x}, ${top_y} ${right_x - offset}, ${top_y + offset} ${right_x - offset}, ${bottom_y - offset} ${right_x}, ${bottom_y} ${left_x}, ${bottom_y} ${left_x}, ${top_y}`
 </script>
 
-<polyline points={points} class:selected={$selected} />
-<NodeBase {widget} text_only />
-
-<style lang="scss">
-  polyline {
-    fill: #fff;
-    stroke: #aaa;
-    shape-rendering: crispEdges;
-    &.selected {
-      stroke: #00f;
-    }
-  }
-</style>
+<NodeBase {widget} text_only poly={poly} />

@@ -1,11 +1,10 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
-
   import type { PdWidget } from '$lib/pd/pd_widget'
 
   export let widget:PdWidget
   export let text_only:boolean = false
   export let no_bg:boolean = false
+  export let poly:string|null = null
 
   $: text = widget.text
   $: box = widget.box
@@ -13,8 +12,12 @@
 </script>
 
 <g>
-  {#if !text_only}
-    <rect width={$box.size.width} height={$box.size.height} class:no_bg={no_bg} class:selected={$selected} />
+  {#if poly}
+    <polyline points={poly} class:selected={$selected}  class:no_bg={no_bg} />
+  {:else}
+    {#if !text_only}
+      <rect width={$box.size.width} height={$box.size.height} class:no_bg={no_bg} class:selected={$selected} />    
+    {/if}
   {/if}
 
   {#if $text != ""}
@@ -25,7 +28,7 @@
 </g>
 
 <style lang="scss">
-  rect {
+  rect, polyline {
     stroke: #666;
     fill: #fff;
     shape-rendering: crispEdges;
