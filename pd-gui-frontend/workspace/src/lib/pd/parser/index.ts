@@ -39,7 +39,7 @@ export function parse(full_message:string) {
       if (!canvas) {
         return
       }
-      pd_.destroy(canvas)
+      pd_.handle_destroy(canvas)
     }
   })
 }

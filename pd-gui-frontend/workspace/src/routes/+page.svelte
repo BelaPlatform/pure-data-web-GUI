@@ -12,22 +12,18 @@
     $pd.send(message)
   }
 
-  let selected_patch:any
-  async function on_open_patch() {
-    $pd.open_patch(selected_patch)
-  }
-
   // the WebSocket HAS to be created in an onMount lifecycle method
   // otherwise, svelte's server-side-prerendering would try to instantiate the WS and fail
   onMount(()  => {
     $pd.use_io(new WebSocketIO('ws://localhost:8081'))
   })
 
+  let selected_patch:any
   $: canvases = $pd.canvases
 </script>
 
 <header>
-  <form on:submit|preventDefault={_ => on_open_patch()}>
+  <form on:submit|preventDefault={_ => $pd.on_open_patch(selected_patch)}>
     <select bind:value={selected_patch} name="patch" id="patch">
       {#each $available_patches as patch}
         <option value={patch}>{patch.file}</option>
@@ -42,12 +38,24 @@
     <ul class="canvas-list">
       {#each $canvases as canvas}
         <li 
-          on:click={_ => $pd.map_canvas_with_id(canvas.id)}
-          on:keypress={_ => $pd.map_canvas_with_id(canvas.id)}
+          on:click={_ => $pd.on_map_canvas_with_id(canvas.id)}
+          on:keypress={_ => $pd.on_map_canvas_with_id(canvas.id)}
           >
-          {canvas.title} <button on:click={$pd.close(canvas)}>x</button>
+          {canvas.title} 
+          <button 
+            on:click={_ => $pd.on_close(canvas)}
+            on:keydown={_ => $pd.on_close(canvas)}
+            >
+            x
+          </button>
         </li>
       {/each}
+      <li
+        on:click={_ => $pd.on_create_new_canvas()}
+        on:keypress={_ => $pd.on_create_new_canvas()}
+        >
+        New
+      </li>
     </ul>
   </aside>
   <main>

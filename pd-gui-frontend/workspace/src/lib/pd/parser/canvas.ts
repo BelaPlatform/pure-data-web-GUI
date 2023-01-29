@@ -7,11 +7,11 @@ export function parse_pdtk_canvas_message(message:string) {
   if (message.startsWith("pdtk_canvas_new")) {
     const tokens = message.split(' ')
     const id = tokens.at(1) || ""
-    get(pd).new_canvas_with_id(id)
+    get(pd).handle_new_canvas_with_id(id)
 
     // this canvas has just been opened by us
-    // send a map message
-    pd_.map_canvas_with_id(id)
+    // send a map message on user's behalf
+    pd_.on_map_canvas_with_id(id)
   }
 
   if (message.startsWith("pdtk_canvas_setparents")) {
@@ -46,6 +46,9 @@ function parse_set_cursor_message(message:string) {
   // console.log(canvas_id)
   const canvas = get(pd).canvas_with_id(canvas_id)
   // console.log(canvas)
+  if (!canvas) {
+    return
+  }
   const cursor = tokens.at(2) || ""
   canvas.set_cursor(cursor)
 }

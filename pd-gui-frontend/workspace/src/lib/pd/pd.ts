@@ -8,6 +8,8 @@ import type { PdWidget } from './pd_widget'
 import type { PdConnection } from './pd_connection'
 
 
+// events originating from pd are prefixed with handle_
+// events originating from user interacion with the frontend are prefixed with on_
 export class Pd {
   io: IO = new NullIO()
   canvases = writable<PdCanvas[]>([])
@@ -41,7 +43,7 @@ export class Pd {
     this.send(message)
   }
 
-  open_patch(patch: PatchFile) {
+  on_open_patch(patch: PatchFile) {
     const split_idx = patch.file.lastIndexOf('/')
     const path = patch.file.substring(0, split_idx + 1)
     const file = patch.file.substring(split_idx + 1)
@@ -49,32 +51,49 @@ export class Pd {
     this.send(message)
   }
 
-  close(canvas: PdCanvas) {
+  on_create_new_canvas() {
+    const message = `pd menunew PDUNTITLED /home/hase/Documents/Pd;`
+    this.send(message)
+  }
+
+  on_close(canvas: PdCanvas) {
     const message = `${canvas.id} menuclose 0;`
+    console.log(`on_close ${message}`)
     this.send(message)
   }
 
-  map_canvas_with_id(canvas_id: string) {
-    const message = `${canvas_id} map 1;`
-    this.send(message)
-    const canvas = this.canvas_with_id(canvas_id)
-    if (canvas) {
-      this.active_canvas.update(_ => canvas)
-    }
-  }
-
-  new_canvas_with_id(id: string) {
+  handle_new_canvas_with_id(id: string) {
     this.canvases.update((cs: PdCanvas[]) => {
       cs = cs.concat([new PdCanvas(id, this)])
       return cs
     })
   }
 
-  destroy(canvas: PdCanvas) {
+  handle_destroy(canvas: PdCanvas) {
+    let map_other_canvas = false
+    // is this the active canavs?
+    if (get(this.active_canvas).id == canvas.id) {
+      map_other_canvas = true
+    }
     this.canvases.update((cs: PdCanvas[]) => {
       cs = cs.filter(c => c.id != canvas.id)
       return cs
     })
+    if (map_other_canvas) {
+      const new_active_canvas = get(this.canvases).at(0)
+      if (new_active_canvas) {
+        this.on_map_canvas_with_id(new_active_canvas.id)
+      }
+    }
+  }
+
+  on_map_canvas_with_id(canvas_id: string) {
+    const message = `${canvas_id} map 1;`
+    this.send(message)
+    const canvas = this.canvas_with_id(canvas_id)
+    if (canvas) {
+      this.active_canvas.update(_ => canvas)
+    }
   }
 
   canvas_with_id(id: string) {
