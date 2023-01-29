@@ -11,6 +11,7 @@ const dummy_patches = [
   {id: 3, file: '/home/hase/Documents/Pd/slider.pd'},
   {id: 4, file: '/home/hase/Documents/Pd/radio.pd'},
   {id: 5, file: '/home/hase/Documents/Pd/vumeter.pd'},
+  {id: 6, file: '/home/hase/Documents/Pd/empty.pd'},
 ]
 
 export const available_patches = writable<PatchFile[]>(dummy_patches)

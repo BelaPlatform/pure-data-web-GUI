@@ -112,4 +112,9 @@ export class PdCanvas {
       return !value
     })
   }
+
+  save() {
+    const message = `${this.id} menusave;`
+    this.pd.send(message)
+  }
 }

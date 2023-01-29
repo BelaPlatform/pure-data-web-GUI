@@ -43,6 +43,12 @@
       return
     }
 
+    if (event.key == 's' && event.ctrlKey) {
+      event.preventDefault()
+      $canvas.save()
+      return
+    }
+
     if (event.key == 'Control') {
       const key = event.location == 1 ? 'Control_L' : 'Control_R'
       $canvas.send_key_down(key)
