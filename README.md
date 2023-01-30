@@ -1,6 +1,6 @@
 # Overview
 
-To make Pd send it's gui procotol data to us, we have to give it a TCP port at startup
+To make Pd send its gui procotol data to us, we have to give it a TCP port at startup
 
 `pd -guiport 56026`
 
