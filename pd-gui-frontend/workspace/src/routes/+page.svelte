@@ -2,6 +2,7 @@
   import { onMount } from "svelte"
 
   import { pd } from '$lib/stores/pd'
+  import { parse } from '$lib/pd/parser/'
   import { WebSocketIO } from '$lib/pd/io'
   import { available_patches } from '$lib/stores/patches'
   import Console from '$lib/components/Console.svelte'
@@ -12,10 +13,23 @@
     $pd.send(message)
   }
 
+  function on_open() {
+    console.log('on_open')
+    // https://developer.mozilla.org/en-US/docs/Web/API/window/showOpenFilePicker
+    // window.showOpenFilePicker()
+
+    // 
+  }
+
   // the WebSocket HAS to be created in an onMount lifecycle method
   // otherwise, svelte's server-side-prerendering would try to instantiate the WS and fail
+  let io:WebSocketIO
   onMount(()  => {
-    $pd.use_io(new WebSocketIO('ws://localhost:8081'))
+    io = new WebSocketIO('ws://localhost:8081')
+    io.on_message = (event:MessageEvent) => {
+      parse(event.data)
+    }
+    $pd.use_io(io)
   })
 
   let selected_patch:any
@@ -62,6 +76,15 @@
         on:keypress={_ => $pd.on_create_new_canvas()}
         >
         New
+      </li>
+      <li
+        on:click={on_open}
+        on:keypress={on_open}
+        >
+        <form>
+          <input type="file" id="open_file" />
+          <!-- <button type="submit">Open File</button> -->
+        </form>
       </li>
     </ul>
   </aside>

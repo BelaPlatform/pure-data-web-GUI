@@ -1,6 +1,6 @@
 import { writable, type Writable, get } from 'svelte/store'
 
-import { parse } from './parser'
+// import { parse } from './parser'
 import { PdCanvas } from './pd_canvas'
 import { IO, NullIO } from './io'
 import type { PatchFile } from '$lib/stores/patches'
@@ -25,9 +25,9 @@ export class Pd {
     this.io.on_open = () => {
       this.send_init_sequence()
     }
-    this.io.on_message = (event:MessageEvent) => {
-      parse(event.data)
-    }
+    // this.io.on_message = (event:MessageEvent) => {
+    //   parse(event.data)
+    // }
   }
 
   send(message: string) {
