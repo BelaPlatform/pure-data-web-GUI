@@ -57,11 +57,32 @@ function parse_set_cursor_message(message:string) {
     return
   }
   const cursor = tokens.at(2) || ""
-  canvas.set_cursor(cursor)
+  canvas.handle_set_cursor(cursor)
 }
 
-export function parse_canvas_message(message:string) {
+function parse_set_editmode_message(message: string) {
+  const pd_ = get(pd)
+  const tokens = message.split(' ')
+  // console.log(tokens)
+  const id = tokens.at(1) || ""
+  // console.log(id)
+  const canvas_id = id.split('.c').at(0) || ""
+  // console.log(canvas_id)
+  const canvas = get(pd).canvas_with_id(canvas_id)
+  // console.log(canvas)
+  if (!canvas) {
+    return
+  }
+  const use_edit_mode = parseInt(tokens.at(2) || "") == 1
+  canvas.handle_set_editmode(use_edit_mode)
+}
+
+export function parse_canvas_message(message: string) {
   if (message.startsWith("::pd::canvas::set_cursor")) {
     parse_set_cursor_message(message) 
+  }
+
+  if (message.startsWith("::pd::canvas::set_editmode")) {
+    parse_set_editmode_message(message) 
   }
 }

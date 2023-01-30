@@ -22,9 +22,9 @@ export class PdCanvas {
   popup = writable<PopUp>({show: false, origin: G.NullPoint(), has_properties: false, has_open: false})
 
   constructor(public id: string, public pd: Pd) {
-    this.edit_mode.subscribe(value => {
-      this.send_set_edit_mode(value ? 1 : 0)
-    })
+    // this.edit_mode.subscribe(value => {
+    //   this.send_set_edit_mode(value ? 1 : 0)
+    // })
   }
 
   create_widget(id:string, klassname:string, x:number, y:number) {
@@ -71,16 +71,29 @@ export class PdCanvas {
     }    
   }
 
-  set_cursor(cursor_name:string) {
+  handle_set_cursor(cursor_name: string) {
     // console.log(`set_cursor ${cursor_name}`)
     this.cursor.update(_ => {
       return cursor_name
     })
   }
 
-  send_set_edit_mode(value: number) {
-    const message = `${this.id} editmode ${value};`
+  private send_set_editmode(use_edit_mode: boolean) {
+    const message = `${this.id} editmode ${use_edit_mode ? 1 : 0};`
     this.pd.send(message)
+  }
+
+  on_toggle_edit_mode() {
+    this.edit_mode.update(value => {
+      this.send_set_editmode(!value)
+      return value
+    })
+  }
+
+  handle_set_editmode(use_edit_mode: boolean) {
+    this.edit_mode.update(_ => {
+      return use_edit_mode
+    })
   }
 
   // modifers:
@@ -113,12 +126,6 @@ export class PdCanvas {
 
   send_key_up(key: string) {
     this.send_key(key, false, 0)
-  }
-
-  on_toggle_edit_mode() {
-    this.edit_mode.update(value => {
-      return !value
-    })
   }
 
   on_save() {
