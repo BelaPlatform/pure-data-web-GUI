@@ -14,6 +14,7 @@ export class Pd {
   io: IO = new NullIO()
   canvases = writable<PdCanvas[]>([])
   active_canvas: Writable<PdCanvas>
+  dsp_is_on = writable<boolean>(false)
 
   constructor() {
     this.active_canvas = writable<PdCanvas>(new PdCanvas('nil', this))
@@ -126,4 +127,22 @@ export class Pd {
     }
     return null
   }
+
+  private send_dsp(dsp_is_on: boolean) {
+    const message = `pd dsp ${dsp_is_on ? 1 : 0};`
+    this.send(message)
+  }
+
+  on_toggle_dsp() {
+    this.dsp_is_on.update(value => {
+      this.send_dsp(!value)
+      return value
+    })
+  }
+
+  handle_dsp(value: boolean) {
+    this.dsp_is_on.update(_ => {
+      return value
+    })
+  }  
 }

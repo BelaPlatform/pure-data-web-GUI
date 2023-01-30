@@ -241,7 +241,7 @@
   <input type="checkbox" id="show_debug" bind:checked={$show_debug} /><label for="show_debug">Debug</label><br>
   <input type="checkbox" id="edit_mode"
     bind:checked={$edit_mode}
-    on:click={$canvas.on_toggle_edit_mode()}
+    on:click={_ => $canvas.on_toggle_edit_mode()}
     /><label for="edit_mode">Edit Mode</label><br>
 
 </div>

@@ -20,6 +20,7 @@
 
   let selected_patch:any
   $: canvases = $pd.canvases
+  $: dsp = $pd.dsp_is_on
 </script>
 
 <header>
@@ -31,6 +32,12 @@
     </select>
     <button type="submit">Open</button>
   </form>
+  <input type="checkbox" 
+    id="dsp"
+    bind:checked={$dsp} 
+    on:click={_ => $pd.on_toggle_dsp()}
+    />
+  <label for="dsp">DSP</label>
 </header>
 
 <div class="l2r">
@@ -70,6 +77,11 @@
 <style lang="scss">
   header {
     margin-bottom: 12px;
+    display: flex;
+
+    form {
+      margin-right: 24px;
+    }
   }
 
   .l2r {

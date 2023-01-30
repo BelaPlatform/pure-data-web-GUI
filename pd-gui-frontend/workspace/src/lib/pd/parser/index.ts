@@ -9,6 +9,7 @@ export function parse(full_message:string) {
   // console.log(full_message)
   const messages = full_message.split(';\n')
   // console.log(messages)
+  const pd_ = get(pd)
   messages.forEach(message => {
     // console.log(`parsing ${message}`)
     if (message.startsWith("::pdwindow")) {
@@ -28,18 +29,24 @@ export function parse(full_message:string) {
     }
 
     if (message.startsWith("pdtk_ping")) {
-      get(pd).send_ping()
+      pd_.send_ping()
     }
 
     if (message.startsWith("destroy")) {
       const tokens = message.split(' ')
       const canvas_id = tokens.at(1) || "0"
-      const pd_ = get(pd)
       const canvas = pd_.canvas_with_id(canvas_id)
       if (!canvas) {
         return
       }
       pd_.handle_destroy(canvas)
+    }
+
+    if (message.startsWith("pdtk_pd_dsp")) {
+      // get(pd).send_ping()
+      console.log('pdtk_pd_dsp')
+      const dsp_on = message.includes('{ON}')
+      pd_.handle_dsp(dsp_on)
     }
   })
 }
