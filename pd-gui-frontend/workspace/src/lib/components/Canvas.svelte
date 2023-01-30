@@ -172,11 +172,16 @@
       $canvas.send_key_down('8')
     }
 
+    if (event.key == 'Enter') {
+      $canvas.send_key_down('10')
+    }
+
     if (event.key == ' ') {
       $canvas.send_key_down('32')
     }
 
-    if (event.code.startsWith('Key')) {
+    // if event.key is of length 1, assume it's an ascii character
+    if (event.key.length == 1) {
       const ascii = event.key.charCodeAt(0)
       $canvas.send_key_down(`${ascii}`)
     }
