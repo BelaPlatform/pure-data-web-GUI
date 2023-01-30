@@ -21,11 +21,11 @@ function parse_create(message:string) {
   }
 
   if (klass == 'connection') {
-    canvas.create_connection(id)
+    canvas.handle_create_connection(id)
   } else {
     const x = tokens.at(4) || ""
     const y = tokens.at(5) || ""
-    canvas.create_widget(id, klass, parseInt(x), parseInt(y))
+    canvas.handle_create_widget(id, klass, parseInt(x), parseInt(y))
   }
 }
 
@@ -204,7 +204,7 @@ function parse_destroy(message: string) {
   const object_id = tokens.at(1) || ""
   const pd_ = get(pd)
   const object = pd_.widget_or_connection_with_id(object_id)
-  object?.canvas.destroy(object)
+  object?.canvas.handle_destroy(object)
 }
 
 function parse_select(message: string) {

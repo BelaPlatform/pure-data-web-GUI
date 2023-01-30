@@ -9,7 +9,7 @@ import type { PdConnection } from './pd_connection'
 
 
 // events originating from pd are prefixed with handle_
-// events originating from user interacion with the frontend are prefixed with on_
+// events originating from user interaction with the frontend are prefixed with on_
 export class Pd {
   io: IO = new NullIO()
   canvases = writable<PdCanvas[]>([])

@@ -12,6 +12,8 @@ export type PopUp = {
   has_open: boolean
 }
 
+// events originating from pd are prefixed with handle_
+// events originating from user interaction with the frontend are prefixed with on_
 export class PdCanvas {
   title: string = ""
   widgets = writable<PdWidget[]>([])
@@ -21,13 +23,9 @@ export class PdCanvas {
   cursor = writable<string>('runmode_nothing')
   popup = writable<PopUp>({show: false, origin: G.NullPoint(), has_properties: false, has_open: false})
 
-  constructor(public id: string, public pd: Pd) {
-    // this.edit_mode.subscribe(value => {
-    //   this.send_set_edit_mode(value ? 1 : 0)
-    // })
-  }
+  constructor(public id: string, public pd: Pd) { }
 
-  create_widget(id:string, klassname:string, x:number, y:number) {
+  handle_create_widget(id:string, klassname:string, x:number, y:number) {
     const widget = new PdWidget(id, this, klassname, x, y)
     this.add_widget(widget)
   }
@@ -39,7 +37,7 @@ export class PdCanvas {
     })
   }
 
-  create_connection(id: string) {
+  handle_create_connection(id: string) {
     const connection = new PdConnection(id, this)
     this.add_connection(connection)
   }
@@ -51,7 +49,7 @@ export class PdCanvas {
     })
   }
 
-  destroy(object: PdWidget|PdConnection) {
+  handle_destroy(object: PdWidget|PdConnection) {
     if (object instanceof PdWidget) {
       this.widgets.update(ws => {
         ws = ws.filter((obj) => {
@@ -97,6 +95,7 @@ export class PdCanvas {
   }
 
   // modifers:
+  // SHIFT = 1
   // CTRL = 2
   // ALT = 4
   // CTRL + ALT = 6

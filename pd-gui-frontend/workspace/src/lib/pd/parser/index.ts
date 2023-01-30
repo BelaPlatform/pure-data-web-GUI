@@ -43,8 +43,6 @@ export function parse(full_message:string) {
     }
 
     if (message.startsWith("pdtk_pd_dsp")) {
-      // get(pd).send_ping()
-      console.log('pdtk_pd_dsp')
       const dsp_on = message.includes('{ON}')
       pd_.handle_dsp(dsp_on)
     }
