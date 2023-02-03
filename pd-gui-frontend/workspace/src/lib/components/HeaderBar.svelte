@@ -7,8 +7,12 @@
 
   let second_level: MenuItem | null = null
 
-  function on_open_menu(item: MenuItem) {
-    second_level = item
+  function on_item_clicked(item: MenuItem) {
+    if (item.children.length) {
+     second_level = item
+    } else {
+      item.action()
+    }
   }
 
   function on_hover(item: MenuItem) {
@@ -26,24 +30,24 @@
   <ul class="top_level">
     {#each menu as item}
       <li
-        on:click={_ => on_open_menu(item)}
-        on:keydown={_ => on_open_menu(item)}
+        on:click={_ => on_item_clicked(item)}
+        on:keydown={_ => on_item_clicked(item)}
         on:mouseenter={_ => on_hover(item)}
         class:is_open={second_level == item}
         >
         <span class="title">{item.title}</span>
         {#if second_level == item && second_level.children}
           <OutClick on:outclick={on_dismiss_menu}>
-          <ul class="second_level">
-            {#each second_level.children as item}
-              <li
-                on:click={_ => on_open_menu(item)}
-                on:keydown={_ => on_open_menu(item)}
-                >
-                <span class="title">{item.title}</span>
-              </li>
-            {/each}
-          </ul>
+            <ul class="second_level">
+              {#each second_level.children as item}
+                <li
+                  on:click={_ => on_item_clicked(item)}
+                  on:keydown={_ => on_item_clicked(item)}
+                  >
+                  <span class="title">{item.title}</span>
+                </li>
+              {/each}
+            </ul>
           </OutClick>
         {/if}
       </li>

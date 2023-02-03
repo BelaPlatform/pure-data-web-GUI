@@ -1,6 +1,7 @@
 import { get } from 'svelte/store'
 
 import { available_patches } from './patches'
+import { wm } from './wm'
 
 export class MenuItem {
   constructor(public title: string,
@@ -11,7 +12,7 @@ export class MenuItem {
 }
 
 function on_new_window() {
-  console.log('on_new_window')
+  get(wm).new_window()
 }
 
 function build_file_menu() : MenuItem[] {
