@@ -141,6 +141,12 @@ export class Config extends Command {
               object.set_fontsize(size)
             }
           } break;
+          case 'font': {
+            if (p.value instanceof StringNode) {
+              const font = (p.value as StringNode).value
+              object.set_font(font)
+            }
+          } break;
         }
       })
     } else if (object instanceof PdConnection) {

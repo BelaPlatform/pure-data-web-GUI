@@ -29,6 +29,7 @@ export class IOLet {
 }
 
 export type WidgetState = 'normal' | 'edit' | 'broken'
+export type WidgetFont = 'dejavu' | 'helvetica' | 'times'
 
 export class PdWidget {
   inlets: IOLet[] = []
@@ -44,6 +45,7 @@ export class PdWidget {
   label = writable<string>('')
   labelpos = writable<G.Point>(G.NullPoint())
   fontsize = writable<number>(12)
+  font = writable<string>('DejaVu Sans Mono')
   klass: Klass
 
   constructor(public id: string, public canvas: PdCanvas, public klassname: string, x: number = 0, y: number = 0) { 
@@ -133,5 +135,9 @@ export class PdWidget {
 
   set_fontsize(size: number) {
     this.fontsize.update(_ => size)
-  }  
+  }
+
+  set_font(font: string) {
+    this.font.update(_ => font)
+  }
 }

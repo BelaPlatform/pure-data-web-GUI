@@ -12,6 +12,7 @@
   $: lcolor = widget.lcolor
   $: labelpos = widget.labelpos
   $: fontsize = widget.fontsize
+  $: font = widget.font
 </script>
 
 <g transform="translate({$box.origin.x},{$box.origin.y})">
@@ -23,7 +24,8 @@
   {#if $label != ""}
     <text x={$labelpos.x} y={$labelpos.y} class="label" 
       style:--lcolor={$lcolor}
-      style:--fontsize="{$fontsize}px">{$label}</text>
+      style:--fontsize="{$fontsize}px"
+      style:--font={$font}>{$label}</text>
   {/if}
   
   <g>
@@ -41,7 +43,7 @@
 <style lang="scss">
   text {
     user-select: none;
-    font-family: 'DejaVu Sans Mono', 'Courier New', Courier, monospace;
+    // font-family: 'DejaVu Sans Mono', 'Courier New', Courier, monospace;
     font-size: 12px;
   }
 
@@ -52,5 +54,6 @@
   .label {
     fill: var(--lcolor);
     font-size: var(--fontsize);
+    font-family: var(--font);
   }
 </style>
