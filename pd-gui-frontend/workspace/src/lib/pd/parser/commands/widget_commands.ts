@@ -1,7 +1,7 @@
 import { Command } from './command'
 import type { Pd } from '../../pd'
 import { PdWidget, IOLetScope, IOLetType, type WidgetState } from '../../pd_widget'
-import { PdConnection } from '../../pd_connection'
+import { PdConnection, PdConnectionType } from '../../pd_connection'
 import { NumberNode, StringNode, VectorNode, type ValueNode } from '../syntax_nodes'
 import * as G from '../../geometry'
 
@@ -135,6 +135,12 @@ export class Config extends Command {
               object.set_labelpos(new G.Point(origin_x, origin_y))
             }
           } break;
+          case 'fontsize': {
+            if (p.value instanceof NumberNode) {
+              const size = parseInt((p.value as NumberNode).value)
+              object.set_fontsize(size)
+            }
+          } break;
         }
       })
     } else if (object instanceof PdConnection) {
@@ -148,6 +154,12 @@ export class Config extends Command {
               const to_x = parseFloat((values.elements[2] as NumberNode).value)
               const to_y = parseFloat((values.elements[3] as NumberNode).value)
               object.set_coordinates(from_x, from_y, to_x, to_y)
+            }
+          } break;
+          case 'type': {
+            if (p.value instanceof StringNode) {
+              const type_name = (p.value as StringNode).value
+              object.set_type(type_name == 'message' ? PdConnectionType.Message : PdConnectionType.Signal)
             }
           } break;
         }

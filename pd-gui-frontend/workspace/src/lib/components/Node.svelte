@@ -11,6 +11,7 @@
   $: label = widget.label
   $: lcolor = widget.lcolor
   $: labelpos = widget.labelpos
+  $: fontsize = widget.fontsize
 </script>
 
 <g transform="translate({$box.origin.x},{$box.origin.y})">
@@ -20,7 +21,9 @@
   {/if}
 
   {#if $label != ""}
-    <text x={$labelpos.x} y={$labelpos.y} class="label" style:--lcolor={$lcolor}>{$label}</text>
+    <text x={$labelpos.x} y={$labelpos.y} class="label" 
+      style:--lcolor={$lcolor}
+      style:--fontsize="{$fontsize}px">{$label}</text>
   {/if}
   
   <g>
@@ -48,5 +51,6 @@
 
   .label {
     fill: var(--lcolor);
+    font-size: var(--fontsize);
   }
 </style>
