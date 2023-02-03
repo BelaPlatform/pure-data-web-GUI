@@ -37,6 +37,7 @@ class WindowManager {
   windows = writable<Fenster[]>([])
   next_id = 1
   n_windows = 0
+  active_window: Fenster | null = null
 
   new_window() {
     const box = DefaultBox()
@@ -57,12 +58,19 @@ class WindowManager {
     })
   }
 
+  close_active_window() {
+    if (this.active_window) {
+      this.close_window(this.active_window)
+    }
+  }
+
   stack_top(window: Fenster) {
     // console.log('stack_top')
     let z_index = 9999
     get(this.windows).forEach(w => {
       w.z_index.update(_ => z_index + (window.id == w.id ? 9999 : 0))
     })
+    this.active_window = window
   }
 }
 

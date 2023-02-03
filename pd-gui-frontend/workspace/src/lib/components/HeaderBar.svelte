@@ -98,5 +98,6 @@
     position: absolute;
     margin-left: -6px;
     margin-top: 6px;
+    z-index: 99999;
   }
 </style>

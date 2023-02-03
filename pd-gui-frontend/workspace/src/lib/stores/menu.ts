@@ -15,6 +15,10 @@ function on_new_window() {
   get(wm).new_window()
 }
 
+function on_close_window() {
+  get(wm).close_active_window()
+}
+
 function build_file_menu() : MenuItem[] {
   const pre = [
     new MenuItem('New', on_new_window),
@@ -27,7 +31,7 @@ function build_file_menu() : MenuItem[] {
 
   const post = [
     new MenuItem('Print'),
-    new MenuItem('Close'),
+    new MenuItem('Close', on_close_window),
     new MenuItem('Quit')
   ]
   
