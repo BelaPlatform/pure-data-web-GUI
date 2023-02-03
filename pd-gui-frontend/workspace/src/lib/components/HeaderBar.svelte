@@ -3,85 +3,7 @@
   import OutClick from 'svelte-outclick'
 
   import { wm } from '$lib/stores/wm'
-  import { available_patches } from '$lib/stores/patches'
-
-  type MenuItem = {
-    title: string
-    children?: MenuItem[]
-  }
-
-  function build_file_menu() : MenuItem[] {
-    const pre = [
-      {title: 'New'},
-      {title: 'Open'},
-      {title: 'Save'},
-      {title: 'SaveAs'},
-      {title: 'Message'},
-      {title: 'Preferences'}
-    ]
-    const post = [
-      {title: 'Print'},
-      {title: 'Close'},
-      {title: 'Quit'}
-    ]
-    
-    const recent: MenuItem[] = []
-    get(available_patches).forEach(item => {
-      const path_components = item.file.split('/')
-      const filename = path_components[path_components.length - 1]
-      recent.push({title: `${item.id}. ${filename}`})
-    })
-    return pre.concat(recent).concat(post)
-  }
-
-  let file_menu: MenuItem[] = build_file_menu()
-
-  let edit_menu: MenuItem[] = [
-    {title: 'Undo'},
-    {title: 'Redo'},
-    {title: 'Cut'},
-    {title: 'Copy'},
-    {title: 'Paste'},
-    {title: 'SelectAll'}
-  ]
-
-  let put_menu: MenuItem[] = [
-    {title: 'Object'},
-    {title: 'Message'},
-    {title: 'Number'},
-    {title: '...'}
-  ]
-
-  let find_menu: MenuItem[] = [
-    {title: 'Find'},
-    {title: 'Find Again'},
-    {title: 'Find Last Error'}
-  ]
-
-  let media_menu: MenuItem[] = [
-    {title: 'DSP On'},
-    {title: 'DSP Off'},
-    {title: 'Test Audio and Midi...'},
-    {title: '...'}
-  ]
-
-  let help_menu: MenuItem[] = [
-    {title: 'About Pd'},
-    {title: 'HTML Manual...'},
-    {title: 'Browser...'},
-    {title: 'List of Objects...'},
-    {title: '...'}
-  ]
-
-  let menu: MenuItem[] = [
-    {title: 'File', children: file_menu},
-    {title: 'Edit', children: edit_menu},
-    {title: 'Put', children: put_menu},
-    {title: 'Find', children: find_menu},
-    {title: 'Media', children: media_menu},
-    // {title: 'Window'},
-    {title: 'Help', children: help_menu},
-  ]
+  import { menu, type MenuItem } from '$lib/stores/menu'
 
   let second_level: MenuItem | null = null
 
@@ -128,7 +50,9 @@
     {/each}
   </ul>
 
-  <button on:click={$wm.new_window()}>
+  <button
+    on:click={_ => $wm.new_window()}
+    on:keydown={_ => $wm.new_window()}>
     +
   </button>
 </div>
