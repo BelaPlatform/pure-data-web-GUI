@@ -26,7 +26,9 @@
     
     const recent: MenuItem[] = []
     get(available_patches).forEach(item => {
-      recent.push({title: `${item.id}. ${item.file}`})
+      const path_components = item.file.split('/')
+      const filename = path_components[path_components.length - 1]
+      recent.push({title: `${item.id}. ${filename}`})
     })
     return pre.concat(recent).concat(post)
   }
