@@ -5,12 +5,14 @@
   export let widget:PdWidget
   $: is_activated = widget.is_activated
   $: fcolor = widget.fcolor
+  $: box = widget.box
+  $: size = $box.size.width
 </script>
 
 <NodeBase {widget} />
 <g style:--fcolor={$fcolor}>
-  <line x1={2} x2={16} y1={2} y2={16} class:is_activated={$is_activated} />
-  <line x1={2} x2={16} y1={16} y2={2} class:is_activated={$is_activated} />
+  <line x1={2} x2={size - 2} y1={2} y2={size - 2} class:is_activated={$is_activated} />
+  <line x1={2} x2={size - 2} y1={size - 2} y2={2} class:is_activated={$is_activated} />
 </g>
 
 <style lang="scss">
