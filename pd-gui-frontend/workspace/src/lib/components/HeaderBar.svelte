@@ -99,5 +99,6 @@
     margin-left: -6px;
     margin-top: 6px;
     z-index: 99999;
+    box-shadow: 2px 2px 2px #ccc;
   }
 </style>

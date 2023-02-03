@@ -74,6 +74,7 @@
     &.hidden {
       display: none;
     }
+    box-shadow: 2px 2px 2px #ccc;
   }
 
   .titlebar {
