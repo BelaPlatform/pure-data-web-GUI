@@ -2,7 +2,7 @@
   import { onMount } from "svelte"
 
   import { pd } from '$lib/stores/pd'
-  import { parse } from '$lib/pd/parser/'
+  import { Interpreter } from '$lib/pd/parser/interpreter'
   import { WebSocketIO } from '$lib/pd/io'
   import { available_patches } from '$lib/stores/patches'
   import Console from '$lib/components/Console.svelte'
@@ -23,11 +23,14 @@
 
   // the WebSocket HAS to be created in an onMount lifecycle method
   // otherwise, svelte's server-side-prerendering would try to instantiate the WS and fail
-  let io:WebSocketIO
+  let io: WebSocketIO
+  // let interpreter: Interpreter
   onMount(()  => {
+    // interpreter = new Interpreter($pd)
     io = new WebSocketIO('ws://localhost:8081')
     io.on_message = (event:MessageEvent) => {
-      parse(event.data)
+      const interpreter = new Interpreter($pd)
+      interpreter.interpret(event.data)
     }
     $pd.use_io(io)
   })
