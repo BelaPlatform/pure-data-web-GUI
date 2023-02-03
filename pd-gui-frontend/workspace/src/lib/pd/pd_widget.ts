@@ -43,6 +43,7 @@ export class PdWidget {
   constructor(public id: string, public canvas: PdCanvas, public klassname: string, x: number = 0, y: number = 0) { 
     this.box = writable<G.Rect>(new G.Rect(new G.Point(x, y), new G.Size(0, 0)))
     this.klass = KlassLibrary.klass_for_klassname(this.klassname)
+    console.log(this.klassname)
   }
 
   add_iolet(scope: IOLetScope, type: IOLetType) {

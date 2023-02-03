@@ -73,13 +73,19 @@ export class Config extends Command {
               // -text {0}
               else {
                 const text = ((p.value as VectorNode).elements[0] as NumberNode).value
-                // console.log(`VectorNode ${text}`)
                 object.set_text(text)
               }
             }
           } break;
           case 'size': {
-            // console.log('size!')
+            if (p.value instanceof VectorNode) {
+              const values = p.value as VectorNode
+              const width = parseFloat((values.elements[0] as NumberNode).value)
+              const height = parseFloat((values.elements[1] as NumberNode).value)
+              object.set_size(width, height)
+            }
+          } break;
+          case 'visible': {
             if (p.value instanceof VectorNode) {
               const values = p.value as VectorNode
               const width = parseFloat((values.elements[0] as NumberNode).value)
