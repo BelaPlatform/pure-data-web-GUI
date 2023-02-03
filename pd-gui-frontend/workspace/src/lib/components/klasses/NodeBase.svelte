@@ -10,6 +10,7 @@
   $: box = widget.box
   $: selected = widget.is_selected
   $: state = widget.state
+  $: tspans = $text.split('\n')
 </script>
 
 <g>
@@ -22,8 +23,10 @@
   {/if}
 
   {#if $text != ""}
-    <text x={3} y={14}>
-      {$text}
+    <text x={3}>
+      {#each tspans as t }
+        <tspan dy="14" dx="0" x="0">{t.trim()}</tspan>
+      {/each}
     </text>
   {/if}
 </g>

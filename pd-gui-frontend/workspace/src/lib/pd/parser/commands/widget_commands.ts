@@ -63,7 +63,6 @@ export class Config extends Command {
             // console.log('text!')
             // console.log(p.value)
             if (p.value instanceof StringNode) {
-              // console.log('StringNode')
               const text = (p.value as StringNode).value
               object.set_text(text)
             } else if (p.value instanceof VectorNode) {
