@@ -40,6 +40,8 @@ export class PdWidget {
   state = writable<WidgetState>('normal')
   bcolor = writable<string>("#fcfcfc")
   fcolor = writable<string>("#333333")
+  lcolor = writable<string>("#000000")
+  label = writable<string>('')
   klass: Klass
 
   constructor(public id: string, public canvas: PdCanvas, public klassname: string, x: number = 0, y: number = 0) { 
@@ -108,14 +110,18 @@ export class PdWidget {
   }
 
   set_bcolor(color: string) {
-    console.log('set_bcolor')
-    console.log(color)
     this.bcolor.update(_ => color)
   }
 
   set_fcolor(color: string) {
-    console.log('set_fcolor')
-    console.log(color)
     this.fcolor.update(_ => color)
+  }
+
+  set_lcolor(color: string) {
+    this.lcolor.update(_ => color)
+  }
+
+  set_label(text: string) {
+    this.label.update(_ => text)
   }
 }

@@ -8,6 +8,8 @@
   const {show_debug} = app
   
   $: box = widget.box
+  $: label = widget.label
+  $: lcolor = widget.lcolor
 </script>
 
 <g transform="translate({$box.origin.x},{$box.origin.y})">
@@ -15,6 +17,11 @@
   {#if $show_debug}
     <text x={3} y={-4} class="annotation">{widget.klassname} # {widget.id}</text>
   {/if}
+
+  {#if $label != ""}
+    <text x={3} y={-4} class="label" style:--lcolor={$lcolor}>{$label}</text>
+  {/if}
+  
   <g>
     {#each widget.inlets as port}
       <Port {port} />
@@ -36,5 +43,9 @@
 
   .annotation {
     font-size: 8px;
+  }
+
+  .label {
+    fill: var(--lcolor);
   }
 </style>

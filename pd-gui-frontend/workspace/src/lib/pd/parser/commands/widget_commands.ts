@@ -114,6 +114,18 @@ export class Config extends Command {
               object.set_fcolor(color)
             }
           } break;
+          case 'lcolor': {
+            if (p.value instanceof StringNode) {
+              const color = (p.value as StringNode).value
+              object.set_lcolor(color)
+            }
+          } break;
+          case 'label': {
+            if (p.value instanceof StringNode) {
+              const text = (p.value as StringNode).value
+              object.set_label(text)
+            }
+          } break;
         }
       })
     } else if (object instanceof PdConnection) {
