@@ -1,22 +1,37 @@
 <script lang="ts">
+  import { get } from 'svelte/store'
   import OutClick from 'svelte-outclick'
+
+  import { available_patches } from '$lib/stores/patches'
 
   type MenuItem = {
     title: string
     children?: MenuItem[]
   }
 
-  let file_menu: MenuItem[] = [
-    {title: 'New'},
-    {title: 'Open'},
-    {title: 'Save'},
-    {title: 'SaveAs'},
-    {title: 'Message'},
-    {title: 'Preferences'},
-    {title: 'Print'},
-    {title: 'Close'},
-    {title: 'Quit'},
-  ]
+  function build_file_menu() : MenuItem[] {
+    const pre = [
+      {title: 'New'},
+      {title: 'Open'},
+      {title: 'Save'},
+      {title: 'SaveAs'},
+      {title: 'Message'},
+      {title: 'Preferences'}
+    ]
+    const post = [
+      {title: 'Print'},
+      {title: 'Close'},
+      {title: 'Quit'}
+    ]
+    
+    const recent: MenuItem[] = []
+    get(available_patches).forEach(item => {
+      recent.push({title: `${item.id}. ${item.file}`})
+    })
+    return pre.concat(recent).concat(post)
+  }
+
+  let file_menu: MenuItem[] = build_file_menu()
 
   let edit_menu: MenuItem[] = [
     {title: 'Undo'},
