@@ -63,7 +63,9 @@ export class Config extends Command {
             // console.log('text!')
             // console.log(p.value)
             if (p.value instanceof StringNode) {
-              const text = (p.value as StringNode).value
+              let text = (p.value as StringNode).value
+              text = text.replace('\\[', '[')
+              text = text.replace('\\]', ']')
               object.set_text(text)
             } else if (p.value instanceof VectorNode) {
               // -text {}
