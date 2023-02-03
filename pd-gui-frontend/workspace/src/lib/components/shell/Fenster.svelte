@@ -9,20 +9,16 @@
   }
 
   let dragging = false
-
   function on_drag_move(event:MouseEvent) {
-    console.log(event)
     fenster.move_to(event.clientX, event.clientY)
   }
 
   function on_drag_stop(event:MouseEvent) {
-    console.log(event)
     window.removeEventListener('mousemove', on_drag_move)
     window.removeEventListener('mouseup', on_drag_stop)
   }
 
   function on_drag_start() {
-    console.log('on_drag_start')
     dragging = true
     window.addEventListener('mousemove', on_drag_move)
     window.addEventListener('mouseup', on_drag_stop)
@@ -31,9 +27,11 @@
   $: box = fenster.box
   $: title = fenster.title
   $: z_index = fenster.z_index
+  $: hidden = fenster.hidden
 </script>
 
 <div class="wrap"
+  class:hidden={$hidden}
   style:--x="{$box.origin.x}px"
   style:--y="{$box.origin.y}px"
   style:--width="{$box.size.width}px"
@@ -47,13 +45,15 @@
     >
     <span class="title">{$title} - {fenster.id}</span>
     <span class="buttons">
-      <button>
+      <button
+        on:click={_ => fenster.hide()}>
         _
       </button>
       <button>
         []
       </button>
-      <button on:click={_ => $wm.close_window(fenster)}>
+      <button
+        on:click={_ => $wm.close_window(fenster)}>
         x
       </button>
     </span>
@@ -70,6 +70,10 @@
     border: #ddd solid thin;
     z-index: var(--z_index);
     background-color: #fff;
+
+    &.hidden {
+      display: none;
+    }
   }
 
   .titlebar {

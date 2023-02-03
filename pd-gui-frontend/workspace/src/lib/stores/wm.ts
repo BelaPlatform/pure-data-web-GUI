@@ -10,6 +10,7 @@ export class Fenster {
   box = writable<G.Rect>(DefaultBox())
   title = writable<string>("Title")
   z_index = writable<number>(9999)
+  hidden = writable<boolean>(false)
 
   constructor(public id: number, box: G.Rect) {
     this.box.set(box)
@@ -22,6 +23,14 @@ export class Fenster {
       return box
     })
   }
+
+  hide() {
+    this.hidden.update(_ => true)
+  }
+
+  unhide() {
+    this.hidden.update(_ => false)
+  }  
 }
 
 class WindowManager {
