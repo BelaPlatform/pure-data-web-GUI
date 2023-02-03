@@ -38,6 +38,8 @@ export class PdWidget {
   is_activated = writable<boolean>(false)
   is_selected = writable<boolean>(false)
   state = writable<WidgetState>('normal')
+  bcolor = writable<string>("#fcfcfc")
+  fcolor = writable<string>("#333333")
   klass: Klass
 
   constructor(public id: string, public canvas: PdCanvas, public klassname: string, x: number = 0, y: number = 0) { 
@@ -103,5 +105,17 @@ export class PdWidget {
       }
       return b
     })
+  }
+
+  set_bcolor(color: string) {
+    console.log('set_bcolor')
+    console.log(color)
+    this.bcolor.update(_ => color)
+  }
+
+  set_fcolor(color: string) {
+    console.log('set_fcolor')
+    console.log(color)
+    this.fcolor.update(_ => color)
   }
 }

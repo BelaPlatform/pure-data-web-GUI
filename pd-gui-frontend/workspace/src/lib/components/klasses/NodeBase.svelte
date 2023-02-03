@@ -10,10 +10,11 @@
   $: box = widget.box
   $: selected = widget.is_selected
   $: state = widget.state
+  $: bcolor = widget.bcolor
   $: tspans = $text.split('\n')
 </script>
 
-<g>
+<g style:--bcolor={$bcolor}>
   {#if poly}
     <polyline points={poly} class:selected={$selected} class:no_bg={no_bg} />
   {:else}
@@ -34,7 +35,7 @@
 <style lang="scss">
   rect, polyline {
     stroke: #666;
-    fill: #fff;
+    fill: var(--bcolor);
     shape-rendering: crispEdges;
 
     &.no_bg {

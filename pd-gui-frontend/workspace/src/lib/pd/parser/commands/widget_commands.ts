@@ -102,6 +102,18 @@ export class Config extends Command {
               object.set_state(state)
             }
           } break;
+          case 'bcolor': {
+            if (p.value instanceof StringNode) {
+              const color = (p.value as StringNode).value
+              object.set_bcolor(color)
+            }
+          } break;
+          case 'fcolor': {
+            if (p.value instanceof StringNode) {
+              const color = (p.value as StringNode).value
+              object.set_fcolor(color)
+            }
+          } break;
         }
       })
     } else if (object instanceof PdConnection) {
