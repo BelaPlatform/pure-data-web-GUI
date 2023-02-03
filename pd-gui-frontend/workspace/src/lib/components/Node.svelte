@@ -10,6 +10,7 @@
   $: box = widget.box
   $: label = widget.label
   $: lcolor = widget.lcolor
+  $: labelpos = widget.labelpos
 </script>
 
 <g transform="translate({$box.origin.x},{$box.origin.y})">
@@ -19,7 +20,7 @@
   {/if}
 
   {#if $label != ""}
-    <text x={3} y={-4} class="label" style:--lcolor={$lcolor}>{$label}</text>
+    <text x={$labelpos.x} y={$labelpos.y} class="label" style:--lcolor={$lcolor}>{$label}</text>
   {/if}
   
   <g>

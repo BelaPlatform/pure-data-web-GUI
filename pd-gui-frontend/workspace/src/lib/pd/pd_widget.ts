@@ -42,6 +42,7 @@ export class PdWidget {
   fcolor = writable<string>("#333333")
   lcolor = writable<string>("#000000")
   label = writable<string>('')
+  labelpos = writable<G.Point>(G.NullPoint())
   klass: Klass
 
   constructor(public id: string, public canvas: PdCanvas, public klassname: string, x: number = 0, y: number = 0) { 
@@ -123,5 +124,9 @@ export class PdWidget {
 
   set_label(text: string) {
     this.label.update(_ => text)
+  }
+
+  set_labelpos(origin: G.Point) {
+    this.labelpos.update(_ => origin)
   }
 }

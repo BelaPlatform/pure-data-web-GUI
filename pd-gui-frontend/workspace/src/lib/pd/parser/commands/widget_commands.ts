@@ -3,6 +3,7 @@ import type { Pd } from '../../pd'
 import { PdWidget, IOLetScope, IOLetType, type WidgetState } from '../../pd_widget'
 import { PdConnection } from '../../pd_connection'
 import { NumberNode, StringNode, VectorNode, type ValueNode } from '../syntax_nodes'
+import * as G from '../../geometry'
 
 export class Create extends Command {
   constructor(public klass: string, 
@@ -124,6 +125,14 @@ export class Config extends Command {
             if (p.value instanceof StringNode) {
               const text = (p.value as StringNode).value
               object.set_label(text)
+            }
+          } break;
+          case 'labelpos': {
+            if (p.value instanceof VectorNode) {
+              const vec = p.value as VectorNode
+              const origin_x = parseFloat((vec.elements[0] as NumberNode).value)
+              const origin_y = parseFloat((vec.elements[1] as NumberNode).value)
+              object.set_labelpos(new G.Point(origin_x, origin_y))
             }
           } break;
         }
