@@ -2,6 +2,7 @@
   import { get } from 'svelte/store'
   import OutClick from 'svelte-outclick'
 
+  import { wm } from '$lib/stores/wm'
   import { available_patches } from '$lib/stores/patches'
 
   type MenuItem = {
@@ -126,6 +127,10 @@
       </li>
     {/each}
   </ul>
+
+  <button on:click={$wm.new_window()}>
+    +
+  </button>
 </div>
 
 <style lang="scss">
