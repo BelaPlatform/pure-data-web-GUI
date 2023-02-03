@@ -6,7 +6,7 @@
   import { WebSocketIO } from '$lib/pd/io'
   import { available_patches } from '$lib/stores/patches'
   import Console from '$lib/components/Console.svelte'
-  import Canvas from '$lib/components/Canvas.svelte'
+  import Canvas from '$lib/components/pd/Canvas.svelte'
 
   async function on_send_message(event:CustomEvent) {
     const message = event.detail

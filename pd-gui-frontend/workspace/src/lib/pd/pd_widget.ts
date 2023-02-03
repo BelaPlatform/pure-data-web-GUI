@@ -2,7 +2,7 @@ import { writable, get, type Writable } from 'svelte/store'
 
 import type { PdCanvas } from './pd_canvas'
 import * as G from './geometry'
-import { Klass, KlassLibrary } from '$lib/components/klasses'
+import { Klass, KlassLibrary } from '$lib/components/pd/klasses'
 
 export enum IOLetScope {
   Input, Output
