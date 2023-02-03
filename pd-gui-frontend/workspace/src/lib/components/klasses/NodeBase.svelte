@@ -12,6 +12,7 @@
   $: state = widget.state
   $: bcolor = widget.bcolor
   $: tspans = $text.split('\n')
+  $: fontsize = widget.fontsize
 </script>
 
 <g style:--bcolor={$bcolor}>
@@ -24,9 +25,10 @@
   {/if}
 
   {#if $text != ""}
-    <text x={3}>
+    <text x={4}
+      style:--fontsize="{$fontsize}px">
       {#each tspans as t }
-        <tspan dy="14" dx="0" x="0">{t.trim()}</tspan>
+        <tspan dy="{$fontsize + 2}" dx="0" x="0">{t.trim()}</tspan>
       {/each}
     </text>
   {/if}
@@ -60,6 +62,6 @@
   text {
     user-select: none;
     font-family: 'DejaVu Sans Mono', 'Courier New', Courier, monospace;
-    font-size: 11px;
+    font-size: var(--fontsize);
   }
 </style>
