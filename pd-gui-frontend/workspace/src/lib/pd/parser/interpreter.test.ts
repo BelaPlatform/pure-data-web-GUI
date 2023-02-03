@@ -106,3 +106,16 @@ describe('bug #4', () => {
     expect(size_property.value).toBeInstanceOf(VectorNode)
   })
 })
+
+describe('bug #5', () => {
+  const ip = new Interpreter(new MockPd())
+
+  it('survives "-text {- delay ....}"', () => {
+    const message = '::pdwidget::config 0x2578bc0 -size {291.000000 35.000000 } -text {- delay time (float), tempo (float) and time unit (symbol) as in "tempo" message.} ;'
+    const commands = ip.build_command_vec(message)
+    expect(commands.length).toBe(1)
+    expect(commands[0]).toBeInstanceOf(WidgetCommands.Config)
+    const config_command = commands[0] as WidgetCommands.Config
+    expect(config_command.widget_id).toBe('0x2578bc0')
+  })
+})

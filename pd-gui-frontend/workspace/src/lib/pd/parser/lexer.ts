@@ -183,11 +183,30 @@ export class Lexer {
   private try_string() : Token|null {
     let peek_count = 1
     let char = this.peek_char(peek_count)
-    // console.log(`try_string '${char}'`)
 
-    // console.log(`try_string ${char.charCodeAt(0)}`)
-    if (is_digit(char) || char == '{' || char == '' || char == '-' || char == '}') {
-      // console.log('is_digit!!!')
+    // not a string but a vector with a number
+    if (is_digit(char)) {
+      return null
+    }
+
+    // a nested vector
+    if (char == '{') {
+      return null
+    }
+
+    // an empty vector
+    if (char == '}') {
+      return null
+    }
+
+    // a negative number?
+    if (char == '-') {
+      if (is_digit(this.peek_char(2))) {
+        return null
+      }
+    }
+
+    if (char == '') {
       return null
     }
 
