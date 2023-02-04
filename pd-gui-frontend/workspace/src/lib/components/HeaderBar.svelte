@@ -55,8 +55,8 @@
   </ul>
 
   <button
-    on:click={_ => $wm.new_window()}
-    on:keydown={_ => $wm.new_window()}>
+    on:click={_ => $wm.new_patch_window()}
+    on:keydown={_ => $wm.new_patch_window()}>
     +
   </button>
 </div>

@@ -3,6 +3,10 @@ import { get } from 'svelte/store'
 import { available_patches } from './patches'
 import { wm } from './wm'
 
+import MessageDialog from '$lib/components/dialogs/MessageDialog.svelte'
+import FindDialog from '$lib/components/dialogs/FindDialog.svelte'
+import PreferencesDialog from '$lib/components/dialogs/PreferencesDialog.svelte'
+
 export class MenuItem {
   constructor(public title: string,
     public action: Function = () => {},
@@ -11,22 +15,37 @@ export class MenuItem {
     }
 }
 
-function on_new_window() {
-  get(wm).new_window()
+function on_new_patch() {
+  get(wm).new_patch_window()
 }
 
 function on_close_window() {
   get(wm).close_active_window()
 }
 
+function on_show_message_dialog() {
+  console.log('on_show_message_dialog')
+  get(wm).new_dialog_window(MessageDialog)
+}
+
+function on_show_find_dialog() {
+  console.log('on_show_find_dialog')
+  get(wm).new_dialog_window(FindDialog)
+}
+
+function on_show_preferences_dialog() {
+  console.log('on_show_preferences_dialog')
+  get(wm).new_dialog_window(PreferencesDialog)
+}
+
 function build_file_menu() : MenuItem[] {
   const pre = [
-    new MenuItem('New', on_new_window),
+    new MenuItem('New', on_new_patch),
     new MenuItem('Open'),
     new MenuItem('Save'),
     new MenuItem('SaveAs'),
-    new MenuItem('Message'),
-    new MenuItem('Preferences')
+    new MenuItem('Message', on_show_message_dialog),
+    new MenuItem('Preferences', on_show_preferences_dialog)
   ]
 
   const post = [
@@ -34,7 +53,7 @@ function build_file_menu() : MenuItem[] {
     new MenuItem('Close', on_close_window),
     new MenuItem('Quit')
   ]
-  
+
   const recent: MenuItem[] = []
   get(available_patches).forEach(item => {
     const path_components = item.file.split('/')
@@ -53,7 +72,7 @@ let edit_menu: MenuItem[] = [
   new MenuItem('Cut'),
   new MenuItem('Copy'),
   new MenuItem('Paste'),
-  new MenuItem('SelectAll')
+  new MenuItem('SelectAll'),
 ]
 
 let put_menu: MenuItem[] = [
@@ -64,7 +83,7 @@ let put_menu: MenuItem[] = [
 ]
 
 let find_menu: MenuItem[] = [
-  new MenuItem('Find'),
+  new MenuItem('Find', on_show_find_dialog),
   new MenuItem('Find Again'),
   new MenuItem('Find Last Error')
 ]

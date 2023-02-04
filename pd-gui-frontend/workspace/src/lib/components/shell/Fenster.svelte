@@ -1,25 +1,34 @@
 <script lang="ts">
+  import { get } from 'svelte/store'
+
   import type { Fenster } from '$lib/stores/wm'
   import { wm } from '$lib/stores/wm'
+  import * as G from '$lib/pd/geometry'
+  import View from './View.svelte'
 
   export let fenster: Fenster
+
+  let dragging = false
+  let drag_offset = G.NullPoint()
 
   function on_clicked_inside() {
     $wm.stack_top(fenster)
   }
 
-  let dragging = false
   function on_drag_move(event:MouseEvent) {
-    fenster.move_to(event.clientX, event.clientY)
+    fenster.move_to(event.clientX - drag_offset.x, event.clientY - drag_offset.y)
   }
 
-  function on_drag_stop(event:MouseEvent) {
+  function on_drag_stop(_:MouseEvent) {
+    dragging = false
     window.removeEventListener('mousemove', on_drag_move)
     window.removeEventListener('mouseup', on_drag_stop)
   }
 
-  function on_drag_start() {
+  function on_drag_start(event:MouseEvent) {
+    const origin = get(box).origin    
     dragging = true
+    drag_offset = new G.Point(event.clientX - origin.x, event.clientY - origin.y)
     window.addEventListener('mousemove', on_drag_move)
     window.addEventListener('mouseup', on_drag_stop)
   }
@@ -28,10 +37,16 @@
   $: title = fenster.title
   $: z_index = fenster.z_index
   $: hidden = fenster.hidden
+  $: is_active = fenster.is_active
+
+  import { pd } from '$lib/stores/pd'
+  import Canvas from '$lib/components/pd/Canvas.svelte'
+  $: canvases = $pd.canvases
 </script>
 
 <div class="wrap"
   class:hidden={$hidden}
+  class:is_active={$is_active}
   style:--x="{$box.origin.x}px"
   style:--y="{$box.origin.y}px"
   style:--width="{$box.size.width}px"
@@ -58,6 +73,11 @@
       </button>
     </span>
   </div>
+  
+  <div class="content">
+    <!-- <View view={fenster.view} /> -->
+    <svelte:component this={fenster.view.klass.component} />
+  </div>
 </div>
 
 <style lang="scss">
@@ -70,11 +90,17 @@
     border: #ddd solid thin;
     z-index: var(--z_index);
     background-color: #fff;
-
+    overflow: hidden;
+    box-shadow: 0px 0px 4px #ddd;
+    display: flex;
+    flex-direction: column;
     &.hidden {
       display: none;
     }
-    box-shadow: 2px 2px 2px #ccc;
+
+    &.is_active {
+      box-shadow: 1px 1px 8px #ccc;
+    }
   }
 
   .titlebar {
@@ -94,5 +120,10 @@
         cursor: pointer;
       }
     }
+  }
+
+  .content {
+    background-color: #eee;
+    height: 100%;
   }
 </style>
