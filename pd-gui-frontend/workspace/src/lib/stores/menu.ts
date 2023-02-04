@@ -2,9 +2,9 @@ import { get } from 'svelte/store'
 
 import { app } from './app'
 import { available_patches, type PatchFile } from './patches'
-import MessageDialog from '$lib/components/dialogs/MessageDialog.svelte'
-import FindDialog from '$lib/components/dialogs/FindDialog.svelte'
-import PreferencesDialog from '$lib/components/dialogs/PreferencesDialog.svelte'
+import MessageDialog from '$lib/components/pd/dialogs/MessageDialog.svelte'
+import FindDialog from '$lib/components/pd/dialogs/FindDialog.svelte'
+import PreferencesDialog from '$lib/components/pd/dialogs/PreferencesDialog.svelte'
 
 export class MenuItem {
   constructor(public title: string,

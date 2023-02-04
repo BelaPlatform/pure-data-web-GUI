@@ -22,6 +22,7 @@ export class Fenster {
   z_index = writable<number>(9999)
   hidden = writable<boolean>(false)
   is_active = writable<boolean>(false)
+  is_resizable = writable<boolean>(true)
   dialogs:Fenster[] = []
   parent: Fenster|null = null
   view: View
@@ -63,6 +64,21 @@ export class Fenster {
       box.size.height = height - 48
       return box
     })
+  }
+
+  set_title(title: string) {
+    this.title.update(_ => title)
+  }
+
+  set_size(size: G.Size) {
+    this.box.update(box => {
+      box.size = size
+      return box
+    })
+  }
+
+  set_is_resizable(is_resizable: boolean) {
+    this.is_resizable.update(_ => is_resizable)
   }
 }
 

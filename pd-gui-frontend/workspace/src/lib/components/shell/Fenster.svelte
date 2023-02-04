@@ -53,6 +53,7 @@
   $: z_index = fenster.z_index
   $: hidden = fenster.hidden
   $: is_active = fenster.is_active
+  $: is_resizable = fenster.is_resizable
 
 </script>
 
@@ -92,9 +93,11 @@
     <svelte:component this={fenster.view.klass.component} {...fenster.view.klass.props} {fenster} />
   </div>
 
+  {#if $is_resizable}
   <div class="resize_grip"
     on:mousedown={on_resize_start}>
   </div>
+  {/if}
 </div>
 
 <style lang="scss">
