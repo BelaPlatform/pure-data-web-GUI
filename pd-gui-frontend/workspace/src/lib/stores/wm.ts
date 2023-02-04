@@ -39,6 +39,14 @@ export class Fenster {
     })
   }
 
+  resize_by(x: number, y: number) {
+    this.box.update(box => {
+      box.size.width += x
+      box.size.height += y
+      return box
+    })
+  }
+
   hide() {
     this.hidden.update(_ => true)
   }

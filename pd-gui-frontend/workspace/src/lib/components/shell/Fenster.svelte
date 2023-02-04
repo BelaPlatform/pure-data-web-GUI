@@ -8,6 +8,7 @@
   export let fenster: Fenster
 
   let dragging = false
+  let resizing = false
   let drag_offset = G.NullPoint()
 
   function on_clicked_inside() {
@@ -32,6 +33,21 @@
     window.addEventListener('mouseup', on_drag_stop)
   }
 
+  function on_resize_stop(_:MouseEvent) {
+    window.removeEventListener('mousemove', on_resize_move)
+    window.removeEventListener('mouseup', on_resize_stop)
+  }
+
+  function on_resize_move(event:MouseEvent) {
+    fenster.resize_by(event.movementX, event.movementY)
+  }
+
+  function on_resize_start(event:MouseEvent) {
+    resizing = true
+    window.addEventListener('mousemove', on_resize_move)
+    window.addEventListener('mouseup', on_resize_stop)
+  }
+
   $: box = fenster.box
   $: title = fenster.title
   $: z_index = fenster.z_index
@@ -53,6 +69,7 @@
   >
   <div class="titlebar"
     on:mousedown={on_drag_start}
+    class:dragging={dragging}
     >
     <span class="title">{$title} - {fenster.id}</span>
     <span class="buttons">
@@ -72,6 +89,10 @@
   
   <div class="content">
     <svelte:component this={fenster.view.klass.component} {...fenster.view.klass.props} />
+  </div>
+
+  <div class="resize_grip"
+    on:mousedown={on_resize_start}>
   </div>
 </div>
 
@@ -104,21 +125,38 @@
     display: flex;
     justify-content: space-between;
     user-select: none;
+    
     .title {
       padding: 3px;
     }
+
     .buttons {
       float: right;
       button {
         outline: none;
         border: none;
         cursor: pointer;
+        background: inherit;
       }
+    }
+
+    &.dragging {
+      cursor: move;
     }
   }
 
   .content {
-    background-color: #eee;
     height: 100%;
+  }
+
+  .resize_grip {
+    cursor: nwse-resize;
+    transform: rotate(45deg);
+    background-color: #ccca;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    left: calc(var(--width) - 16px);
+    top: calc(var(--height) - 16px);
   }
 </style>
