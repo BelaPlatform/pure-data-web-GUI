@@ -1,7 +1,6 @@
 <script lang="ts">
   import { app } from '$lib/stores/app'
-  import { pd } from '$lib/stores/pd'
-  import type { PdCanvas } from '$lib/pd/pd_canvas'  
+  import type { PdCanvas } from '$lib/pd/pd_canvas'
   import Node from './Node.svelte'
   import Noodle from './Noodle.svelte'
   import PopUp from './PopUp.svelte'
@@ -9,13 +8,11 @@
   export let canvas: PdCanvas
   export let is_active: boolean
 
-  // $: canvas = $pd.active_canvas
   $: widgets = canvas.widgets
   $: connections = canvas.connections
-  $: edit_mode = canvas.edit_mode
   $: cursor = canvas.cursor
 
-  const {show_debug} = $app
+  let show_debug = false
 
   function on_mousedown(event:MouseEvent) {
     if (event.button != 0) {
@@ -28,6 +25,8 @@
   }
 
   function on_contextmenu(event:MouseEvent) {
+    console.log('on_contextmenu')
+    console.log(event.offsetX)
     canvas.send_mouse_down(event.offsetX, event.offsetY, 3, 8)
   }
 
@@ -47,6 +46,12 @@
     if (!is_active) { return }
     // console.log(event)
     // console.log(event.key)
+
+    if (event.key == 'd' && event.ctrlKey) {
+      event.preventDefault()
+      show_debug = !show_debug
+      return
+    }
 
     // first, see if it's a shortcut
     if (event.key == 'e' && event.ctrlKey) {
@@ -221,9 +226,6 @@
       <Noodle {connection} />
     {/each}
   </svg>
-  <br>
-
-  <input type="checkbox" id="show_debug" bind:checked={$show_debug} /><label for="show_debug">Debug</label><br>
 </div>
 
 <style lang="scss">

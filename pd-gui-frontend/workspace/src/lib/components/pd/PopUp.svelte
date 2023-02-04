@@ -22,7 +22,7 @@
 </script>
 
 <OutClick on:outclick={_ => canvas.on_dismiss_popup()}>
-  <div class="wrap" style:--x={$popup.origin.x + 144}px  style:--y={$popup.origin.y + 32}px class:visible={$popup.show}>
+  <div class="wrap" style:--x={$popup.origin.x}px  style:--y={$popup.origin.y}px class:visible={$popup.show}>
     <ul>
       <li class:disabled={!$popup.has_properties}
         on:click={on_clicked_properties}

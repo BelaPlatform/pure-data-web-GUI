@@ -127,6 +127,7 @@
     justify-content: space-between;
     user-select: none;
     font-size: 13px;
+    white-space: nowrap;
     .title {
       padding: 3px;
     }
