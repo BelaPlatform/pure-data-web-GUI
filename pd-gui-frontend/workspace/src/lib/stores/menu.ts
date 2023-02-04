@@ -7,6 +7,7 @@ import FindDialog from '$lib/components/pd/dialogs/FindDialog.svelte'
 import PreferencesDialog from '$lib/components/pd/dialogs/PreferencesDialog.svelte'
 import AudioSettingsDialog from '$lib/components/pd/dialogs/AudioSettingsDialog.svelte'
 import PdDialog from '$lib/components/pd/dialogs/PdDialog.svelte'
+import AboutPdDialog from '$lib/components/pd/dialogs/AboutPdDialog.svelte'
 
 export class MenuItem {
   constructor(public title: string,
@@ -48,6 +49,9 @@ function on_show_pd_dialog() {
   get(app).wm.new_dialog_window(PdDialog)
 }
 
+function on_show_about_pd_dialog() {
+  get(app).wm.new_dialog_window(AboutPdDialog)
+}
 
 function build_file_menu() : MenuItem[] {
   const pre = [
@@ -116,7 +120,7 @@ let window_menu: MenuItem[] = [
 ]
 
 let help_menu: MenuItem[] = [
-  new MenuItem('About Pd'),
+  new MenuItem('About Pd', on_show_about_pd_dialog),
   new MenuItem('HTML Manual...'),
   new MenuItem('Browser...'),
   new MenuItem('List of Objects...'),

@@ -113,6 +113,7 @@ export class WindowManager {
       return ws
     })
     this.n_windows++
+    this.stack_top(w)
   }
 
   close_window(window: Fenster) {
