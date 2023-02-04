@@ -5,6 +5,7 @@ import { available_patches, type PatchFile } from './patches'
 import MessageDialog from '$lib/components/pd/dialogs/MessageDialog.svelte'
 import FindDialog from '$lib/components/pd/dialogs/FindDialog.svelte'
 import PreferencesDialog from '$lib/components/pd/dialogs/PreferencesDialog.svelte'
+import AudioSettingsDialog from '$lib/components/pd/dialogs/AudioSettingsDialog.svelte'
 
 export class MenuItem {
   constructor(public title: string,
@@ -36,6 +37,10 @@ function on_show_find_dialog() {
 
 function on_show_preferences_dialog() {
   get(app).wm.new_dialog_window(PreferencesDialog)
+}
+
+function on_show_audio_settings_dialog() {
+  get(app).wm.new_dialog_window(AudioSettingsDialog)
 }
 
 function build_file_menu() : MenuItem[] {
@@ -95,6 +100,7 @@ let media_menu: MenuItem[] = [
   new MenuItem('DSP On'),
   new MenuItem('DSP Off'),
   new MenuItem('Test Audio and Midi...'),
+  new MenuItem('Audio Settings...', on_show_audio_settings_dialog),
   new MenuItem('...')
 ]
 
