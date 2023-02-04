@@ -77,7 +77,8 @@
         on:click={_ => fenster.hide()}>
         -
       </button>
-      <button>
+      <button
+        on:click={_ => fenster.maximize(window.innerWidth, window.innerHeight)}>
         +
       </button>
       <button

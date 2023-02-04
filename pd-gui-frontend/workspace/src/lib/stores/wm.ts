@@ -53,7 +53,17 @@ export class Fenster {
 
   unhide() {
     this.hidden.update(_ => false)
-  }  
+  }
+
+  maximize(width: number, height: number) {
+    this.box.update(box => {
+      box.origin.x = 4
+      box.origin.y = 36
+      box.size.width = width - 8
+      box.size.height = height - 48
+      return box
+    })
+  }
 }
 
 export class WindowManager {

@@ -11,8 +11,7 @@
   $: widgets = canvas.widgets
   $: connections = canvas.connections
   $: cursor = canvas.cursor
-
-  let show_debug = false
+  $: show_debug = $app.show_debug
 
   function on_mousedown(event:MouseEvent) {
     if (event.button != 0) {
@@ -20,13 +19,10 @@
     }
     const button = 1
     const modifiers = (event.ctrlKey ? 2 : 0) + (event.altKey ? 4 : 0)
-    // const button = event.button == 2 ? 3 : 1
     canvas.send_mouse_down(event.offsetX, event.offsetY, button, modifiers)
   }
 
   function on_contextmenu(event:MouseEvent) {
-    console.log('on_contextmenu')
-    console.log(event.offsetX)
     canvas.send_mouse_down(event.offsetX, event.offsetY, 3, 8)
   }
 
@@ -35,21 +31,16 @@
   }
 
   function on_mousemove(event:MouseEvent) {
-    // console.log(event)
-    // console.log(event.ctrlKey)
-    // console.log(event.altKey)
     const modifiers = (event.ctrlKey ? 2 : 0) + (event.altKey ? 4 : 0)
     canvas.send_motion(event.offsetX, event.offsetY, modifiers)
   }
 
   function on_keydown(event:KeyboardEvent) {
     if (!is_active) { return }
-    // console.log(event)
-    // console.log(event.key)
 
-    if (event.key == 'd' && event.ctrlKey) {
+    if (event.key == '#' && event.ctrlKey) {
       event.preventDefault()
-      show_debug = !show_debug
+      show_debug.update(value => !value)
       return
     }
 
