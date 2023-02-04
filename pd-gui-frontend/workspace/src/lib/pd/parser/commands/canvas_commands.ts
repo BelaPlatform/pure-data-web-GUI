@@ -2,7 +2,11 @@ import { Command } from './command'
 import type { Pd } from '../../pd'
 
 export class ReflectTitle extends Command {
-  constructor(public canvas_id: string, public directory: string, public title: string, public mode: string) {
+  constructor(public canvas_id: string,
+      public directory: string,
+      public title: string,
+      public mode: string,
+      public is_unsaved: boolean = false) {
     super()
   }
 
@@ -18,7 +22,7 @@ export class ReflectTitle extends Command {
       mode_text = mode_text.replace('\\]', ']') + " "
     }
 
-    canvas.handle_set_title(`${this.title}${mode_text}- ${this.directory}`)
+    canvas.handle_set_title(`${this.title}${this.is_unsaved ? '*' : ''}${mode_text}- ${this.directory}`)
 
     pd.on_map_canvas_with_id(this.canvas_id)
   }

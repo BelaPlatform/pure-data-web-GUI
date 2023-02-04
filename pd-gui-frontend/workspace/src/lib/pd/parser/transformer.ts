@@ -1,5 +1,5 @@
 import { UnrecognizedCommand, IgnoredCommand, type Command } from './commands/command'
-import { type Identifier, type NumberNode, type RootNode, StringNode, VectorNode, type PropertyNode, type ValueNode } from './syntax_nodes'
+import { type Identifier, NumberNode, type RootNode, StringNode, VectorNode, type PropertyNode, type ValueNode } from './syntax_nodes'
 import * as PdCommands from './commands/pd_commands'
 import * as PdWindowCommands from './commands/pd_window_commands'
 import * as CanvasCommands from './commands/canvas_commands'
@@ -98,7 +98,13 @@ export function transform(root: RootNode) : Command[] {
       if (mode_arg instanceof StringNode) {
         mode = mode_arg.value
       }
-      commands.push(new CanvasCommands.ReflectTitle(canvas_id, directory_arg.value, title_arg.value, mode))
+      const is_unsaved_arg = proc.arguments[4]
+      console.log(is_unsaved_arg)
+      let is_unsaved = false
+      if (is_unsaved_arg instanceof NumberNode) {
+        is_unsaved = parseInt(is_unsaved_arg.value) == 1
+      }
+      commands.push(new CanvasCommands.ReflectTitle(canvas_id, directory_arg.value, title_arg.value, mode, is_unsaved))
       return
     }
 
