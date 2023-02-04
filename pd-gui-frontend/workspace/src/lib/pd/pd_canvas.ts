@@ -22,8 +22,11 @@ export class PdCanvas {
   edit_mode = writable<boolean>(false)
   cursor = writable<string>('runmode_nothing')
   popup = writable<PopUp>({show: false, origin: G.NullPoint(), has_properties: false, has_open: false})
+  size = writable<G.Size>(G.NullSize())
 
-  constructor(public id: string, public pd: Pd) { }
+  constructor(public id: string, public pd: Pd, size: G.Size) {
+    this.size.set(size)
+  }
 
   handle_create_widget(id:string, klassname:string, x:number, y:number) {
     const widget = new PdWidget(id, this, klassname, x, y)
@@ -216,5 +219,11 @@ export class PdCanvas {
     const message = `${this.id} done-popup ${value} ${popup_.origin.x} ${popup_.origin.y};`
     this.pd.send(message)
     this.on_dismiss_popup()
+  }
+
+  on_set_size(size: G.Size) {
+    this.size.update(_ => size)
+    const message = `${this.id} setbounds 0 0 ${size.width} ${size.height};`
+    this.pd.send(message)
   }
 }

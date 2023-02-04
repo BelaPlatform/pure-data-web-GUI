@@ -5,6 +5,7 @@ import { IO, NullIO } from './io'
 import type { PatchFile } from '$lib/stores/patches'
 import type { PdWidget } from './pd_widget'
 import type { PdConnection } from './pd_connection'
+import * as G from './geometry'
 
 
 export interface PdCallbacks {
@@ -23,7 +24,7 @@ export class Pd {
 
   constructor() {
     console.log('Pd!')
-    this.active_canvas = writable<PdCanvas>(new PdCanvas('nil', this))
+    this.active_canvas = writable<PdCanvas>(new PdCanvas('nil', this, G.NullSize()))
   }
 
   use_io(io:IO) {
@@ -65,8 +66,8 @@ export class Pd {
     this.send(message)
   }
 
-  handle_new_canvas_with_id(id: string) {
-    const canvas = new PdCanvas(id, this)
+  handle_new_canvas_with_id(id: string, size: G.Size) {
+    const canvas = new PdCanvas(id, this, size)
     this.canvases.update((cs: PdCanvas[]) => {
       cs = cs.concat([canvas])
       return cs

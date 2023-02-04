@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
+  import { get } from 'svelte/store'
 
   import CanvasComponent from '../pd/Canvas.svelte'
   import type { PdCanvas } from '$lib/pd/pd_canvas'
@@ -12,8 +13,13 @@
 
   onMount(() => {
     canvas.title.subscribe(t => {
-      console.log(t)
       fenster.title.update(_ => t)
+    })
+
+    const size = get(canvas.size)
+    fenster.set_size(size)
+    fenster.box.subscribe(box => {
+      canvas.on_set_size(box.size)
     })
   })
 </script>

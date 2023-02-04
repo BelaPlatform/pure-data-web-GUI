@@ -5,6 +5,7 @@ import * as PdWindowCommands from './commands/pd_window_commands'
 import * as CanvasCommands from './commands/canvas_commands'
 import * as WidgetCommands from './commands/widget_commands'
 import { type IOLetType, IOLetScope } from '../pd_widget'
+import * as G from '../geometry'
 
 function clean_canvas_id(cid: string) {
   if (cid.endsWith('.c')) {
@@ -110,7 +111,12 @@ export function transform(root: RootNode) : Command[] {
     if (proc.id.name == 'pdtk_canvas_new') {
       const canvas_arg = proc.arguments[0] as Identifier
       const canvas_id = canvas_arg.name
-      commands.push(new CanvasCommands.NewCanvas(canvas_id))
+      // for (let arg of proc.arguments) {
+      //   console.log(arg)
+      // }
+      const width = parseInt((proc.arguments[1] as NumberNode).value)
+      const height = parseInt((proc.arguments[2] as NumberNode).value)
+      commands.push(new CanvasCommands.NewCanvas(canvas_id, new G.Size(width, height)))
       return
     }
 

@@ -1,5 +1,6 @@
 import { Command } from './command'
 import type { Pd } from '../../pd'
+import type * as G from '../../geometry'
 
 export class ReflectTitle extends Command {
   constructor(public canvas_id: string,
@@ -38,12 +39,12 @@ export class SetParents extends Command {
 
 
 export class NewCanvas extends Command {
-  constructor(public canvas_id: string) {
+  constructor(public canvas_id: string, public size: G.Size) {
     super()
   }
 
   override eval(pd: Pd) { 
-    pd.handle_new_canvas_with_id(this.canvas_id)
+    pd.handle_new_canvas_with_id(this.canvas_id, this.size)
   }
 }
 
