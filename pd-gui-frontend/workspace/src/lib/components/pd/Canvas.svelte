@@ -1,15 +1,17 @@
 <script lang="ts">
   import { app } from '$lib/stores/app'
   import { pd } from '$lib/stores/pd'
+  import type { PdCanvas } from '$lib/pd/pd_canvas'  
   import Node from './Node.svelte'
   import Noodle from './Noodle.svelte'
   import PopUp from './PopUp.svelte'
 
-  $: canvas = $pd.active_canvas
-  $: widgets = $canvas.widgets
-  $: connections = $canvas.connections
-  $: edit_mode = $canvas.edit_mode
-  $: cursor = $canvas.cursor
+  export let canvas: PdCanvas
+  // $: canvas = $pd.active_canvas
+  $: widgets = canvas.widgets
+  $: connections = canvas.connections
+  $: edit_mode = canvas.edit_mode
+  $: cursor = canvas.cursor
 
   const {show_debug} = $app
 
@@ -20,15 +22,15 @@
     const button = 1
     const modifiers = (event.ctrlKey ? 2 : 0) + (event.altKey ? 4 : 0)
     // const button = event.button == 2 ? 3 : 1
-    $canvas.send_mouse_down(event.offsetX, event.offsetY, button, modifiers)
+    canvas.send_mouse_down(event.offsetX, event.offsetY, button, modifiers)
   }
 
   function on_contextmenu(event:MouseEvent) {
-    $canvas.send_mouse_down(event.offsetX, event.offsetY, 3, 8)
+    canvas.send_mouse_down(event.offsetX, event.offsetY, 3, 8)
   }
 
   function on_mouseup(event:MouseEvent) {
-    $canvas.send_mouse_up(event.offsetX, event.offsetY, event.button)
+    canvas.send_mouse_up(event.offsetX, event.offsetY, event.button)
   }
 
   function on_mousemove(event:MouseEvent) {
@@ -36,7 +38,7 @@
     // console.log(event.ctrlKey)
     // console.log(event.altKey)
     const modifiers = (event.ctrlKey ? 2 : 0) + (event.altKey ? 4 : 0)
-    $canvas.send_motion(event.offsetX, event.offsetY, modifiers)
+    canvas.send_motion(event.offsetX, event.offsetY, modifiers)
   }
 
   function on_keydown(event:KeyboardEvent) {
@@ -46,31 +48,31 @@
     // first, see if it's a shortcut
     if (event.key == 'e' && event.ctrlKey) {
       event.preventDefault()
-      $canvas.on_toggle_edit_mode()
+      canvas.on_toggle_edit_mode()
       return
     }
 
     if (event.key == '1' && event.ctrlKey) {
       event.preventDefault()
-      $canvas.on_create_object()
+      canvas.on_create_object()
       return
     }
 
     if (event.key == '2' && event.ctrlKey) {
       event.preventDefault()
-      $canvas.on_create_message()
+      canvas.on_create_message()
       return
     }
 
     if (event.key == '3' && event.ctrlKey) {
       event.preventDefault()
-      $canvas.on_create_number()
+      canvas.on_create_number()
       return
     }
 
     if (event.key == '5' && event.ctrlKey) {
       event.preventDefault()
-      $canvas.on_create_comment()
+      canvas.on_create_comment()
       return
     }
 
@@ -78,112 +80,112 @@
     // use altKey for now
     if (event.key == 'B' && event.altKey && event.shiftKey) {
       event.preventDefault()
-      $canvas.on_create_bang()
+      canvas.on_create_bang()
       return
     }
 
     if (event.key == 'T' && event.altKey && event.shiftKey) {
       event.preventDefault()
-      $canvas.on_create_toggle()
+      canvas.on_create_toggle()
       return
     }
 
     if (event.key == 's' && event.ctrlKey) {
       event.preventDefault()
-      $canvas.on_save()
+      canvas.on_save()
       return
     }
 
     if (event.key == 'a' && event.ctrlKey) {
       event.preventDefault()
-      $canvas.on_select_all()
+      canvas.on_select_all()
       return
     }
 
     if (event.key == 'c' && event.ctrlKey) {
       event.preventDefault()
-      $canvas.on_copy()
+      canvas.on_copy()
       return
     }
 
     if (event.key == 'v' && event.ctrlKey) {
       event.preventDefault()
-      $canvas.on_paste()
+      canvas.on_paste()
       return
     }
 
     if (event.key == 'x' && event.ctrlKey) {
       event.preventDefault()
-      $canvas.on_cut()
+      canvas.on_cut()
       return
     }
 
     if (event.key == 'z' && event.ctrlKey) {
       event.preventDefault()
-      $canvas.on_undo()
+      canvas.on_undo()
       return
     }
 
     if (event.key == 'd' && event.ctrlKey) {
       event.preventDefault()
-      $canvas.on_duplicate()
+      canvas.on_duplicate()
       return
     }
 
     if (event.key == 'R' && event.ctrlKey) {
       event.preventDefault()
-      $canvas.on_tidy()
+      canvas.on_tidy()
       return
     }
 
     if (event.key == 'k' && event.ctrlKey) {
       event.preventDefault()
-      $canvas.on_connect_selection()
+      canvas.on_connect_selection()
       return
     }
 
     if (event.key == 'Control') {
       const key = event.location == 1 ? 'Control_L' : 'Control_R'
-      $canvas.send_key_down(key)
+      canvas.send_key_down(key)
     }
 
     const modifiers = (event.shiftKey ? 1 : 0) + (event.ctrlKey ? 2 : 0) + (event.altKey ? 4 : 0)
     if (event.key == 'ArrowLeft') {
-      $canvas.send_key_down('Left', modifiers)
+      canvas.send_key_down('Left', modifiers)
     }
 
     if (event.key == 'ArrowRight') {
-      $canvas.send_key_down('Right', modifiers)
+      canvas.send_key_down('Right', modifiers)
     }
 
     if (event.key == 'ArrowUp') {
-      $canvas.send_key_down('Up', modifiers)
+      canvas.send_key_down('Up', modifiers)
     }
 
     if (event.key == 'ArrowDown') {
-      $canvas.send_key_down('Down', modifiers)
+      canvas.send_key_down('Down', modifiers)
     }
 
     if (event.key == 'Delete') {
-      $canvas.send_key_down('127')
+      canvas.send_key_down('127')
     }
 
     if (event.key == 'Backspace') {
-      $canvas.send_key_down('8')
+      canvas.send_key_down('8')
     }
 
     if (event.key == 'Enter') {
-      $canvas.send_key_down('10')
+      canvas.send_key_down('10')
     }
 
     if (event.key == ' ') {
-      $canvas.send_key_down('32')
+      canvas.send_key_down('32')
     }
 
     // if event.key is of length 1, assume it's an ascii character
     if (event.key.length == 1) {
       const ascii = event.key.charCodeAt(0)
-      $canvas.send_key_down(`${ascii}`)
+      canvas.send_key_down(`${ascii}`)
     }
   }
 
@@ -193,7 +195,7 @@
 
     if (event.key == 'Control') {
       const key = event.location == 1 ? 'Control_L' : 'Control_R'
-      $canvas.send_key_up(key)
+      canvas.send_key_up(key)
     }
   }
 </script>
@@ -201,7 +203,7 @@
 <svelte:window on:keydown={on_keydown} on:keyup={on_keyup}/>
 
 <div class="wrap">
-  <PopUp canvas={$canvas} />
+  <PopUp canvas={canvas} />
 
   <svg xmlns="http://www.w3.org/2000/svg"
     on:mousedown={on_mousedown}
@@ -218,7 +220,7 @@
   </svg>
   <br>
   
-  <!-- {$canvas.title} {$canvas.id}
+  <!-- {canvas.title} {canvas.id}
   <h4>widgets</h4>
   <ul>
   {#each $widgets as widget(widget.id)}
@@ -241,7 +243,7 @@
   <input type="checkbox" id="show_debug" bind:checked={$show_debug} /><label for="show_debug">Debug</label><br>
   <input type="checkbox" id="edit_mode"
     bind:checked={$edit_mode}
-    on:click={_ => $canvas.on_toggle_edit_mode()}
+    on:click={_ => canvas.on_toggle_edit_mode()}
     /><label for="edit_mode">Edit Mode</label><br>
 
 </div>

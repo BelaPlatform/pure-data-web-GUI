@@ -14,5 +14,5 @@
 
 <div>
   {canvas.title}
-  <!-- <CanvasComponent {canvas} /> -->
+  <CanvasComponent canvas={canvas} />
 </div>
