@@ -1,5 +1,5 @@
 import { UnrecognizedCommand, IgnoredCommand, type Command } from './commands/command'
-import { type Identifier, type NumberNode, type RootNode, type StringNode, VectorNode, type PropertyNode, type ValueNode } from './syntax_nodes'
+import { type Identifier, type NumberNode, type RootNode, StringNode, VectorNode, type PropertyNode, type ValueNode } from './syntax_nodes'
 import * as PdCommands from './commands/pd_commands'
 import * as PdWindowCommands from './commands/pd_window_commands'
 import * as CanvasCommands from './commands/canvas_commands'
@@ -93,8 +93,12 @@ export function transform(root: RootNode) : Command[] {
       const canvas_id = canvas_arg.name
       const directory_arg = proc.arguments[1] as StringNode
       const title_arg = proc.arguments[2] as StringNode
-      const mode_arg = proc.arguments[3] as StringNode
-      commands.push(new CanvasCommands.ReflectTitle(canvas_id, directory_arg.value, title_arg.value, mode_arg.value))
+      const mode_arg = proc.arguments[3]
+      let mode = ""
+      if (mode_arg instanceof StringNode) {
+        mode = mode_arg.value
+      }
+      commands.push(new CanvasCommands.ReflectTitle(canvas_id, directory_arg.value, title_arg.value, mode))
       return
     }
 

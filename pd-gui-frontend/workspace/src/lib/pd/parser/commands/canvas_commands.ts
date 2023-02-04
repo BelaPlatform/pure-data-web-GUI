@@ -11,7 +11,14 @@ export class ReflectTitle extends Command {
     if (!canvas) {
       return
     }
-    canvas.handle_set_title(`${this.title} ${this.mode} - ${this.directory}`)
+
+    let mode_text = " "
+    if (this.mode.length != 0) {
+      mode_text += this.mode.replace('\\[', '[')
+      mode_text = mode_text.replace('\\]', ']') + " "
+    }
+
+    canvas.handle_set_title(`${this.title}${mode_text}- ${this.directory}`)
 
     pd.on_map_canvas_with_id(this.canvas_id)
   }
