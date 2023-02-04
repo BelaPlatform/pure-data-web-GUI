@@ -15,7 +15,7 @@
   $: font = widget.font
 </script>
 
-<g transform="translate({$box.origin.x},{$box.origin.y})">
+<g transform="translate({$box.origin.x},{$box.origin.y})" data-node-id="{widget.id}">
   <svelte:component this={widget.klass.impl} {widget} />
   {#if $show_debug}
     <text x={3} y={-4} class="annotation">{widget.klassname} # {widget.id}</text>

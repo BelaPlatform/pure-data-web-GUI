@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { setContext } from 'svelte'
+
   import { app } from '$lib/stores/app'
   import type { PdCanvas } from '$lib/pd/pd_canvas'
   import Node from './Node.svelte'
@@ -22,7 +24,30 @@
     canvas.send_mouse_down(event.offsetX, event.offsetY, button, modifiers)
   }
 
+  function find_node_for_target(target:any) {
+    let node_id = ""
+    let element = target as HTMLElement
+    while(true) {
+      if (element.hasAttribute('data-node-id')) {
+        node_id = element.getAttribute('data-node-id')!
+        break
+      }
+      if(element.parentElement) {
+        element = element.parentElement
+        continue
+      }
+      break
+    }
+    return node_id
+  }
+
+  let popup_context_object_id = ""
+  setContext('object-id', {
+    getObjectId: () => popup_context_object_id
+  })
+
   function on_contextmenu(event:MouseEvent) {
+    popup_context_object_id = find_node_for_target(event.target)
     canvas.send_mouse_down(event.offsetX, event.offsetY, 3, 8)
   }
 

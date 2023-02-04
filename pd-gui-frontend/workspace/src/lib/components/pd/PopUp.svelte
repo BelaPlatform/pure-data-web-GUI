@@ -1,14 +1,28 @@
 <script lang="ts">
-	import OutClick from 'svelte-outclick'
+  import { getContext, onMount } from 'svelte'
+
+  import OutClick from 'svelte-outclick'
 
   import type { PdCanvas } from '$lib/pd/pd_canvas'
 
   export let canvas:PdCanvas
 
-  $: popup = canvas.popup
+  const {getObjectId} = getContext('object-id') as any
 
   function on_clicked_properties() {
-    canvas.on_dismiss_popup_with_result(0)
+    // don't call Pd
+    // or we'd be getting back an undecipherable message like
+    // pdtk_iemgui_dialog {.gfxstubd93fb0} |cnv| {} 20 1 {} 0 0 {} {} 24 {} 24 {} 0 -1 {} {} -1 -1 {} -1 {} {} {} 20 12 0 12 #faff00 #000000 #404040 ;
+    
+    // canvas.on_dismiss_popup_with_result(0)
+
+    // call our own impl instead
+    const object_id = getObjectId()
+    console.log(`show properties dialog for ${object_id}`)
+    canvas.popup.update(p => {
+      p.show = false
+      return p
+    })
   }
 
   function on_clicked_open() {
@@ -19,6 +33,7 @@
     canvas.on_dismiss_popup_with_result(2)
   }
 
+  $: popup = canvas.popup
 </script>
 
 <OutClick on:outclick={_ => canvas.on_dismiss_popup()}>

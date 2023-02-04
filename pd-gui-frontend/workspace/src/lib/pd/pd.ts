@@ -1,6 +1,5 @@
 import { writable, type Writable, get } from 'svelte/store'
 
-// import { parse } from './parser'
 import { PdCanvas } from './pd_canvas'
 import { IO, NullIO } from './io'
 import type { PatchFile } from '$lib/stores/patches'
@@ -32,9 +31,6 @@ export class Pd {
     this.io.on_open = () => {
       this.send_init_sequence()
     }
-    // this.io.on_message = (event:MessageEvent) => {
-    //   parse(event.data)
-    // }
   }
 
   send(message: string) {
@@ -66,7 +62,6 @@ export class Pd {
 
   on_close(canvas: PdCanvas) {
     const message = `${canvas.id} menuclose 0;`
-    console.log(`on_close ${message}`)
     this.send(message)
   }
 

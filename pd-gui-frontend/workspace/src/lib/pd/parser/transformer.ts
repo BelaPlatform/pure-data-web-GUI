@@ -99,7 +99,6 @@ export function transform(root: RootNode) : Command[] {
         mode = mode_arg.value
       }
       const is_unsaved_arg = proc.arguments[4]
-      console.log(is_unsaved_arg)
       let is_unsaved = false
       if (is_unsaved_arg instanceof NumberNode) {
         is_unsaved = parseInt(is_unsaved_arg.value) == 1
@@ -147,13 +146,14 @@ export function transform(root: RootNode) : Command[] {
       const canvas_id = canvas_arg.name
       const origin_x_arg = proc.arguments[1] as NumberNode
       const origin_y_arg = proc.arguments[2] as NumberNode
-      const show_properties_arg = proc.arguments[1] as NumberNode
-      const show_open_arg = proc.arguments[2] as NumberNode
+      const show_properties_arg = proc.arguments[3] as NumberNode
+      const show_open_arg = proc.arguments[4] as NumberNode
       commands.push(new CanvasCommands.PopUp(canvas_id, 
           parseInt(origin_x_arg.value),
           parseInt(origin_y_arg.value),
-          parseInt(show_open_arg.value) == 1,
-          parseInt(show_properties_arg.value) == 1))
+          parseInt(show_properties_arg.value) == 1,
+          parseInt(show_open_arg.value) == 1
+          ))
       return
     }
 
