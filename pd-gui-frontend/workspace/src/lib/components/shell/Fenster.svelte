@@ -54,6 +54,7 @@
   $: hidden = fenster.hidden
   $: is_active = fenster.is_active
   $: is_resizable = fenster.is_resizable
+  $: is_maximized = fenster.is_maximized
 
 </script>
 
@@ -78,10 +79,19 @@
         on:click={_ => fenster.hide()}>
         -
       </button>
-      <button
-        on:click={_ => fenster.maximize(window.innerWidth, window.innerHeight)}>
-        +
-      </button>
+      {#if $is_resizable}
+        <button
+          on:click={_ => fenster.maximize(window.innerWidth, window.innerHeight)}>
+          +
+        </button>
+      {:else if $is_maximized}
+        <button
+          on:click={_ => fenster.unmaximize()}>
+          O
+        </button>
+      {:else}
+        &nbsp;&nbsp;&nbsp;
+      {/if}
       <button
         on:click={_ => $app.wm.close_window(fenster)}>
         x

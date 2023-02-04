@@ -18,11 +18,13 @@ export class View {
 
 export class Fenster {
   box = writable<G.Rect>(DefaultBox())
+  restore_box = DefaultBox()
   title = writable<string>("Title")
   z_index = writable<number>(9999)
   hidden = writable<boolean>(false)
   is_active = writable<boolean>(false)
   is_resizable = writable<boolean>(true)
+  is_maximized = writable<boolean>(false)
   dialogs:Fenster[] = []
   parent: Fenster|null = null
   view: View
@@ -58,12 +60,21 @@ export class Fenster {
 
   maximize(width: number, height: number) {
     this.box.update(box => {
+      this.restore_box = box.clone()
       box.origin.x = 4
       box.origin.y = 36
       box.size.width = width - 8
       box.size.height = height - 48
       return box
     })
+    this.is_maximized.update(_ => true)
+    this.is_resizable.update(_ => false)
+  }
+
+  unmaximize() {
+    this.box.update(_ => this.restore_box)
+    this.is_maximized.update(_ => false)
+    this.is_resizable.update(_ => true)
   }
 
   set_title(title: string) {

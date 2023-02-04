@@ -1,5 +1,9 @@
 export class Point {
   constructor(public x:number, public y:number) {}
+
+  clone() {
+    return new Point(this.x, this.y)
+  }  
 }
 
 export function NullPoint() {
@@ -8,6 +12,10 @@ export function NullPoint() {
 
 export class Size {
   constructor(public width:number, public height:number) {}
+
+  clone() {
+    return new Size(this.width, this.height)
+  }
 }
 
 export function NullSize() {
@@ -47,6 +55,10 @@ export class Rect {
 
   get center() {
     return new Point(this.origin.x + this.size.width / 2, this.origin.y + this.size.height / 2)
+  }
+
+  clone() {
+    return new Rect(this.origin.clone(), this.size.clone())
   }
 }
 
