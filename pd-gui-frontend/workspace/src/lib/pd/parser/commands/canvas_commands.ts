@@ -2,7 +2,7 @@ import { Command } from './command'
 import type { Pd } from '../../pd'
 
 export class ReflectTitle extends Command {
-  constructor(public canvas_id: string, public directory: string, public title: string) {
+  constructor(public canvas_id: string, public directory: string, public title: string, public mode: string) {
     super()
   }
 
@@ -11,7 +11,7 @@ export class ReflectTitle extends Command {
     if (!canvas) {
       return
     }
-    canvas.title = this.title
+    canvas.handle_set_title(`${this.title} ${this.mode} - ${this.directory}`)
 
     pd.on_map_canvas_with_id(this.canvas_id)
   }

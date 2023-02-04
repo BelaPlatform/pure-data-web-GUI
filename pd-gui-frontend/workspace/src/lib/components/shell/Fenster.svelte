@@ -71,7 +71,7 @@
     on:mousedown={on_drag_start}
     class:dragging={dragging}
     >
-    <span class="title">{$title} - {fenster.id}</span>
+    <span class="title">{$title}</span>
     <span class="buttons">
       <button
         on:click={_ => fenster.hide()}>
@@ -126,7 +126,7 @@
     display: flex;
     justify-content: space-between;
     user-select: none;
-    
+    font-size: 13px;
     .title {
       padding: 3px;
     }

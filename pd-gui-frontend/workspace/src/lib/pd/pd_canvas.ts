@@ -15,7 +15,7 @@ export type PopUp = {
 // events originating from pd are prefixed with handle_
 // events originating from user interaction with the frontend are prefixed with on_
 export class PdCanvas {
-  title: string = ""
+  title = writable<string>("")
   widgets = writable<PdWidget[]>([])
   connections = writable<PdConnection[]>([])
   is_mapped: boolean = false
@@ -70,12 +70,9 @@ export class PdCanvas {
   }
 
   handle_set_cursor(cursor_name: string) {
-    // console.log(`set_cursor ${cursor_name}`)
-    this.cursor.update(_ => {
-      return cursor_name
-    })
+    this.cursor.update(_ => cursor_name)
   }
-
+  
   private send_set_editmode(use_edit_mode: boolean) {
     const message = `${this.id} editmode ${use_edit_mode ? 1 : 0};`
     this.pd.send(message)
@@ -89,9 +86,11 @@ export class PdCanvas {
   }
 
   handle_set_editmode(use_edit_mode: boolean) {
-    this.edit_mode.update(_ => {
-      return use_edit_mode
-    })
+    this.edit_mode.update(_ => use_edit_mode)
+  }
+
+  handle_set_title(title: string) {
+    this.title.update(_ => title)
   }
 
   // modifers:

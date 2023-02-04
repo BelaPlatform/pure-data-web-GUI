@@ -93,7 +93,8 @@ export function transform(root: RootNode) : Command[] {
       const canvas_id = canvas_arg.name
       const directory_arg = proc.arguments[1] as StringNode
       const title_arg = proc.arguments[2] as StringNode
-      commands.push(new CanvasCommands.ReflectTitle(canvas_id, directory_arg.value, title_arg.value))
+      const mode_arg = proc.arguments[3] as StringNode
+      commands.push(new CanvasCommands.ReflectTitle(canvas_id, directory_arg.value, title_arg.value, mode_arg.value))
       return
     }
 
