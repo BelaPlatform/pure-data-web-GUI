@@ -73,6 +73,7 @@ export class WindowManager {
       return ws
     })
     this.n_windows++
+    this.stack_top(w)
   }
 
   new_dialog_window(component: any) {

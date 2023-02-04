@@ -42,7 +42,7 @@
     fenster.resize_by(event.movementX, event.movementY)
   }
 
-  function on_resize_start(event:MouseEvent) {
+  function on_resize_start(_:MouseEvent) {
     resizing = true
     window.addEventListener('mousemove', on_resize_move)
     window.addEventListener('mouseup', on_resize_stop)
@@ -88,7 +88,7 @@
   </div>
   
   <div class="content">
-    <svelte:component this={fenster.view.klass.component} {...fenster.view.klass.props} />
+    <svelte:component this={fenster.view.klass.component} {...fenster.view.klass.props} {fenster} />
   </div>
 
   <div class="resize_grip"
@@ -110,6 +110,7 @@
     box-shadow: 0px 0px 4px #ddd;
     display: flex;
     flex-direction: column;
+    user-select: none;
     &.hidden {
       display: none;
     }

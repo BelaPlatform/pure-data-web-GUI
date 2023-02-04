@@ -7,6 +7,8 @@
   import PopUp from './PopUp.svelte'
 
   export let canvas: PdCanvas
+  export let is_active: boolean
+
   // $: canvas = $pd.active_canvas
   $: widgets = canvas.widgets
   $: connections = canvas.connections
@@ -42,6 +44,7 @@
   }
 
   function on_keydown(event:KeyboardEvent) {
+    if (!is_active) { return }
     // console.log(event)
     // console.log(event.key)
 
@@ -192,7 +195,7 @@
   function on_keyup(event:KeyboardEvent) {
     // console.log('on_keyup')
     // console.log(event)
-
+    if (!is_active) { return }
     if (event.key == 'Control') {
       const key = event.location == 1 ? 'Control_L' : 'Control_R'
       canvas.send_key_up(key)
@@ -200,7 +203,7 @@
   }
 </script>
 
-<svelte:window on:keydown={on_keydown} on:keyup={on_keyup}/>
+<svelte:window on:keydown={on_keydown} on:keyup={on_keyup} />
 
 <div class="wrap">
   <PopUp canvas={canvas} />
