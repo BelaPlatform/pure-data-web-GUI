@@ -2,14 +2,14 @@ import { writable, get } from "svelte/store"
 
 import * as G from '../pd/geometry'
 import PatchView from '$lib/components/shell/PatchView.svelte'
-import type { SvelteComponent } from "svelte/internal"
+import type { PdCanvas } from '../pd/pd_canvas'
 
 function DefaultBox() { 
   return new G.Rect(new G.Point(24, 24), new G.Size(480, 360)) 
 }
 
 export class ViewKlass {
-  constructor(public component: any) {}
+  constructor(public component: any, public props: any) {}
 }
 
 export class View {
@@ -48,18 +48,18 @@ export class Fenster {
   }  
 }
 
-class WindowManager {
+export class WindowManager {
   windows = writable<Fenster[]>([])
   next_id = 1
   n_windows = 0
   active_window: Fenster | null = null
 
-  new_patch_window() {
+  new_canvas_window(canvas: PdCanvas) {
     const box = DefaultBox()
     box.origin.x += this.next_id * 24
     box.origin.y += this.next_id * 24
 
-    const w = new Fenster(this.next_id++, new ViewKlass(PatchView), box)
+    const w = new Fenster(this.next_id++, new ViewKlass(PatchView, {canvas}), box)
     this.windows.update(ws => {
       ws.push(w)
       return ws
@@ -72,7 +72,7 @@ class WindowManager {
     box.origin.x += this.next_id * 24
     box.origin.y += this.next_id * 24
 
-    const w = new Fenster(this.next_id++, new ViewKlass(component), box)
+    const w = new Fenster(this.next_id++, new ViewKlass(component, {}), box)
     this.windows.update(ws => {
       ws.push(w)
       return ws
@@ -104,4 +104,4 @@ class WindowManager {
   }
 }
 
-export const wm = writable<WindowManager>(new WindowManager())
+// export const wm = writable<WindowManager>(new WindowManager())

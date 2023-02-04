@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Headerbar from '$lib/components/HeaderBar.svelte'
+  import Headerbar from '$lib/components/shell/HeaderBar.svelte'
 </script>
 
 <Headerbar />

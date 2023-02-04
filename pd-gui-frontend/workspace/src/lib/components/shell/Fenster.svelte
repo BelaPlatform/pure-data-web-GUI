@@ -2,9 +2,8 @@
   import { get } from 'svelte/store'
 
   import type { Fenster } from '$lib/stores/wm'
-  import { wm } from '$lib/stores/wm'
+  import { app } from '$lib/stores/app'
   import * as G from '$lib/pd/geometry'
-  import View from './View.svelte'
 
   export let fenster: Fenster
 
@@ -12,7 +11,7 @@
   let drag_offset = G.NullPoint()
 
   function on_clicked_inside() {
-    $wm.stack_top(fenster)
+    $app.wm.stack_top(fenster)
   }
 
   function on_drag_move(event:MouseEvent) {
@@ -39,9 +38,6 @@
   $: hidden = fenster.hidden
   $: is_active = fenster.is_active
 
-  import { pd } from '$lib/stores/pd'
-  import Canvas from '$lib/components/pd/Canvas.svelte'
-  $: canvases = $pd.canvases
 </script>
 
 <div class="wrap"
@@ -68,15 +64,14 @@
         []
       </button>
       <button
-        on:click={_ => $wm.close_window(fenster)}>
+        on:click={_ => $app.wm.close_window(fenster)}>
         x
       </button>
     </span>
   </div>
   
   <div class="content">
-    <!-- <View view={fenster.view} /> -->
-    <svelte:component this={fenster.view.klass.component} />
+    <svelte:component this={fenster.view.klass.component} {...fenster.view.klass.props} />
   </div>
 </div>
 

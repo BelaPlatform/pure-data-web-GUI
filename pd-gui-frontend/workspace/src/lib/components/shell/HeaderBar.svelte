@@ -2,16 +2,19 @@
   import { get } from 'svelte/store'
   import OutClick from 'svelte-outclick'
 
-  import { wm } from '$lib/stores/wm'
+  import { app } from '$lib/stores/app'
   import { menu, type MenuItem } from '$lib/stores/menu'
 
   let second_level: MenuItem | null = null
 
-  function on_item_clicked(item: MenuItem) {
+  function on_pick(item: MenuItem) {
+    on_dismiss_menu()
+    item.action()
+  }
+
+  function on_expand(event: MouseEvent, item: MenuItem) {
     if (item.children.length) {
      second_level = item
-    } else {
-      item.action()
     }
   }
 
@@ -30,8 +33,7 @@
   <ul class="top_level">
     {#each menu as item}
       <li
-        on:click={_ => on_item_clicked(item)}
-        on:keydown={_ => on_item_clicked(item)}
+        on:mousedown={event => on_expand(event, item)}
         on:mouseenter={_ => on_hover(item)}
         class:is_open={second_level == item}
         >
@@ -41,8 +43,8 @@
             <ul class="second_level">
               {#each second_level.children as item}
                 <li
-                  on:click={_ => on_item_clicked(item)}
-                  on:keydown={_ => on_item_clicked(item)}
+                  on:mousedown|stopPropagation={_ => on_pick(item)}
+                  on:keydown={_ => on_pick(item)}
                   >
                   <span class="title">{item.title}</span>
                 </li>
@@ -53,12 +55,6 @@
       </li>
     {/each}
   </ul>
-
-  <button
-    on:click={_ => $wm.new_patch_window()}
-    on:keydown={_ => $wm.new_patch_window()}>
-    +
-  </button>
 </div>
 
 <style lang="scss">

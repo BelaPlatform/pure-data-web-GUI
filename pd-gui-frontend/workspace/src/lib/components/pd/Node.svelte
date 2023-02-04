@@ -5,7 +5,7 @@
 
   export let widget:PdWidget
 
-  const {show_debug} = app
+  const {show_debug} = $app
   
   $: box = widget.box
   $: label = widget.label

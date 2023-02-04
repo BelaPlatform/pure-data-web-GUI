@@ -11,7 +11,7 @@
   $: edit_mode = $canvas.edit_mode
   $: cursor = $canvas.cursor
 
-  const {show_debug} = app
+  const {show_debug} = $app
 
   function on_mousedown(event:MouseEvent) {
     if (event.button != 0) {

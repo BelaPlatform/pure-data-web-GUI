@@ -1,7 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte"
 
-  import { wm } from '$lib/stores/wm'
+  // import { wm } from '$lib/stores/wm'
+  import { app } from '$lib/stores/app'
   import { pd } from '$lib/stores/pd'
   import { Interpreter } from '$lib/pd/parser/interpreter'
   import { WebSocketIO } from '$lib/pd/io'
@@ -40,7 +41,8 @@
   let selected_patch:any
   $: canvases = $pd.canvases
   $: dsp = $pd.dsp_is_on
-  $: windows = $wm.windows
+  $: wm = $app.wm
+  $: windows = wm.windows
 </script>
 
 {#each $windows as fenster(fenster.id)}

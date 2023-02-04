@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { available_patches } from './patches'
-import { wm } from './wm'
+import { app } from './app'
 
 import MessageDialog from '$lib/components/dialogs/MessageDialog.svelte'
 import FindDialog from '$lib/components/dialogs/FindDialog.svelte'
@@ -16,26 +16,23 @@ export class MenuItem {
 }
 
 function on_new_patch() {
-  get(wm).new_patch_window()
+  get(app).on_new_patch()
 }
 
 function on_close_window() {
-  get(wm).close_active_window()
+  get(app).wm.close_active_window()
 }
 
 function on_show_message_dialog() {
-  console.log('on_show_message_dialog')
-  get(wm).new_dialog_window(MessageDialog)
+  get(app).wm.new_dialog_window(MessageDialog)
 }
 
 function on_show_find_dialog() {
-  console.log('on_show_find_dialog')
-  get(wm).new_dialog_window(FindDialog)
+  get(app).wm.new_dialog_window(FindDialog)
 }
 
 function on_show_preferences_dialog() {
-  console.log('on_show_preferences_dialog')
-  get(wm).new_dialog_window(PreferencesDialog)
+  get(app).wm.new_dialog_window(PreferencesDialog)
 }
 
 function build_file_menu() : MenuItem[] {

@@ -8,6 +8,11 @@ import type { PdWidget } from './pd_widget'
 import type { PdConnection } from './pd_connection'
 
 
+export interface PdCallbacks {
+  did_create_canvas: Function
+  did_destroy_canvas: Function
+}
+
 // events originating from pd are prefixed with handle_
 // events originating from user interaction with the frontend are prefixed with on_
 export class Pd {
@@ -15,8 +20,10 @@ export class Pd {
   canvases = writable<PdCanvas[]>([])
   active_canvas: Writable<PdCanvas>
   dsp_is_on = writable<boolean>(false)
+  callbacks: PdCallbacks | null = null
 
   constructor() {
+    console.log('Pd!')
     this.active_canvas = writable<PdCanvas>(new PdCanvas('nil', this))
   }
 
@@ -64,10 +71,15 @@ export class Pd {
   }
 
   handle_new_canvas_with_id(id: string) {
+    const canvas = new PdCanvas(id, this)
     this.canvases.update((cs: PdCanvas[]) => {
-      cs = cs.concat([new PdCanvas(id, this)])
+      cs = cs.concat([canvas])
       return cs
     })
+
+    if (this.callbacks) {
+      this.callbacks.did_create_canvas(canvas)
+    }
   }
 
   handle_destroy(canvas: PdCanvas) {
@@ -85,6 +97,10 @@ export class Pd {
       if (new_active_canvas) {
         this.on_map_canvas_with_id(new_active_canvas.id)
       }
+    }
+
+    if (this.callbacks) {
+      this.callbacks.did_destroy_canvas()
     }
   }
 
