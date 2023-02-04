@@ -1,8 +1,19 @@
 <script lang="ts">
-  import Headerbar from '$lib/components/shell/HeaderBar.svelte'
+  import { onMount } from 'svelte'
+  import { get } from 'svelte/store'
 
+  import Headerbar from '$lib/components/shell/HeaderBar.svelte'
+  import PdDialog from '$lib/components/pd/dialogs/PdDialog.svelte'
+  import { app } from '$lib/stores/app'
   import { pd } from '$lib/stores/pd'
-  $: dsp = $pd.dsp_is_on  
+  import { Direction, PdMessages } from '$lib/pd/pd_messages'
+
+  onMount(() => {
+    console.log('+layout::onMount')
+    get(app).wm.new_dialog_window(PdDialog)
+    PdMessages.push('Hello, World!', Direction.Internal)
+  })
+  $: dsp = $pd.dsp_is_on
 </script>
 
 <Headerbar>

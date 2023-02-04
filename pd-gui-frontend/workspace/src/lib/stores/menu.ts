@@ -6,6 +6,7 @@ import MessageDialog from '$lib/components/pd/dialogs/MessageDialog.svelte'
 import FindDialog from '$lib/components/pd/dialogs/FindDialog.svelte'
 import PreferencesDialog from '$lib/components/pd/dialogs/PreferencesDialog.svelte'
 import AudioSettingsDialog from '$lib/components/pd/dialogs/AudioSettingsDialog.svelte'
+import PdDialog from '$lib/components/pd/dialogs/PdDialog.svelte'
 
 export class MenuItem {
   constructor(public title: string,
@@ -42,6 +43,11 @@ function on_show_preferences_dialog() {
 function on_show_audio_settings_dialog() {
   get(app).wm.new_dialog_window(AudioSettingsDialog)
 }
+
+function on_show_pd_dialog() {
+  get(app).wm.new_dialog_window(PdDialog)
+}
+
 
 function build_file_menu() : MenuItem[] {
   const pre = [
@@ -104,6 +110,11 @@ let media_menu: MenuItem[] = [
   new MenuItem('...')
 ]
 
+let window_menu: MenuItem[] = [
+  new MenuItem('Pd Window', on_show_pd_dialog),
+  new MenuItem('Parent Window'),
+]
+
 let help_menu: MenuItem[] = [
   new MenuItem('About Pd'),
   new MenuItem('HTML Manual...'),
@@ -118,6 +129,6 @@ export const menu: MenuItem[] = [
   new MenuItem('Put', () => {}, put_menu),
   new MenuItem('Find', () => {}, find_menu),
   new MenuItem('Media', () => {}, media_menu),
-  new MenuItem('Window', () => {}),
+  new MenuItem('Window', () => {}, window_menu),
   new MenuItem('Help', () => {}, help_menu),
 ]

@@ -1,7 +1,8 @@
 import { writable, get } from 'svelte/store'
 
 export enum Direction {
-  Incoming, Outgoing
+  Incoming, Outgoing,
+  Internal
 }
 
 export class PdMessage {
