@@ -1,8 +1,7 @@
 import { get } from 'svelte/store'
 
-import { available_patches } from './patches'
 import { app } from './app'
-
+import { available_patches, type PatchFile } from './patches'
 import MessageDialog from '$lib/components/dialogs/MessageDialog.svelte'
 import FindDialog from '$lib/components/dialogs/FindDialog.svelte'
 import PreferencesDialog from '$lib/components/dialogs/PreferencesDialog.svelte'
@@ -17,6 +16,10 @@ export class MenuItem {
 
 function on_new_patch() {
   get(app).on_new_patch()
+}
+
+function on_open_patch(patch: PatchFile) {
+  get(app).on_open_patch(patch)
 }
 
 function on_close_window() {
@@ -55,7 +58,10 @@ function build_file_menu() : MenuItem[] {
   get(available_patches).forEach(item => {
     const path_components = item.file.split('/')
     const filename = path_components[path_components.length - 1]
-    recent.push(new MenuItem(`${item.id}. ${filename}`))
+    const action = () => {
+      on_open_patch(item)
+    }
+    recent.push(new MenuItem(`${item.id}. ${filename}`, action))
   })
 
   return pre.concat(recent).concat(post)

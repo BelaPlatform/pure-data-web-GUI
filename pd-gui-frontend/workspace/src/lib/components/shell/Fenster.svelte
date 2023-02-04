@@ -75,10 +75,10 @@
     <span class="buttons">
       <button
         on:click={_ => fenster.hide()}>
-        _
+        -
       </button>
       <button>
-        []
+        +
       </button>
       <button
         on:click={_ => $app.wm.close_window(fenster)}>
