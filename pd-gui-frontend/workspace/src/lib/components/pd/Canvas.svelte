@@ -222,50 +222,11 @@
     {/each}
   </svg>
   <br>
-  
-  <!-- {canvas.title} {canvas.id}
-  <h4>widgets</h4>
-  <ul>
-  {#each $widgets as widget(widget.id)}
-    <li>
-      {widget.klass} {widget.text} {widget.id} ({get(widget.box).size.width}/{get(widget.box).size.height})
-      ins: {widget.inlets.length} outs: {widget.outlets.length}
-    </li>
-  {/each}
-  </ul> -->
-  <!-- 
-  <h4>connections</h4>
-  <ul>
-    {#each $connections as connection(connection.id)}
-    <li>
-      {connection.id} &lbrace;({connection.from.x}/{connection.from.y}), ({connection.to.x} {connection.to.y})&rbrace;
-    </li>
-    {/each}
-  </ul> -->
 
   <input type="checkbox" id="show_debug" bind:checked={$show_debug} /><label for="show_debug">Debug</label><br>
-  <input type="checkbox" id="edit_mode"
-    bind:checked={$edit_mode}
-    on:click={_ => canvas.on_toggle_edit_mode()}
-    /><label for="edit_mode">Edit Mode</label><br>
-
 </div>
 
 <style lang="scss">
-  // .wrap {
-  //   background-color: #def;
-  // }
-
-  // h4 {
-  //   margin: 0;
-  // }
-
-  // ul {
-  //   list-style: none;
-  //   margin: 0;
-  //   padding: 0;
-  // }
-
   svg {
     width: 100%;
     height: 480px;

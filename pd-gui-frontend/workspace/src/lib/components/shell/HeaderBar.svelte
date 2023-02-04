@@ -55,9 +55,19 @@
       </li>
     {/each}
   </ul>
+  <aside>
+    <slot></slot>
+  </aside>
 </div>
 
 <style lang="scss">
+  .wrap {
+    display: flex;
+    width: 100vw;
+    background-color: #ddd;
+    justify-content: space-between;
+  }
+
   ul {
     list-style: none;
     margin: 0;
@@ -96,5 +106,9 @@
     margin-top: 6px;
     z-index: 99999;
     box-shadow: 2px 2px 2px #ccc;
+  }
+
+  aside {
+    padding: 6px;
   }
 </style>
