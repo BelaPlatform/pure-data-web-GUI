@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { IOLetType, type IOLet } from '$lib/pd/pd_widget'
+  import { IOLetType, IOLetScope, type IOLet } from '$lib/pd/pd_widget'
 
   export let port: IOLet
 
   $: type = port.type == IOLetType.Message ? 'message' : 'signal'
   $: x = port.box.origin.x
-  $: y = port.box.origin.y
+  $: y = port.box.origin.y + (port.scope == IOLetScope.Input ? 0 : 1)
   $: width = port.box.size.width
   $: height = port.box.size.height
 </script>
