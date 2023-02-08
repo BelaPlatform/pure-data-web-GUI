@@ -72,6 +72,7 @@
   <div class="titlebar"
     on:mousedown={on_drag_start}
     class:dragging={dragging}
+    class:is_active={$is_active}
     >
     <span class="title">{$title}</span>
     <span class="buttons">
@@ -136,12 +137,18 @@
 
   .titlebar {
     border-bottom: #ddd solid thin;
+    background-color: #eee;
     font-family: 'Courier New', Courier, monospace;
     display: flex;
     justify-content: space-between;
     user-select: none;
     font-size: 13px;
     white-space: nowrap;
+
+    &.is_active {
+      background-color: #ddd;
+    }
+
     .title {
       padding: 3px;
     }
