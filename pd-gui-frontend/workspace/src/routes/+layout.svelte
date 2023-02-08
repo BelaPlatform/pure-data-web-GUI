@@ -10,7 +10,7 @@
 
   onMount(() => {
     console.log('+layout::onMount')
-    get(app).wm.new_dialog_window(PdDialog)
+    get(app).wm.new_dialog_frame(PdDialog)
     PdMessages.push('Hello, World!', Direction.Internal)
   })
   $: dsp = $pd.dsp_is_on

@@ -5,7 +5,7 @@
   import { pd } from '$lib/stores/pd'
   import { Interpreter } from '$lib/pd/parser/interpreter'
   import { WebSocketIO } from '$lib/pd/io'
-  import Fenster from '$lib/components/shell/Fenster.svelte'
+  import Frame from '$lib/components/shell/Frame.svelte'
 
   function on_open() {
     console.log('on_open')
@@ -30,9 +30,9 @@
   })
 
   $: wm = $app.wm
-  $: windows = wm.windows
+  $: frames = wm.frames
 </script>
 
-{#each $windows as fenster(fenster.id)}
-  <Fenster {fenster} />
+{#each $frames as frame(frame.id)}
+  <Frame {frame} />
 {/each}

@@ -1,15 +1,15 @@
 <script lang="ts">
   import { onMount } from 'svelte'
 
-  import type { Fenster } from '$lib/stores/wm'
+  import type { Frame } from '$lib/stores/wm'
   import * as G from '$lib/pd/geometry'
   
-  export let fenster: Fenster
+  export let frame: Frame
 
   onMount(() => {
-    fenster.set_title('About')
-    fenster.set_size(new G.Size(480, 600))
-    fenster.set_is_resizable(false)
+    frame.set_title('About')
+    frame.set_size(new G.Size(480, 600))
+    frame.set_is_resizable(false)
   })
 </script>
   

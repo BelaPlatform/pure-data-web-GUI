@@ -1,60 +1,60 @@
 <script lang="ts">
   import { get } from 'svelte/store'
 
-  import type { Fenster } from '$lib/stores/wm'
+  import type { Frame } from '$lib/stores/wm'
   import { app } from '$lib/stores/app'
   import * as G from '$lib/pd/geometry'
 
-  export let fenster: Fenster
+  export let frame: Frame
 
   let dragging = false
   let resizing = false
   let drag_offset = G.NullPoint()
 
   function on_clicked_inside() {
-    $app.wm.stack_top(fenster)
+    $app.wm.stack_top(frame)
   }
 
-  function on_drag_move(event:MouseEvent) {
-    fenster.move_to(event.clientX - drag_offset.x, event.clientY - drag_offset.y)
+  function on_drag_move(event: MouseEvent) {
+    frame.move_to(event.clientX - drag_offset.x, event.clientY - drag_offset.y)
   }
 
-  function on_drag_stop(_:MouseEvent) {
+  function on_drag_stop(_: MouseEvent) {
     dragging = false
     window.removeEventListener('mousemove', on_drag_move)
     window.removeEventListener('mouseup', on_drag_stop)
   }
 
-  function on_drag_start(event:MouseEvent) {
-    const origin = get(box).origin    
+  function on_drag_start(event: MouseEvent) {
+    const origin = get(box).origin
     dragging = true
     drag_offset = new G.Point(event.clientX - origin.x, event.clientY - origin.y)
     window.addEventListener('mousemove', on_drag_move)
     window.addEventListener('mouseup', on_drag_stop)
   }
 
-  function on_resize_stop(_:MouseEvent) {
+  function on_resize_stop(_: MouseEvent) {
     window.removeEventListener('mousemove', on_resize_move)
     window.removeEventListener('mouseup', on_resize_stop)
   }
 
-  function on_resize_move(event:MouseEvent) {
-    fenster.resize_by(event.movementX, event.movementY)
+  function on_resize_move(event: MouseEvent) {
+    frame.resize_by(event.movementX, event.movementY)
   }
 
-  function on_resize_start(_:MouseEvent) {
+  function on_resize_start(_: MouseEvent) {
     resizing = true
     window.addEventListener('mousemove', on_resize_move)
     window.addEventListener('mouseup', on_resize_stop)
   }
 
-  $: box = fenster.box
-  $: title = fenster.title
-  $: z_index = fenster.z_index
-  $: hidden = fenster.hidden
-  $: is_active = fenster.is_active
-  $: is_resizable = fenster.is_resizable
-  $: is_maximized = fenster.is_maximized
+  $: box = frame.box
+  $: title = frame.title
+  $: z_index = frame.z_index
+  $: hidden = frame.hidden
+  $: is_active = frame.is_active
+  $: is_resizable = frame.is_resizable
+  $: is_maximized = frame.is_maximized
 
 </script>
 
@@ -77,31 +77,31 @@
     <span class="title">{$title}</span>
     <span class="buttons">
       <button
-        on:click={_ => fenster.hide()}>
+        on:click={_ => frame.hide()}>
         -
       </button>
       {#if $is_resizable}
         <button
-          on:click={_ => fenster.maximize(window.innerWidth, window.innerHeight)}>
+          on:click={_ => frame.maximize(window.innerWidth, window.innerHeight)}>
           +
         </button>
       {:else if $is_maximized}
         <button
-          on:click={_ => fenster.unmaximize()}>
+          on:click={_ => frame.unmaximize()}>
           O
         </button>
       {:else}
         &nbsp;&nbsp;&nbsp;
       {/if}
       <button
-        on:click={_ => $app.wm.close_window(fenster)}>
+        on:click={_ => $app.wm.close_frame(frame)}>
         x
       </button>
     </span>
   </div>
   
   <div class="content">
-    <svelte:component this={fenster.view.klass.component} {...fenster.view.klass.props} {fenster} />
+    <svelte:component this={frame.view.klass.component} {...frame.view.klass.props} frame={frame} />
   </div>
 
   {#if $is_resizable}

@@ -4,21 +4,21 @@
 
   import CanvasComponent from '../pd/Canvas.svelte'
   import type { PdCanvas } from '$lib/pd/pd_canvas'
-  import type { Fenster } from '$lib/stores/wm'
+  import type { Frame } from '$lib/stores/wm'
 
-  export let canvas:PdCanvas
-  export let fenster: Fenster
+  export let canvas: PdCanvas
+  export let frame: Frame
 
-  $: is_active = fenster.is_active
+  $: is_active = frame.is_active
 
   onMount(() => {
     canvas.title.subscribe(t => {
-      fenster.title.update(_ => t)
+      frame.title.update(_ => t)
     })
 
     const size = get(canvas.size)
-    fenster.set_size(size)
-    fenster.box.subscribe(box => {
+    frame.set_size(size)
+    frame.box.subscribe(box => {
       canvas.on_set_size(box.size)
     })
   })

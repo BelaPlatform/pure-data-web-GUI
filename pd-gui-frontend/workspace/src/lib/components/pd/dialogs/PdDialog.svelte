@@ -1,10 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte'
 
-  import type { Fenster } from '$lib/stores/wm'
+  import type { Frame } from '$lib/stores/wm'
   import * as G from '$lib/pd/geometry'
   
-  export let fenster: Fenster
+  export let frame: Frame
 
   import { Direction, PdMessages } from '$lib/pd/pd_messages'
 
@@ -13,8 +13,8 @@
   $: messages = PdMessages.messages
 
   onMount(() => {
-    fenster.set_title('Pd')
-    fenster.set_size(new G.Size(480, 360))
+    frame.set_title('Pd')
+    frame.set_size(new G.Size(480, 360))
     messages.subscribe(() => {
       message_container.scrollTop = message_container.scrollHeight
     })

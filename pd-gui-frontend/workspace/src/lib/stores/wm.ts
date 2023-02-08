@@ -13,10 +13,10 @@ export class ViewKlass {
 }
 
 export class View {
-  constructor(public window: Fenster, public klass: ViewKlass) {}
+  constructor(public frame: Frame, public klass: ViewKlass) {}
 }
 
-export class Fenster {
+export class Frame {
   box = writable<G.Rect>(DefaultBox())
   restore_box = DefaultBox()
   title = writable<string>("Title")
@@ -25,8 +25,8 @@ export class Fenster {
   is_active = writable<boolean>(false)
   is_resizable = writable<boolean>(true)
   is_maximized = writable<boolean>(false)
-  dialogs:Fenster[] = []
-  parent: Fenster|null = null
+  dialogs: Frame[] = []
+  parent: Frame|null = null
   view: View
 
   constructor(public id: number, public klass: ViewKlass, box: G.Rect) {
@@ -94,61 +94,59 @@ export class Fenster {
 }
 
 export class WindowManager {
-  windows = writable<Fenster[]>([])
+  frames = writable<Frame[]>([])
   next_id = 1
-  n_windows = 0
-  active_window: Fenster | null = null
+  n_frames = 0
+  active_frame: Frame | null = null
 
-  new_canvas_window(canvas: PdCanvas) {
+  new_canvas_frame(canvas: PdCanvas) {
     const box = DefaultBox()
     box.origin.x += this.next_id * 24
     box.origin.y += this.next_id * 24
 
-    const w = new Fenster(this.next_id++, new ViewKlass(PatchView, {canvas}), box)
-    this.windows.update(ws => {
+    const w = new Frame(this.next_id++, new ViewKlass(PatchView, {canvas}), box)
+    this.frames.update(ws => {
       ws.push(w)
       return ws
     })
-    this.n_windows++
+    this.n_frames++
     this.stack_top(w)
   }
 
-  new_dialog_window(component: any) {
+  new_dialog_frame(component: any) {
     const box = DefaultBox()
     box.origin.x += this.next_id * 24
     box.origin.y += this.next_id * 24
 
-    const w = new Fenster(this.next_id++, new ViewKlass(component, {}), box)
-    this.windows.update(ws => {
-      ws.push(w)
-      return ws
+    const frame = new Frame(this.next_id++, new ViewKlass(component, {}), box)
+    this.frames.update(fs => {
+      fs.push(frame)
+      return fs
     })
-    this.n_windows++
-    this.stack_top(w)
+    this.n_frames++
+    this.stack_top(frame)
   }
 
-  close_window(window: Fenster) {
-    this.windows.update(ws => {
-      return ws.filter(w => w.id != window.id)
+  close_frame(frame: Frame) {
+    this.frames.update(fs => {
+      return fs.filter(f => f.id != frame.id)
     })
   }
 
-  close_active_window() {
-    if (this.active_window) {
-      this.close_window(this.active_window)
+  close_active_frame() {
+    if (this.active_frame) {
+      this.close_frame(this.active_frame)
     }
   }
 
-  stack_top(window: Fenster) {
+  stack_top(frame: Frame) {
     // console.log('stack_top')
     let z_index = 9999
-    get(this.windows).forEach(w => {
-      const is_new_top = window.id == w.id
-      w.z_index.update(_ => z_index + (is_new_top ? 9999 : 0))
-      w.is_active.update(_ => is_new_top)
+    get(this.frames).forEach(f => {
+      const is_new_top = frame.id == f.id
+      f.z_index.update(_ => z_index + (is_new_top ? 9999 : 0))
+      f.is_active.update(_ => is_new_top)
     })
-    this.active_window = window
+    this.active_frame = frame
   }
 }
-
-// export const wm = writable<WindowManager>(new WindowManager())

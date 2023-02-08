@@ -2,10 +2,10 @@
   import { onMount } from 'svelte'
 
   import { pd } from '$lib/stores/pd'
-  import type { Fenster } from '$lib/stores/wm'
+  import type { Frame } from '$lib/stores/wm'
   import * as G from '$lib/pd/geometry'
 
-  export let fenster: Fenster
+  export let frame: Frame
 
   let text: string
   function on_send() {
@@ -15,9 +15,9 @@
   }
 
   onMount(() => {
-    fenster.set_title('Send a Pd message')
-    fenster.set_size(new G.Size(396, 92))
-    fenster.set_is_resizable(false)
+    frame.set_title('Send a Pd message')
+    frame.set_size(new G.Size(396, 92))
+    frame.set_is_resizable(false)
   })
 </script>
 

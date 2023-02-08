@@ -32,7 +32,7 @@ export class App  {
 
   did_create_canvas(canvas: PdCanvas) {
     console.log('did_create_canvas')
-    this.wm.new_canvas_window(canvas)
+    this.wm.new_canvas_frame(canvas)
   }
 
   did_destroy_canvas() {

@@ -2,15 +2,15 @@
   import { onMount } from 'svelte'
 
   import { pd } from '$lib/stores/pd'
-  import type { Fenster } from '$lib/stores/wm'
+  import type { Frame } from '$lib/stores/wm'
   import * as G from '$lib/pd/geometry'
   
-  export let fenster: Fenster
+  export let frame: Frame
 
   onMount(() => {
-    fenster.set_title('Audio Settings')
-    fenster.set_size(new G.Size(360, 480))
-    fenster.set_is_resizable(false)
+    frame.set_title('Audio Settings')
+    frame.set_size(new G.Size(360, 480))
+    frame.set_is_resizable(false)
   })
 </script>
 

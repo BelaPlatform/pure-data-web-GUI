@@ -26,31 +26,31 @@ function on_open_patch(patch: PatchFile) {
 }
 
 function on_close_window() {
-  get(app).wm.close_active_window()
+  get(app).wm.close_active_frame()
 }
 
 function on_show_message_dialog() {
-  get(app).wm.new_dialog_window(MessageDialog)
+  get(app).wm.new_dialog_frame(MessageDialog)
 }
 
 function on_show_find_dialog() {
-  get(app).wm.new_dialog_window(FindDialog)
+  get(app).wm.new_dialog_frame(FindDialog)
 }
 
 function on_show_preferences_dialog() {
-  get(app).wm.new_dialog_window(PreferencesDialog)
+  get(app).wm.new_dialog_frame(PreferencesDialog)
 }
 
 function on_show_audio_settings_dialog() {
-  get(app).wm.new_dialog_window(AudioSettingsDialog)
+  get(app).wm.new_dialog_frame(AudioSettingsDialog)
 }
 
 function on_show_pd_dialog() {
-  get(app).wm.new_dialog_window(PdDialog)
+  get(app).wm.new_dialog_frame(PdDialog)
 }
 
 function on_show_about_pd_dialog() {
-  get(app).wm.new_dialog_window(AboutPdDialog)
+  get(app).wm.new_dialog_frame(AboutPdDialog)
 }
 
 function build_file_menu() : MenuItem[] {
