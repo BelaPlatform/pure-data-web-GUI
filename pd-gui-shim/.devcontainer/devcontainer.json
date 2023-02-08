@@ -10,32 +10,21 @@
   }
   , "runArgs": ["--name=pd-gui-shim"]
 
-  , "settings": {
-      "terminal.integrated.defaultProfile.linux": "fish", 
-      "terminal.integrated.profiles.linux": {
-          "fish": {
-              "path": "/bin/fish"
-          }
-      }
-  }
-
-  // Use 'forwardPorts' to make a list of ports inside the container available locally.
   , "forwardPorts": [8081, 56026]
 
-  , "extensions": [
-    
-  ]
-  // Uncomment the next line to run commands after the container is created - for example installing curl.
-  // "postCreateCommand": "apt-get update && apt-get install -y curl",
 
-  // Uncomment when using a ptrace-based debugger like C++, Go, and Rust
-  // "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
-
-  // Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
-  // "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
-
-  // Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
-  // "remoteUser": "vscode"
+  , "customizations": {
+    "vscode" : {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "fish", 
+        "terminal.integrated.profiles.linux": {
+            "fish": {
+                "path": "/bin/fish"
+            }
+        }
+      }
+    }
+  }
 
   , "mounts": [
     "source=pd-gui-shim-dvlpr,target=/home/dvlpr/,type=volume"
@@ -45,4 +34,4 @@
   , "workspaceMount": "source=${localWorkspaceFolder}/workspace,target=/workspace,type=bind"
   , "remoteUser": "dvlpr"
   , "containerUser": "dvlpr"
-}	
+}
