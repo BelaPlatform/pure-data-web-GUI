@@ -169,10 +169,23 @@ export class WindowManager {
   }
 
   on_keydown(event: KeyboardEvent) {
+    console.log(event)
     // is it a shortcut?
     if (event.key == '#' && event.ctrlKey) {
       event.preventDefault()
       this.app.on_toggle_debug()
+      return
+    }
+
+    if (event.key == 'n' && event.altKey) {
+      this.app.on_new_patch()
+      event.preventDefault()
+      return
+    }
+
+    if (event.key == 'w' && event.altKey) {
+      this.close_active_frame()
+      event.preventDefault()
       return
     }
 

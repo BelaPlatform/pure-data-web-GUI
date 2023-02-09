@@ -49,7 +49,6 @@ export class Pd {
 
   on_close(canvas: PdCanvas) {
     const message = `${canvas.id} menuclose 0;`
-    console.log(`on_close ${message}`)
     this.send(message)
   }
 

@@ -13,7 +13,6 @@ export class MenuItem {
   constructor(public title: string,
     public action: Function = () => {},
     public children: MenuItem[] = []) {
-
     }
 }
 
