@@ -16,7 +16,9 @@
     frame.set_title('Pd')
     frame.set_size(new G.Size(480, 360))
     messages.subscribe(() => {
-      message_container.scrollTop = message_container.scrollHeight
+      if (message_container) {
+        message_container.scrollTop = message_container.scrollHeight
+      }
     })
   })
 </script>
