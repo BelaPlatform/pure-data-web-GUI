@@ -1,7 +1,7 @@
 <script lang="ts">
   import { get } from 'svelte/store'
 
-  import type { Frame } from '$lib/stores/wm'
+  import type { Frame } from '$lib/shell/wm'
   import { app } from '$lib/stores/app'
   import * as G from '$lib/utils/geometry'
 

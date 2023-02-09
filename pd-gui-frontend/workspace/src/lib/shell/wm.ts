@@ -29,6 +29,7 @@ export class Frame {
   dialogs: Frame[] = []
   parent: Frame|null = null
   view: View
+  close_effect: Function|null = null
 
   constructor(public id: number, public klass: ViewKlass, box: G.Rect) {
     this.box.set(box)
@@ -140,6 +141,11 @@ export class WindowManager {
   }
 
   close_frame(frame: Frame) {
+    // does it have a side effect?
+    if (frame.close_effect) {
+      frame.close_effect()
+    }
+
     this.frames.update(fs => {
       return fs.filter(f => f.id != frame.id)
     })
@@ -163,14 +169,18 @@ export class WindowManager {
   }
 
   on_keydown(event: KeyboardEvent) {
-    console.log('wm::on_keydown')
-    console.log(event)
-    console.log(this.app)
     // is it a shortcut?
     if (event.key == '#' && event.ctrlKey) {
       event.preventDefault()
-      this.app?.on_toggle_debug()
+      this.app.on_toggle_debug()
       return
+    }
+
+    // do we have an open canvas?
+    const canvas = get(this.app.pd.active_canvas)
+    if (canvas) {
+      console.log('have canvas')
+      console.log(canvas)
     }
   }
 }

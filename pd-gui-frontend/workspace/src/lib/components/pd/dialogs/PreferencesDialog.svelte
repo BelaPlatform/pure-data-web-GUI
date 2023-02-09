@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
 
-  import type { Frame } from '$lib/stores/wm'
+  import type { Frame } from '$lib/shell/wm'
   import * as G from '$lib/utils/geometry'
 
   export let frame: Frame

@@ -1,9 +1,8 @@
 <script lang="ts">
-  import { get } from 'svelte/store'
   import OutClick from 'svelte-outclick'
 
   import { app } from '$lib/stores/app'
-  import { menu, type MenuItem } from '$lib/stores/menu'
+  import { menu, type MenuItem } from '$lib/shell/menu'
 
   let second_level: MenuItem | null = null
 

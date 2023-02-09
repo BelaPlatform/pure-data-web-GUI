@@ -1,23 +1,23 @@
 import { writable, type Writable, get } from 'svelte/store'
 
-import type { App } from '../stores/app'
+import type { App } from '../shell/app'
 import { PdCanvas } from './pd_canvas'
 import type { PatchFile } from '$lib/stores/patches'
 import type { PdWidget } from './pd_widget'
 import type { PdConnection } from './pd_connection'
-import * as G from '../utils/geometry'
+import type * as G from '../utils/geometry'
 
 
 // events originating from pd are prefixed with handle_
 // events originating from user interaction with the frontend are prefixed with on_
 export class Pd {
   canvases = writable<PdCanvas[]>([])
-  active_canvas: Writable<PdCanvas>
+  active_canvas: Writable<PdCanvas | null> = writable(null)
   dsp_is_on = writable<boolean>(false)
 
   constructor(public app: App) {
     console.log('Pd!')
-    this.active_canvas = writable<PdCanvas>(new PdCanvas('nil', this, G.NullSize()))
+    // this.active_canvas = writable<PdCanvas>(new PdCanvas('nil', this, G.NullSize()))
   }
 
   send(message: string) {
@@ -49,6 +49,7 @@ export class Pd {
 
   on_close(canvas: PdCanvas) {
     const message = `${canvas.id} menuclose 0;`
+    console.log(`on_close ${message}`)
     this.send(message)
   }
 
@@ -64,8 +65,9 @@ export class Pd {
 
   handle_destroy(canvas: PdCanvas) {
     let map_other_canvas = false
+
     // is this the active canavs?
-    if (get(this.active_canvas).id == canvas.id) {
+    if (get(this.active_canvas)?.id == canvas.id) {
       map_other_canvas = true
     }
     this.canvases.update((cs: PdCanvas[]) => {

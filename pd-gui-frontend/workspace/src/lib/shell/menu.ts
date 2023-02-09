@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
-import { app } from './app'
-import { available_patches, type PatchFile } from './patches'
+import { app } from '../stores/app'
+import { available_patches, type PatchFile } from '../stores/patches'
 import MessageDialog from '$lib/components/pd/dialogs/MessageDialog.svelte'
 import FindDialog from '$lib/components/pd/dialogs/FindDialog.svelte'
 import PreferencesDialog from '$lib/components/pd/dialogs/PreferencesDialog.svelte'

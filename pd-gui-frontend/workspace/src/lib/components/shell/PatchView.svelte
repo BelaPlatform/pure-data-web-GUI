@@ -2,14 +2,16 @@
   import { onMount } from 'svelte'
   import { get } from 'svelte/store'
 
+  import { app } from '$lib/stores/app'
   import CanvasComponent from '../pd/Canvas.svelte'
   import type { PdCanvas } from '$lib/pd/pd_canvas'
-  import type { Frame } from '$lib/stores/wm'
+  import type { Frame } from '$lib/shell/wm'
 
   export let canvas: PdCanvas
   export let frame: Frame
 
   $: is_active = frame.is_active
+  $: pd = $app.pd
 
   onMount(() => {
     canvas.title.subscribe(t => {
@@ -21,6 +23,9 @@
     frame.box.subscribe(box => {
       canvas.on_set_size(box.size)
     })
+    frame.close_effect = () => {
+      pd.on_close(canvas)
+    }
   })
 </script>
 
