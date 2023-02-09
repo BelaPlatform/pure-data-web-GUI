@@ -61,6 +61,10 @@ function on_show_about_pd_dialog() {
   get(app).wm.new_dialog_frame(AboutPdDialog)
 }
 
+function on_print() {
+  window.print()
+}
+
 function build_file_menu() : MenuItem[] {
   const pre = [
     new MenuItem('New', on_new_patch, [], 'Alt+N'),
@@ -71,7 +75,7 @@ function build_file_menu() : MenuItem[] {
     new MenuItem('-'),
     new MenuItem('Message', on_show_message_dialog),
     new MenuItem('Preferences', on_show_preferences_dialog),
-    new MenuItem('Print'),
+    new MenuItem('Print', on_print),
     new MenuItem('-'),
   ]
 
