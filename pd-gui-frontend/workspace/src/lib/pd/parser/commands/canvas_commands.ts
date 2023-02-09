@@ -111,3 +111,18 @@ export class SetEditMode extends Command {
     canvas.handle_set_editmode(this.use_edit_mode)
   }
 }
+
+
+export class Raise extends Command {
+  constructor(public canvas_id: string) {
+    super()
+  }
+
+  override eval(pd: Pd) {
+    const canvas = pd.canvas_with_id(this.canvas_id)
+    if (!canvas) {
+      return
+    }
+    canvas.handle_raise()
+  }
+}

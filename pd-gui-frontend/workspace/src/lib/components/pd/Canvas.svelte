@@ -1,7 +1,6 @@
 <script lang="ts">
   import { setContext } from 'svelte'
 
-  import { app } from '$lib/stores/app'
   import type { PdCanvas } from '$lib/pd/pd_canvas'
   import Node from './Node.svelte'
   import Noodle from './Noodle.svelte'
@@ -13,7 +12,6 @@
   $: widgets = canvas.widgets
   $: connections = canvas.connections
   $: cursor = canvas.cursor
-  $: show_debug = $app.show_debug
 
   function on_mousedown(event:MouseEvent) {
     if (event.button != 0) {
@@ -108,15 +106,15 @@
       return
     }
 
-    if (event.key == 'a' && event.ctrlKey) {
-      event.preventDefault()
-      canvas.on_select_all()
-      return
-    }
-
     if (event.key == 'z' && event.ctrlKey) {
       event.preventDefault()
       canvas.on_undo()
+      return
+    }
+
+    if (event.key == 'a' && event.ctrlKey) {
+      event.preventDefault()
+      canvas.on_select_all()
       return
     }
 

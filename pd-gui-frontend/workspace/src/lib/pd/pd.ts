@@ -83,6 +83,14 @@ export class Pd {
     this.app.did_destroy_canvas()
   }
 
+  handle_raise_canvas(canvas: PdCanvas) {
+    console.log('handle_raise')
+    const found_frame = this.app.wm.frame_for_canvas(canvas)
+    if (found_frame) {
+      this.app.wm.stack_top(found_frame)
+    }
+  }
+
   on_map_canvas_with_id(canvas_id: string) {
     const message = `${canvas_id} map 1;`
     this.send(message)

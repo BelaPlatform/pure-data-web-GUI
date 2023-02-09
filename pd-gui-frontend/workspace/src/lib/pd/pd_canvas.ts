@@ -96,6 +96,9 @@ export class PdCanvas {
     this.title.update(_ => title)
   }
 
+  handle_raise() {
+    this.pd.handle_raise_canvas(this)
+  }
   // modifers:
   // SHIFT = 1
   // CTRL = 2

@@ -120,6 +120,13 @@ export function transform(root: RootNode) : Command[] {
       return
     }
 
+    if (proc.id.name == 'pdtk_canvas_raise') {
+      const canvas_arg = proc.arguments[0] as Identifier
+      const canvas_id = canvas_arg.name
+      commands.push(new CanvasCommands.Raise(canvas_id))
+      return
+    }
+
     if (proc.id.name == 'set_cursor') {
       const canvas_id_arg = proc.arguments[0] as Identifier
       let canvas_id = clean_canvas_id(canvas_id_arg.name)

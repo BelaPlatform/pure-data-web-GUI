@@ -138,6 +138,19 @@ export class WindowManager {
     this.stack_top(frame)
   }
 
+  frame_for_canvas(canvas: PdCanvas) {
+    const frames_ = get(this.frames)
+    let frame: Frame | null = null
+    frames_.forEach(f => {
+      if (f.klass.component == PatchView) {
+        console.log('is PatchView')
+      } else {
+        console.log('not a PatchView')
+      }
+    })
+    return frame
+  }
+
   close_frame(frame: Frame) {
     // does it have a side effect?
     if (frame.close_effect) {
