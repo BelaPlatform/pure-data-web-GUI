@@ -61,7 +61,7 @@
   }
 
   function on_keydown(event:KeyboardEvent) {
-    console.log('Canvas::on_keydown')
+    // console.log('Canvas::on_keydown')
     if (!is_active) { return }
 
     if (event.key == 'e' && event.ctrlKey) {

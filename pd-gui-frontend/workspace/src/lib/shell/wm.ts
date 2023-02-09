@@ -125,8 +125,6 @@ export class WindowManager {
   }
 
   new_dialog_frame(component: any) {
-    console.log(this)
-    console.log(this.app)
     const box = DefaultBox()
     box.origin.x += this.next_id * 24
     box.origin.y += this.next_id * 24
@@ -149,6 +147,20 @@ export class WindowManager {
     this.frames.update(fs => {
       return fs.filter(f => f.id != frame.id)
     })
+
+    // is there another frame we could activate?
+    const frame_ = this.last_frame()
+    if (frame_) {
+      this.stack_top(frame_)
+    }
+  }
+
+  private last_frame() {
+    const frames_ = get(this.frames)
+    if (frames_.length == 0) {
+      return null
+    }
+    return frames_[frames_.length - 1]
   }
 
   close_active_frame() {
@@ -169,7 +181,7 @@ export class WindowManager {
   }
 
   on_keydown(event: KeyboardEvent) {
-    console.log(event)
+    // console.log(event)
     // is it a shortcut?
     if (event.key == '#' && event.ctrlKey) {
       event.preventDefault()
