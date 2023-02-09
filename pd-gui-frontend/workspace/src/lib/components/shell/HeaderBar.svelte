@@ -27,7 +27,14 @@
   function on_dismiss_menu() {
     second_level = null
   }
+
+  function on_keydown(event: KeyboardEvent) {
+    console.log('HeaderBar::on_keydown')
+    console.log(event)
+  }
 </script>
+
+<svelte:window on:keydown={on_keydown} />
 
 <div class="wrap">
   <ul class="top_level">
@@ -45,6 +52,7 @@
                 <li
                   on:mousedown|stopPropagation={_ => on_pick(item)}
                   on:keydown={_ => on_pick(item)}
+                  class:is_separator={item.title == '-'}
                   >
                   <span class="title">{item.title}</span>
                 </li>
@@ -82,6 +90,13 @@
     padding: 6px;
     &:hover, &.is_open {
       background-color: #eee;
+    }
+    &.is_separator {
+      height: 1px;
+      background-color: #fff;
+      padding: 0px;
+
+      span { display: none; }
     }
   }
 

@@ -57,14 +57,18 @@ function build_file_menu() : MenuItem[] {
   const pre = [
     new MenuItem('New', on_new_patch),
     new MenuItem('Open'),
+    new MenuItem('-'),
     new MenuItem('Save'),
     new MenuItem('SaveAs'),
+    new MenuItem('-'),
     new MenuItem('Message', on_show_message_dialog),
-    new MenuItem('Preferences', on_show_preferences_dialog)
+    new MenuItem('Preferences', on_show_preferences_dialog),
+    new MenuItem('Print'),
+    new MenuItem('-'),
   ]
 
   const post = [
-    new MenuItem('Print'),
+    new MenuItem('-'),
     new MenuItem('Close', on_close_frame),
     new MenuItem('Quit')
   ]
