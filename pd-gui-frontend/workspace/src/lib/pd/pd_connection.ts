@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
 
-import * as G from './geometry'
+import * as G from '../utils/geometry'
 import type { PdCanvas } from './pd_canvas'
 
 export enum PdConnectionType {

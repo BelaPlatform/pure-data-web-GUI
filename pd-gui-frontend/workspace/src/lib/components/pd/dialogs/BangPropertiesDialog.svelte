@@ -2,7 +2,7 @@
   import { onMount } from 'svelte'
 
   import type { Frame } from '$lib/stores/wm'
-  import * as G from '$lib/pd/geometry'
+  import * as G from '$lib/utils/geometry'
   
   export let frame: Frame
 

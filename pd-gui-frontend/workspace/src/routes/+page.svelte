@@ -1,37 +1,31 @@
 <script lang="ts">
-  import { onMount } from "svelte"
+  import { onMount } from 'svelte'
 
   import { app } from '$lib/stores/app'
-  import { pd } from '$lib/stores/pd'
-  import { Interpreter } from '$lib/pd/parser/interpreter'
-  import { WebSocketIO } from '$lib/pd/io'
+  import Headerbar from '$lib/components/shell/HeaderBar.svelte'
   import Frame from '$lib/components/shell/Frame.svelte'
 
-  function on_open() {
-    console.log('on_open')
-    // https://developer.mozilla.org/en-US/docs/Web/API/window/showOpenFilePicker
-    // window.showOpenFilePicker()
-
-    // 
-  }
-
-  // the WebSocket HAS to be created in an onMount lifecycle method
-  // otherwise, svelte's server-side-prerendering would try to instantiate the WS and fail
-  let io: WebSocketIO
-  // let interpreter: Interpreter
   onMount(()  => {
-    // interpreter = new Interpreter($pd)
-    io = new WebSocketIO('ws://localhost:8081')
-    io.on_message = (event:MessageEvent) => {
-      const interpreter = new Interpreter($pd)
-      interpreter.interpret(event.data)
-    }
-    $pd.use_io(io)
+    console.log('+page::onMount()')
+    $app.on_startup()
   })
 
   $: wm = $app.wm
   $: frames = wm.frames
+  $: pd = $app.pd
+  $: dsp = pd.dsp_is_on
 </script>
+
+<svelte:window on:keydown={(event) => $app.wm.on_keydown(event)} />
+
+<Headerbar>
+  <input type="checkbox" 
+    id="dsp"
+    bind:checked={$dsp} 
+    on:click={_ => pd.on_toggle_dsp()}
+    />
+  <label for="dsp">DSP</label>
+</Headerbar>
 
 {#each $frames as frame(frame.id)}
   <Frame {frame} />

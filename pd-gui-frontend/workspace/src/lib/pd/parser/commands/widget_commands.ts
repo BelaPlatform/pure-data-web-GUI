@@ -3,7 +3,7 @@ import type { Pd } from '../../pd'
 import { PdWidget, IOLetScope, IOLetType, type WidgetState } from '../../pd_widget'
 import { PdConnection, PdConnectionType } from '../../pd_connection'
 import { NumberNode, StringNode, VectorNode, type ValueNode } from '../syntax_nodes'
-import * as G from '../../geometry'
+import * as G from '../../../utils/geometry'
 
 export class Create extends Command {
   constructor(public klass: string, 

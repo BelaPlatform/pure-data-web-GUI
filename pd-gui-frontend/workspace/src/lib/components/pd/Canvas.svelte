@@ -64,12 +64,6 @@
     console.log('Canvas::on_keydown')
     if (!is_active) { return }
 
-    if (event.key == '#' && event.ctrlKey) {
-      event.preventDefault()
-      show_debug.update(value => !value)
-      return
-    }
-
     // first, see if it's a shortcut
     if (event.key == 'e' && event.ctrlKey) {
       event.preventDefault()

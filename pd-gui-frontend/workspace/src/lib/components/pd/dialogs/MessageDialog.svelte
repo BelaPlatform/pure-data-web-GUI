@@ -1,16 +1,16 @@
 <script lang="ts">
   import { onMount } from 'svelte'
 
-  import { pd } from '$lib/stores/pd'
+  import { app } from '$lib/stores/app'
   import type { Frame } from '$lib/stores/wm'
-  import * as G from '$lib/pd/geometry'
+  import * as G from '$lib/utils/geometry'
 
   export let frame: Frame
 
   let text: string
   function on_send() {
     console.log(text)
-    $pd.send(text)
+    $app.pd.send(text)
     text = ""
   }
 

@@ -2,25 +2,24 @@
   import { onMount } from 'svelte'
 
   import type { Frame } from '$lib/stores/wm'
-  import * as G from '$lib/pd/geometry'
-  
-  export let frame: Frame
-
+  import * as G from '$lib/utils/geometry'
   import { Direction, PdMessages } from '$lib/pd/pd_messages'
 
-  let message_container:HTMLElement
+  export let frame: Frame
 
-  $: messages = PdMessages.messages
+  let message_container:HTMLElement
 
   onMount(() => {
     frame.set_title('Pd')
     frame.set_size(new G.Size(480, 360))
-    messages.subscribe(() => {
+    PdMessages.messages.subscribe(() => {
       if (message_container) {
         message_container.scrollTop = message_container.scrollHeight
       }
     })
   })
+
+  $: messages = PdMessages.messages
 </script>
 
 <div class="wrap">

@@ -1,41 +1,27 @@
 import { writable, type Writable, get } from 'svelte/store'
 
+import type { App } from '../stores/app'
 import { PdCanvas } from './pd_canvas'
-import { IO, NullIO } from './io'
 import type { PatchFile } from '$lib/stores/patches'
 import type { PdWidget } from './pd_widget'
 import type { PdConnection } from './pd_connection'
-import * as G from './geometry'
+import * as G from '../utils/geometry'
 
-
-export interface PdCallbacks {
-  did_create_canvas: Function
-  did_destroy_canvas: Function
-}
 
 // events originating from pd are prefixed with handle_
 // events originating from user interaction with the frontend are prefixed with on_
 export class Pd {
-  io: IO = new NullIO()
   canvases = writable<PdCanvas[]>([])
   active_canvas: Writable<PdCanvas>
   dsp_is_on = writable<boolean>(false)
-  callbacks: PdCallbacks | null = null
 
-  constructor() {
+  constructor(public app: App) {
     console.log('Pd!')
     this.active_canvas = writable<PdCanvas>(new PdCanvas('nil', this, G.NullSize()))
   }
 
-  use_io(io:IO) {
-    this.io = io
-    this.io.on_open = () => {
-      this.send_init_sequence()
-    }
-  }
-
   send(message: string) {
-    this.io.send(message)
+    this.app.io.send(message)
   }
 
   send_init_sequence() {
@@ -73,9 +59,7 @@ export class Pd {
       return cs
     })
 
-    if (this.callbacks) {
-      this.callbacks.did_create_canvas(canvas)
-    }
+    this.app.did_create_canvas(canvas)
   }
 
   handle_destroy(canvas: PdCanvas) {
@@ -95,9 +79,7 @@ export class Pd {
       }
     }
 
-    if (this.callbacks) {
-      this.callbacks.did_destroy_canvas()
-    }
+    this.app.did_destroy_canvas()
   }
 
   on_map_canvas_with_id(canvas_id: string) {

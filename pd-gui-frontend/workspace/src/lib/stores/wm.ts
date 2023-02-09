@@ -1,6 +1,7 @@
 import { writable, get } from "svelte/store"
 
-import * as G from '../pd/geometry'
+import type { App } from './app'
+import * as G from '../utils/geometry'
 import PatchView from '$lib/components/shell/PatchView.svelte'
 import type { PdCanvas } from '../pd/pd_canvas'
 
@@ -99,6 +100,15 @@ export class WindowManager {
   n_frames = 0
   active_frame: Frame | null = null
 
+  constructor(public app: App) {
+    console.log('WindowManager!')
+  }
+
+  use_app(app: App) {
+    console.log('WindowManager::use_app')
+    this.app = app
+  }
+
   new_canvas_frame(canvas: PdCanvas) {
     const box = DefaultBox()
     box.origin.x += this.next_id * 24
@@ -114,6 +124,8 @@ export class WindowManager {
   }
 
   new_dialog_frame(component: any) {
+    console.log(this)
+    console.log(this.app)
     const box = DefaultBox()
     box.origin.x += this.next_id * 24
     box.origin.y += this.next_id * 24
@@ -148,5 +160,17 @@ export class WindowManager {
       f.is_active.update(_ => is_new_top)
     })
     this.active_frame = frame
+  }
+
+  on_keydown(event: KeyboardEvent) {
+    console.log('wm::on_keydown')
+    console.log(event)
+    console.log(this.app)
+    // is it a shortcut?
+    if (event.key == '#' && event.ctrlKey) {
+      event.preventDefault()
+      this.app?.on_toggle_debug()
+      return
+    }
   }
 }

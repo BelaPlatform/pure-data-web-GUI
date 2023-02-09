@@ -28,13 +28,7 @@
     second_level = null
   }
 
-  function on_keydown(event: KeyboardEvent) {
-    console.log('HeaderBar::on_keydown')
-    console.log(event)
-  }
 </script>
-
-<svelte:window on:keydown={on_keydown} />
 
 <div class="wrap">
   <ul class="top_level">

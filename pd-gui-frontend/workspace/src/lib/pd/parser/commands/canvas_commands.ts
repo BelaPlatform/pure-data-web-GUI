@@ -1,6 +1,6 @@
 import { Command } from './command'
 import type { Pd } from '../../pd'
-import type * as G from '../../geometry'
+import type * as G from '../../../utils/geometry'
 
 export class ReflectTitle extends Command {
   constructor(public canvas_id: string,

@@ -1,5 +1,5 @@
 import { writable, get } from 'svelte/store'
-import * as G from './geometry'
+import * as G from '../utils/geometry'
 
 import type { Pd } from './pd'
 import { PdConnection } from './pd_connection'

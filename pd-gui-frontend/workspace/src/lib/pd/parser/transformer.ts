@@ -5,7 +5,7 @@ import * as PdWindowCommands from './commands/pd_window_commands'
 import * as CanvasCommands from './commands/canvas_commands'
 import * as WidgetCommands from './commands/widget_commands'
 import { type IOLetType, IOLetScope } from '../pd_widget'
-import * as G from '../geometry'
+import * as G from '../../utils/geometry'
 
 function clean_canvas_id(cid: string) {
   if (cid.endsWith('.c')) {
