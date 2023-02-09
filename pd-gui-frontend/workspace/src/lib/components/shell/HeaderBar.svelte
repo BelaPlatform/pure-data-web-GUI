@@ -37,7 +37,9 @@
         on:mouseenter={_ => on_hover(item)}
         class:is_open={second_level == item}
         >
-        <span class="title">{item.title}</span>
+        <span class="title">
+          {item.title}
+        </span>
         {#if second_level == item && second_level.children}
           <OutClick on:outclick={on_dismiss_menu}>
             <ul class="second_level">
@@ -47,7 +49,12 @@
                   on:keydown={_ => on_pick(item)}
                   class:is_separator={item.title == '-'}
                   >
-                  <span class="title">{item.title}</span>
+                  <span class="title">
+                    {item.title}
+                    {#if item.shortcut != ""}
+                      <span class="shortcut">{item.shortcut}</span>
+                    {/if}
+                  </span>
                 </li>
               {/each}
             </ul>
@@ -84,17 +91,10 @@
     &:hover, &.is_open {
       background-color: #eee;
     }
-    &.is_separator {
-      height: 1px;
-      background-color: #fff;
-      padding: 0px;
-
-      span { display: none; }
-    }
   }
 
   span.title {
-    padding: 6px;
+    padding: 3px;
   }
 
   ul.top_level {
@@ -107,13 +107,31 @@
 
   ul.second_level {
     border-top: #ccc solid thin;
-    min-width: 144px;
+    min-width: 180px;
     flex-direction: column;
     position: absolute;
     margin-left: -6px;
     margin-top: 6px;
     z-index: 99999;
     box-shadow: 2px 2px 2px #ccc;
+
+    li.is_separator {
+      height: 1px;
+      background-color: #fff;
+      padding: 0px;
+
+      span { display: none; }
+    }
+
+    span.title {
+      width: 100%;
+      display: inline-block;
+
+      .shortcut {
+        float: right;
+        padding-right: 6px;
+      }
+    }
   }
 
   aside {

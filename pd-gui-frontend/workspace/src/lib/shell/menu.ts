@@ -12,7 +12,8 @@ import AboutPdDialog from '$lib/components/pd/dialogs/AboutPdDialog.svelte'
 export class MenuItem {
   constructor(public title: string,
     public action: Function = () => {},
-    public children: MenuItem[] = []) {
+    public children: MenuItem[] = [],
+    public shortcut: string = "") {
     }
 }
 
@@ -54,7 +55,7 @@ function on_show_about_pd_dialog() {
 
 function build_file_menu() : MenuItem[] {
   const pre = [
-    new MenuItem('New', on_new_patch),
+    new MenuItem('New', on_new_patch, [], 'Alt+N'),
     new MenuItem('Open'),
     new MenuItem('-'),
     new MenuItem('Save'),
