@@ -48,7 +48,7 @@
   }
 
   .annotation {
-    font-size: 8px;
+    font-size: 10px;
   }
 
   .label {

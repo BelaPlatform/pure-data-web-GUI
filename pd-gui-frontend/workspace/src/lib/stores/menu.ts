@@ -25,7 +25,7 @@ function on_open_patch(patch: PatchFile) {
   get(app).on_open_patch(patch)
 }
 
-function on_close_window() {
+function on_close_frame() {
   get(app).wm.close_active_frame()
 }
 
@@ -65,7 +65,7 @@ function build_file_menu() : MenuItem[] {
 
   const post = [
     new MenuItem('Print'),
-    new MenuItem('Close', on_close_window),
+    new MenuItem('Close', on_close_frame),
     new MenuItem('Quit')
   ]
 
