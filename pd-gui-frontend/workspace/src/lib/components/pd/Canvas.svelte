@@ -108,12 +108,6 @@
       return
     }
 
-    if (event.key == 's' && event.ctrlKey) {
-      event.preventDefault()
-      canvas.on_save()
-      return
-    }
-
     if (event.key == 'a' && event.ctrlKey) {
       event.preventDefault()
       canvas.on_select_all()

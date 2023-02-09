@@ -192,8 +192,11 @@ export class WindowManager {
     // do we have an open canvas?
     const canvas = get(this.app.pd.active_canvas)
     if (canvas) {
-      console.log('have canvas')
-      console.log(canvas)
+      if (event.key == 's' && event.ctrlKey) {
+        event.preventDefault()
+        canvas.on_save()
+        return
+      }
     }
   }
 }

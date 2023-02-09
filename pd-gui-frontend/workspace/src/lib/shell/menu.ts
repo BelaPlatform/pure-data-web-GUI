@@ -25,6 +25,14 @@ function on_open_patch(patch: PatchFile) {
   get(app).on_open_patch(patch)
 }
 
+function on_save_patch() {
+  const app_ = get(app)
+  const canvas = get(app_.pd.active_canvas)
+  if (canvas) {
+    canvas.on_save()
+  }
+}
+
 function on_close_frame() {
   get(app).wm.close_active_frame()
 }
@@ -58,7 +66,7 @@ function build_file_menu() : MenuItem[] {
     new MenuItem('New', on_new_patch, [], 'Alt+N'),
     new MenuItem('Open'),
     new MenuItem('-'),
-    new MenuItem('Save'),
+    new MenuItem('Save', on_save_patch, [], 'Ctrl+S'),
     new MenuItem('SaveAs'),
     new MenuItem('-'),
     new MenuItem('Message', on_show_message_dialog),
@@ -69,8 +77,8 @@ function build_file_menu() : MenuItem[] {
 
   const post = [
     new MenuItem('-'),
-    new MenuItem('Close', on_close_frame),
-    new MenuItem('Quit')
+    new MenuItem('Close', on_close_frame, [], 'Alt+W')
+    /* new MenuItem('Quit') */
   ]
 
   const recent: MenuItem[] = []
