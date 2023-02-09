@@ -209,6 +209,24 @@ export class WindowManager {
         canvas.on_save()
         return
       }
+
+      if (event.key == 'c' && event.ctrlKey) {
+        event.preventDefault()
+        canvas.on_copy()
+        return
+      }
+  
+      if (event.key == 'v' && event.ctrlKey) {
+        event.preventDefault()
+        canvas.on_paste()
+        return
+      }
+  
+      if (event.key == 'x' && event.ctrlKey) {
+        event.preventDefault()
+        canvas.on_cut()
+        return
+      }
     }
   }
 }

@@ -33,6 +33,30 @@ function on_save_patch() {
   }
 }
 
+function on_edit_cut() {
+  const app_ = get(app)
+  const canvas = get(app_.pd.active_canvas)
+  if (canvas) {
+    canvas.on_cut()
+  }
+}
+
+function on_edit_copy() {
+  const app_ = get(app)
+  const canvas = get(app_.pd.active_canvas)
+  if (canvas) {
+    canvas.on_copy()
+  }
+}
+
+function on_edit_paste() {
+  const app_ = get(app)
+  const canvas = get(app_.pd.active_canvas)
+  if (canvas) {
+    canvas.on_paste()
+  }
+}
+
 function on_close_frame() {
   get(app).wm.close_active_frame()
 }
@@ -101,11 +125,12 @@ function build_file_menu() : MenuItem[] {
 let file_menu: MenuItem[] = build_file_menu()
 
 let edit_menu: MenuItem[] = [
-  new MenuItem('Undo'),
-  new MenuItem('Redo'),
-  new MenuItem('Cut'),
-  new MenuItem('Copy'),
-  new MenuItem('Paste'),
+/*   new MenuItem('Undo'),
+  new MenuItem('Redo'), */
+  new MenuItem('Cut', on_edit_cut, [], 'Ctrl+X'),
+  new MenuItem('Copy', on_edit_copy, [], 'Ctrl+C'),
+  new MenuItem('Paste', on_edit_paste, [], 'Ctrl+V'),
+  new MenuItem('Duplicate'),
   new MenuItem('SelectAll'),
 ]
 
