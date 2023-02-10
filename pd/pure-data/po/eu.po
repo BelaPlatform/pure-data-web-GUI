@@ -1,0 +1,1240 @@
+# Basque translation of Pure Data.
+# This file is put in the public domain.
+# Mikel Olasagasti <hey_neken@euskal.org>, 2004, 2005.
+# Fvargas Grc  <fvargasgrc@yahoo.es> 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: Pure Data 0.43\n"
+"Report-Msgid-Bugs-To: pd-dev@iem.at\n"
+"POT-Creation-Date: 2017-07-06 18:10+0200\n"
+"PO-Revision-Date: 2015-10-18 18:10+0200\n"
+"Last-Translator: Fvargas Grc <fvargasgrc@yahoo.es>\n"
+"Language-Team: Basque <translation-team-eu@lists.sourceforge.net>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "-------dimensions(digits)(pix):-------"
+msgstr ""
+
+msgid "--------dimensions(pix)(pix):--------"
+msgstr ""
+
+msgid "----------dimensions(pix):-----------"
+msgstr ""
+
+msgid "--------flash-time(ms)(ms):---------"
+msgstr ""
+
+msgid "-----------output-range:-----------"
+msgstr ""
+
+msgid "------selectable_dimensions(pix):------"
+msgstr ""
+
+msgid "------visible_rectangle(pix)(pix):------"
+msgstr ""
+
+#, fuzzy
+msgid "bottom:"
+msgstr "Behean"
+
+#, fuzzy
+msgid "height:"
+msgstr "Eskuinea"
+
+msgid "hold:"
+msgstr ""
+
+msgid "intrrpt:"
+msgstr ""
+
+msgid "left:"
+msgstr ""
+
+msgid "lin"
+msgstr ""
+
+msgid "log"
+msgstr ""
+
+msgid "log-height:"
+msgstr ""
+
+msgid "max:"
+msgstr ""
+
+msgid "min:"
+msgstr ""
+
+#, fuzzy
+msgid "right:"
+msgstr "Eskuinea"
+
+#, fuzzy
+msgid "size:"
+msgstr "Neurria:"
+
+msgid "top:"
+msgstr ""
+
+msgid "value:"
+msgstr ""
+
+#, fuzzy
+msgid "width:"
+msgstr "Zabalera:"
+
+#, tcl-format
+msgid "Do you want to save the changes you made in '%s'?"
+msgstr "'%s'-ren egiten duzun aldaketak gorde nahi duzu?"
+
+#, tcl-format
+msgid "Discard changes to '%s'?"
+msgstr "'%s'-ren aldaketak utzi"
+
+msgid "Undo clear"
+msgstr "Argitu desegin"
+
+msgid "Undo connect"
+msgstr "Lotura desegin"
+
+#, fuzzy
+msgid "Undo cut"
+msgstr "Ebakia desegin"
+
+msgid "Undo disconnect"
+msgstr "Deslotu desegin"
+
+#, fuzzy
+msgid "Undo duplicate"
+msgstr "Bikoiztu desegin"
+
+msgid "Undo motion"
+msgstr "Mugitze desegin"
+
+msgid "Undo paste"
+msgstr "Itsatsi desegin"
+
+msgid "Undo typing"
+msgstr ""
+
+#, fuzzy
+msgid "Redo clear"
+msgstr "Argitu desegin"
+
+#, fuzzy
+msgid "Redo connect"
+msgstr "Lotura desegin"
+
+#, fuzzy
+msgid "Redo cut"
+msgstr "Ebakia desegin"
+
+#, fuzzy
+msgid "Redo disconnect"
+msgstr "Deslotu desegin"
+
+#, fuzzy
+msgid "Redo duplicate"
+msgstr "Bikoiztu desegin"
+
+#, fuzzy
+msgid "Redo motion"
+msgstr "Mugitze desegin"
+
+#, fuzzy
+msgid "Redo paste"
+msgstr "Itsatsi desegin"
+
+msgid "Redo typing"
+msgstr ""
+
+msgid "no Pd settings to clear"
+msgstr ""
+
+msgid "removed .pdsettings file"
+msgstr ""
+
+msgid "couldn't delete .pdsettings file"
+msgstr ""
+
+msgid "failed to erase Pd settings"
+msgstr ""
+
+#, fuzzy
+msgid "erased Pd settings"
+msgstr "Ezarpen gustiak gorde"
+
+msgid "no Pd settings to erase"
+msgstr ""
+
+msgid "skipping loading preferences... Pd seems to have crashed on startup"
+msgstr ""
+
+msgid "(re-save preferences to reinstate them)"
+msgstr ""
+
+msgid "File"
+msgstr "Fitxategia"
+
+#, fuzzy
+msgid "Edit"
+msgstr "Editatu"
+
+msgid "Put"
+msgstr "Jarri"
+
+msgid "Find"
+msgstr "Aurikitu"
+
+#, fuzzy
+msgid "Media"
+msgstr "Komunikabidea"
+
+#, fuzzy
+msgid "Window"
+msgstr "Leihoa"
+
+msgid "Help"
+msgstr "Laguntza"
+
+msgid "Show &Hidden Files and Directories"
+msgstr ""
+
+msgid "Copy"
+msgstr "Kopiatu"
+
+#, fuzzy
+msgid "Paste"
+msgstr "Itsatsi"
+
+msgid "Array Properties"
+msgstr ""
+
+msgid "Array"
+msgstr ""
+
+#, fuzzy
+msgid "Name:"
+msgstr "Izena:"
+
+msgid "Size:"
+msgstr "Neurria:"
+
+#, fuzzy
+msgid "Save contents"
+msgstr "Edukiak gorde"
+
+msgid "Draw as:"
+msgstr ""
+
+#, fuzzy
+msgid "Polygon"
+msgstr "Poligonoa"
+
+#, fuzzy
+msgid "Points"
+msgstr "Puntuak"
+
+msgid "Bezier curve"
+msgstr "Bezier-en kurba"
+
+msgid "Put array into:"
+msgstr ""
+
+msgid "New graph"
+msgstr "Grafiko berria"
+
+#, fuzzy
+msgid "Last graph"
+msgstr "Azken grafikoa"
+
+msgid "Options"
+msgstr ""
+
+#, fuzzy
+msgid "Open List View..."
+msgstr "Zerrenden bista ireki..."
+
+#, fuzzy
+msgid "Delete array"
+msgstr "Array ezabatu"
+
+msgid "Cancel"
+msgstr "Utzi"
+
+msgid "Apply"
+msgstr "Aplikatu"
+
+msgid "OK"
+msgstr ""
+
+msgid "Audio Settings"
+msgstr "Audioaren ezarpenak"
+
+#, fuzzy
+msgid "Settings"
+msgstr "MIDI-ren Ezarpenak"
+
+msgid "Sample rate:"
+msgstr "Samplearen heina:"
+
+msgid "Delay (msec):"
+msgstr ""
+
+msgid "48k"
+msgstr ""
+
+msgid "44.1k"
+msgstr ""
+
+msgid "96k"
+msgstr ""
+
+msgid "Block size:"
+msgstr ""
+
+msgid "Use callbacks"
+msgstr ""
+
+msgid "Input Devices"
+msgstr "Sartze tresna"
+
+msgid "Channels:"
+msgstr "Kanalak:"
+
+msgid "Output Devices"
+msgstr "Irtendako tresna"
+
+#, fuzzy
+msgid "(same as input device)..."
+msgstr "(sartze tresna bezala) ..............       "
+
+#, fuzzy
+msgid "Use Multiple Devices"
+msgstr "Anitz tresna erabili"
+
+msgid "Save All Settings"
+msgstr "Ezarpen gustiak gorde"
+
+msgid "WARNING: unknown graphme flags received in pdtk_canvas_dialog"
+msgstr ""
+
+msgid "Canvas Properties"
+msgstr ""
+
+#, fuzzy
+msgid "Scale"
+msgstr "Eskala"
+
+msgid "X units per pixel:"
+msgstr ""
+
+msgid "Y units per pixel:"
+msgstr "Y unitateak pixelengatik"
+
+msgid "Appearance on parent patch"
+msgstr "Sortzaile patch-ean agertu"
+
+msgid "Graph-On-Parent"
+msgstr "Sortzailean-Agertu"
+
+msgid "Hide object name and arguments"
+msgstr "Objetuaren izena eta argumentuak ezkutatu"
+
+msgid "Range and size"
+msgstr "Heina eta neurria"
+
+msgid "X range: from"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
+#, fuzzy
+msgid "Margin:"
+msgstr "Ertz:"
+
+msgid "Y range: from"
+msgstr ""
+
+#, fuzzy
+msgid "Data Properties"
+msgstr "Letraren propietateak"
+
+#, tcl-format
+msgid "Found '%1$s' in %2$s"
+msgstr ""
+
+#, tcl-format
+msgid "Couldn't find '%1$s' in %2$s"
+msgstr ""
+
+#, fuzzy, tcl-format
+msgid "Search in %s for:"
+msgstr "Bilatu"
+
+#, tcl-format
+msgid "Showed last '%1$s' in %2$s"
+msgstr ""
+
+#, tcl-format
+msgid "Showing '%1$d' out of %2$d items in %3$s"
+msgstr ""
+
+#, fuzzy
+msgid "Pd window"
+msgstr "Pd-en leihoa"
+
+msgid "Match whole word only"
+msgstr "Bakarrik hitz osoa berdindu"
+
+msgid "Close"
+msgstr "Itxi"
+
+#, fuzzy, tcl-format
+msgid "%s Font"
+msgstr "%s Letra"
+
+#, fuzzy
+msgid "Font"
+msgstr "Letra-tipoa"
+
+#, fuzzy
+msgid "Font Size"
+msgstr "Letraren neurria"
+
+msgid "Stretch"
+msgstr ""
+
+msgid "X and Y"
+msgstr "X eta Y"
+
+msgid "X only"
+msgstr "X bakarrik"
+
+msgid "Y only"
+msgstr "Y bakarrik"
+
+msgid "Atom Box Properties"
+msgstr "Atom-en Lauki Propietateak"
+
+msgid "Width:"
+msgstr "Zabalera:"
+
+#, fuzzy
+msgid "Limits"
+msgstr "Mugak"
+
+msgid "Lower:"
+msgstr "Beheko:"
+
+#, fuzzy
+msgid "Upper:"
+msgstr "Gaineko:"
+
+msgid "Label"
+msgstr "Etiketa"
+
+#, fuzzy
+msgid "Left"
+msgstr "Ezkerra   "
+
+msgid "Right"
+msgstr "Eskuinea"
+
+msgid "Top"
+msgstr "Goian"
+
+msgid "Bottom"
+msgstr "Behean"
+
+#, fuzzy
+msgid "Messages"
+msgstr "Mezuak"
+
+msgid "Send symbol:"
+msgstr "Sinboloa bidali:"
+
+#, fuzzy
+msgid "Receive symbol:"
+msgstr "Sinboloa jaso:"
+
+#, fuzzy
+msgid "Background color"
+msgstr "Atzeko kolorea"
+
+#, fuzzy
+msgid "Foreground color"
+msgstr "Aurreko kolorea"
+
+#, fuzzy
+msgid "Label color"
+msgstr "Etiketaren kolorea"
+
+msgid "Init"
+msgstr ""
+
+msgid "No init"
+msgstr ""
+
+msgid "Jump on click"
+msgstr "Klik egitean jauzi"
+
+msgid "Steady on click"
+msgstr ""
+
+#, fuzzy
+msgid "Bang"
+msgstr "Bang"
+
+msgid "Flash Time (msec)"
+msgstr ""
+
+msgid "Intrrpt:"
+msgstr ""
+
+msgid "Hold:"
+msgstr ""
+
+#, fuzzy
+msgid "Toggle"
+msgstr "Toggle"
+
+msgid "Non Zero Value"
+msgstr ""
+
+msgid "Value:"
+msgstr ""
+
+#, fuzzy
+msgid "Number2"
+msgstr "Zenbakia2"
+
+msgid "Width (digits):"
+msgstr ""
+
+#, fuzzy
+msgid "Height:"
+msgstr "Eskuinea"
+
+msgid "Output Range"
+msgstr ""
+
+msgid "Log height:"
+msgstr ""
+
+msgid "Vslider"
+msgstr ""
+
+msgid "Hslider"
+msgstr ""
+
+msgid "Vradio"
+msgstr ""
+
+msgid "Num cells:"
+msgstr ""
+
+msgid "Hradio"
+msgstr ""
+
+msgid "VU Meter"
+msgstr ""
+
+msgid "Canvas"
+msgstr ""
+
+msgid "Visible Rectangle (pix)"
+msgstr ""
+
+#, tcl-format
+msgid "%s Properties"
+msgstr "%s-en Propietateak"
+
+msgid "Parameters"
+msgstr ""
+
+msgid "X offset:"
+msgstr ""
+
+msgid "Y offset:"
+msgstr ""
+
+msgid "Colors"
+msgstr "Koloreak"
+
+#, fuzzy
+msgid "Background"
+msgstr "Hondo"
+
+#, fuzzy
+msgid "Front"
+msgstr "Aurrealde"
+
+msgid "Compose color"
+msgstr "Kolorea osatu"
+
+#, fuzzy
+msgid "Test label"
+msgstr "Probaren etiketa"
+
+#, fuzzy
+msgid "Send a Pd message"
+msgstr "Mezua Bidali..."
+
+msgid "(use arrow keys for history)"
+msgstr ""
+
+msgid "MIDI Settings"
+msgstr "MIDI-ren Ezarpenak"
+
+msgid "ALSA MIDI Settings"
+msgstr "ALSA MIDI-ren Esarpenak"
+
+msgid "In Ports:"
+msgstr "Sartzeko Portuetan:"
+
+msgid "Out Ports:"
+msgstr "Aterako Portuetan:"
+
+msgid "Pd search path for objects, help, fonts, and other files"
+msgstr ""
+
+msgid "Use standard paths"
+msgstr ""
+
+msgid "Verbose"
+msgstr ""
+
+msgid "Pd Documents Directory"
+msgstr ""
+
+msgid "Browse"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Externals Install Directory"
+msgstr ""
+
+#, fuzzy
+msgid "Clear"
+msgstr "Menua Garbitu"
+
+msgid "Choose Pd documents directory:"
+msgstr ""
+
+msgid "Install externals to directory:"
+msgstr ""
+
+msgid "Add a new path"
+msgstr ""
+
+msgid "Add new library"
+msgstr ""
+
+msgid "Edit library"
+msgstr ""
+
+msgid "Pd libraries to load on startup"
+msgstr ""
+
+msgid "Startup flags:"
+msgstr ""
+
+msgid "Defeat real-time scheduling"
+msgstr ""
+
+#, fuzzy
+msgid "Help Browser"
+msgstr "Arakatu..."
+
+msgid "(Tcl) MISSING CLOSE-BRACE '}': "
+msgstr ""
+
+msgid "(Tcl) INVALID COMMAND NAME: "
+msgstr ""
+
+msgid "(Tcl) UNHANDLED ERROR: "
+msgstr ""
+
+#, tcl-format
+msgid "installed version [%1$s] > %2$s...skipping!"
+msgstr ""
+
+#, tcl-format
+msgid "installed version [%1$s] < %2$s...overwriting!"
+msgstr ""
+
+#, tcl-format
+msgid "installed version [%1$s] == %2$s...skipping!"
+msgstr ""
+
+#, tcl-format
+msgid "successfully unzipped %1$s into %2$s"
+msgstr ""
+
+msgid "unable to extract package automatically"
+msgstr ""
+
+msgid "please perform the following steps manually:"
+msgstr ""
+
+#, tcl-format
+msgid "1. unzip %s"
+msgstr ""
+
+#, tcl-format
+msgid "2. copy the contents into %s"
+msgstr ""
+
+#, tcl-format
+msgid "uninstalling '%s'"
+msgstr ""
+
+#, tcl-format
+msgid "uninstalling %1$s from %2$s failed!"
+msgstr ""
+
+#, tcl-format
+msgid "deken-plugin.tcl (Pd externals search) loaded from %s"
+msgstr ""
+
+#, tcl-format
+msgid "platform detected: %s"
+msgstr ""
+
+#, tcl-format
+msgid "platform re-detected: %s"
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
+#, fuzzy
+msgid "Search"
+msgstr "Bilatu"
+
+msgid "To get a list of all available externals, try an empty search."
+msgstr ""
+
+msgid "Find externals"
+msgstr ""
+
+msgid "Only install externals uploaded by people you trust."
+msgstr ""
+
+#, fuzzy
+msgid "Preferences"
+msgstr "Hobespenak"
+
+msgid "Installation options:"
+msgstr ""
+
+msgid "Try to remove libraries before (re)installing them?"
+msgstr ""
+
+msgid "Show README of newly installed libraries (if present)?"
+msgstr ""
+
+msgid "Should newly installed libraries be added to Pd's search path?"
+msgstr ""
+
+msgid "Platform settings:"
+msgstr ""
+
+#, tcl-format
+msgid "Default platform: %s"
+msgstr ""
+
+msgid "User-defined platform:"
+msgstr ""
+
+msgid "Hide foreign architectures?"
+msgstr ""
+
+#, fuzzy, tcl-format
+msgid "Deken %s Preferences"
+msgstr "Hobespenak"
+
+#, fuzzy
+msgid "start searching for externals..."
+msgstr "'%s'-ren aldaketak utzi"
+
+#, tcl-format
+msgid "online? %s"
+msgstr ""
+
+msgid "Are you online?"
+msgstr ""
+
+msgid "Unable to perform search."
+msgstr ""
+
+msgid "no matching externals found"
+msgstr ""
+
+msgid "try using the full name e.g. 'freeverb'"
+msgstr ""
+
+msgid "No matching externals found."
+msgstr ""
+
+msgid "Please select a (writable) installation directory!"
+msgstr ""
+
+#, tcl-format
+msgid "Install %1$s to %2$s?"
+msgstr ""
+
+#, tcl-format
+msgid ""
+"commencing downloading of:\n"
+"%1$s\n"
+"into %2$s..."
+msgstr ""
+
+msgid "... aborting"
+msgstr ""
+
+#, tcl-format
+msgid "unable to add %s to search paths"
+msgstr ""
+
+#, tcl-format
+msgid "Add %s to the Pd search paths?"
+msgstr ""
+
+#, tcl-format
+msgid "added %s to search paths"
+msgstr ""
+
+#, tcl-format
+msgid "unable to download from %1$s [%2$s]"
+msgstr ""
+
+#, tcl-format
+msgid "unable to remove stray file %s"
+msgstr ""
+
+#, tcl-format
+msgid "unable to rename downloaded file to %s"
+msgstr ""
+
+#, fuzzy, tcl-format
+msgid "searching for '%s'"
+msgstr "'%s'-ren aldaketak utzi"
+
+msgid "unable to perform search"
+msgstr ""
+
+#, tcl-format
+msgid "Uploaded by %1$s @ %2$s"
+msgstr ""
+
+msgid "Install package"
+msgstr ""
+
+#, fuzzy
+msgid "Open webpage"
+msgstr "Azkenaldi Ireki"
+
+msgid "_"
+msgstr ""
+
+#, tcl-format
+msgid ""
+"Do you want Pd to use the existing documents directory for patches and "
+"external libraries?\n"
+"\n"
+"Location: %s\n"
+"\n"
+"You can change or disable this later in the Path preferences."
+msgstr ""
+
+#, tcl-format
+msgid ""
+"Do you want Pd to create a documents directory for patches and external "
+"libraries?\n"
+"\n"
+"Location: %s\n"
+"\n"
+"You can change or disable this later in the Path preferences."
+msgstr ""
+
+#, tcl-format
+msgid ""
+"Pd documents directory cannot be found:\n"
+"\n"
+"%s\n"
+"\n"
+"Choose a new location?"
+msgstr ""
+
+#, tcl-format
+msgid "couldn't create Pd documents directory: %s\n"
+msgstr ""
+
+#, tcl-format
+msgid "couldn't create \"externals\" directory in: %s\n"
+msgstr ""
+
+msgid "refusing to delete empty domain"
+msgstr ""
+
+#, tcl-format
+msgid "Couldn't create preferences \"%1$s\" in %2$s"
+msgstr ""
+
+#, fuzzy
+msgid "About Pd"
+msgstr "Pd-ri Buruz"
+
+msgid "Save"
+msgstr "Gorde"
+
+#, fuzzy
+msgid "Save As..."
+msgstr "Gorde Honela..."
+
+#, fuzzy
+msgid "Print..."
+msgstr "Inprimatu..."
+
+msgid "Paste Replace"
+msgstr ""
+
+#, fuzzy
+msgid "Duplicate"
+msgstr "Bikoiztu"
+
+msgid "Zoom In"
+msgstr ""
+
+msgid "Zoom Out"
+msgstr ""
+
+msgid "Tidy Up"
+msgstr "Txukuntzea"
+
+msgid "(Dis)Connect Selection"
+msgstr ""
+
+msgid "Triggerize"
+msgstr ""
+
+#, fuzzy
+msgid "Edit Mode"
+msgstr "Edizio Modua"
+
+#, fuzzy
+msgid "Undo"
+msgstr "Desegin"
+
+#, fuzzy
+msgid "Redo"
+msgstr "Berregin"
+
+msgid "List of objects..."
+msgstr ""
+
+msgid "New"
+msgstr "Berria"
+
+msgid "Open"
+msgstr "Ireki"
+
+#, fuzzy
+msgid "Message..."
+msgstr "Mezua"
+
+msgid "Cut"
+msgstr "Mostu"
+
+#, fuzzy
+msgid "Select All"
+msgstr "Guztia Aukeratu"
+
+#, fuzzy
+msgid "Clear Console"
+msgstr "Kontsola Garbitu"
+
+msgid "Object"
+msgstr "Objektu"
+
+msgid "Message"
+msgstr "Mezua"
+
+#, fuzzy
+msgid "Number"
+msgstr "Zenbakia"
+
+msgid "Symbol"
+msgstr "Sinboloa"
+
+#, fuzzy
+msgid "Comment"
+msgstr "Azalpen"
+
+msgid "Graph"
+msgstr "Grafikoa"
+
+#, fuzzy
+msgid "Find..."
+msgstr "Bilatu..."
+
+msgid "Find Again"
+msgstr "Berriro Bilatu"
+
+msgid "Find Last Error"
+msgstr "Azken Akatsa Bilatu"
+
+msgid "DSP On"
+msgstr "DSP Piztuta"
+
+#, fuzzy
+msgid "DSP Off"
+msgstr "DSP Itzali"
+
+msgid "Test Audio and MIDI..."
+msgstr "Audio eta MIDI Probatu"
+
+#, fuzzy
+msgid "Load Meter"
+msgstr "Kontagailua Kargatu"
+
+msgid "Audio Settings..."
+msgstr "Audioaren Ezarpenak"
+
+msgid "MIDI Settings..."
+msgstr "MIDI Ezarpenak"
+
+msgid "Minimize"
+msgstr "Gutxitu"
+
+msgid "Zoom"
+msgstr ""
+
+msgid "Bring All to Front"
+msgstr "Ekarri Gustia Aurrera"
+
+#, fuzzy
+msgid "Next Window"
+msgstr "Leihoa"
+
+msgid "Previous Window"
+msgstr ""
+
+msgid "Parent Window"
+msgstr ""
+
+msgid "HTML Manual..."
+msgstr ""
+
+#, fuzzy
+msgid "Browser..."
+msgstr "Arakatu..."
+
+msgid "puredata.info"
+msgstr ""
+
+msgid "Report a bug"
+msgstr ""
+
+#, fuzzy
+msgid "Clear Menu"
+msgstr "Menua Garbitu"
+
+msgid ""
+"Delete all preferences?\n"
+"(takes effect when Pd is restarted)"
+msgstr ""
+
+msgid "no Pd-GUI settings to clear"
+msgstr ""
+
+msgid "Path..."
+msgstr ""
+
+msgid "Startup..."
+msgstr ""
+
+#, fuzzy
+msgid "Audio..."
+msgstr "Audioaren Ezarpenak"
+
+#, fuzzy
+msgid "MIDI..."
+msgstr "MIDI Ezarpenak"
+
+#, fuzzy
+msgid "Zoom New Windows"
+msgstr "Leihoa"
+
+#, fuzzy
+msgid "Save All Preferences"
+msgstr "Hobespenak"
+
+#, fuzzy
+msgid "Save to..."
+msgstr "Gorde Honela..."
+
+msgid "Load from..."
+msgstr ""
+
+msgid "Forget All..."
+msgstr ""
+
+msgid "Open Recent"
+msgstr "Azkenaldi Ireki"
+
+msgid "Quit"
+msgstr "Irten"
+
+msgid "Properties"
+msgstr "Propietateak"
+
+#, fuzzy
+msgid "Audio on"
+msgstr "Audioaren ezarpenak"
+
+msgid "Audio off"
+msgstr ""
+
+msgid "(Tcl) MISSING CLOSE-BRACKET ']': "
+msgstr ""
+
+msgid "Tcl:"
+msgstr ""
+
+msgid "Pd"
+msgstr ""
+
+msgid "DSP"
+msgstr ""
+
+msgid "Audio I/O error"
+msgstr ""
+
+msgid "Log:"
+msgstr ""
+
+msgid "fatal"
+msgstr ""
+
+msgid "error"
+msgstr ""
+
+msgid "normal"
+msgstr ""
+
+msgid "debug"
+msgstr ""
+
+msgid "all"
+msgstr ""
+
+msgid "New..."
+msgstr ""
+
+#, fuzzy
+msgid "Edit..."
+msgstr "Editatu"
+
+#, fuzzy
+msgid "Delete"
+msgstr "Array ezabatu"
+
+#, tcl-format
+msgid "ignoring '%s': doesn't exist"
+msgstr ""
+
+#, tcl-format
+msgid "ignoring '%s': doesn't look like a Pd file"
+msgstr ""
+
+#~ msgid "WARNING: Font family '%s' not found, using default (%s)"
+#~ msgstr "ADI: Letraren familia '%s' aurkiturik ez, (%s) lehenetsi erabiltzen"
+
+#~ msgid "Generators"
+#~ msgstr "Generadoreak"
+
+#~ msgid "Math"
+#~ msgstr "Matematika"
+
+#~ msgid "Input device 2:"
+#~ msgstr "Sartze tresna 2:"
+
+#~ msgid "Others"
+#~ msgstr "Besteak"
+
+#~ msgid "Use multiple ALSA devices"
+#~ msgstr "ALSA tresna anitz erabili"
+
+#~ msgid "Preferences..."
+#~ msgstr "Hobespenak..."
+
+#~ msgid "Discard changes to this window??"
+#~ msgstr "Leiho honetaren aldaketak baztertu??"
+
+#~ msgid "really quit?"
+#~ msgstr "Benetan irten?"
+
+#~ msgid "Max Patch Files (.pat)"
+#~ msgstr "Max Patch Fitxategiak (.pat)"
+
+#~ msgid "Untitled"
+#~ msgstr "Izenburu gabe"
+
+#~ msgid "Output device 2:"
+#~ msgstr "Irtendako tresna 2:"
+
+#~ msgid "Max Text Files"
+#~ msgstr "Max Testu Fitxategiak"
+
+#~ msgid "Signal"
+#~ msgstr "Seinalea"
+
+#, fuzzy
+#~ msgid "Close this window??"
+#~ msgstr "Lehioa honetan itxi?"
+
+#~ msgid "Output device 3:"
+#~ msgstr "Irtendako tresna 3:"
+
+#, fuzzy
+#~ msgid "Text Editor"
+#~ msgstr "Testu Editorea"
+
+#~ msgid "Input device 3:"
+#~ msgstr "Sartze tresna 3:"
+
+#~ msgid "Max Patch Files"
+#~ msgstr "Max Patch Fitxategiak"
+
+#~ msgid "Associated Files"
+#~ msgstr "Lotutako Fitxategiak"
+
+#~ msgid "Input device 4:"
+#~ msgstr "Sartze tresna 4:"
+
+#~ msgid "Max Text Files (.mxt)"
+#~ msgstr "Max Testu Fitxategiak (.mxt)"
+
+#, fuzzy
+#~ msgid "Filters"
+#~ msgstr "Filtroak"
+
+#~ msgid "Output device 4:"
+#~ msgstr "Irtendako tresna 4:"
+
+#, fuzzy
+#~ msgid "Pd Files"
+#~ msgstr "Pd Fitxategiak"

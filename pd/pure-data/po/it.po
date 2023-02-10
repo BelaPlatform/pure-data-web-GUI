@@ -1,0 +1,1223 @@
+# Italian translation for Pure Data
+# This file is put in the public domain
+#
+# Lorenzo Sutton (lorenzosu) <lsutton@libero.it>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: Pure Data 0.43\n"
+"Report-Msgid-Bugs-To: pd-dev@iem.at\n"
+"POT-Creation-Date: 2017-07-06 18:10+0200\n"
+"PO-Revision-Date: 2009-10-27 21:07+0100\n"
+"Last-Translator: Lorenzo Sutton (lorenzosu) <lsutton@libero.it>\n"
+"Language-Team: American English <>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "-------dimensions(digits)(pix):-------"
+msgstr ""
+
+msgid "--------dimensions(pix)(pix):--------"
+msgstr ""
+
+msgid "----------dimensions(pix):-----------"
+msgstr ""
+
+msgid "--------flash-time(ms)(ms):---------"
+msgstr ""
+
+msgid "-----------output-range:-----------"
+msgstr ""
+
+msgid "------selectable_dimensions(pix):------"
+msgstr ""
+
+msgid "------visible_rectangle(pix)(pix):------"
+msgstr ""
+
+#, fuzzy
+msgid "bottom:"
+msgstr "Sotto"
+
+#, fuzzy
+msgid "height:"
+msgstr "Destra"
+
+msgid "hold:"
+msgstr ""
+
+msgid "intrrpt:"
+msgstr ""
+
+msgid "left:"
+msgstr ""
+
+msgid "lin"
+msgstr ""
+
+msgid "log"
+msgstr ""
+
+msgid "log-height:"
+msgstr ""
+
+msgid "max:"
+msgstr ""
+
+msgid "min:"
+msgstr ""
+
+#, fuzzy
+msgid "right:"
+msgstr "Destra"
+
+#, fuzzy
+msgid "size:"
+msgstr "Dimensione:"
+
+msgid "top:"
+msgstr ""
+
+msgid "value:"
+msgstr ""
+
+#, fuzzy
+msgid "width:"
+msgstr "Larghezza:"
+
+#, tcl-format
+msgid "Do you want to save the changes you made in '%s'?"
+msgstr "Salvare le modifiche apportate a '%s'?"
+
+#, tcl-format
+msgid "Discard changes to '%s'?"
+msgstr "Cestinare le modifiche apportate a '%s'?"
+
+msgid "Undo clear"
+msgstr "Annulla pulisci"
+
+msgid "Undo connect"
+msgstr "Annulla connetti"
+
+msgid "Undo cut"
+msgstr "Annulla taglia"
+
+msgid "Undo disconnect"
+msgstr "Annulla disconnetti"
+
+msgid "Undo duplicate"
+msgstr "Annulla duplica"
+
+msgid "Undo motion"
+msgstr "Annulla spostamento "
+
+msgid "Undo paste"
+msgstr "Annulla incolla"
+
+msgid "Undo typing"
+msgstr "Annulla inserimento"
+
+#, fuzzy
+msgid "Redo clear"
+msgstr "Annulla pulisci"
+
+#, fuzzy
+msgid "Redo connect"
+msgstr "Annulla connetti"
+
+#, fuzzy
+msgid "Redo cut"
+msgstr "Annulla taglia"
+
+#, fuzzy
+msgid "Redo disconnect"
+msgstr "Annulla disconnetti"
+
+#, fuzzy
+msgid "Redo duplicate"
+msgstr "Annulla duplica"
+
+#, fuzzy
+msgid "Redo motion"
+msgstr "Annulla spostamento "
+
+#, fuzzy
+msgid "Redo paste"
+msgstr "Annulla incolla"
+
+#, fuzzy
+msgid "Redo typing"
+msgstr "Annulla inserimento"
+
+msgid "no Pd settings to clear"
+msgstr ""
+
+msgid "removed .pdsettings file"
+msgstr ""
+
+msgid "couldn't delete .pdsettings file"
+msgstr ""
+
+msgid "failed to erase Pd settings"
+msgstr ""
+
+#, fuzzy
+msgid "erased Pd settings"
+msgstr "Salva tutti i settaggi"
+
+msgid "no Pd settings to erase"
+msgstr ""
+
+msgid "skipping loading preferences... Pd seems to have crashed on startup"
+msgstr ""
+
+msgid "(re-save preferences to reinstate them)"
+msgstr ""
+
+msgid "File"
+msgstr "File"
+
+#, fuzzy
+msgid "Edit"
+msgstr "Modifica"
+
+msgid "Put"
+msgstr "Inserisci"
+
+msgid "Find"
+msgstr "Trova"
+
+msgid "Media"
+msgstr "Media"
+
+msgid "Window"
+msgstr "Finestra"
+
+msgid "Help"
+msgstr "Aiuto"
+
+msgid "Show &Hidden Files and Directories"
+msgstr ""
+
+msgid "Copy"
+msgstr "Copia"
+
+msgid "Paste"
+msgstr "Incolla"
+
+msgid "Array Properties"
+msgstr "Proprietà Array"
+
+msgid "Array"
+msgstr "Array"
+
+msgid "Name:"
+msgstr "Nome:"
+
+msgid "Size:"
+msgstr "Dimensione:"
+
+msgid "Save contents"
+msgstr "Salva contenuto"
+
+msgid "Draw as:"
+msgstr "Disegna come:"
+
+msgid "Polygon"
+msgstr "Poligono"
+
+msgid "Points"
+msgstr "Punti"
+
+msgid "Bezier curve"
+msgstr "Curva bezier"
+
+msgid "Put array into:"
+msgstr "Matty l'array in:"
+
+msgid "New graph"
+msgstr "Nuovo grafico"
+
+msgid "Last graph"
+msgstr "Ultimo grafico"
+
+msgid "Options"
+msgstr ""
+
+msgid "Open List View..."
+msgstr "Apri visualizzazione lista..."
+
+msgid "Delete array"
+msgstr "Cancella array"
+
+msgid "Cancel"
+msgstr "Annulla"
+
+msgid "Apply"
+msgstr "Applica"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Audio Settings"
+msgstr "Settaggi Audio"
+
+#, fuzzy
+msgid "Settings"
+msgstr "Settaggi MIDI"
+
+msgid "Sample rate:"
+msgstr "Frequenza di campionamento"
+
+msgid "Delay (msec):"
+msgstr "Ritardo (msec):"
+
+msgid "48k"
+msgstr ""
+
+msgid "44.1k"
+msgstr ""
+
+msgid "96k"
+msgstr ""
+
+msgid "Block size:"
+msgstr ""
+
+msgid "Use callbacks"
+msgstr "Usa callback"
+
+msgid "Input Devices"
+msgstr "Dispositivo di ingresso"
+
+msgid "Channels:"
+msgstr "Canali:"
+
+msgid "Output Devices"
+msgstr "Dispositivo di uscita"
+
+#, fuzzy
+msgid "(same as input device)..."
+msgstr "(lo stesso del dispositivo di ingresso)..........."
+
+#, fuzzy
+msgid "Use Multiple Devices"
+msgstr "Usa dispositivi multipli"
+
+msgid "Save All Settings"
+msgstr "Salva tutti i settaggi"
+
+msgid "WARNING: unknown graphme flags received in pdtk_canvas_dialog"
+msgstr ""
+
+msgid "Canvas Properties"
+msgstr "Proprietà Canvas"
+
+msgid "Scale"
+msgstr "Scala"
+
+msgid "X units per pixel:"
+msgstr "X unità per pixel"
+
+msgid "Y units per pixel:"
+msgstr "Y unità per pixel:"
+
+msgid "Appearance on parent patch"
+msgstr "Aspetto sulla parent patch"
+
+msgid "Graph-On-Parent"
+msgstr "Mostra sulla patent"
+
+msgid "Hide object name and arguments"
+msgstr "Nascondi il nome oggetto e gli argomenti"
+
+msgid "Range and size"
+msgstr "Intervallo e dimensioni"
+
+#, fuzzy
+msgid "X range: from"
+msgstr "Intervallo X, da"
+
+msgid "to"
+msgstr "a"
+
+msgid "Margin:"
+msgstr "Margine:"
+
+#, fuzzy
+msgid "Y range: from"
+msgstr "Intervallo Y, da"
+
+#, fuzzy
+msgid "Data Properties"
+msgstr "Proprietà Canvas"
+
+#, tcl-format
+msgid "Found '%1$s' in %2$s"
+msgstr ""
+
+#, tcl-format
+msgid "Couldn't find '%1$s' in %2$s"
+msgstr ""
+
+#, fuzzy, tcl-format
+msgid "Search in %s for:"
+msgstr "Cerca in"
+
+#, tcl-format
+msgid "Showed last '%1$s' in %2$s"
+msgstr ""
+
+#, tcl-format
+msgid "Showing '%1$d' out of %2$d items in %3$s"
+msgstr ""
+
+msgid "Pd window"
+msgstr "Finestra Pd"
+
+msgid "Match whole word only"
+msgstr "Solo parole intere"
+
+msgid "Close"
+msgstr "Chiudi"
+
+#, fuzzy, tcl-format
+msgid "%s Font"
+msgstr "Carattere"
+
+msgid "Font"
+msgstr "Carattere"
+
+msgid "Font Size"
+msgstr "Dimensione carattere:"
+
+msgid "Stretch"
+msgstr "Allarga/riduci:"
+
+msgid "X and Y"
+msgstr "X e Y"
+
+msgid "X only"
+msgstr "Solo X"
+
+msgid "Y only"
+msgstr "Solo Y"
+
+msgid "Atom Box Properties"
+msgstr "Proprietà Atom Box"
+
+msgid "Width:"
+msgstr "Larghezza:"
+
+msgid "Limits"
+msgstr "Limiti"
+
+msgid "Lower:"
+msgstr "Inferiore:"
+
+msgid "Upper:"
+msgstr "Superiore:"
+
+msgid "Label"
+msgstr "Etichetta"
+
+#, fuzzy
+msgid "Left"
+msgstr "Sinistra   "
+
+msgid "Right"
+msgstr "Destra"
+
+msgid "Top"
+msgstr "Sopra"
+
+msgid "Bottom"
+msgstr "Sotto"
+
+msgid "Messages"
+msgstr "Messaggi"
+
+msgid "Send symbol:"
+msgstr "Invia simbolo:"
+
+msgid "Receive symbol:"
+msgstr "Ricevi simbolo:"
+
+msgid "Background color"
+msgstr "Colore sfondo"
+
+msgid "Foreground color"
+msgstr "Colore primo piano"
+
+msgid "Label color"
+msgstr "Colore etichetta"
+
+msgid "Init"
+msgstr ""
+
+msgid "No init"
+msgstr ""
+
+msgid "Jump on click"
+msgstr "Click imposta il valore"
+
+msgid "Steady on click"
+msgstr "Click incrementa/decrementa"
+
+msgid "Bang"
+msgstr "Bang"
+
+#, fuzzy
+msgid "Flash Time (msec)"
+msgstr "Ritardo (msec):"
+
+msgid "Intrrpt:"
+msgstr ""
+
+msgid "Hold:"
+msgstr ""
+
+msgid "Toggle"
+msgstr "Toggle"
+
+msgid "Non Zero Value"
+msgstr ""
+
+msgid "Value:"
+msgstr ""
+
+msgid "Number2"
+msgstr "Numero2"
+
+msgid "Width (digits):"
+msgstr ""
+
+#, fuzzy
+msgid "Height:"
+msgstr "Destra"
+
+msgid "Output Range"
+msgstr ""
+
+msgid "Log height:"
+msgstr ""
+
+msgid "Vslider"
+msgstr "Slider verticale"
+
+msgid "Hslider"
+msgstr "Slider orizzontale"
+
+msgid "Vradio"
+msgstr "Radio verticale"
+
+msgid "Num cells:"
+msgstr ""
+
+msgid "Hradio"
+msgstr "Radio orizzontale"
+
+msgid "VU Meter"
+msgstr "Indicatore VU"
+
+msgid "Canvas"
+msgstr "Tavolozza"
+
+msgid "Visible Rectangle (pix)"
+msgstr ""
+
+#, tcl-format
+msgid "%s Properties"
+msgstr "%s Proprietà"
+
+msgid "Parameters"
+msgstr ""
+
+#, fuzzy
+msgid "X offset:"
+msgstr "Spostamento X"
+
+#, fuzzy
+msgid "Y offset:"
+msgstr "Spostamento Y"
+
+msgid "Colors"
+msgstr "Colori"
+
+msgid "Background"
+msgstr "Colore sfondo"
+
+msgid "Front"
+msgstr "Primo piano"
+
+msgid "Compose color"
+msgstr "Crea colore"
+
+msgid "Test label"
+msgstr "Test etichetta"
+
+#, fuzzy
+msgid "Send a Pd message"
+msgstr "Invia un Messaggio..."
+
+msgid "(use arrow keys for history)"
+msgstr ""
+
+msgid "MIDI Settings"
+msgstr "Settaggi MIDI"
+
+msgid "ALSA MIDI Settings"
+msgstr "Settaggi ALSA MIDI"
+
+msgid "In Ports:"
+msgstr "Porte Ingresso:"
+
+msgid "Out Ports:"
+msgstr "Porte Uscita:"
+
+msgid "Pd search path for objects, help, fonts, and other files"
+msgstr ""
+
+msgid "Use standard paths"
+msgstr ""
+
+msgid "Verbose"
+msgstr ""
+
+msgid "Pd Documents Directory"
+msgstr ""
+
+msgid "Browse"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Externals Install Directory"
+msgstr ""
+
+#, fuzzy
+msgid "Clear"
+msgstr "Pulisci menu"
+
+msgid "Choose Pd documents directory:"
+msgstr ""
+
+msgid "Install externals to directory:"
+msgstr ""
+
+msgid "Add a new path"
+msgstr ""
+
+msgid "Add new library"
+msgstr ""
+
+msgid "Edit library"
+msgstr ""
+
+msgid "Pd libraries to load on startup"
+msgstr ""
+
+msgid "Startup flags:"
+msgstr ""
+
+msgid "Defeat real-time scheduling"
+msgstr ""
+
+msgid "Help Browser"
+msgstr ""
+
+msgid "(Tcl) MISSING CLOSE-BRACE '}': "
+msgstr ""
+
+msgid "(Tcl) INVALID COMMAND NAME: "
+msgstr ""
+
+msgid "(Tcl) UNHANDLED ERROR: "
+msgstr ""
+
+#, tcl-format
+msgid "installed version [%1$s] > %2$s...skipping!"
+msgstr ""
+
+#, tcl-format
+msgid "installed version [%1$s] < %2$s...overwriting!"
+msgstr ""
+
+#, tcl-format
+msgid "installed version [%1$s] == %2$s...skipping!"
+msgstr ""
+
+#, tcl-format
+msgid "successfully unzipped %1$s into %2$s"
+msgstr ""
+
+msgid "unable to extract package automatically"
+msgstr ""
+
+msgid "please perform the following steps manually:"
+msgstr ""
+
+#, tcl-format
+msgid "1. unzip %s"
+msgstr ""
+
+#, tcl-format
+msgid "2. copy the contents into %s"
+msgstr ""
+
+#, tcl-format
+msgid "uninstalling '%s'"
+msgstr ""
+
+#, tcl-format
+msgid "uninstalling %1$s from %2$s failed!"
+msgstr ""
+
+#, tcl-format
+msgid "deken-plugin.tcl (Pd externals search) loaded from %s"
+msgstr ""
+
+#, tcl-format
+msgid "platform detected: %s"
+msgstr ""
+
+#, tcl-format
+msgid "platform re-detected: %s"
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
+#, fuzzy
+msgid "Search"
+msgstr "Cerca in"
+
+msgid "To get a list of all available externals, try an empty search."
+msgstr ""
+
+msgid "Find externals"
+msgstr ""
+
+msgid "Only install externals uploaded by people you trust."
+msgstr ""
+
+msgid "Preferences"
+msgstr "Preferenze"
+
+msgid "Installation options:"
+msgstr ""
+
+msgid "Try to remove libraries before (re)installing them?"
+msgstr ""
+
+msgid "Show README of newly installed libraries (if present)?"
+msgstr ""
+
+msgid "Should newly installed libraries be added to Pd's search path?"
+msgstr ""
+
+msgid "Platform settings:"
+msgstr ""
+
+#, tcl-format
+msgid "Default platform: %s"
+msgstr ""
+
+msgid "User-defined platform:"
+msgstr ""
+
+msgid "Hide foreign architectures?"
+msgstr ""
+
+#, fuzzy, tcl-format
+msgid "Deken %s Preferences"
+msgstr "Preferenze"
+
+#, fuzzy
+msgid "start searching for externals..."
+msgstr "Cestinare le modifiche apportate a '%s'?"
+
+#, tcl-format
+msgid "online? %s"
+msgstr ""
+
+msgid "Are you online?"
+msgstr ""
+
+msgid "Unable to perform search."
+msgstr ""
+
+msgid "no matching externals found"
+msgstr ""
+
+msgid "try using the full name e.g. 'freeverb'"
+msgstr ""
+
+msgid "No matching externals found."
+msgstr ""
+
+msgid "Please select a (writable) installation directory!"
+msgstr ""
+
+#, tcl-format
+msgid "Install %1$s to %2$s?"
+msgstr ""
+
+#, tcl-format
+msgid ""
+"commencing downloading of:\n"
+"%1$s\n"
+"into %2$s..."
+msgstr ""
+
+msgid "... aborting"
+msgstr ""
+
+#, tcl-format
+msgid "unable to add %s to search paths"
+msgstr ""
+
+#, tcl-format
+msgid "Add %s to the Pd search paths?"
+msgstr ""
+
+#, tcl-format
+msgid "added %s to search paths"
+msgstr ""
+
+#, tcl-format
+msgid "unable to download from %1$s [%2$s]"
+msgstr ""
+
+#, tcl-format
+msgid "unable to remove stray file %s"
+msgstr ""
+
+#, tcl-format
+msgid "unable to rename downloaded file to %s"
+msgstr ""
+
+#, fuzzy, tcl-format
+msgid "searching for '%s'"
+msgstr "Cestinare le modifiche apportate a '%s'?"
+
+msgid "unable to perform search"
+msgstr ""
+
+#, tcl-format
+msgid "Uploaded by %1$s @ %2$s"
+msgstr ""
+
+msgid "Install package"
+msgstr ""
+
+#, fuzzy
+msgid "Open webpage"
+msgstr "Apri recenti"
+
+msgid "_"
+msgstr ""
+
+#, tcl-format
+msgid ""
+"Do you want Pd to use the existing documents directory for patches and "
+"external libraries?\n"
+"\n"
+"Location: %s\n"
+"\n"
+"You can change or disable this later in the Path preferences."
+msgstr ""
+
+#, tcl-format
+msgid ""
+"Do you want Pd to create a documents directory for patches and external "
+"libraries?\n"
+"\n"
+"Location: %s\n"
+"\n"
+"You can change or disable this later in the Path preferences."
+msgstr ""
+
+#, tcl-format
+msgid ""
+"Pd documents directory cannot be found:\n"
+"\n"
+"%s\n"
+"\n"
+"Choose a new location?"
+msgstr ""
+
+#, tcl-format
+msgid "couldn't create Pd documents directory: %s\n"
+msgstr ""
+
+#, tcl-format
+msgid "couldn't create \"externals\" directory in: %s\n"
+msgstr ""
+
+msgid "refusing to delete empty domain"
+msgstr ""
+
+#, tcl-format
+msgid "Couldn't create preferences \"%1$s\" in %2$s"
+msgstr ""
+
+msgid "About Pd"
+msgstr "Informazioni su Pd..."
+
+msgid "Save"
+msgstr "Salva"
+
+msgid "Save As..."
+msgstr "Salva con nome..."
+
+msgid "Print..."
+msgstr "Stampa..."
+
+msgid "Paste Replace"
+msgstr ""
+
+msgid "Duplicate"
+msgstr "Duplica"
+
+msgid "Zoom In"
+msgstr ""
+
+msgid "Zoom Out"
+msgstr ""
+
+msgid "Tidy Up"
+msgstr "Allinea elementi"
+
+msgid "(Dis)Connect Selection"
+msgstr ""
+
+msgid "Triggerize"
+msgstr ""
+
+msgid "Edit Mode"
+msgstr "Modalità modifica"
+
+msgid "Undo"
+msgstr "Annulla"
+
+msgid "Redo"
+msgstr "Ripristina"
+
+msgid "List of objects..."
+msgstr ""
+
+msgid "New"
+msgstr "Nuovo File"
+
+msgid "Open"
+msgstr "Apri File..."
+
+#, fuzzy
+msgid "Message..."
+msgstr "Messaggio"
+
+msgid "Cut"
+msgstr "Taglia"
+
+msgid "Select All"
+msgstr "Seleziona tutto"
+
+msgid "Clear Console"
+msgstr "Pulisci console"
+
+msgid "Object"
+msgstr "Oggetto"
+
+msgid "Message"
+msgstr "Messaggio"
+
+msgid "Number"
+msgstr "Numero"
+
+msgid "Symbol"
+msgstr "Simbolo"
+
+msgid "Comment"
+msgstr "Commento"
+
+msgid "Graph"
+msgstr "Grafico"
+
+msgid "Find..."
+msgstr "Trova"
+
+msgid "Find Again"
+msgstr "Cerca Ancora"
+
+msgid "Find Last Error"
+msgstr "Trova l'ultimo errore"
+
+msgid "DSP On"
+msgstr ""
+
+msgid "DSP Off"
+msgstr ""
+
+msgid "Test Audio and MIDI..."
+msgstr "Test Audio e MIDI"
+
+msgid "Load Meter"
+msgstr "Misura carico cpu"
+
+msgid "Audio Settings..."
+msgstr "Settaggi audio..."
+
+msgid "MIDI Settings..."
+msgstr "Settaggi MIDI..."
+
+msgid "Minimize"
+msgstr "Minimizza"
+
+msgid "Zoom"
+msgstr ""
+
+msgid "Bring All to Front"
+msgstr "Porta tutto in primo piano"
+
+#, fuzzy
+msgid "Next Window"
+msgstr "Finestra parent"
+
+#, fuzzy
+msgid "Previous Window"
+msgstr "Finestra parent"
+
+msgid "Parent Window"
+msgstr "Finestra parent"
+
+msgid "HTML Manual..."
+msgstr "Manuale HTML..."
+
+msgid "Browser..."
+msgstr ""
+
+msgid "puredata.info"
+msgstr ""
+
+msgid "Report a bug"
+msgstr ""
+
+msgid "Clear Menu"
+msgstr "Pulisci menu"
+
+msgid ""
+"Delete all preferences?\n"
+"(takes effect when Pd is restarted)"
+msgstr ""
+
+msgid "no Pd-GUI settings to clear"
+msgstr ""
+
+msgid "Path..."
+msgstr ""
+
+msgid "Startup..."
+msgstr ""
+
+#, fuzzy
+msgid "Audio..."
+msgstr "Settaggi audio..."
+
+#, fuzzy
+msgid "MIDI..."
+msgstr "Settaggi MIDI..."
+
+#, fuzzy
+msgid "Zoom New Windows"
+msgstr "Finestra parent"
+
+#, fuzzy
+msgid "Save All Preferences"
+msgstr "Preferenze"
+
+#, fuzzy
+msgid "Save to..."
+msgstr "Salva con nome..."
+
+msgid "Load from..."
+msgstr ""
+
+msgid "Forget All..."
+msgstr ""
+
+msgid "Open Recent"
+msgstr "Apri recenti"
+
+msgid "Quit"
+msgstr "Esci"
+
+msgid "Properties"
+msgstr "Proprietà"
+
+#, fuzzy
+msgid "Audio on"
+msgstr "Settaggi Audio"
+
+msgid "Audio off"
+msgstr ""
+
+msgid "(Tcl) MISSING CLOSE-BRACKET ']': "
+msgstr ""
+
+msgid "Tcl:"
+msgstr ""
+
+msgid "Pd"
+msgstr ""
+
+msgid "DSP"
+msgstr ""
+
+msgid "Audio I/O error"
+msgstr ""
+
+msgid "Log:"
+msgstr ""
+
+msgid "fatal"
+msgstr ""
+
+msgid "error"
+msgstr ""
+
+msgid "normal"
+msgstr ""
+
+msgid "debug"
+msgstr ""
+
+msgid "all"
+msgstr ""
+
+msgid "New..."
+msgstr ""
+
+#, fuzzy
+msgid "Edit..."
+msgstr "Modifica"
+
+#, fuzzy
+msgid "Delete"
+msgstr "Cancella array"
+
+#, tcl-format
+msgid "ignoring '%s': doesn't exist"
+msgstr ""
+
+#, tcl-format
+msgid "ignoring '%s': doesn't look like a Pd file"
+msgstr ""
+
+#~ msgid "for:"
+#~ msgstr "per:"
+
+#~ msgid "Signal"
+#~ msgstr "Segnali"
+
+#~ msgid "WARNING: Font weight '%s' not found, using default (%s)"
+#~ msgstr ""
+#~ "ATTENZIONE: Peso '%s' del font non trovato, uso quello di default (%s)"
+
+#~ msgid "Close this window??"
+#~ msgstr "Chiudere questa finestra??"
+
+#~ msgid "Input device 3:"
+#~ msgstr "Dispositivo di ingresso 3:"
+
+#~ msgid "Associated Files"
+#~ msgstr "File associati"
+
+#~ msgid "Output device 4:"
+#~ msgstr "Dispositivo di uscita 4:"
+
+#~ msgid "Generators"
+#~ msgstr "Generatori"
+
+#~ msgid "WARNING: Font family '%s' not found, using default (%s)"
+#~ msgstr ""
+#~ "ATTENZIONE: Famiglia di font '%s\" non trovata, uso quella di default (%s)"
+
+#~ msgid "Preferences..."
+#~ msgstr "Preferenze..."
+
+#~ msgid "Output device 2:"
+#~ msgstr "Dispositivo di uscita 2:"
+
+#~ msgid "Max Patch Files (.pat)"
+#~ msgstr "Patch Max (.pat)"
+
+#~ msgid "Sampling"
+#~ msgstr "Campionamento"
+
+#~ msgid "Others"
+#~ msgstr "Altri"
+
+#~ msgid "Text Editor"
+#~ msgstr "Editor di Testo..."
+
+#~ msgid "really quit?"
+#~ msgstr "Uscire veramente?"
+
+#, fuzzy
+#~ msgid "Font Properties"
+#~ msgstr "Proprietà"
+
+#~ msgid "Max Patch Files"
+#~ msgstr "Patch Max"
+
+#~ msgid "ERROR: %s failed to find font size (%s) that fits into %sx%s!"
+#~ msgstr ""
+#~ "ERRORE: %s impossibile trovare la dimensione del font (%s) che entra in "
+#~ "%sx%s!"
+
+#~ msgid "Toggle Console"
+#~ msgstr "Mostra/Nascondi console"
+
+#~ msgid "I/O"
+#~ msgstr "Input/Output"
+
+#~ msgid "Math"
+#~ msgstr "Matematica"
+
+#~ msgid "Input device 2:"
+#~ msgstr "Dispositivo di ingresso 2:"
+
+#~ msgid "Input device 4:"
+#~ msgstr "Dispositivo di ingresso 4:"
+
+#~ msgid "ERROR: 'pd' never showed up, 'pd-gui' quitting!"
+#~ msgstr "ERRORE: 'pd' non è mai partito, chiudo 'pd-gui'!"
+
+#~ msgid "Filters"
+#~ msgstr "Filtri"
+
+#~ msgid "Pd Files"
+#~ msgstr "File Pd"
+
+#~ msgid "Max Text Files (.mxt)"
+#~ msgstr "File di testo Max (.mxt)"
+
+#~ msgid "Max Text Files"
+#~ msgstr "File di testo Max"
+
+#~ msgid "Output device 3:"
+#~ msgstr "Dispositivo di uscita 3:"
+
+#~ msgid "Discard changes to this window??"
+#~ msgstr "Cestinare le modifiche apportate in questa finestra?"
+
+#~ msgid "Use multiple ALSA devices"
+#~ msgstr "Usa dispositivi ALSA multipli"
