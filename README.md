@@ -1,18 +1,41 @@
 # Preview Setup
 
-🚧
+## on the first run
 
-ideally, it will be as simple as
+`./setup.sh`
 
-`make run`
+Sets up the docker network.
 
-🚧
+
+## Start shim
+
+`cd pd-gui-shim`
+
+`./run.sh`
+
+Wait until you see the message "server bound on 56026"
+
+
+## Start pd
+
+`cd pd`
+
+`./run.sh`
+
+Wait until you see the message "priority 94 scheduling failed"
+
+
+## Start frontend
+
+`cd pd-gui-frontend`
+
+`./run.sh`
 
 visit http://localhost:8080
 
 
 
-## Loading your own patches
+# Loading your own patches
 
 Adding patches through the frontend is not yet implemented. Put your patches into the ./patches directory and reload the frontend in the browser to make them available in the menu.
 
@@ -30,13 +53,14 @@ On the frontend side, we have to use WebSockets though. Thus, we need a shim bet
 
 ## Pd
 
-currently, the core→gui communication is a PR of a POC by umlaeute 
+Currently, the core→gui communication is a PR of a POC by umlaeute 
 https://github.com/pure-data/pure-data/pull/1765
 
 ### Get Pd code
 
 https://github.com/umlaeute/pure-data.git
-check out branch remotes/origin/feature/1695/draft-1
+
+Check out branch remotes/origin/feature/1695/draft-1
 
 ### Build & install
 
@@ -49,11 +73,11 @@ check out branch remotes/origin/feature/1695/draft-1
 `sudo make install`
 
 
-## Run it
+## Run the containers
 
-the order of steps is important
+The order of steps is important
 
-### run the shim
+### Run the shim
 
 `cd pd-gui-shim`
 
@@ -65,7 +89,7 @@ the order of steps is important
 
 dvlpr@shim:/workspace$ `pnpm install`
 
-##### run
+##### Start
 
 dvlpr@shim:/workspace$ `pnpm start:watch`
 
@@ -83,11 +107,11 @@ dvlpr@shim:/workspace$ `pnpm start:watch`
 
 #### Inside Docker
 
-##### install dependencies
+##### Install dependencies
 
 dvlpr@frontend:/workspace$ `pnpm install`
 
-##### run
+##### Start
 
 dvlpr@frontend:/workspace$ `pnpm start:watch`
 
