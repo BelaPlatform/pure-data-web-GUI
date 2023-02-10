@@ -19,7 +19,7 @@ RUN curl -fsSL https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-li
 RUN mkdir -p /opt/nodejs
 RUN tar -xJvf /tmp/node.tar.xz --strip 1 -C /opt/nodejs
 
-EXPOSE 56026
+EXPOSE 5173
 
 
 FROM base AS dev

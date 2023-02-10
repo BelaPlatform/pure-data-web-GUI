@@ -14,7 +14,7 @@
 	"main": "dist/main.js",
 	"scripts": {
 		"start:watch": "tsc-watch --onSuccess \"node .\"",
-		"build": "tsc main.ts",
+		"build": "tsc",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],

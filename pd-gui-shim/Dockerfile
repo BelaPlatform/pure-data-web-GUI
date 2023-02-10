@@ -1,7 +1,7 @@
 FROM debian:bookworm-20230109 AS base
 
 LABEL author="Sebastian Stang <sebastian@chair.audio>"
-LABEL version="1.0"
+LABEL version="1.2"
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
@@ -19,7 +19,7 @@ RUN curl -fsSL https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-li
 RUN mkdir -p /opt/nodejs
 RUN tar -xJvf /tmp/node.tar.xz --strip 1 -C /opt/nodejs
 
-EXPOSE 56026
+EXPOSE 8081 56026
 
 
 FROM base AS dev
@@ -34,3 +34,19 @@ ENV PATH "/opt/nodejs/bin:/workspace/node_modules/.bin:$PATH"
 RUN corepack enable
 RUN corepack prepare pnpm@7.26.0 --activate
 WORKDIR /workspace
+
+
+FROM dev as build
+
+USER root
+COPY workspace /workspace/
+RUN pnpm install
+RUN pnpm run build
+
+
+FROM build as run
+
+# COPY --from=build /workspace/dist/ /opt/pd-gui-shim-runner/
+# COPY dockerfs/package.json /opt/pd-gui-shim-runner/
+# CMD ["node", "."]
+CMD ["pnpm", "start:watch"]
