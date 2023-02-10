@@ -1,0 +1,1233 @@
+# Hungarian translation of Pure Data.
+# This file is put in the public domain
+#
+# Andras Muranyi <muranyia@gmail.com>, 2009, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: Pure Data 0.43\n"
+"Report-Msgid-Bugs-To: pd-dev@iem.at\n"
+"POT-Creation-Date: 2017-07-06 18:10+0200\n"
+"PO-Revision-Date: 2010-01-29 21:09+0100\n"
+"Last-Translator: Andras Muranyi <muranyia@gmail.com>\n"
+"Language-Team: Hungarian <hu@gnome.hu>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+msgid "-------dimensions(digits)(pix):-------"
+msgstr ""
+
+msgid "--------dimensions(pix)(pix):--------"
+msgstr ""
+
+msgid "----------dimensions(pix):-----------"
+msgstr ""
+
+msgid "--------flash-time(ms)(ms):---------"
+msgstr ""
+
+msgid "-----------output-range:-----------"
+msgstr ""
+
+msgid "------selectable_dimensions(pix):------"
+msgstr ""
+
+msgid "------visible_rectangle(pix)(pix):------"
+msgstr ""
+
+#, fuzzy
+msgid "bottom:"
+msgstr "Lent"
+
+#, fuzzy
+msgid "height:"
+msgstr "Jobb"
+
+msgid "hold:"
+msgstr ""
+
+msgid "intrrpt:"
+msgstr ""
+
+msgid "left:"
+msgstr ""
+
+msgid "lin"
+msgstr ""
+
+msgid "log"
+msgstr ""
+
+msgid "log-height:"
+msgstr ""
+
+msgid "max:"
+msgstr ""
+
+msgid "min:"
+msgstr ""
+
+#, fuzzy
+msgid "right:"
+msgstr "Jobb"
+
+#, fuzzy
+msgid "size:"
+msgstr "Méret:"
+
+msgid "top:"
+msgstr ""
+
+msgid "value:"
+msgstr ""
+
+#, fuzzy
+msgid "width:"
+msgstr "Szélesség:"
+
+#, tcl-format
+msgid "Do you want to save the changes you made in '%s'?"
+msgstr "El akarja menteni '%s' változásait?"
+
+#, tcl-format
+msgid "Discard changes to '%s'?"
+msgstr "Elveti '%s' változtatásait?"
+
+msgid "Undo clear"
+msgstr "Mégsem töröl"
+
+msgid "Undo connect"
+msgstr "Mégsem csatlakoztat"
+
+msgid "Undo cut"
+msgstr "Mégsem vág ki"
+
+msgid "Undo disconnect"
+msgstr "Mégsem törli a csatlakozást"
+
+msgid "Undo duplicate"
+msgstr "Mégsem duplikál"
+
+msgid "Undo motion"
+msgstr "Mégsem mozgat"
+
+msgid "Undo paste"
+msgstr "Mégsem illeszt be"
+
+msgid "Undo typing"
+msgstr "Mégsem ír"
+
+#, fuzzy
+msgid "Redo clear"
+msgstr "Mégsem töröl"
+
+#, fuzzy
+msgid "Redo connect"
+msgstr "Mégsem csatlakoztat"
+
+#, fuzzy
+msgid "Redo cut"
+msgstr "Mégsem vág ki"
+
+#, fuzzy
+msgid "Redo disconnect"
+msgstr "Mégsem törli a csatlakozást"
+
+#, fuzzy
+msgid "Redo duplicate"
+msgstr "Mégsem duplikál"
+
+#, fuzzy
+msgid "Redo motion"
+msgstr "Mégsem mozgat"
+
+#, fuzzy
+msgid "Redo paste"
+msgstr "Mégsem illeszt be"
+
+#, fuzzy
+msgid "Redo typing"
+msgstr "Mégsem ír"
+
+msgid "no Pd settings to clear"
+msgstr ""
+
+msgid "removed .pdsettings file"
+msgstr ""
+
+msgid "couldn't delete .pdsettings file"
+msgstr ""
+
+msgid "failed to erase Pd settings"
+msgstr ""
+
+#, fuzzy
+msgid "erased Pd settings"
+msgstr "Minden bellítást ment"
+
+msgid "no Pd settings to erase"
+msgstr ""
+
+msgid "skipping loading preferences... Pd seems to have crashed on startup"
+msgstr ""
+
+msgid "(re-save preferences to reinstate them)"
+msgstr ""
+
+msgid "File"
+msgstr "Fájl"
+
+#, fuzzy
+msgid "Edit"
+msgstr "Szerkeszt"
+
+msgid "Put"
+msgstr "Új"
+
+msgid "Find"
+msgstr "Keres"
+
+msgid "Media"
+msgstr "Média"
+
+msgid "Window"
+msgstr "Ablak"
+
+msgid "Help"
+msgstr "Súgó"
+
+msgid "Show &Hidden Files and Directories"
+msgstr ""
+
+msgid "Copy"
+msgstr "Másol"
+
+msgid "Paste"
+msgstr "Beilleszt"
+
+msgid "Array Properties"
+msgstr "Array tulajdonságai"
+
+msgid "Array"
+msgstr "Array"
+
+msgid "Name:"
+msgstr "Név:"
+
+msgid "Size:"
+msgstr "Méret:"
+
+msgid "Save contents"
+msgstr "Tartalom mentése"
+
+msgid "Draw as:"
+msgstr "Megjelenítés:"
+
+msgid "Polygon"
+msgstr "Sokszög"
+
+msgid "Points"
+msgstr "Pontok"
+
+msgid "Bezier curve"
+msgstr "Bezier görbe"
+
+msgid "Put array into:"
+msgstr "Array helye:"
+
+msgid "New graph"
+msgstr "Új graph"
+
+msgid "Last graph"
+msgstr "Legutóbbi graph"
+
+msgid "Options"
+msgstr ""
+
+msgid "Open List View..."
+msgstr "Lista nézet megnyitása..."
+
+msgid "Delete array"
+msgstr "Array-t töröl"
+
+msgid "Cancel"
+msgstr "Mégsem"
+
+msgid "Apply"
+msgstr "Alkalmaz"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Audio Settings"
+msgstr "Hang beállítások"
+
+#, fuzzy
+msgid "Settings"
+msgstr "MIDI beállítások"
+
+msgid "Sample rate:"
+msgstr "Mintavétel (Hz):"
+
+msgid "Delay (msec):"
+msgstr "Késés (ms):"
+
+msgid "48k"
+msgstr ""
+
+msgid "44.1k"
+msgstr ""
+
+msgid "96k"
+msgstr ""
+
+msgid "Block size:"
+msgstr ""
+
+msgid "Use callbacks"
+msgstr "Callback-ek használata"
+
+#, fuzzy
+msgid "Input Devices"
+msgstr "Bemeneti eszköz:"
+
+msgid "Channels:"
+msgstr "Csatornák:"
+
+#, fuzzy
+msgid "Output Devices"
+msgstr "Kimeneti eszköz:"
+
+#, fuzzy
+msgid "(same as input device)..."
+msgstr "(ugyanaz mint a bemeneti eszköz) ..............      "
+
+#, fuzzy
+msgid "Use Multiple Devices"
+msgstr "Több eszköz használata"
+
+msgid "Save All Settings"
+msgstr "Minden bellítást ment"
+
+msgid "WARNING: unknown graphme flags received in pdtk_canvas_dialog"
+msgstr ""
+
+msgid "Canvas Properties"
+msgstr "Canvas tulajdonságai"
+
+msgid "Scale"
+msgstr "Méretarány"
+
+msgid "X units per pixel:"
+msgstr "X egység képpontonként:"
+
+msgid "Y units per pixel:"
+msgstr "Y egység képpontonként:"
+
+msgid "Appearance on parent patch"
+msgstr "Megjelenés a szülő patch-en"
+
+msgid "Graph-On-Parent"
+msgstr "Megjelenítés a szülőn (GOP)"
+
+msgid "Hide object name and arguments"
+msgstr "Elemnév és paraméterek elrejtése"
+
+msgid "Range and size"
+msgstr "Tartomány és méret"
+
+#, fuzzy
+msgid "X range: from"
+msgstr "X tartomány kezdete"
+
+msgid "to"
+msgstr "vége"
+
+msgid "Margin:"
+msgstr "Margó:"
+
+#, fuzzy
+msgid "Y range: from"
+msgstr "Y tartomány kezdete"
+
+#, fuzzy
+msgid "Data Properties"
+msgstr "Canvas tulajdonságai"
+
+#, tcl-format
+msgid "Found '%1$s' in %2$s"
+msgstr ""
+
+#, tcl-format
+msgid "Couldn't find '%1$s' in %2$s"
+msgstr ""
+
+#, fuzzy, tcl-format
+msgid "Search in %s for:"
+msgstr "Keresés itt:"
+
+#, tcl-format
+msgid "Showed last '%1$s' in %2$s"
+msgstr ""
+
+#, tcl-format
+msgid "Showing '%1$d' out of %2$d items in %3$s"
+msgstr ""
+
+msgid "Pd window"
+msgstr "Pd ablak"
+
+msgid "Match whole word only"
+msgstr "Csak egész szavas egyezés"
+
+msgid "Close"
+msgstr "Bezár"
+
+#, tcl-format
+msgid "%s Font"
+msgstr "%s betűkészlet"
+
+msgid "Font"
+msgstr "Betű"
+
+msgid "Font Size"
+msgstr "Betűméret"
+
+msgid "Stretch"
+msgstr "Nyújtás"
+
+msgid "X and Y"
+msgstr "X és Y"
+
+msgid "X only"
+msgstr "csak X"
+
+msgid "Y only"
+msgstr "csak Y"
+
+msgid "Atom Box Properties"
+msgstr "Atom Box tulajdonságai"
+
+msgid "Width:"
+msgstr "Szélesség:"
+
+msgid "Limits"
+msgstr "Korlátok"
+
+msgid "Lower:"
+msgstr "Alsó:"
+
+msgid "Upper:"
+msgstr "Felső:"
+
+msgid "Label"
+msgstr "Címke"
+
+#, fuzzy
+msgid "Left"
+msgstr "Bal"
+
+msgid "Right"
+msgstr "Jobb"
+
+msgid "Top"
+msgstr "Fent"
+
+msgid "Bottom"
+msgstr "Lent"
+
+msgid "Messages"
+msgstr "Üzenetek"
+
+msgid "Send symbol:"
+msgstr "Küldött symbol:"
+
+msgid "Receive symbol:"
+msgstr "Fogadott symbol:"
+
+msgid "Background color"
+msgstr "Háttérszín"
+
+msgid "Foreground color"
+msgstr "Szín"
+
+msgid "Label color"
+msgstr "Címkeszín"
+
+msgid "Init"
+msgstr "Kezdőérték"
+
+msgid "No init"
+msgstr "Nincs kezdőérték"
+
+msgid "Jump on click"
+msgstr "Kattintásra ugorjon"
+
+msgid "Steady on click"
+msgstr "Kattintásra várjon"
+
+msgid "Bang"
+msgstr "Bang"
+
+#, fuzzy
+msgid "Flash Time (msec)"
+msgstr "Késés (ms):"
+
+msgid "Intrrpt:"
+msgstr ""
+
+msgid "Hold:"
+msgstr ""
+
+msgid "Toggle"
+msgstr "Toggle"
+
+msgid "Non Zero Value"
+msgstr ""
+
+msgid "Value:"
+msgstr ""
+
+msgid "Number2"
+msgstr "Number2"
+
+msgid "Width (digits):"
+msgstr ""
+
+#, fuzzy
+msgid "Height:"
+msgstr "Jobb"
+
+msgid "Output Range"
+msgstr ""
+
+msgid "Log height:"
+msgstr ""
+
+msgid "Vslider"
+msgstr "Vslider"
+
+msgid "Hslider"
+msgstr "Hslider"
+
+msgid "Vradio"
+msgstr "Vradio"
+
+msgid "Num cells:"
+msgstr ""
+
+msgid "Hradio"
+msgstr "Hradio"
+
+msgid "VU Meter"
+msgstr "VU meter"
+
+msgid "Canvas"
+msgstr "Canvas"
+
+msgid "Visible Rectangle (pix)"
+msgstr ""
+
+#, tcl-format
+msgid "%s Properties"
+msgstr "%s tulajdonságai"
+
+msgid "Parameters"
+msgstr ""
+
+#, fuzzy
+msgid "X offset:"
+msgstr "X offszet"
+
+#, fuzzy
+msgid "Y offset:"
+msgstr "Y offszet"
+
+msgid "Colors"
+msgstr "Színek"
+
+msgid "Background"
+msgstr "Háttér"
+
+msgid "Front"
+msgstr "Előtér"
+
+msgid "Compose color"
+msgstr "Színkeverés"
+
+msgid "Test label"
+msgstr "Teszt címke"
+
+#, fuzzy
+msgid "Send a Pd message"
+msgstr "Üzenet küldése..."
+
+msgid "(use arrow keys for history)"
+msgstr ""
+
+msgid "MIDI Settings"
+msgstr "MIDI beállítások"
+
+msgid "ALSA MIDI Settings"
+msgstr "ALSA MIDI beállítások"
+
+msgid "In Ports:"
+msgstr "Bejövő portok:"
+
+msgid "Out Ports:"
+msgstr "Kimenő portok:"
+
+msgid "Pd search path for objects, help, fonts, and other files"
+msgstr ""
+
+msgid "Use standard paths"
+msgstr ""
+
+msgid "Verbose"
+msgstr ""
+
+msgid "Pd Documents Directory"
+msgstr ""
+
+msgid "Browse"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Externals Install Directory"
+msgstr ""
+
+#, fuzzy
+msgid "Clear"
+msgstr "Menüt ürít"
+
+msgid "Choose Pd documents directory:"
+msgstr ""
+
+msgid "Install externals to directory:"
+msgstr ""
+
+msgid "Add a new path"
+msgstr ""
+
+msgid "Add new library"
+msgstr ""
+
+msgid "Edit library"
+msgstr ""
+
+msgid "Pd libraries to load on startup"
+msgstr ""
+
+msgid "Startup flags:"
+msgstr ""
+
+msgid "Defeat real-time scheduling"
+msgstr ""
+
+#, fuzzy
+msgid "Help Browser"
+msgstr "Beépített böngésző..."
+
+msgid "(Tcl) MISSING CLOSE-BRACE '}': "
+msgstr ""
+
+msgid "(Tcl) INVALID COMMAND NAME: "
+msgstr ""
+
+msgid "(Tcl) UNHANDLED ERROR: "
+msgstr ""
+
+#, tcl-format
+msgid "installed version [%1$s] > %2$s...skipping!"
+msgstr ""
+
+#, tcl-format
+msgid "installed version [%1$s] < %2$s...overwriting!"
+msgstr ""
+
+#, tcl-format
+msgid "installed version [%1$s] == %2$s...skipping!"
+msgstr ""
+
+#, tcl-format
+msgid "successfully unzipped %1$s into %2$s"
+msgstr ""
+
+msgid "unable to extract package automatically"
+msgstr ""
+
+msgid "please perform the following steps manually:"
+msgstr ""
+
+#, tcl-format
+msgid "1. unzip %s"
+msgstr ""
+
+#, tcl-format
+msgid "2. copy the contents into %s"
+msgstr ""
+
+#, tcl-format
+msgid "uninstalling '%s'"
+msgstr ""
+
+#, tcl-format
+msgid "uninstalling %1$s from %2$s failed!"
+msgstr ""
+
+#, tcl-format
+msgid "deken-plugin.tcl (Pd externals search) loaded from %s"
+msgstr ""
+
+#, tcl-format
+msgid "platform detected: %s"
+msgstr ""
+
+#, tcl-format
+msgid "platform re-detected: %s"
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
+#, fuzzy
+msgid "Search"
+msgstr "Keresés itt:"
+
+msgid "To get a list of all available externals, try an empty search."
+msgstr ""
+
+msgid "Find externals"
+msgstr ""
+
+msgid "Only install externals uploaded by people you trust."
+msgstr ""
+
+msgid "Preferences"
+msgstr "Beállítások"
+
+msgid "Installation options:"
+msgstr ""
+
+msgid "Try to remove libraries before (re)installing them?"
+msgstr ""
+
+msgid "Show README of newly installed libraries (if present)?"
+msgstr ""
+
+msgid "Should newly installed libraries be added to Pd's search path?"
+msgstr ""
+
+msgid "Platform settings:"
+msgstr ""
+
+#, tcl-format
+msgid "Default platform: %s"
+msgstr ""
+
+msgid "User-defined platform:"
+msgstr ""
+
+msgid "Hide foreign architectures?"
+msgstr ""
+
+#, fuzzy, tcl-format
+msgid "Deken %s Preferences"
+msgstr "Beállítások"
+
+#, fuzzy
+msgid "start searching for externals..."
+msgstr "Elveti '%s' változtatásait?"
+
+#, tcl-format
+msgid "online? %s"
+msgstr ""
+
+msgid "Are you online?"
+msgstr ""
+
+msgid "Unable to perform search."
+msgstr ""
+
+msgid "no matching externals found"
+msgstr ""
+
+msgid "try using the full name e.g. 'freeverb'"
+msgstr ""
+
+msgid "No matching externals found."
+msgstr ""
+
+msgid "Please select a (writable) installation directory!"
+msgstr ""
+
+#, tcl-format
+msgid "Install %1$s to %2$s?"
+msgstr ""
+
+#, tcl-format
+msgid ""
+"commencing downloading of:\n"
+"%1$s\n"
+"into %2$s..."
+msgstr ""
+
+msgid "... aborting"
+msgstr ""
+
+#, tcl-format
+msgid "unable to add %s to search paths"
+msgstr ""
+
+#, tcl-format
+msgid "Add %s to the Pd search paths?"
+msgstr ""
+
+#, tcl-format
+msgid "added %s to search paths"
+msgstr ""
+
+#, tcl-format
+msgid "unable to download from %1$s [%2$s]"
+msgstr ""
+
+#, tcl-format
+msgid "unable to remove stray file %s"
+msgstr ""
+
+#, tcl-format
+msgid "unable to rename downloaded file to %s"
+msgstr ""
+
+#, fuzzy, tcl-format
+msgid "searching for '%s'"
+msgstr "Elveti '%s' változtatásait?"
+
+msgid "unable to perform search"
+msgstr ""
+
+#, tcl-format
+msgid "Uploaded by %1$s @ %2$s"
+msgstr ""
+
+msgid "Install package"
+msgstr ""
+
+#, fuzzy
+msgid "Open webpage"
+msgstr "Legutóbbi fájlok"
+
+msgid "_"
+msgstr ""
+
+#, tcl-format
+msgid ""
+"Do you want Pd to use the existing documents directory for patches and "
+"external libraries?\n"
+"\n"
+"Location: %s\n"
+"\n"
+"You can change or disable this later in the Path preferences."
+msgstr ""
+
+#, tcl-format
+msgid ""
+"Do you want Pd to create a documents directory for patches and external "
+"libraries?\n"
+"\n"
+"Location: %s\n"
+"\n"
+"You can change or disable this later in the Path preferences."
+msgstr ""
+
+#, tcl-format
+msgid ""
+"Pd documents directory cannot be found:\n"
+"\n"
+"%s\n"
+"\n"
+"Choose a new location?"
+msgstr ""
+
+#, tcl-format
+msgid "couldn't create Pd documents directory: %s\n"
+msgstr ""
+
+#, tcl-format
+msgid "couldn't create \"externals\" directory in: %s\n"
+msgstr ""
+
+msgid "refusing to delete empty domain"
+msgstr ""
+
+#, tcl-format
+msgid "Couldn't create preferences \"%1$s\" in %2$s"
+msgstr ""
+
+msgid "About Pd"
+msgstr "A Pd-ről"
+
+msgid "Save"
+msgstr "Ment"
+
+msgid "Save As..."
+msgstr "Ment új néven..."
+
+msgid "Print..."
+msgstr "Nyomtat..."
+
+msgid "Paste Replace"
+msgstr ""
+
+msgid "Duplicate"
+msgstr "Duplikál"
+
+#, fuzzy
+msgid "Zoom In"
+msgstr "Nagyító"
+
+#, fuzzy
+msgid "Zoom Out"
+msgstr "Nagyító"
+
+msgid "Tidy Up"
+msgstr "Elrendez"
+
+msgid "(Dis)Connect Selection"
+msgstr ""
+
+msgid "Triggerize"
+msgstr ""
+
+msgid "Edit Mode"
+msgstr "Szerkesztő üzemmód"
+
+msgid "Undo"
+msgstr "Mégsem!"
+
+msgid "Redo"
+msgstr "Mégis!"
+
+msgid "List of objects..."
+msgstr ""
+
+msgid "New"
+msgstr "Új"
+
+msgid "Open"
+msgstr "Megnyit"
+
+#, fuzzy
+msgid "Message..."
+msgstr "Üzenet"
+
+msgid "Cut"
+msgstr "Kivág"
+
+msgid "Select All"
+msgstr "Mindent kijelöl"
+
+msgid "Clear Console"
+msgstr "Konzolt ürít"
+
+msgid "Object"
+msgstr "Object"
+
+msgid "Message"
+msgstr "Üzenet"
+
+msgid "Number"
+msgstr "Number"
+
+msgid "Symbol"
+msgstr "Symbol"
+
+msgid "Comment"
+msgstr "Comment"
+
+msgid "Graph"
+msgstr "Graph"
+
+msgid "Find..."
+msgstr "Keres..."
+
+msgid "Find Again"
+msgstr "Újra keres"
+
+msgid "Find Last Error"
+msgstr "Legutóbbi hiba helye"
+
+msgid "DSP On"
+msgstr "DSP be"
+
+msgid "DSP Off"
+msgstr "DSP ki"
+
+msgid "Test Audio and MIDI..."
+msgstr "Hang és MIDI tesztelése..."
+
+msgid "Load Meter"
+msgstr "Terhelésmérő"
+
+msgid "Audio Settings..."
+msgstr "Hang beállítások..."
+
+msgid "MIDI Settings..."
+msgstr "MIDI beállítások..."
+
+msgid "Minimize"
+msgstr "Kicsinyít"
+
+msgid "Zoom"
+msgstr "Nagyító"
+
+msgid "Bring All to Front"
+msgstr "Mindent előtérbe hoz"
+
+#, fuzzy
+msgid "Next Window"
+msgstr "Szülő ablak"
+
+#, fuzzy
+msgid "Previous Window"
+msgstr "Szülő ablak"
+
+msgid "Parent Window"
+msgstr "Szülő ablak"
+
+msgid "HTML Manual..."
+msgstr "HTML kézikönyv..."
+
+msgid "Browser..."
+msgstr "Beépített böngésző..."
+
+msgid "puredata.info"
+msgstr ""
+
+msgid "Report a bug"
+msgstr ""
+
+msgid "Clear Menu"
+msgstr "Menüt ürít"
+
+msgid ""
+"Delete all preferences?\n"
+"(takes effect when Pd is restarted)"
+msgstr ""
+
+msgid "no Pd-GUI settings to clear"
+msgstr ""
+
+msgid "Path..."
+msgstr ""
+
+msgid "Startup..."
+msgstr ""
+
+#, fuzzy
+msgid "Audio..."
+msgstr "Hang beállítások..."
+
+#, fuzzy
+msgid "MIDI..."
+msgstr "MIDI beállítások..."
+
+#, fuzzy
+msgid "Zoom New Windows"
+msgstr "Szülő ablak"
+
+#, fuzzy
+msgid "Save All Preferences"
+msgstr "Beállítások"
+
+#, fuzzy
+msgid "Save to..."
+msgstr "Ment új néven..."
+
+msgid "Load from..."
+msgstr ""
+
+msgid "Forget All..."
+msgstr ""
+
+msgid "Open Recent"
+msgstr "Legutóbbi fájlok"
+
+msgid "Quit"
+msgstr "Kilép"
+
+msgid "Properties"
+msgstr "Tulajdonságok"
+
+#, fuzzy
+msgid "Audio on"
+msgstr "Hang beállítások"
+
+msgid "Audio off"
+msgstr ""
+
+msgid "(Tcl) MISSING CLOSE-BRACKET ']': "
+msgstr ""
+
+msgid "Tcl:"
+msgstr ""
+
+msgid "Pd"
+msgstr ""
+
+msgid "DSP"
+msgstr "DSP"
+
+msgid "Audio I/O error"
+msgstr ""
+
+msgid "Log:"
+msgstr ""
+
+msgid "fatal"
+msgstr ""
+
+msgid "error"
+msgstr ""
+
+msgid "normal"
+msgstr ""
+
+msgid "debug"
+msgstr ""
+
+msgid "all"
+msgstr ""
+
+msgid "New..."
+msgstr ""
+
+#, fuzzy
+msgid "Edit..."
+msgstr "Szerkeszt"
+
+#, fuzzy
+msgid "Delete"
+msgstr "Array-t töröl"
+
+#, tcl-format
+msgid "ignoring '%s': doesn't exist"
+msgstr ""
+
+#, tcl-format
+msgid "ignoring '%s': doesn't look like a Pd file"
+msgstr ""
+
+#~ msgid "for:"
+#~ msgstr "erre:"
+
+#~ msgid "Filters"
+#~ msgstr "Szűrők"
+
+#~ msgid "Input device 3:"
+#~ msgstr "3. bemeneti eszköz:"
+
+#~ msgid "Sampling"
+#~ msgstr "Mintavételezés"
+
+#~ msgid "Max Patch Files"
+#~ msgstr "Max patch fájlok"
+
+#~ msgid "Untitled"
+#~ msgstr "Névtelen"
+
+#~ msgid "Max Text Files (.mxt)"
+#~ msgstr "Max szövegfájlok (.mxt)"
+
+#~ msgid "Pd Files"
+#~ msgstr "Pd fájlok"
+
+#~ msgid "GUI"
+#~ msgstr "Kezelőfelület"
+
+#~ msgid "ERROR: 'pd' never showed up, 'pd-gui' quitting!"
+#~ msgstr "HIBA: a 'pd' nem jelentkezett, a 'pd-gui' kilép!"
+
+#~ msgid "Font Properties"
+#~ msgstr "Betű tulajdonságai"
+
+#~ msgid "Output device 3:"
+#~ msgstr "3. kimeneti eszköz:"
+
+#~ msgid "Input device 2:"
+#~ msgstr "2. bemeneti eszköz:"
+
+#~ msgid "Max Text Files"
+#~ msgstr "Max szövegfájlok"
+
+#~ msgid "Signal"
+#~ msgstr "Jel"
+
+#~ msgid "Others"
+#~ msgstr "Egyéb"
+
+#~ msgid "really quit?"
+#~ msgstr "tényleg kilép?"
+
+#~ msgid "Patch Font"
+#~ msgstr "Patch betűkészlet"
+
+#~ msgid "Close this window??"
+#~ msgstr "Bezárja ezt az ablakot?"
+
+#~ msgid "Toggle Console"
+#~ msgstr "Konzol ki/be"
+
+#~ msgid "Generators"
+#~ msgstr "Generátorok"
+
+#~ msgid "ERROR: %s failed to find font size (%s) that fits into %sx%s!"
+#~ msgstr "FIGYELEM: nem található %s betűkészlet %sx%s (%s) méretben!"
+
+#~ msgid "Math"
+#~ msgstr "Számítások"
+
+#~ msgid "Output device 2:"
+#~ msgstr "2. kimeneti eszköz:"
+
+#~ msgid "Associated Files"
+#~ msgstr "Kapcsolódó fájlok"
+
+#~ msgid "Preferences..."
+#~ msgstr "Beállítások..."
+
+#~ msgid "WARNING: Font family '%s' not found, using default (%s)"
+#~ msgstr ""
+#~ "FIGYELEM: Nem található '%s' betűcsalád, az alapbeállítás (%s) érvényes"
+
+#~ msgid "I/O"
+#~ msgstr "I/O"
+
+#~ msgid "Max Patch Files (.pat)"
+#~ msgstr "Max patch fájlok (.pat)"
+
+#~ msgid "Input device 4:"
+#~ msgstr "4. bemeneti eszköz:"
+
+#~ msgid "WARNING: Font weight '%s' not found, using default (%s)"
+#~ msgstr ""
+#~ "FIGYELEM: Nem található '%s' betűvastagság, az alapbeállítás (%s) érvényes"
+
+#~ msgid "Discard changes to this window??"
+#~ msgstr "Elveti az ablak változtatásait?"
+
+#~ msgid "Text Editor"
+#~ msgstr "Szövegszerkesztő"
+
+#~ msgid "Use multiple ALSA devices"
+#~ msgstr "Több ALSA eszköz használata"
+
+#~ msgid "Output device 4:"
+#~ msgstr "4. kimeneti eszköz:"
