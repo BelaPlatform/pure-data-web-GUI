@@ -5,7 +5,9 @@
   import Headerbar from '$lib/components/shell/HeaderBar.svelte'
   import Frame from '$lib/components/shell/Frame.svelte'
 
-  onMount(()  => {
+  console.log('+page::module')
+
+  onMount(async ()  => {
     console.log('+page::onMount()')
     $app.on_startup()
   })

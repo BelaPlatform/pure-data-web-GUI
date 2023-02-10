@@ -2,7 +2,7 @@
   import OutClick from 'svelte-outclick'
 
   import { app } from '$lib/stores/app'
-  import { menu, type MenuItem } from '$lib/shell/menu'
+  import type { MenuItem } from '$lib/shell/menu'
 
   let second_level: MenuItem | null = null
 
@@ -27,11 +27,12 @@
     second_level = null
   }
 
+  $: menu = $app.menu
 </script>
 
 <div class="wrap">
   <ul class="top_level">
-    {#each menu as item}
+    {#each $menu as item}
       <li
         on:mousedown={event => on_expand(event, item)}
         on:mouseenter={_ => on_hover(item)}

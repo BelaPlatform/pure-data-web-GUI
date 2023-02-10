@@ -2,12 +2,13 @@ import { writable } from "svelte/store"
 
 import { WindowManager } from './wm'
 import type { PdCanvas } from '../pd/pd_canvas'
-import type { PatchFile } from '../stores/patches'
+import { enumerate_patches, type PatchFile } from '../stores/patches'
 import PdDialog from '$lib/components/pd/dialogs/PdDialog.svelte'
 import { Direction, PdMessages } from '$lib/pd/pd_messages'
 import { WebSocketIO } from '$lib/utils/io'
 import { Interpreter } from '$lib/pd/parser/interpreter'
 import { Pd } from "$lib/pd/pd"
+import { make_menu, type MenuItem } from "./menu"
 
 export enum Theme {
   Vanilla,
@@ -18,6 +19,7 @@ export enum Theme {
 export class App {
   show_debug = writable<boolean>(false)
   theme = writable<Theme>(Theme.Vanilla)
+  menu = writable<MenuItem[]>([])
   wm: WindowManager
   pd: Pd
   io: WebSocketIO
@@ -33,8 +35,11 @@ export class App {
     }
   }
 
-  on_startup() {
+  async on_startup() {
     console.log('on_startup')
+    await enumerate_patches()
+    const m = await make_menu()
+    this.menu.update(_ => m)
     this.io.on_open = () => this.pd.send_init_sequence()
     this.wm.new_dialog_frame(PdDialog)
     PdMessages.push('Hello, World!', Direction.Internal)
