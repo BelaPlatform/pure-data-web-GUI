@@ -34,3 +34,18 @@ ENV PATH "/opt/nodejs/bin:/workspace/node_modules/.bin:$PATH"
 RUN corepack enable
 RUN corepack prepare pnpm@7.26.0 --activate
 WORKDIR /workspace
+
+
+FROM dev as build
+
+USER root
+COPY workspace /workspace/
+RUN pnpm install
+RUN pnpm run build
+
+
+FROM build as run
+
+EXPOSE 8080
+
+CMD ["node", "/workspace/dist/"]
