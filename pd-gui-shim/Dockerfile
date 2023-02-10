@@ -57,6 +57,8 @@ COPY dockerfs/sshd_config /etc/ssh/
 # COPY --from=build /workspace/dist/ /opt/pd-gui-shim-runner/
 # COPY dockerfs/package.json /opt/pd-gui-shim-runner/
 # CMD ["node", "."]
+
+COPY dockerfs/run.sh /usr/local/bin/
 RUN passwd --delete root
 ENV RUNNER 1
-CMD ["pnpm", "start:watch"]
+CMD ["run.sh"]
