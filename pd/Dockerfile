@@ -9,7 +9,8 @@ RUN apt-get update && \
         automake \
         gcc \
         libtool \
-        make
+        make \
+        openssh-client
 
 WORKDIR /src
 
@@ -17,5 +18,6 @@ WORKDIR /src
 FROM base as build
 
 COPY dockerfs/build-and-run.sh /usr/local/bin/
+COPY dockerfs/.ssh/config /root/.ssh/
 
 CMD ["build-and-run.sh"]

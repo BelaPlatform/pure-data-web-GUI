@@ -46,7 +46,17 @@ RUN pnpm run build
 
 FROM build as run
 
+RUN apt-get update && \
+      apt-get install -y \
+        openssh-server
+
+EXPOSE 8081 56026 22
+
+COPY dockerfs/sshd_config /etc/ssh/
+
 # COPY --from=build /workspace/dist/ /opt/pd-gui-shim-runner/
 # COPY dockerfs/package.json /opt/pd-gui-shim-runner/
 # CMD ["node", "."]
+RUN passwd --delete root
+ENV RUNNER 1
 CMD ["pnpm", "start:watch"]

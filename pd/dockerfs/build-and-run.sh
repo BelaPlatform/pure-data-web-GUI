@@ -4,4 +4,10 @@
 ./configure --prefix /opt/pd --disable-portaudio
 make install
 
-/opt/pd/bin/pd -guiport 56026
+set -m
+
+(sleep 4; /opt/pd/bin/pd -guiport 56026) &
+
+ssh pd-gui-shim-runner -L 127.0.0.1:56026:127.0.0.1:56026
+
+fg %1
