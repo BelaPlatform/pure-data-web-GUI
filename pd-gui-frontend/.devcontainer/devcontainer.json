@@ -28,6 +28,10 @@
 
   , "forwardPorts": [5173]
 
+  ,"containerEnv": {
+    "OVERRIDE_PATCH_DIRECTORY": "${localWorkspaceFolder}/../patches"
+  }
+
   , "mounts": [
     "source=pd-gui-frontend-dvlpr,target=/home/dvlpr/,type=volume",
     "source=${localWorkspaceFolder}/../patches,target=/patches,type=bind"
