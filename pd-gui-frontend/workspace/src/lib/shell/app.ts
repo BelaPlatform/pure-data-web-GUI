@@ -33,6 +33,7 @@ export class App {
       const interpreter = new Interpreter(this.pd)
       interpreter.interpret(event.data)
     }
+    this.io.on_open = () => this.pd.send_init_sequence()
   }
 
   async on_startup() {
@@ -40,7 +41,6 @@ export class App {
     await enumerate_patches()
     const m = await make_menu()
     this.menu.update(_ => m)
-    this.io.on_open = () => this.pd.send_init_sequence()
     this.wm.new_dialog_frame(PdDialog)
     PdMessages.push('Hello, World!', Direction.Internal)
   }
