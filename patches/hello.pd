@@ -1,0 +1,63 @@
+#N canvas 105 145 767 528 12;
+#X obj 54 93 bng 15 250 50 0 empty empty asdsdasd 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X text 55 218 this is a comment;
+#X floatatom 427 287 5 0 0 1 - - - 24;
+#X symbolatom 256 205 17 0 0 0 - - - 0;
+#X obj 256 250 print symbol;
+#X obj 55 308 print message, f 28;
+#X msg 256 159 symbol hello;
+#X msg 50 159 hello world;
+#X msg 373 159 symbol world;
+#X obj 426 195 tgl 20 0 empty empty empty 0 -10 0 12 #fcfcfc #000000
+#000000 0 1;
+#X obj 427 241 metro 1000;
+#X obj 400 375 print metro;
+#X obj 427 332 expr $f1 + 1;
+#X msg 524 357 set \$1;
+#X obj 398 287 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 88 258 r foo;
+#X obj 115 350 r bar;
+#X msg 115 396;
+#X obj 251 442 bng 20 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc
+#000000 #000000;
+#X obj 251 350 tgl 20 0 empty empty empty 0 -10 0 12 #fcfcfc #000000
+#000000 0 1;
+#X obj 251 396 subpatch;
+#X obj 574 254 tgl 20 0 empty empty empty 0 -10 0 24 #faff00 #ff0400
+#000000 0 1;
+#X msg 579 293 \; pd dsp \$1;
+#X obj 131 94 cnv 20 24 24 empty empty empty 20 12 0 12 #faff00 #404040
+0;
+#X obj 160 95 cnv 20 24 24 empty empty blue 0 48 0 24 #0400ff #0400ff
+0;
+#X obj 191 95 cnv 20 24 24 empty empty pink 24 24 0 12 #ffc7c6 #ffc7c6
+0;
+#X obj 552 105 phasor~;
+#X obj 550 48 adc~;
+#X obj 662 84 tgl 48 0 empty empty empty 0 -10 0 12 #ffc7c6 #00faff
+#000000 0 1;
+#X obj 671 187 metro 1000;
+#X obj 670 233 bng 64 250 50 0 empty empty empty 0 -10 0 12 #ff0400
+#ffffff #000000;
+#X connect 0 0 7 0;
+#X connect 2 0 12 0;
+#X connect 6 0 4 0;
+#X connect 7 0 5 0;
+#X connect 8 0 3 0;
+#X connect 9 0 10 0;
+#X connect 10 0 2 0;
+#X connect 10 0 14 0;
+#X connect 10 0 21 0;
+#X connect 12 0 11 0;
+#X connect 12 0 13 0;
+#X connect 13 0 2 0;
+#X connect 15 0 5 0;
+#X connect 16 0 17 0;
+#X connect 19 0 20 0;
+#X connect 20 0 18 0;
+#X connect 21 0 22 0;
+#X connect 27 0 26 0;
+#X connect 28 0 29 0;
+#X connect 29 0 30 0;

@@ -29,7 +29,8 @@
   , "forwardPorts": [5173]
 
   , "mounts": [
-    "source=pd-gui-frontend-dvlpr,target=/home/dvlpr/,type=volume"
+    "source=pd-gui-frontend-dvlpr,target=/home/dvlpr/,type=volume",
+    "source=${localWorkspaceFolder}/../patches,target=/patches,type=bind"
   ]
 
   , "workspaceFolder": "/workspace"

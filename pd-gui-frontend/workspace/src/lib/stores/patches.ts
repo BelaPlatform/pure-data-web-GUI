@@ -6,15 +6,10 @@ export type PatchFile = {
 }
 
 const dummy_patches = [
-  {id: 1, file: '/home/hase/Documents/Pd/hello.pd'},
-  {id: 2, file: '/home/hase/Documents/Pd/send.pd'},
-  // {id: 3, file: '/home/hase/Documents/Pd/slider.pd'},
-  // {id: 4, file: '/home/hase/Documents/Pd/radio.pd'},
-  // {id: 5, file: '/home/hase/Documents/Pd/vumeter.pd'},
-  {id: 6, file: '/home/hase/Documents/Pd/empty.pd'},
-  {id: 7, file: '/home/hase/Documents/Pd/canvas.pd'},
-  // {id: 8, file: '/home/hase/Documents/Pd/number.pd'},
-  // {id: 9, file: '/home/hase/Documents/Pd/graph.pd'},
+  {id: 1, file: '/patches/hello.pd'},
+  {id: 6, file: '/patches/empty.pd'},
+  {id: 7, file: '/patches/canvas.pd'},
+  {id: 8, file: '/patches/subpatch.pd'},
 ]
 
 export const available_patches = writable<PatchFile[]>(dummy_patches)

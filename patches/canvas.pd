@@ -1,0 +1,16 @@
+#N canvas 2356 424 1098 694 12;
+#X obj 170 221 pack 100 60;
+#X obj 212 193 t b f;
+#X floatatom 213 170 4 18 100 0 - - - 0;
+#X floatatom 170 168 4 18 480 0 - - - 0;
+#X obj 170 280 send \$0-vis_size;
+#X msg 170 251 vis_size \$1 \$2;
+#X text 92 167 horizontal;
+#X text 247 167 vertical;
+#X obj 219 343 cnv 15 143 46 empty \$0-vis_size hello\,\ world! 20 12 0 48 #ff8300 #00ff04 0;
+#X connect 0 0 5 0;
+#X connect 1 0 0 0;
+#X connect 1 1 0 1;
+#X connect 2 0 1 0;
+#X connect 3 0 0 0;
+#X connect 5 0 4 0;

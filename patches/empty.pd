@@ -1,0 +1,7 @@
+#N canvas 0 0 530 372 12;
+#X text 33 42 a nearly empty patch;
+#X obj 280 142 subpatch;
+#X floatatom 289 52 5 0 0 0 - - - 0;
+#X floatatom 268 217 5 0 0 0 - - - 0;
+#X connect 1 0 3 0;
+#X connect 2 0 1 0;
