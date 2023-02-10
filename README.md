@@ -11,6 +11,13 @@ ideally, it will be as simple as
 visit http://localhost:8080
 
 
+
+## Loading your own patches
+
+Adding patches through the frontend is not yet implemented. Put your patches into the ./patches directory and reload the frontend in the browser to make them available in the menu.
+
+
+
 # Development Setup
 
 To make Pd send its gui procotol data to us, we have to give it a TCP port at startup
@@ -18,6 +25,7 @@ To make Pd send its gui procotol data to us, we have to give it a TCP port at st
 `pd -guiport 56026`
 
 On the frontend side, we have to use WebSockets though. Thus, we need a shim between Pd and the frontend.
+
 
 
 ## Pd
