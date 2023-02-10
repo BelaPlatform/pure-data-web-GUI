@@ -6,10 +6,10 @@
 	"os": [
 		"linux"
 	],
-	"packageManager": "pnpm@7.24.3",
+	"packageManager": "pnpm@7.27.0",
 	"engines": {
-		"node:": "^19.4",
-		"pnpm": "^7.24.3"
+		"node:": "^19.6",
+		"pnpm": "^7.27.0"
 	},
 	"main": "dist/main.js",
 	"scripts": {
