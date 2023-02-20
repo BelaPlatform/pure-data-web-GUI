@@ -2,7 +2,7 @@
 
 ./autogen.sh
 ./configure --prefix /opt/pd --disable-portaudio
-make install
+make -j$(getconf _NPROCESSORS_ONLN) install
 
 set -m
 
