@@ -19,7 +19,7 @@ export class PdCanvas {
   widgets = writable<PdWidget[]>([])
   connections = writable<PdConnection[]>([])
   is_mapped: boolean = false
-  edit_mode = writable<boolean>(false)
+  edit_mode = writable<boolean>(true)
   cursor = writable<string>('runmode_nothing')
   popup = writable<PopUp>({show: false, origin: G.NullPoint(), has_properties: false, has_open: false})
   size = writable<G.Size>(G.NullSize())
@@ -84,7 +84,7 @@ export class PdCanvas {
   on_toggle_edit_mode() {
     this.edit_mode.update(value => {
       this.send_set_editmode(!value)
-      return value
+      return !value
     })
   }
 
