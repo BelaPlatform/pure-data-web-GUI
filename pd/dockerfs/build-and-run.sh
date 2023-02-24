@@ -10,7 +10,7 @@ PD_INSTALL_BINARY=./src/pd
 [ -f "Makefile" ] || {
 ./configure --prefix $PD_INSTALL_DIR --disable-portaudio
 }
-make -j$(getconf _NPROCESSORS_ONLN)
+make -C src -j$(getconf _NPROCESSORS_ONLN)
 
 set -m
 
