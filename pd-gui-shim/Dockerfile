@@ -1,7 +1,7 @@
 FROM debian:bookworm-20230109 AS base
 
 LABEL author="Sebastian Stang <sebastian@chair.audio>"
-LABEL version="1.2"
+LABEL version="1.3"
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
@@ -11,15 +11,19 @@ RUN apt-get update && \
         fish \
         tar \
         xzip \
-        xz-utils
-
+        xz-utils \
+        automake \
+        gcc \
+        libtool \
+        make \
+        vim
 
 ARG NODE_VERSION=19.6.0
 RUN curl -fsSL https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz --output /tmp/node.tar.xz
 RUN mkdir -p /opt/nodejs
 RUN tar -xJvf /tmp/node.tar.xz --strip 1 -C /opt/nodejs
 
-EXPOSE 8081 56026
+EXPOSE 8081
 
 
 FROM base AS dev
@@ -34,7 +38,8 @@ ENV PATH "/opt/nodejs/bin:/workspace/node_modules/.bin:$PATH"
 RUN corepack enable
 RUN corepack prepare pnpm@7.27.0 --activate
 WORKDIR /workspace
-
+COPY dockerfs/build-pd.sh /usr/local/bin/
+COPY dockerfs/run.sh /usr/local/bin/
 
 FROM dev as build
 
@@ -43,22 +48,6 @@ COPY workspace /workspace/
 RUN pnpm install
 RUN pnpm run build
 
-
 FROM build as run
 
-RUN apt-get update && \
-      apt-get install -y \
-        openssh-server
-
-EXPOSE 8081 56026 22
-
-COPY dockerfs/sshd_config /etc/ssh/
-
-# COPY --from=build /workspace/dist/ /opt/pd-gui-shim-runner/
-# COPY dockerfs/package.json /opt/pd-gui-shim-runner/
-# CMD ["node", "."]
-
-COPY dockerfs/run.sh /usr/local/bin/
-RUN passwd --delete root
-ENV RUNNER 1
 CMD ["run.sh"]
