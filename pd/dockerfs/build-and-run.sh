@@ -3,14 +3,14 @@ set -euo pipefail
 set -x
 
 PD_INSTALL_DIR=/opt/pd/
-PD_INSTALL_BINARY=$PD_INSTALL_DIR/bin/pd
+PD_INSTALL_BINARY=./src/pd
 [ -f "Makefile.in" ] || {
 ./autogen.sh
 }
 [ -f "Makefile" ] || {
 ./configure --prefix $PD_INSTALL_DIR --disable-portaudio
 }
-make -j$(getconf _NPROCESSORS_ONLN) install
+make -j$(getconf _NPROCESSORS_ONLN)
 
 set -m
 
