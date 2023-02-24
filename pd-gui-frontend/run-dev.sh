@@ -2,7 +2,7 @@
 
 docker build --tag pd-gui-frontend --target dev .
 
-docker run -p 127.0.0.1:5173:5173 \
+docker run -p 0.0.0.0:8080:5173 \
   --rm --interactive --tty \
   -v "$(pwd)/workspace":/workspace:z \
   -v "$(pwd)/../patches":/patches:z \
