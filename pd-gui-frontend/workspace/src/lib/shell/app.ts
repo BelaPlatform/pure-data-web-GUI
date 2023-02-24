@@ -27,7 +27,8 @@ export class App {
   constructor() {
     console.log('App!')
     this.wm = new WindowManager(this)
-    this.io = new WebSocketIO('ws://localhost:8081')
+    let addr = 'ws://' + window.location.hostname +':8081';
+    this.io = new WebSocketIO(addr)
     this.pd = new Pd(this)
     this.io.on_message = (event:MessageEvent) => {
       const interpreter = new Interpreter(this.pd)
