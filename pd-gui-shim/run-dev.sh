@@ -3,9 +3,10 @@ set -euo pipefail
 
 docker build --tag pd-gui-shim --target dev .
 
-docker run -p 0.0.0.0:8081:8081 \
+docker run -p 0.0.0.0:8081:8081 -p 0.0.0.0:8080:5173 \
   --rm --interactive --tty \
   -v "$(pwd)/workspace":/workspace:z \
+  -v "$(pwd)/../pd-gui-frontend/workspace":/workspace-frontend:z \
   -v "$(pwd)/../patches":/patches:z \
   -v "$(pwd)/../pd/pure-data":/pure-data:z \
   -h shim --name pd-gui-shim pd-gui-shim

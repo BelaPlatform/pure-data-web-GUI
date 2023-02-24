@@ -23,7 +23,7 @@ RUN curl -fsSL https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-li
 RUN mkdir -p /opt/nodejs
 RUN tar -xJvf /tmp/node.tar.xz --strip 1 -C /opt/nodejs
 
-EXPOSE 8081
+EXPOSE 8080 8081
 
 
 FROM base AS dev
@@ -37,14 +37,19 @@ USER ${USERNAME}
 ENV PATH "/opt/nodejs/bin:/workspace/node_modules/.bin:$PATH"
 RUN corepack enable
 RUN corepack prepare pnpm@7.27.0 --activate
-WORKDIR /workspace
 COPY dockerfs/build-pd.sh /usr/local/bin/
 COPY dockerfs/run.sh /usr/local/bin/
 
 FROM dev as build
 
 USER root
-COPY workspace /workspace/
+COPY ../pd-gui-frontend/workspace /workspace-frontend
+WORKDIR /workspace-frontend
+RUN pnpm install
+RUN pnpm run build
+
+COPY workspace /workspace
+WORKDIR /workspace
 RUN pnpm install
 RUN pnpm run build
 

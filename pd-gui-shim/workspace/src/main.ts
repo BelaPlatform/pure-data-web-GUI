@@ -62,9 +62,29 @@ pd.stderr.on('data', (data) => {
 })
 
 pd.on('close', (code) => {
-  console.log(`child process exited with code ${code}`)
+  console.log(`pd child process exited with code ${code}`)
 })
 
+const frontend = cp.spawn('pnpm', ['start:watch'], {
+  cwd: '/workspace-frontend'
+})
+
+frontend.stdout.on('data', (data) => {
+  console.log(`frontend: ${data}`)
+})
+
+frontend.stderr.on('data', (data) => {
+  console.log(`frontend-err: ${data}`)
+})
+
+frontend.on('close', (code) => {
+  console.log(`frontend child process exited with code ${code}`)
+})
+
+process.on('close', () => {
+  pd.kill(2)
+  frontend.kill(2)
+})
 const wss = new WebSocketServer({
   port: config.WS_PORT,
 })
