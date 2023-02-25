@@ -76,6 +76,11 @@ function on_edit_select_all() {
   canvas?.on_select_all()
 }
 
+function on_edit_dulicate() {
+  const app_ = get(app)
+  const canvas = get(app_.pd.active_canvas)
+  canvas?.on_duplicate()
+}
 
 function on_close_frame() {
   get(app).wm.close_active_frame()
@@ -159,7 +164,7 @@ export async function make_menu() {
     new MenuItem('Cut', on_edit_cut, [], 'Ctrl+X'),
     new MenuItem('Copy', on_edit_copy, [], 'Ctrl+C'),
     new MenuItem('Paste', on_edit_paste, [], 'Ctrl+V'),
-    new MenuItem('Duplicate'),
+    new MenuItem('Duplicate', on_edit_dulicate, [], 'Ctrl+D'),
     new MenuItem('SelectAll', on_edit_select_all, [], 'Ctrl+A'),
     new MenuItem('-'),
     new MenuItem('Connect Selection', on_edit_connect_selection, [], 'Ctrl+K'),
