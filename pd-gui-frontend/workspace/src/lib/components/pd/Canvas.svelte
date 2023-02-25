@@ -71,25 +71,25 @@
 
     if (event.key == '1' && event.ctrlKey) {
       event.preventDefault()
-      canvas.on_create_object()
+      canvas.on_put('obj')
       return
     }
 
     if (event.key == '2' && event.ctrlKey) {
       event.preventDefault()
-      canvas.on_create_message()
+      canvas.on_put('msg')
       return
     }
 
     if (event.key == '3' && event.ctrlKey) {
       event.preventDefault()
-      canvas.on_create_number()
+      canvas.on_put('floatatom')
       return
     }
 
     if (event.key == '5' && event.ctrlKey) {
       event.preventDefault()
-      canvas.on_create_comment()
+      canvas.on_put('text')
       return
     }
 
@@ -97,13 +97,13 @@
     // use altKey for now
     if (event.key == 'B' && event.altKey && event.shiftKey) {
       event.preventDefault()
-      canvas.on_create_bang()
+      canvas.on_put('bng')
       return
     }
 
     if (event.key == 'T' && event.altKey && event.shiftKey) {
       event.preventDefault()
-      canvas.on_create_toggle()
+      canvas.on_put('toggle')
       return
     }
 

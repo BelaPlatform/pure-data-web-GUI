@@ -2,6 +2,7 @@ import { get } from 'svelte/store'
 
 import { app } from '../stores/app'
 import { available_patches, type PatchFile } from '../stores/patches'
+import type { NodeType } from '../pd/pd_canvas'
 import MessageDialog from '$lib/components/pd/dialogs/MessageDialog.svelte'
 import FindDialog from '$lib/components/pd/dialogs/FindDialog.svelte'
 import PreferencesDialog from '$lib/components/pd/dialogs/PreferencesDialog.svelte'
@@ -129,6 +130,12 @@ function build_file_menu() : MenuItem[] {
   return pre.concat(recent).concat(post)
 }
 
+function on_put(what: NodeType) {
+  const app_ = get(app)
+  const canvas = get(app_.pd.active_canvas)
+  if (!canvas) { return }
+  canvas.on_put(what)
+}
 
 export async function make_menu() {
   let file_menu: MenuItem[] = build_file_menu()
@@ -146,10 +153,13 @@ export async function make_menu() {
   ]
 
   let put_menu: MenuItem[] = [
-    new MenuItem('Object'),
-    new MenuItem('Message'),
-    new MenuItem('Number'),
-    new MenuItem('...')
+    new MenuItem('Object', () => on_put('obj'), [], 'Ctrl+1'),
+    new MenuItem('Message', () => on_put('msg'), [], 'Ctrl+2'),
+    new MenuItem('Number', () => on_put('floatatom'), [], 'Ctrl+3'),
+    new MenuItem('Comment', () => on_put('text'), [], 'Ctrl+5'),
+    new MenuItem('-'),
+    new MenuItem('Bang', () => on_put('bng')),
+    new MenuItem('Toggle', () => on_put('toggle'))
   ]
 
   let find_menu: MenuItem[] = [

@@ -12,6 +12,8 @@ export type PopUp = {
   has_open: boolean
 }
 
+export type NodeType = 'obj' | 'msg' | 'floatatom' | 'text' | 'bng' | 'toggle'
+
 // events originating from pd are prefixed with handle_
 // events originating from user interaction with the frontend are prefixed with on_
 export class PdCanvas {
@@ -136,37 +138,23 @@ export class PdCanvas {
     this.pd.send(message)
   }
 
-  on_create_object() {
-    const message = `${this.id} obj 0;`
-    this.pd.send(message)
-  }
-
-  on_create_message() {
-    const message = `${this.id} msg 0;`
-    this.pd.send(message)
-  }
-
-  on_create_number() {
-    const message = `${this.id} floatatom 0;`
-    this.pd.send(message)
-  }
-
-  on_create_comment() {
-    const message = `${this.id} text 0;`
-    this.pd.send(message)
-  }
-
   private send_simple_command(command: string) {
     const message = `${this.id} ${command};`
     this.pd.send(message)
   }
 
-  on_create_bang() {
-    this.send_simple_command('bng')
-  }
-
-  on_create_toggle() {
-    this.send_simple_command('toggle')
+  on_put(node_type: NodeType) {
+    switch (node_type) {
+      case 'obj':
+      case 'msg':
+      case 'floatatom':
+      case 'text':
+        this.pd.send(`${this.id} ${node_type} 0;`)
+        break
+      case 'bng':
+      case 'toggle':
+        this.send_simple_command(`${node_type}`)
+    }
   }
 
   on_select_all() {
