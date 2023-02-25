@@ -4,8 +4,8 @@ import WebSocket, { WebSocketServer } from 'ws'
 
 import * as config from './config.js'
 
-let pd_client:net.Socket
-let ws_client:WebSocket
+let pd_client: net.Socket
+let ws_clients: WebSocket[] = []
 
 let buffer: string = ""
 
@@ -30,8 +30,8 @@ const server = net.createServer((client) => {
 
     if ((str[str.length-2] != ';' || str[str.length-1] != '\n') && !(str.endsWith('pdtk_ping\n'))) {
       console.log('!dont send, just buffer!')
-    } else if (ws_client) {
-      ws_client.send(buffer)
+    } else {
+      ws_clients.forEach(client => client.send(buffer))
       buffer = ""
     }
   })
@@ -70,13 +70,10 @@ const wss = new WebSocketServer({
   port: config.WS_PORT,
 })
 
-wss.on('connection', function connection(ws) {
+wss.on('connection', ws => {
   console.log('connection')
-  ws_client = ws
-  ws.on('message', function message(data) {
-    console.log('received: %s', data);
-    // ws.send(`OK : ${data}`);
-    const stringified_data = `${data}`
-    pd_client.write(stringified_data)
+  ws_clients.push(ws)
+  ws.on('message', data => {
+    pd_client.write(`${data}`)
   })
 })
