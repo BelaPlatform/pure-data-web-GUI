@@ -202,7 +202,6 @@
       const modifiers = 0
       const x = touch.clientX - box.x
       const y = touch.clientY - box.y
-      $app.log(`touchstart ${x} ${y}`)
       canvas.send_mouse_down(x, y, button, modifiers)
     }
   }
@@ -215,7 +214,6 @@
       const modifiers = 0
       const x = touch.clientX - box.x
       const y = touch.clientY - box.y
-      $app.log(`touchmove ${x} ${y}`)
       canvas.send_motion(x, y, modifiers)
     }
   }
@@ -228,7 +226,6 @@
       const button = 1
       const x = touch.clientX - box.x
       const y = touch.clientY - box.y
-      $app.log(`touend ${x} ${y}`)
       canvas.send_mouse_up(x, y, button)
     }
   }

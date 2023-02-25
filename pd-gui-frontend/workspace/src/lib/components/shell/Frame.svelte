@@ -15,22 +15,45 @@
     $app.wm.stack_top(frame)
   }
 
-  function on_drag_move(event: MouseEvent) {
+  function on_drag_move_mouse(event: MouseEvent) {
     frame.move_to(event.clientX - drag_offset.x, event.clientY - drag_offset.y)
   }
 
-  function on_drag_stop(_: MouseEvent) {
-    dragging = false
-    window.removeEventListener('mousemove', on_drag_move)
-    window.removeEventListener('mouseup', on_drag_stop)
+  function on_drag_move_touch(event: TouchEvent) {
+    const touch = event.targetTouches[0]
+    frame.move_to(touch.clientX - drag_offset.x, touch.clientY - drag_offset.y)
   }
 
-  function on_drag_start(event: MouseEvent) {
-    const origin = get(box).origin
+  function on_drag_stop_mouse(_: MouseEvent) {
+    dragging = false
+    window.removeEventListener('mousemove', on_drag_move_mouse)
+    window.removeEventListener('mouseup', on_drag_stop_mouse)
+  }
+
+  function on_drag_stop_touch(_: TouchEvent) {
+    dragging = false
+    window.removeEventListener('touchmove', on_drag_move_touch)
+    window.removeEventListener('touchend', on_drag_stop_touch)
+  }
+
+  function on_drag_start(offset: G.Point) {
     dragging = true
-    drag_offset = new G.Point(event.clientX - origin.x, event.clientY - origin.y)
-    window.addEventListener('mousemove', on_drag_move)
-    window.addEventListener('mouseup', on_drag_stop)
+    drag_offset = offset
+  }
+
+  function on_drag_start_mouse(event: MouseEvent) {
+    const origin = get(box).origin
+    on_drag_start(new G.Point(event.clientX - origin.x, event.clientY - origin.y))
+    window.addEventListener('mousemove', on_drag_move_mouse)
+    window.addEventListener('mouseup', on_drag_stop_mouse)
+  }
+
+  function on_drag_start_touch(event: TouchEvent) {
+    const touch = event.changedTouches[0]
+    const origin = get(box).origin
+    on_drag_start(new G.Point(touch.clientX - origin.x, touch.clientY - origin.y))
+    window.addEventListener('touchmove', on_drag_move_touch)
+    window.addEventListener('touchend', on_drag_stop_touch)
   }
 
   function on_resize_stop(_: MouseEvent) {
@@ -67,10 +90,12 @@
   style:--height="{$box.size.height}px"
   style:--z_index={$z_index}
   on:mousedown={on_clicked_inside}
+  on:touchstart={on_clicked_inside}
   on:keydown={on_clicked_inside}
   >
   <div class="titlebar"
-    on:mousedown={on_drag_start}
+    on:mousedown={on_drag_start_mouse}
+    on:touchstart={on_drag_start_touch}
     class:dragging={dragging}
     class:is_active={$is_active}
     >
