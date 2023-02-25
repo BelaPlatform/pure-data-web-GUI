@@ -24,7 +24,8 @@ export class PdConnection {
     })
   }
 
-  set_is_selected(value:boolean) {
+  set_is_selected(value: boolean) {
+    console.log(`set_is_selected ${value}`)
     this.is_selected.update(_ => { return value })
   }
 

@@ -239,9 +239,9 @@ export class Select extends Command {
   }
 
   override eval(pd: Pd) {
-    const widget = pd.widget_with_id(this.widget_id)
-    if (!widget) { return }
-    widget.set_is_selected(this.is_selected)
+    const object = pd.widget_or_connection_with_id(this.widget_id)
+    if (!object) { return }
+    object.set_is_selected(this.is_selected)
   }
 }
 

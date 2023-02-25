@@ -30,6 +30,7 @@
 
     &.selected {
       stroke: #00f;
+      stroke-width: 1px;
     }
   }
 </style>
