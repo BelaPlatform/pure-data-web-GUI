@@ -88,8 +88,7 @@
   function on_resize_start_touch(event: TouchEvent) {
     resizing = true
     const touch = event.changedTouches[0]
-    const origin = get(box).origin
-    drag_offset = new G.Point(touch.clientX - origin.x, touch.clientY - origin.y)
+    drag_offset = new G.Point(touch.clientX, touch.clientY)
     window.addEventListener('touchmove', on_resize_move_touch)
     window.addEventListener('touchend', on_resize_stop_touch)
   }
