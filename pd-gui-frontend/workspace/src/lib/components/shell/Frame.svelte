@@ -56,19 +56,42 @@
     window.addEventListener('touchend', on_drag_stop_touch)
   }
 
-  function on_resize_stop(_: MouseEvent) {
-    window.removeEventListener('mousemove', on_resize_move)
-    window.removeEventListener('mouseup', on_resize_stop)
+  function on_resize_stop_mouse(_: MouseEvent) {
+    window.removeEventListener('mousemove', on_resize_move_mouse)
+    window.removeEventListener('mouseup', on_resize_stop_mouse)
   }
 
-  function on_resize_move(event: MouseEvent) {
+  function on_resize_move_mouse(event: MouseEvent) {
     frame.resize_by(event.movementX, event.movementY)
   }
 
-  function on_resize_start(_: MouseEvent) {
+  function on_resize_start_mouse(_: MouseEvent) {
     resizing = true
-    window.addEventListener('mousemove', on_resize_move)
-    window.addEventListener('mouseup', on_resize_stop)
+    window.addEventListener('mousemove', on_resize_move_mouse)
+    window.addEventListener('mouseup', on_resize_stop_mouse)
+  }
+
+  function on_resize_move_touch(event: TouchEvent) {
+    const touch = event.changedTouches[0]
+    const movement_x = touch.clientX - drag_offset.x
+    const movement_y = touch.clientY - drag_offset.y
+    frame.resize_by(movement_x, movement_y)
+    drag_offset.x = touch.clientX
+    drag_offset.y = touch.clientY
+  }
+
+  function on_resize_stop_touch(_: TouchEvent) {
+    window.removeEventListener('touchmove', on_resize_move_touch)
+    window.removeEventListener('touchend', on_resize_stop_touch)
+  }
+
+  function on_resize_start_touch(event: TouchEvent) {
+    resizing = true
+    const touch = event.changedTouches[0]
+    const origin = get(box).origin
+    drag_offset = new G.Point(touch.clientX - origin.x, touch.clientY - origin.y)
+    window.addEventListener('touchmove', on_resize_move_touch)
+    window.addEventListener('touchend', on_resize_stop_touch)
   }
 
   $: box = frame.box
@@ -131,7 +154,8 @@
 
   {#if $is_resizable}
   <div class="resize_grip"
-    on:mousedown={on_resize_start}>
+    on:mousedown={on_resize_start_mouse}
+    on:touchstart={on_resize_start_touch}>
   </div>
   {/if}
 </div>
