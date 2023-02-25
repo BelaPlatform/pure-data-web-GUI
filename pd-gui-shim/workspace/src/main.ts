@@ -52,6 +52,7 @@ server.listen(config.GUI_PORT, () => {
   console.log(`server bound on ${config.GUI_PORT}`)
 })
 
+/*
 const pd = cp.spawn("/pure-data/src/pd", ["-guiport", `${config.GUI_PORT}`])
 pd.stdout.on('data', (data) => {
   console.log(`pd: ${data}`)
@@ -85,6 +86,7 @@ process.on('close', () => {
   pd.kill(2)
   frontend.kill(2)
 })
+*/
 const wss = new WebSocketServer({
   port: config.WS_PORT,
 })
