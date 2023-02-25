@@ -57,6 +57,12 @@ function on_edit_paste() {
   }
 }
 
+function on_edit_toggle_edit_mode() {
+  const app_ = get(app)
+  const canvas = get(app_.pd.active_canvas)
+  canvas?.on_toggle_edit_mode()
+}
+
 function on_close_frame() {
   get(app).wm.close_active_frame()
 }
@@ -135,6 +141,8 @@ export async function make_menu() {
     new MenuItem('Paste', on_edit_paste, [], 'Ctrl+V'),
     new MenuItem('Duplicate'),
     new MenuItem('SelectAll'),
+    new MenuItem('-'),
+    new MenuItem('Edit Mode', on_edit_toggle_edit_mode, [], 'Ctrl+E'),
   ]
 
   let put_menu: MenuItem[] = [
