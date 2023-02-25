@@ -16,7 +16,7 @@
 
   onMount(() => {
     frame.set_title('Send a Pd message')
-    frame.set_size(new G.Size(396, 92))
+    frame.set_size(new G.Size(420, 92))
     frame.set_is_resizable(false)
   })
 </script>
