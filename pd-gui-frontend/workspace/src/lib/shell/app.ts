@@ -66,4 +66,8 @@ export class App {
   did_destroy_canvas() {
     console.log('did_destroy_canvas')
   }
+
+  log(message: string) {
+    PdMessages.push(message, Direction.Internal)
+  }
 }

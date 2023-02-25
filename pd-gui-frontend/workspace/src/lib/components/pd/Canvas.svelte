@@ -1,6 +1,7 @@
 <script lang="ts">
   import { setContext } from 'svelte'
 
+  import { app } from '$lib/stores/app'
   import type { PdCanvas } from '$lib/pd/pd_canvas'
   import Node from './Node.svelte'
   import Noodle from './Noodle.svelte'
@@ -190,6 +191,48 @@
       canvas.send_key_up(key)
     }
   }
+
+  let canvas_svg_element:SVGSVGElement
+  function on_touchstart(event: TouchEvent) {
+    event.preventDefault()
+    for (let i = 0; i < event.changedTouches.length; ++i) {
+      const touch = event.changedTouches[i]
+      const box = canvas_svg_element.getBoundingClientRect()
+      const button = 1
+      const modifiers = 0
+      const x = touch.clientX - box.x
+      const y = touch.clientY - box.y
+      $app.log(`touchstart ${x} ${y}`)
+      canvas.send_mouse_down(x, y, button, modifiers)
+    }
+  }
+  
+  function on_touchmove(event: TouchEvent) {
+    event.preventDefault()
+    for (let i = 0; i < event.changedTouches.length; ++i) {
+      const touch = event.changedTouches[i]
+      const box = canvas_svg_element.getBoundingClientRect()
+      const modifiers = 0
+      const x = touch.clientX - box.x
+      const y = touch.clientY - box.y
+      $app.log(`touchmove ${x} ${y}`)
+      canvas.send_motion(x, y, modifiers)
+    }
+  }
+
+  function on_touchend(event: TouchEvent) {
+    event.preventDefault()
+    for (let i = 0; i < event.changedTouches.length; ++i) {
+      const touch = event.changedTouches[i]
+      const box = canvas_svg_element.getBoundingClientRect()
+      const button = 1
+      const x = touch.clientX - box.x
+      const y = touch.clientY - box.y
+      $app.log(`touend ${x} ${y}`)
+      canvas.send_mouse_up(x, y, button)
+    }
+  }
+
 </script>
 
 <svelte:window on:keydown={on_keydown} on:keyup={on_keyup} />
@@ -201,8 +244,12 @@
     on:mousedown={on_mousedown}
     on:mousemove={on_mousemove}
     on:mouseup={on_mouseup}
+    on:touchstart={on_touchstart}
+    on:touchmove={on_touchmove}
+    on:touchend={on_touchend}
     on:contextmenu|preventDefault={on_contextmenu}
-    class={$cursor}>
+    class={$cursor}
+    bind:this={canvas_svg_element}>
     {#each $widgets as widget(widget.id)}
       <Node {widget} />
     {/each}
@@ -216,6 +263,9 @@
   svg {
     width: 100%;
     height: 480px;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
 
     &.runmode_nothing {
       cursor: inherit;

@@ -7,7 +7,6 @@ import type { PdWidget } from './pd_widget'
 import type { PdConnection } from './pd_connection'
 import type * as G from '../utils/geometry'
 
-
 // events originating from pd are prefixed with handle_
 // events originating from user interaction with the frontend are prefixed with on_
 export class Pd {

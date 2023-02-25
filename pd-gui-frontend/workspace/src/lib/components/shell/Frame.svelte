@@ -126,6 +126,9 @@
     display: flex;
     flex-direction: column;
     user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+
     &.hidden {
       display: none;
     }
