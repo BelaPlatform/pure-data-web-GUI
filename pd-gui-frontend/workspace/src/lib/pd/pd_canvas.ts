@@ -24,8 +24,9 @@ export class PdCanvas {
   popup = writable<PopUp>({show: false, origin: G.NullPoint(), has_properties: false, has_open: false})
   size = writable<G.Size>(G.NullSize())
 
-  constructor(public id: string, public pd: Pd, size: G.Size) {
+  constructor(public id: string, public pd: Pd, size: G.Size, set_edit_mode_on: boolean) {
     this.size.set(size)
+    this.edit_mode.set(set_edit_mode_on)
   }
 
   handle_create_widget(id:string, klassname:string, x:number, y:number) {
@@ -82,10 +83,8 @@ export class PdCanvas {
   }
 
   on_toggle_edit_mode() {
-    this.edit_mode.update(value => {
-      this.send_set_editmode(!value)
-      return !value
-    })
+    const current = get(this.edit_mode)
+    this.send_set_editmode(!current)
   }
 
   handle_set_editmode(use_edit_mode: boolean) {

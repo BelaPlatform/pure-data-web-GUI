@@ -111,12 +111,10 @@ export function transform(root: RootNode) : Command[] {
     if (proc.id.name == 'pdtk_canvas_new') {
       const canvas_arg = proc.arguments[0] as Identifier
       const canvas_id = canvas_arg.name
-      // for (let arg of proc.arguments) {
-      //   console.log(arg)
-      // }
       const width = parseInt((proc.arguments[1] as NumberNode).value)
       const height = parseInt((proc.arguments[2] as NumberNode).value)
-      commands.push(new CanvasCommands.NewCanvas(canvas_id, new G.Size(width, height)))
+      const set_edit_mode_on = parseInt((proc.arguments[4] as NumberNode).value) == 1
+      commands.push(new CanvasCommands.NewCanvas(canvas_id, new G.Size(width, height), set_edit_mode_on))
       return
     }
 
