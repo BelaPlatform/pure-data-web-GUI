@@ -15,6 +15,10 @@
 
   onMount(() => {
     canvas.title.subscribe(t => {
+      console.log(t)
+      if (t.startsWith('PDUNTITLED') && !t.endsWith('.pd')) {
+        t = t.replace('PDUNTITLED', 'Untitled')
+      }
       frame.title.update(_ => t)
     })
 

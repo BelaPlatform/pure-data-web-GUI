@@ -13,6 +13,7 @@ export class Pd {
   canvases = writable<PdCanvas[]>([])
   active_canvas: Writable<PdCanvas | null> = writable(null)
   dsp_is_on = writable<boolean>(false)
+  next_untitled_id = 1
 
   constructor(public app: App) {
     console.log('Pd!')
@@ -43,7 +44,7 @@ export class Pd {
   }
 
   on_create_new_canvas() {
-    const message = `pd menunew PDUNTITLED /patches;`
+    const message = `pd menunew PDUNTITLED-${this.next_untitled_id++} /patches;`
     this.send(message)
   }
 

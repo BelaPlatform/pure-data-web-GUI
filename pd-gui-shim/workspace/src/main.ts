@@ -18,7 +18,7 @@ const server = net.createServer((client) => {
   client.on('data', (data) => {
     console.log(`#--${data}--#`)
     const str =  `${data}`
-    console.log(`#-- ${str.length} ${str[str.length-2]} ${str[str.length-1]} --#`)
+    // console.log(`#-- ${str.length} ${str[str.length-2]} ${str[str.length-1]} --#`)
 
     if (str.includes("set ::sys_searchpath")) {
       // ignore
