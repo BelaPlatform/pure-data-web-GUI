@@ -121,7 +121,9 @@
     class:dragging={dragging}
     class:is_active={$is_active}
     >
-    <span class="title">{$title}</span>
+    <span class="title">
+      {$title}
+    </span>
     <span class="buttons">
       <button
         on:click={_ => frame.hide()}>
@@ -202,10 +204,13 @@
 
     .title {
       padding: 3px;
+      flex-shrink: 1;
+      overflow: hidden;
     }
 
     .buttons {
       float: right;
+      margin-left: 12px;
       button {
         outline: none;
         border: none;

@@ -127,7 +127,7 @@ export class Raise extends Command {
   }
 }
 
-export class StartTextEditing extends Command {
+export class TextEditing extends Command {
   constructor(public canvas_id: string, public text_editing_is_on: boolean) {
     super()
   }
