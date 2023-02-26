@@ -89,6 +89,14 @@ export function transform(root: RootNode) : Command[] {
       return
     }
 
+    if (proc.id.name == 'pdtk_text_editing') {
+      const canvas_arg = proc.arguments[0] as Identifier
+      const text_editing_is_enabled = (parseInt((proc.arguments[2] as NumberNode).value || "0") || 0) == 1
+      const canvas_id = canvas_arg.name
+      commands.push(new CanvasCommands.StartTextEditing(canvas_id, text_editing_is_enabled))
+      return
+    }
+
     if (proc.id.name == 'pdtk_canvas_reflecttitle') {
       const canvas_arg = proc.arguments[0] as Identifier
       const canvas_id = canvas_arg.name

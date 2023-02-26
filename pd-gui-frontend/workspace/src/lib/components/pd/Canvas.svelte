@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { setContext } from 'svelte'
+  import { onMount, setContext } from 'svelte'
 
   import { app } from '$lib/stores/app'
   import type { PdCanvas } from '$lib/pd/pd_canvas'
@@ -13,7 +13,7 @@
   $: widgets = canvas.widgets
   $: connections = canvas.connections
   $: cursor = canvas.cursor
-
+  
   function on_mousedown(event:MouseEvent) {
     if (event.button != 0) {
       return
@@ -230,13 +230,29 @@
     }
   }
 
+  /* let text_input:HTMLInputElement */
+  onMount(() => {
+    canvas.text_edit_mode_enabled.subscribe(is_enabled => {
+      // console.log(`is_enabled ${is_enabled}`)
+      if (is_enabled && $app.user_agent.is_mobile) {
+        const text = prompt("enter obj text") || ""
+        // console.log(text)
+        // text_input.focus()
+        for (let idx = 0; idx < text.length; ++idx) {
+          const char_code = text.charCodeAt(idx)
+          // console.log(`send char ${char_code}`)
+          canvas.send_key_down(`${char_code}`)
+        }
+      }
+    })
+  })
 </script>
 
 <svelte:window on:keydown={on_keydown} on:keyup={on_keyup} />
 
 <div class="wrap">
   <PopUp canvas={canvas} />
-
+  <!-- <input type="text" bind:this={text_input} /> -->
   <svg xmlns="http://www.w3.org/2000/svg"
     on:mousedown={on_mousedown}
     on:mousemove={on_mousemove}

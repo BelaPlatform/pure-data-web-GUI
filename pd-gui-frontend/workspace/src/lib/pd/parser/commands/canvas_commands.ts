@@ -126,3 +126,17 @@ export class Raise extends Command {
     canvas.handle_raise()
   }
 }
+
+export class StartTextEditing extends Command {
+  constructor(public canvas_id: string, public text_editing_is_on: boolean) {
+    super()
+  }
+
+  override eval(pd: Pd) {
+    const canvas = pd.canvas_with_id(this.canvas_id)
+    if (!canvas) {
+      return
+    }
+    canvas.handle_text_editing(this.text_editing_is_on)
+  }
+}

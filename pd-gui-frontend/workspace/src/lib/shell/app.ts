@@ -16,6 +16,15 @@ export enum Theme {
   Purr
 }
 
+export type Platform = 'linux' | 'mac'
+export type Browser = 'chrome' | 'safari' | 'firefox'
+
+export type UserAgent = {
+  is_mobile: boolean
+  platform: Platform
+  browser: Browser
+}
+
 export class App {
   show_debug = writable<boolean>(false)
   theme = writable<Theme>(Theme.Vanilla)
@@ -23,6 +32,7 @@ export class App {
   wm: WindowManager
   pd: Pd
   io: WebSocketIO
+  user_agent: UserAgent
 
   constructor() {
     console.log('App!')
@@ -35,6 +45,7 @@ export class App {
       interpreter.interpret(event.data)
     }
     this.io.on_open = () => this.pd.send_init_sequence()
+    this.user_agent = {is_mobile: false, platform: 'linux', browser: 'chrome'}
   }
 
   async on_startup() {
@@ -44,6 +55,17 @@ export class App {
     this.menu.update(_ => m)
     this.wm.new_dialog_frame(PdDialog)
     PdMessages.push('Hello, World!', Direction.Internal)
+    PdMessages.push(navigator.userAgent, Direction.Internal)
+    if (navigator.userAgent.search('Macintosh') != -1) {
+      this.user_agent.platform = 'mac'
+    }
+    const contains_safari = navigator.userAgent.search('Safari') != -1
+    const contains_chrome = navigator.userAgent.search('Chrome') != -1
+    if (contains_safari && !contains_chrome) {
+      this.user_agent.browser = 'safari'
+    }
+    this.user_agent.is_mobile = navigator.maxTouchPoints > 0
+    PdMessages.push(`browser:${this.user_agent.browser} platform:${this.user_agent.platform} mobile:${this.user_agent.is_mobile}`, Direction.Internal)
   }
 
   on_new_patch() {

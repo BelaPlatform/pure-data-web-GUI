@@ -22,6 +22,7 @@ export class PdCanvas {
   connections = writable<PdConnection[]>([])
   is_mapped: boolean = false
   edit_mode = writable<boolean>(true)
+  text_edit_mode_enabled = writable<boolean>(false)
   cursor = writable<string>('runmode_nothing')
   popup = writable<PopUp>({show: false, origin: G.NullPoint(), has_properties: false, has_open: false})
   size = writable<G.Size>(G.NullSize())
@@ -215,5 +216,9 @@ export class PdCanvas {
     this.size.update(_ => size)
     const message = `${this.id} setbounds 0 0 ${size.width} ${size.height};`
     this.pd.send(message)
+  }
+
+  handle_text_editing(text_edit_mode_is_enabled: boolean) {
+    this.text_edit_mode_enabled.update(_ => text_edit_mode_is_enabled)
   }
 }
