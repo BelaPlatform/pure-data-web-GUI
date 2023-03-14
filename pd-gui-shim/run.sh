@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 docker build --tag pd-gui-shim-runner --target run .
 

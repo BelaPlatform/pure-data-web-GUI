@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 docker build --tag pd-gui-frontend-runner --target run .
 
