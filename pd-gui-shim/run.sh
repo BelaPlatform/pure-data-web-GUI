@@ -8,5 +8,4 @@ docker run -p 0.0.0.0:8081:8081 \
   -v "$(pwd)/workspace":/workspace:z \
   -v "$(pwd)/../patches":/patches:z \
   -v "$(pwd)/../pd/pure-data":/pure-data:z \
-  --network pd-gui-run \
   --name pd-gui-shim-runner pd-gui-shim-runner
