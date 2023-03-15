@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
+cd $(dirname $0)
+. ../parse-cli.inc #sets $NOPD_PARAMS
 
 docker build --tag pd-gui-shim --target dev .
 
