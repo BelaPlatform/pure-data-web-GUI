@@ -7,5 +7,4 @@ docker run -p 0.0.0.0:8080:3000 \
   --init \
   --rm --interactive --tty \
   -v "$(pwd)/../patches":/patches:z \
-  --network pd-gui-run \
   --name pd-gui-frontend-runner pd-gui-frontend-runner

@@ -52,7 +52,12 @@ WORKDIR /repo/pd-gui-frontend/workspace
 RUN pnpm install
 RUN pnpm run build
 
+COPY /pd /repo/pd
+WORKDIR /repo/pd
+
+COPY /index.js /repo/index.js
+
 FROM build as run
 WORKDIR /repo/
 
-CMD ["node", "/repo/index.js"]
+#CMD ["node", "/repo/index.js"]
