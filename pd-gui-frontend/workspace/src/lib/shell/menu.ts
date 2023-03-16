@@ -105,6 +105,10 @@ function on_show_about_pd_dialog() {
   get(app).wm.on_show_singleton_dialog('about')
 }
 
+function on_show_manual() {
+  window.open('https://puredata.info/docs/manuals/pd/')
+}
+
 function on_print() {
   window.print()
 }
@@ -199,7 +203,7 @@ export async function make_menu() {
 
   let help_menu: MenuItem[] = [
     new MenuItem('About Pd', on_show_about_pd_dialog),
-    new MenuItem('HTML Manual...'),
+    new MenuItem('HTML Manual...', on_show_manual),
     new MenuItem('Browser...'),
     new MenuItem('List of Objects...'),
     new MenuItem('...')

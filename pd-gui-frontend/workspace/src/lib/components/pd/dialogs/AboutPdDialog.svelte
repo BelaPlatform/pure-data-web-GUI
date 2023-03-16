@@ -26,7 +26,7 @@
   Reference manual for Pd lives in:<br>
   &nbsp;&nbsp;&nbsp;&nbsp;/opt/pd-gui/lib/pd/doc/1.manual/index.htm<br>
   or online:<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;<strike>https://msp.ucsd.edu/Pd_documentation/</strike><br><br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="https://puredata.info/docs/manuals/pd/" target="_blank" rel="noreferrer">https://puredata.info/docs/manuals/pd/</a><br><br>
   
   Information of all sorts (guides, development, meetings, more documentation, etc):<br>
   &nbsp;&nbsp;&nbsp;&nbsp;<a href="https://puredata.info" rel="noreferrer" target="_blank">https://puredata.info</a><br><br>
