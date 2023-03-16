@@ -10,7 +10,6 @@ export async function enumerate_patches() {
     method: 'GET'
   })
   const patches = await response.json()
-  console.log(patches)
   available_patches.update(_ => patches)
 }
 

@@ -24,7 +24,6 @@ export class Pd {
   }
 
   send_init_sequence() {
-    console.log('send_init_sequence')
     const message = "pd init / 0  8 5 10 10 6 13 12 7 15 16 10 19 24 14 29 37 22 44 17 10 20 20 12 24 24 14 29 32 19 38 47 28 56 73 44 86;"
     this.send(message)
   }
@@ -84,7 +83,6 @@ export class Pd {
   }
 
   handle_raise_canvas(canvas: PdCanvas) {
-    console.log('handle_raise')
     const found_frame = this.app.wm.frame_for_canvas(canvas)
     if (found_frame) {
       this.app.wm.stack_top(found_frame)

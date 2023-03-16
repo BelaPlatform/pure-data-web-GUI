@@ -114,7 +114,6 @@ function on_print() {
 }
 
 function build_file_menu() : MenuItem[] {
-  console.log('build_file_menu()')
   const pre = [
     new MenuItem('New', on_new_patch, [], 'Alt+N'),
     new MenuItem('Open'),

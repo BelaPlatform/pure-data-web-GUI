@@ -1,7 +1,3 @@
-<script lang="ts">
-  console.log('+layout::module')
-</script>
-
 <slot></slot>
 
 <style lang="scss">

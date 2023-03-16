@@ -52,7 +52,6 @@ export class App {
     const m = await make_menu()
     this.menu.update(_ => m)
     this.wm.on_show_singleton_dialog('pd')
-    PdMessages.push('Hello, World!', Direction.Internal)
     PdMessages.push(navigator.userAgent, Direction.Internal)
     if (navigator.userAgent.search('Macintosh') != -1) {
       this.user_agent.platform = 'mac'
