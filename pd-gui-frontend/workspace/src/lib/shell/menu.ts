@@ -120,7 +120,7 @@ function build_file_menu() : MenuItem[] {
     new MenuItem('Open'),
     new MenuItem('-'),
     new MenuItem('Save', on_save_patch, [], 'Ctrl+S'),
-    new MenuItem('SaveAs'),
+    // new MenuItem('SaveAs'),
     new MenuItem('-'),
     new MenuItem('Message', on_show_message_dialog),
     new MenuItem('Preferences', on_show_preferences_dialog),
@@ -184,29 +184,29 @@ export async function make_menu() {
 
   let find_menu: MenuItem[] = [
     new MenuItem('Find', on_show_find_dialog),
-    new MenuItem('Find Again'),
-    new MenuItem('Find Last Error')
+    /* new MenuItem('Find Again'),
+    new MenuItem('Find Last Error') */
   ]
 
   let media_menu: MenuItem[] = [
-    new MenuItem('DSP On'),
+    /* new MenuItem('DSP On'),
     new MenuItem('DSP Off'),
-    new MenuItem('Test Audio and Midi...'),
+    new MenuItem('Test Audio and Midi...'), */
     new MenuItem('Audio Settings...', on_show_audio_settings_dialog),
-    new MenuItem('...')
+    // new MenuItem('...')
   ]
 
   let window_menu: MenuItem[] = [
     new MenuItem('Pd Window', on_show_pd_dialog),
-    new MenuItem('Parent Window'),
+    // new MenuItem('Parent Window'),
   ]
 
   let help_menu: MenuItem[] = [
     new MenuItem('About Pd', on_show_about_pd_dialog),
     new MenuItem('HTML Manual...', on_show_manual),
-    new MenuItem('Browser...'),
+    /* new MenuItem('Browser...'),
     new MenuItem('List of Objects...'),
-    new MenuItem('...')
+    new MenuItem('...') */
   ]
 
   const menu: MenuItem[] = [
