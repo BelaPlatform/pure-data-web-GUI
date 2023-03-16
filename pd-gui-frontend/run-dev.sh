@@ -5,7 +5,7 @@ cd $(dirname $0)
 
 docker build --tag pd-gui-frontend --target dev .
 
-docker run -p 0.0.0.0:8080:5173 \
+docker run -p 0.0.0.0:8080:8080 \
   --rm --interactive --tty \
   -v "$(pwd)/workspace":/workspace:z \
   -v "$(pwd)/../patches":/patches:z \

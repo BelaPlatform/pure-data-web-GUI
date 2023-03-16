@@ -48,4 +48,4 @@ FROM build as run
 
 EXPOSE 8080
 
-CMD ["node", "/workspace/dist/"]
+CMD PORT=8080 node /workspace/dist/

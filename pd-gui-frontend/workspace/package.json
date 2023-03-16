@@ -11,8 +11,8 @@
 		"pnpm": "^7.27.0"
 	},
 	"scripts": {
-		"start:watch": "vite dev --host",
-		"build": "vite build",
+		"start:watch": "vite dev --host -d --port 8080",
+		"build": "vite build -d",
 		"preview": "vite preview",
 		"test": "playwright test",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
