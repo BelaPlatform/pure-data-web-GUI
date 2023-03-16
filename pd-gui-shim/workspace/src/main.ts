@@ -52,18 +52,22 @@ server.listen(config.GUI_PORT, () => {
   console.log(`server bound on ${config.GUI_PORT}`)
 })
 
-const pd = cp.spawn("/pure-data/src/pd", ["-guiport", `${config.GUI_PORT}`])
-pd.stdout.on('data', (data) => {
-  console.log(`pd: ${data}`)
-})
+console.log(process.argv)
+let startPd = !("nopd" === process.argv[2]);
+if(startPd) {
+  const pd = cp.spawn("/pure-data/src/pd", ["-guiport", `${config.GUI_PORT}`])
+  pd.stdout.on('data', (data) => {
+    console.log(`pd: ${data}`)
+  })
 
-pd.stderr.on('data', (data) => {
-  console.error(`pd-err: ${data}`)
-})
+  pd.stderr.on('data', (data) => {
+    console.error(`pd-err: ${data}`)
+  })
 
-pd.on('close', (code) => {
-  console.log(`child process exited with code ${code}`)
-})
+  pd.on('close', (code) => {
+    console.log(`child process exited with code ${code}`)
+  })
+}
 
 const wss = new WebSocketServer({
   port: config.WS_PORT,

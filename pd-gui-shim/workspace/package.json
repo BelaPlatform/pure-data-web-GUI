@@ -14,6 +14,7 @@
 	"main": "dist/main.js",
 	"scripts": {
 		"start:watch": "tsc-watch --onSuccess \"node .\"",
+		"start:watch:nopd": "tsc-watch --onSuccess \"node . nopd\"",
 		"build": "tsc",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
