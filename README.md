@@ -21,7 +21,6 @@ Additionally:
 - if you have more than one tab on one or more devices open with the page loaded, it will misfunction without warning you about it. Just make sure you use a single window at all times.
 - vslider/hslider are not handled properly.
 - audio and MIDI I/O is currently not possible when running Pd inside the Docker container. You can start Pd externally and connect to the shim instead if you want audio and MIDI I/O to work.
-- ctrl-4 doesn't create a symbol
 - on macos, always use ctrl instead of cmd
 - refreshing the page while one or more patches are open will hide them
 - loading patches from arbitrary locations

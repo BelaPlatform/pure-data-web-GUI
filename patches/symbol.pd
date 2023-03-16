@@ -1,0 +1,14 @@
+#N canvas 529 256 793 519 12;
+#X symbolatom 125 159 15 0 0 0 - - - 0;
+#X msg 141 99 set hi;
+#X msg 125 71 symbol hello\ world;
+#X obj 125 192 print symbol_box;
+#X msg 155 129 bang;
+#X text 25 30 Symbol boxes are like number boxes but hold a symbol instead of a number:, f 61;
+#X text 276 69 set and output a symbol;
+#X text 198 103 set only - don't output;
+#X text 193 127 output only - don't change value;
+#X connect 0 0 3 0;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 4 0 0 0;

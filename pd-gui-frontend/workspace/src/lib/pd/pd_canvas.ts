@@ -12,7 +12,7 @@ export type PopUp = {
   has_open: boolean
 }
 
-export type NodeType = 'obj' | 'msg' | 'floatatom' | 'text' | 'bng' | 'toggle'
+export type NodeType = 'obj' | 'msg' | 'floatatom' | 'symbolatom' | 'text' | 'bng' | 'toggle'
 
 // events originating from pd are prefixed with handle_
 // events originating from user interaction with the frontend are prefixed with on_
@@ -149,6 +149,7 @@ export class PdCanvas {
       case 'obj':
       case 'msg':
       case 'floatatom':
+      case 'symbolatom':
       case 'text':
         this.pd.send(`${this.id} ${node_type} 0;`)
         break

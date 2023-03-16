@@ -171,6 +171,7 @@ export async function make_menu() {
     new MenuItem('Object', () => on_put('obj'), [], 'Ctrl+1'),
     new MenuItem('Message', () => on_put('msg'), [], 'Ctrl+2'),
     new MenuItem('Number', () => on_put('floatatom'), [], 'Ctrl+3'),
+    new MenuItem('Symbol', () => on_put('symbolatom'), [], 'Ctrl+4'),
     new MenuItem('Comment', () => on_put('text'), [], 'Ctrl+5'),
     new MenuItem('-'),
     new MenuItem('Bang', () => on_put('bng')),
