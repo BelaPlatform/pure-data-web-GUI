@@ -1,0 +1,4 @@
+[submodule "pd/pure-data"]
+	path = pd/pure-data
+	url = https://github.com/giuliomoro/pure-data-1/
+	branch = 1695/draft-1
