@@ -8,22 +8,9 @@ Under the hood, the shim starts the Pd backend passing it a GUI port, so that it
 
 `pd -guiport 56026`
 
-## Things that currently work
+A little example:
 
-A lot. Most of those that work on the Pd branch we are using. Additionally, there is touch support so you can (although in a cumbersome way) edit patches from a touch screen. Hint: use the "Edit->Connect selection" menu entry to create connection between selected objects. ctrl-1, ctrl-2, ctrl-3, ctrl-4, ctrl-5 to create new objects.
-
-## Things that currently don't work
-
-Several. All bugs/regressions inherited from the Pd branch we are using, e.g.:
-- cannot patch to second inlet/second outlet.
-Additionally:
-- on macos, you cannot use a keyboard shortcut to create a new window, but can do that from the File menu.
-- if you have more than one tab on one or more devices open with the page loaded, it will misfunction without warning you about it. Just make sure you use a single window at all times.
-- vslider/hslider are not handled properly.
-- audio and MIDI I/O is currently not possible when running Pd inside the Docker container. You can start Pd externally and connect to the shim instead if you want audio and MIDI I/O to work.
-- on macos, always use ctrl instead of cmd
-- refreshing the page while one or more patches are open will hide them
-- loading patches from arbitrary locations
+[Screencast from 2023-02-04 07-50-02.webm](https://user-images.githubusercontent.com/4260604/225753604-0c28cdbc-6faf-4acb-ad5f-16a6870775fe.webm)
 
 ### Shim - `./pd-gui-shim`
 
@@ -37,11 +24,33 @@ It parses messages from the Pd backend and renders Pd patches, objects, menus an
 
 ### Pd
 
-We are using the refactored core/GUI protocol as per https://github.com/pure-data/pure-data/pull/1765 and remotes/origin/feature/1695/draft-1
+We are using the refactored core/GUI protocol as per https://github.com/pure-data/pure-data/pull/1765 and https://github.com/umlaeute/pure-data/tree/feature/1695/draft-1 . If you are starting Pd manually, you should also use the same.
+
+### Things that currently work
+
+A lot. Most of those that work on the Pd branch we are using. Additionally, there is touch support so you can (although in a cumbersome and limited way) edit patches from a touch screen. Hint: use the "Edit->Connect selection" menu entry to create connection between selected objects. ctrl-1, ctrl-2, ctrl-3, ctrl-4, ctrl-5 to create new objects.
+
+### Things that currently don't work
+
+Several. All bugs/regressions inherited from the Pd branch we are using.
+
+Additionally:
+- on macos, you cannot use a keyboard shortcut to create a new window, but can do that from the File menu.
+- if you have more than one tab on one or more devices open with the page loaded, it will misfunction without warning you about it. Just make sure you use a single window at all times.
+- vslider/hslider are not handled properly.
+- audio and MIDI I/O is currently not possible when running Pd inside the Docker container. You can start Pd externally and connect to the shim instead if you want audio and MIDI I/O to work.
+- ctrl-shift shortcuts not implemented
+- on macos, always use ctrl instead of cmd
+- refreshing the page while one or more patches are open will hide them
+- loading patches from arbitrary locations
 
 ## Quick start
 
 In all the commands below, if you replace `$NOPD` with `nopd`, it will be assumed that you intend to start Pd manually with `/path/to/pd -guiport 56026`. This has to be done after starting the shim.
+Get the repo and submodules:
+```
+git clone --recursive https://github.com/BelaPlatform/pure-data-web-GUI
+```
 
 ### Start shim (and Pd)
 
