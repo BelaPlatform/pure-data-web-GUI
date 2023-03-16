@@ -39,9 +39,13 @@ const server = net.createServer((client) => {
   client.on('error', (data) => {
     console.log(`ERROR ${data} `)
   })
+  /*
+  // watchdog is only handled by Pd if it is running on Linux
+  // we disable it here to avoid spurious warnings on other platforms
   const watchdog = setInterval(() => {
     pd_client.write("pd watchdog;")
   }, 2000)
+  */
 })
 
 server.on('error', (err) => {
