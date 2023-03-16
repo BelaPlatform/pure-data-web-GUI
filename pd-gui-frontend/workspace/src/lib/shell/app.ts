@@ -35,7 +35,6 @@ export class App {
   user_agent: UserAgent
 
   constructor() {
-    console.log('App!')
     this.wm = new WindowManager(this)
     let addr = 'ws://' + window.location.hostname +':8081';
     this.io = new WebSocketIO(addr)
@@ -49,11 +48,10 @@ export class App {
   }
 
   async on_startup() {
-    console.log('on_startup')
     await enumerate_patches()
     const m = await make_menu()
     this.menu.update(_ => m)
-    this.wm.new_dialog_frame(PdDialog)
+    this.wm.on_show_singleton_dialog('pd')
     PdMessages.push('Hello, World!', Direction.Internal)
     PdMessages.push(navigator.userAgent, Direction.Internal)
     if (navigator.userAgent.search('Macintosh') != -1) {
@@ -81,7 +79,6 @@ export class App {
   }
 
   did_create_canvas(canvas: PdCanvas) {
-    console.log('did_create_canvas')
     this.wm.new_canvas_frame(canvas)
   }
 

@@ -3,12 +3,7 @@ import { get } from 'svelte/store'
 import { app } from '../stores/app'
 import { available_patches, type PatchFile } from '../stores/patches'
 import type { NodeType } from '../pd/pd_canvas'
-import MessageDialog from '$lib/components/pd/dialogs/MessageDialog.svelte'
-import FindDialog from '$lib/components/pd/dialogs/FindDialog.svelte'
-import PreferencesDialog from '$lib/components/pd/dialogs/PreferencesDialog.svelte'
-import AudioSettingsDialog from '$lib/components/pd/dialogs/AudioSettingsDialog.svelte'
-import PdDialog from '$lib/components/pd/dialogs/PdDialog.svelte'
-import AboutPdDialog from '$lib/components/pd/dialogs/AboutPdDialog.svelte'
+import type { DialogType } from './wm'
 
 export class MenuItem {
   constructor(public title: string,
@@ -87,27 +82,27 @@ function on_close_frame() {
 }
 
 function on_show_message_dialog() {
-  get(app).wm.new_dialog_frame(MessageDialog)
+  get(app).wm.on_show_singleton_dialog('message')
 }
 
 function on_show_find_dialog() {
-  get(app).wm.new_dialog_frame(FindDialog)
+  get(app).wm.on_show_singleton_dialog('find')
 }
 
 function on_show_preferences_dialog() {
-  get(app).wm.new_dialog_frame(PreferencesDialog)
+  get(app).wm.on_show_singleton_dialog('preferences')
 }
 
 function on_show_audio_settings_dialog() {
-  get(app).wm.new_dialog_frame(AudioSettingsDialog)
+  get(app).wm.on_show_singleton_dialog('audio-settings')
 }
 
 function on_show_pd_dialog() {
-  get(app).wm.new_dialog_frame(PdDialog)
+  get(app).wm.on_show_singleton_dialog('pd')
 }
 
 function on_show_about_pd_dialog() {
-  get(app).wm.new_dialog_frame(AboutPdDialog)
+  get(app).wm.on_show_singleton_dialog('about')
 }
 
 function on_print() {

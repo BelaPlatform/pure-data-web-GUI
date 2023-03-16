@@ -16,7 +16,6 @@ export class Pd {
   next_untitled_id = 1
 
   constructor(public app: App) {
-    console.log('Pd!')
     // this.active_canvas = writable<PdCanvas>(new PdCanvas('nil', this, G.NullSize()))
   }
 

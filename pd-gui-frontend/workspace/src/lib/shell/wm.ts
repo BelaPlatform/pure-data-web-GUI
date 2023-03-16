@@ -4,6 +4,14 @@ import type { App } from './app'
 import * as G from '../utils/geometry'
 import PatchView from '$lib/components/shell/PatchView.svelte'
 import type { PdCanvas } from '../pd/pd_canvas'
+import MessageDialog from '$lib/components/pd/dialogs/MessageDialog.svelte'
+import FindDialog from '$lib/components/pd/dialogs/FindDialog.svelte'
+import PreferencesDialog from '$lib/components/pd/dialogs/PreferencesDialog.svelte'
+import AudioSettingsDialog from '$lib/components/pd/dialogs/AudioSettingsDialog.svelte'
+import PdDialog from '$lib/components/pd/dialogs/PdDialog.svelte'
+import AboutPdDialog from '$lib/components/pd/dialogs/AboutPdDialog.svelte'
+
+export type DialogType = 'pd' | 'message' | 'find' | 'preferences' | 'audio-settings' | 'about'
 
 function DefaultBox() { 
   return new G.Rect(new G.Point(24, 24), new G.Size(480, 360)) 
@@ -100,13 +108,11 @@ export class WindowManager {
   next_id = 1
   n_frames = 0
   active_frame: Frame | null = null
+  singleton_dialogs: [DialogType, Frame][] = []
 
-  constructor(public app: App) {
-    console.log('WindowManager!')
-  }
+  constructor(public app: App) {}
 
   use_app(app: App) {
-    console.log('WindowManager::use_app')
     this.app = app
   }
 
@@ -136,6 +142,37 @@ export class WindowManager {
     })
     this.n_frames++
     this.stack_top(frame)
+    return frame
+  }
+
+  on_show_singleton_dialog(dialog: DialogType) {
+    let dialog_frame = this.singleton_dialogs.find(dlg => dlg[0] == dialog)
+    if (dialog_frame === undefined) {
+      let component: any = null
+      switch(dialog) {
+        case 'about':
+          component = AboutPdDialog
+          break
+        case 'audio-settings':
+          component = AudioSettingsDialog
+          break
+        case 'find':
+          component = FindDialog
+          break
+        case 'message':
+          component = MessageDialog
+          break
+        case 'pd':
+          component = PdDialog
+          break
+        case 'preferences':
+          component = PreferencesDialog
+          break
+      }
+      dialog_frame = [dialog, this.new_dialog_frame(component)]
+      this.singleton_dialogs.push(dialog_frame)
+    }
+    this.stack_top(dialog_frame[1])
   }
 
   frame_for_canvas(canvas: PdCanvas) {
@@ -152,6 +189,12 @@ export class WindowManager {
   }
 
   close_frame(frame: Frame) {
+    // is it one of the singleton dialogs?
+    if (this.singleton_dialogs.find(d => d[1] == frame)) {
+      frame.hidden.update(_ => true)
+      return
+    }
+
     // does it have a side effect?
     if (frame.close_effect) {
       frame.close_effect()
@@ -183,13 +226,13 @@ export class WindowManager {
   }
 
   stack_top(frame: Frame) {
-    // console.log('stack_top')
     let z_index = 9999
     get(this.frames).forEach(f => {
       const is_new_top = frame.id == f.id
       f.z_index.update(_ => z_index + (is_new_top ? 9999 : 0))
       f.is_active.update(_ => is_new_top)
     })
+    frame.hidden.update(_ => false)
     this.active_frame = frame
   }
 
