@@ -10,7 +10,7 @@ Under the hood, the shim starts the Pd backend passing it a GUI port, so that it
 
 ## Things that currently work
 
-A lot. Most of those that work on the Pd branch we are using. Additionally, there is touch support so you can (although in a cumbersome way) edit patches from a touch screen. Hint: use the "Edit->Connect selection" menu entry to create connection between selected objects. ctrl-1, ctrl-2, ctrl-3, ctrl-5 to create new objects.
+A lot. Most of those that work on the Pd branch we are using. Additionally, there is touch support so you can (although in a cumbersome way) edit patches from a touch screen. Hint: use the "Edit->Connect selection" menu entry to create connection between selected objects. ctrl-1, ctrl-2, ctrl-3, ctrl-4, ctrl-5 to create new objects.
 
 ## Things that currently don't work
 
