@@ -74,10 +74,12 @@ export class Pd {
     if (get(this.active_canvas)?.id == canvas.id) {
       map_other_canvas = true
     }
+    
     this.canvases.update((cs: PdCanvas[]) => {
       cs = cs.filter(c => c.id != canvas.id)
       return cs
     })
+
     if (map_other_canvas) {
       const new_active_canvas = get(this.canvases).at(0)
       if (new_active_canvas) {
@@ -85,7 +87,7 @@ export class Pd {
       }
     }
 
-    this.app.did_destroy_canvas()
+    this.app.handle_did_destroy_canvas(canvas)
   }
 
   handle_raise_canvas(canvas: PdCanvas) {

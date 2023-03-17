@@ -81,8 +81,12 @@ export class App {
     this.wm.new_canvas_frame(canvas)
   }
 
-  did_destroy_canvas() {
-    console.log('did_destroy_canvas')
+  handle_did_destroy_canvas(canvas: PdCanvas) {
+    const frame = this.wm.frame_for_canvas(canvas)
+    if (frame) {
+      frame.close_effect = null
+      this.wm.close_frame(frame)
+    }
   }
 
   log(message: string) {

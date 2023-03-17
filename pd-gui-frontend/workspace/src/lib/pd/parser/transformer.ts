@@ -322,7 +322,8 @@ export function transform(root: RootNode) : Command[] {
     if (proc.id.name.startsWith('.x') && proc.id.name.endsWith('.c')) {
       if (proc.arguments.length >= 2) {
         const action = proc.arguments[0] as Identifier
-        if(action.name == 'delete') {
+        const what = proc.arguments[1] as StringNode
+        if(action.name == 'delete' && what.value == "all") {
           commands.push(new PdCommands.DeleteCanvas(clean_canvas_id(proc.id.name)))
           return
         }

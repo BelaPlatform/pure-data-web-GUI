@@ -177,15 +177,15 @@ export class WindowManager {
 
   frame_for_canvas(canvas: PdCanvas) {
     const frames_ = get(this.frames)
-    let frame: Frame | null = null
-    frames_.forEach(f => {
+    return frames_.find(f => {
       if (f.klass.component == PatchView) {
-        console.log('is PatchView')
+        if (f.klass.props.canvas !== undefined) {
+          return f.klass.props.canvas === canvas
+        }
       } else {
-        console.log('not a PatchView')
+        return false
       }
     })
-    return frame
   }
 
   close_frame(frame: Frame) {
