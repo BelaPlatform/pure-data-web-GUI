@@ -7,6 +7,7 @@ import * as WidgetCommands from './commands/widget_commands'
 import { type IOLetType, IOLetScope } from '../pd_widget'
 import * as G from '../../utils/geometry'
 
+
 function clean_canvas_id(cid: string) {
   if (cid.endsWith('.c')) {
     return cid.split('.c')[0]
@@ -315,6 +316,17 @@ export function transform(root: RootNode) : Command[] {
       const is_activated = parseInt(is_activated_arg.value) == 1
       commands.push(new WidgetCommands.Activate(widget_id_arg.name, is_activated))
       return
+    }
+
+    // legacy style canvas command
+    if (proc.id.name.startsWith('.x') && proc.id.name.endsWith('.c')) {
+      if (proc.arguments.length >= 2) {
+        const action = proc.arguments[0] as Identifier
+        if(action.name == 'delete') {
+          commands.push(new PdCommands.DeleteCanvas(clean_canvas_id(proc.id.name)))
+          return
+        }
+      }
     }
 
     commands.push(new UnrecognizedCommand(proc.id.name))

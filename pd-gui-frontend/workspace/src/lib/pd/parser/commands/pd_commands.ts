@@ -34,3 +34,18 @@ export class Dsp extends Command {
     pd.handle_dsp(this.dsp_is_on)
   }
 }
+
+
+export class DeleteCanvas extends Command {
+  constructor(public canvas_id: string) {
+    super()
+  }
+
+  override eval(pd: Pd) {
+    const canvas = pd.canvas_with_id(this.canvas_id)
+    if (!canvas) {
+      return
+    }
+    pd.handle_destroy(canvas)
+  }
+}

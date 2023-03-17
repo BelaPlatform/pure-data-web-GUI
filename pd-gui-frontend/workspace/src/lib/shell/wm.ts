@@ -245,6 +245,12 @@ export class WindowManager {
       return
     }
 
+    if (event.key == 'r' && event.altKey) {
+      event.preventDefault()
+      this.app.pd.send_refresh_gui()
+      return
+    }
+
     if (event.key == 'n' && event.altKey) {
       this.app.on_new_patch()
       event.preventDefault()

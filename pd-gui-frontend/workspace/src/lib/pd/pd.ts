@@ -26,10 +26,16 @@ export class Pd {
   send_init_sequence() {
     const message = "pd init / 0  8 5 10 10 6 13 12 7 15 16 10 19 24 14 29 37 22 44 17 10 20 20 12 24 24 14 29 32 19 38 47 28 56 73 44 86;"
     this.send(message)
+    this.send_refresh_gui()
   }
 
   send_ping() {
     const message = "pd ping;"
+    this.send(message)
+  }
+
+  send_refresh_gui() {
+    const message = "pd refresh-gui;"
     this.send(message)
   }
 
