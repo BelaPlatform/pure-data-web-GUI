@@ -6,6 +6,7 @@
   import CanvasComponent from '../pd/Canvas.svelte'
   import type { PdCanvas } from '$lib/pd/pd_canvas'
   import type { Frame } from '$lib/shell/wm'
+  import * as Geometry from '$lib/utils/geometry'
 
   export let canvas: PdCanvas
   export let frame: Frame
@@ -25,6 +26,9 @@
     frame.set_size(size)
     frame.box.subscribe(box => {
       canvas.on_set_size(box.size)
+      canvas.origin.update(_ => {
+        return new Geometry.Point(box.origin.x, box.origin.y + 24)
+      })
     })
     frame.close_effect = () => {
       pd.on_close(canvas)

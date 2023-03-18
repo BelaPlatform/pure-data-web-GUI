@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount, setContext } from 'svelte'
+  import { get } from 'svelte/store'
 
   import { app } from '$lib/stores/app'
   import type { PdCanvas } from '$lib/pd/pd_canvas'
@@ -14,15 +15,6 @@
   $: connections = canvas.connections
   $: cursor = canvas.cursor
   
-  function on_mousedown(event:MouseEvent) {
-    if (event.button != 0) {
-      return
-    }
-    const button = 1
-    const modifiers = (event.ctrlKey ? 2 : 0) + (event.altKey ? 4 : 0)
-    canvas.send_mouse_down(event.offsetX, event.offsetY, button, modifiers)
-  }
-
   function find_node_for_target(target:any) {
     let node_id = ""
     let element = target as HTMLElement
@@ -50,13 +42,36 @@
     canvas.send_mouse_down(event.offsetX, event.offsetY, 3, 8)
   }
 
+  function global_to_local(event:MouseEvent) {
+    const origin = get(canvas.origin)
+    const x = event.clientX - origin.x
+    const y = event.clientY - origin.y
+    return {x, y}
+  }
+
+  function on_mousedown(event:MouseEvent) {
+    if (event.button != 0) {
+      return
+    }
+    console.log(event.target)
+    if (event.target == canvas_svg_element) {
+      console.log('on svg')
+    }
+    const {x, y} = global_to_local(event)
+    const button = 1
+    const modifiers = (event.ctrlKey ? 2 : 0) + (event.altKey ? 4 : 0)
+    canvas.send_mouse_down(x, y, button, modifiers)
+  }
+
   function on_mouseup(event:MouseEvent) {
-    canvas.send_mouse_up(event.offsetX, event.offsetY, event.button)
+    const {x, y} = global_to_local(event)
+    canvas.send_mouse_up(x, y, event.button)
   }
 
   function on_mousemove(event:MouseEvent) {
     const modifiers = (event.ctrlKey ? 2 : 0) + (event.altKey ? 4 : 0)
-    canvas.send_motion(event.offsetX, event.offsetY, modifiers)
+    const {x, y} = global_to_local(event)
+    canvas.send_motion(x, y, modifiers)
   }
 
   function on_keydown(event:KeyboardEvent) {
@@ -233,7 +248,7 @@
   /* let text_input:HTMLInputElement */
   onMount(() => {
     canvas.text_edit_mode_enabled.subscribe(is_enabled => {
-      // console.log(`is_enabled ${is_enabled}`)
+      console.log(`text_edit_mode_enabled ${is_enabled}`)
       if (is_enabled && $app.user_agent.is_mobile) {
         const text = prompt("enter obj text") || ""
         // console.log(text)
@@ -250,6 +265,8 @@
 
 <svelte:window on:keydown={on_keydown} on:keyup={on_keyup} />
 
+<!-- on:contextmenu|preventDefault={on_contextmenu} -->
+
 <div class="wrap">
   <PopUp canvas={canvas} />
   <!-- <input type="text" bind:this={text_input} /> -->
@@ -260,7 +277,6 @@
     on:touchstart={on_touchstart}
     on:touchmove={on_touchmove}
     on:touchend={on_touchend}
-    on:contextmenu|preventDefault={on_contextmenu}
     class={$cursor}
     bind:this={canvas_svg_element}>
     {#each $widgets as widget(widget.id)}

@@ -118,6 +118,8 @@ export function transform(root: RootNode) : Command[] {
     }
 
     if (proc.id.name == 'pdtk_canvas_new') {
+      console.log('pdtk_canvas_new')
+      console.log(proc.arguments)
       const canvas_arg = proc.arguments[0] as Identifier
       const canvas_id = canvas_arg.name
       const width = parseInt((proc.arguments[1] as NumberNode).value)
@@ -233,7 +235,14 @@ export function transform(root: RootNode) : Command[] {
     }
 
     if (proc.id.name == 'textselect') {
-      commands.push(new IgnoredCommand('textselect'))
+      const widget_id = (proc.arguments[0] as Identifier).name
+      let start = 0
+      let end = 0
+      if (proc.arguments.length >= 3) {
+        start = parseInt((proc.arguments[1] as NumberNode).value)
+        end = parseInt((proc.arguments[2] as NumberNode).value)
+      }
+      commands.push(new WidgetCommands.TextSelect(widget_id, start, end))
       return
     }
 

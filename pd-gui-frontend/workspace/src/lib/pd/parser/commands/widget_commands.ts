@@ -257,3 +257,16 @@ export class Activate extends Command {
     widget.set_is_activated(this.is_activated)
   }
 }
+
+export class TextSelect extends Command {
+  constructor(public widget_id: string,
+    public start: number, public end: number) {
+    super()
+  }
+
+  override eval(pd: Pd) {
+    const widget = pd.widget_with_id(this.widget_id)
+    if (!widget) { return }
+    widget.handle_text_selection(this.start, this.end)
+  }
+}

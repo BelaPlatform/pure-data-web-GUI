@@ -26,6 +26,7 @@ export class PdCanvas {
   cursor = writable<string>('runmode_nothing')
   popup = writable<PopUp>({show: false, origin: G.NullPoint(), has_properties: false, has_open: false})
   size = writable<G.Size>(G.NullSize())
+  origin = writable<G.Point>(G.NullPoint())
 
   constructor(public id: string, public pd: Pd, size: G.Size, set_edit_mode_on: boolean) {
     this.size.set(size)

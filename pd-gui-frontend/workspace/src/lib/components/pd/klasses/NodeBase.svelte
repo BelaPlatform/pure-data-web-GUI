@@ -1,18 +1,17 @@
 <script lang="ts">
   import type { PdWidget } from '$lib/pd/pd_widget'
+  import TextField from '../utils/TextField.svelte'
 
   export let widget:PdWidget
   export let text_only:boolean = false
   export let no_bg:boolean = false
+  export let no_text:boolean = false
   export let poly:string|null = null
 
-  $: text = widget.text
   $: box = widget.box
   $: selected = widget.is_selected
   $: state = widget.state
   $: bcolor = widget.bcolor
-  $: tspans = $text.split('\n')
-  $: fontsize = widget.fontsize
 </script>
 
 <g style:--bcolor={$bcolor}>
@@ -23,14 +22,8 @@
       <rect width={$box.size.width} height={$box.size.height} class:no_bg={no_bg} class:selected={$selected} class="{$state}"/>
     {/if}
   {/if}
-
-  {#if $text != ""}
-    <text x={4}
-      style:--fontsize="{$fontsize}px">
-      {#each tspans as t }
-        <tspan dy="{$fontsize + 2}" dx="0" x="0">{t.trim()}</tspan>
-      {/each}
-    </text>
+  {#if !no_text}
+    <TextField {widget} />
   {/if}
 </g>
 
@@ -57,11 +50,5 @@
     &.broken {
       stroke-dasharray: 6 6;
     }
-  }
-
-  text {
-    user-select: none;
-    font-family: 'DejaVu Sans Mono', 'Courier New', Courier, monospace;
-    font-size: var(--fontsize);
   }
 </style>

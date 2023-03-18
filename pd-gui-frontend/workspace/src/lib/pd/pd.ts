@@ -15,9 +15,7 @@ export class Pd {
   dsp_is_on = writable<boolean>(false)
   next_untitled_id = 1
 
-  constructor(public app: App) {
-    // this.active_canvas = writable<PdCanvas>(new PdCanvas('nil', this, G.NullSize()))
-  }
+  constructor(public app: App) {}
 
   send(message: string) {
     this.app.io.send(message)

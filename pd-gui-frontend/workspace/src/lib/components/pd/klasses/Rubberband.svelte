@@ -5,4 +5,4 @@
   export let widget:PdWidget
 </script>
 
-<NodeBase {widget} no_bg={true} />
+<NodeBase {widget} no_bg={true} no_text={true} />

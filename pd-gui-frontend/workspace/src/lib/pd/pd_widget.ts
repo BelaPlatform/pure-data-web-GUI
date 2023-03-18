@@ -31,10 +31,16 @@ export class IOLet {
 export type WidgetState = 'normal' | 'edit' | 'broken'
 export type WidgetFont = 'dejavu' | 'helvetica' | 'times'
 
+type TextSelection = {
+  start: number
+  end: number
+}
+
 export class PdWidget {
   inlets: IOLet[] = []
   outlets: IOLet[] = []
   text = writable<string>('')
+  text_selection = writable<TextSelection>({start: 0, end: 0})
   box: Writable<G.Rect>
   is_activated = writable<boolean>(false)
   is_selected = writable<boolean>(false)
@@ -139,5 +145,11 @@ export class PdWidget {
 
   set_font(font: string) {
     this.font.update(_ => font)
+  }
+
+  handle_text_selection(start: number, end: number) {
+    this.text_selection.update(_ => {
+      return {start, end}
+    })
   }
 }
