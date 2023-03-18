@@ -45,6 +45,10 @@
       console.log(rows)
     })
     selection.subscribe(s => {
+      if ($text.length == 0) {
+        cursor = {x: 0, y: 0}
+        return
+      }
       if (s.start == $text.length) {
         const last_row = rows[rows.length - 1]
         const last_cell = last_row.cells[last_row.cells.length - 1]
