@@ -69,12 +69,13 @@
 
 </script>
 
+<!-- <text>{$fontsize}</text> -->
 {#each rows as row}
   {#each row.cells as cell}
     {#if $selection.start <= cell.idx_in_string && $selection.end > cell.idx_in_string}
-      <rect x={cell.idx_in_row * 8} y={row.idx * 12} width="8" height="14" class="bg" />
+      <rect x={cell.idx_in_row * $fontsize / 1.8} y={row.idx  * $fontsize } width={$fontsize / 1.8 + 1} height={$fontsize + 4} class="bg" />
     {/if}
-    <text x={cell.idx_in_row * 7} y={12 + row.idx * 12} 
+    <text x={cell.idx_in_row * $fontsize / 1.8} y={(row.idx + 1) * $fontsize + 1} 
       style:--fontsize="{$fontsize}px"
       class:selected={$selection.start <= cell.idx_in_string && $selection.end > cell.idx_in_string}>
       {cell.char}
@@ -83,7 +84,7 @@
 {/each}
 
 {#if $state == 'edit'}
-  <line x1={cursor.x * 8} x2={cursor.x * 8} y1={cursor.y * 12} y2={cursor.y * 12 +16} class="cursor" />
+  <line x1={cursor.x * 8} x2={cursor.x * 8} y1={cursor.y * 12} y2={cursor.y * 12 + 16} class="cursor" />
 {/if}
 
 <style lang="scss">
