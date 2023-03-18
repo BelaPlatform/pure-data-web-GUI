@@ -74,7 +74,7 @@
     {#if $selection.start <= cell.idx_in_string && $selection.end > cell.idx_in_string}
       <rect x={cell.idx_in_row * 8} y={row.idx * 12} width="8" height="14" class="bg" />
     {/if}
-    <text x={cell.idx_in_row * 8} y={12 + row.idx * 12} 
+    <text x={cell.idx_in_row * 7} y={12 + row.idx * 12} 
       style:--fontsize="{$fontsize}px"
       class:selected={$selection.start <= cell.idx_in_string && $selection.end > cell.idx_in_string}>
       {cell.char}
