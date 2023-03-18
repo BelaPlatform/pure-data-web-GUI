@@ -42,7 +42,6 @@
   onMount(() => {
     text.subscribe(t => {
       rows = cellify_text(t)
-      console.log(rows)
     })
     selection.subscribe(s => {
       if ($text.length == 0) {
@@ -65,7 +64,6 @@
           }
         }
       }
-
     })
   })
 

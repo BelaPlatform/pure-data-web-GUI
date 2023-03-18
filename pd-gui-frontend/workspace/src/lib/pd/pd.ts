@@ -55,8 +55,8 @@ export class Pd {
     this.send(message)
   }
 
-  handle_new_canvas_with_id(id: string, size: G.Size, set_edit_mode_on: boolean) {
-    const canvas = new PdCanvas(id, this, size, set_edit_mode_on)
+  handle_new_canvas_with_id(id: string, size: G.Size, origin: G.Point, set_edit_mode_on: boolean) {
+    const canvas = new PdCanvas(id, this, size, origin, set_edit_mode_on)
     this.canvases.update((cs: PdCanvas[]) => {
       cs = cs.concat([canvas])
       return cs

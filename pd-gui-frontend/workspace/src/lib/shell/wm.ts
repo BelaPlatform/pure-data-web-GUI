@@ -118,8 +118,14 @@ export class WindowManager {
 
   new_canvas_frame(canvas: PdCanvas) {
     const box = DefaultBox()
-    box.origin.x += this.next_id * 24
-    box.origin.y += this.next_id * 24
+    box.origin.x = get(canvas.origin).x
+    box.origin.y = get(canvas.origin).y
+    if (box.origin.x == 0) {
+      box.origin.x = this.next_id * 24
+    }
+    if (box.origin.y == 0) {
+      box.origin.y = this.next_id * 24
+    }
 
     const w = new Frame(this.next_id++, new ViewKlass(PatchView, {canvas}), box)
     this.frames.update(ws => {

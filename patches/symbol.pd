@@ -1,4 +1,4 @@
-#N canvas 529 256 793 519 12;
+#N canvas 427 427 74 -64 12;
 #X symbolatom 125 159 15 0 0 0 - - - 0;
 #X msg 141 99 set hi;
 #X msg 125 71 symbol hello\ world;

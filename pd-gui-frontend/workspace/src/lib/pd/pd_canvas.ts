@@ -28,8 +28,12 @@ export class PdCanvas {
   size = writable<G.Size>(G.NullSize())
   origin = writable<G.Point>(G.NullPoint())
 
-  constructor(public id: string, public pd: Pd, size: G.Size, set_edit_mode_on: boolean) {
+  constructor(public id: string, public pd: Pd, size: G.Size, origin: G.Point, set_edit_mode_on: boolean) {
     this.size.set(size)
+    this.origin.set(origin)
+    if (origin.x > 1000) {
+      origin.x -= 1000
+    }
     this.edit_mode.set(set_edit_mode_on)
   }
 
@@ -216,7 +220,8 @@ export class PdCanvas {
 
   on_set_size(size: G.Size) {
     this.size.update(_ => size)
-    const message = `${this.id} setbounds 0 0 ${size.width} ${size.height};`
+    const origin = get(this.origin)
+    const message = `${this.id} setbounds ${origin.x} ${origin.y} ${size.width} ${size.height};`
     this.pd.send(message)
   }
 

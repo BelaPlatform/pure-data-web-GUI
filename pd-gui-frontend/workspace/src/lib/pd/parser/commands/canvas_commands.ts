@@ -39,12 +39,12 @@ export class SetParents extends Command {
 
 
 export class NewCanvas extends Command {
-  constructor(public canvas_id: string, public size: G.Size, public set_edit_mode_on: boolean) {
+  constructor(public canvas_id: string, public size: G.Size, public origin: G.Point, public set_edit_mode_on: boolean) {
     super()
   }
 
   override eval(pd: Pd) { 
-    pd.handle_new_canvas_with_id(this.canvas_id, this.size, this.set_edit_mode_on)
+    pd.handle_new_canvas_with_id(this.canvas_id, this.size, this.origin, this.set_edit_mode_on)
   }
 }
 

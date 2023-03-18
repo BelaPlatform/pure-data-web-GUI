@@ -53,10 +53,6 @@
     if (event.button != 0) {
       return
     }
-    console.log(event.target)
-    if (event.target == canvas_svg_element) {
-      console.log('on svg')
-    }
     const {x, y} = global_to_local(event)
     const button = 1
     const modifiers = (event.ctrlKey ? 2 : 0) + (event.altKey ? 4 : 0)
@@ -251,17 +247,12 @@
     }
   }
 
-  /* let text_input:HTMLInputElement */
   onMount(() => {
     canvas.text_edit_mode_enabled.subscribe(is_enabled => {
-      console.log(`text_edit_mode_enabled ${is_enabled}`)
       if (is_enabled && $app.user_agent.is_mobile) {
         const text = prompt("enter obj text") || ""
-        // console.log(text)
-        // text_input.focus()
-        for (let idx = 0; idx < text.length; ++idx) {
+       for (let idx = 0; idx < text.length; ++idx) {
           const char_code = text.charCodeAt(idx)
-          // console.log(`send char ${char_code}`)
           canvas.send_key_down(`${char_code}`)
         }
       }
@@ -274,7 +265,6 @@
 
 <div class="wrap">
   <PopUp canvas={canvas} />
-  <!-- <input type="text" bind:this={text_input} /> -->
   <svg xmlns="http://www.w3.org/2000/svg"
     on:mousedown={on_mousedown}
     on:mousemove={on_mousemove}
