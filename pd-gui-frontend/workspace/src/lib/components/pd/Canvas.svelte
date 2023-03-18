@@ -186,6 +186,12 @@
       canvas.send_key_down('10')
     }
 
+    if (event.key == 'Home' || event.key == 'End') {
+      canvas.send_key_down(event.key)
+    }
+    
+    
+
     if (event.key == ' ') {
       canvas.send_key_down('32')
     }
@@ -265,7 +271,6 @@
 
 <svelte:window on:keydown={on_keydown} on:keyup={on_keyup} />
 
-<!-- on:contextmenu|preventDefault={on_contextmenu} -->
 
 <div class="wrap">
   <PopUp canvas={canvas} />
@@ -277,6 +282,7 @@
     on:touchstart={on_touchstart}
     on:touchmove={on_touchmove}
     on:touchend={on_touchend}
+    on:contextmenu|preventDefault={on_contextmenu}
     class={$cursor}
     bind:this={canvas_svg_element}>
     {#each $widgets as widget(widget.id)}
