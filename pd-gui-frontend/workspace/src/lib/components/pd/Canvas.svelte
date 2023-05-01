@@ -14,7 +14,8 @@
   $: widgets = canvas.widgets
   $: connections = canvas.connections
   $: cursor = canvas.cursor
-  
+  $: required_size = canvas.required_size
+
   function find_node_for_target(target:any) {
     let node_id = ""
     let element = target as HTMLElement
@@ -273,7 +274,9 @@
     on:touchend={on_touchend}
     on:contextmenu|preventDefault={on_contextmenu}
     class={$cursor}
-    bind:this={canvas_svg_element}>
+    bind:this={canvas_svg_element}
+    style:--min-width="{$required_size.width}px"
+    style:--min-height="{$required_size.height}px">
     {#each $widgets as widget(widget.id)}
       <Node {widget} />
     {/each}
@@ -285,18 +288,16 @@
 
 <style lang="scss">
   .wrap {
-    /* border: #00f solid thick; */
-    box-sizing: border-box;
     width: 100%;
     height: 100%;
-    /* overflow: scroll; */
+    overflow: auto;
   }
 
   svg {
-    width: 100%;
-    height: 100%;
-    /* border: #0f0 solid thick; */
-    box-sizing: border-box;
+    width: 99%;
+    height: 99%;
+    min-width: var(--min-width);
+    min-height: var(--min-height);
     user-select: none;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
