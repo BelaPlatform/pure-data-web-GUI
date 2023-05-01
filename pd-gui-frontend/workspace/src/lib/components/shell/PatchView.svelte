@@ -37,6 +37,4 @@
   })
 </script>
 
-<div>
-  <CanvasComponent canvas={canvas} is_active={$is_active} />
-</div>
+<CanvasComponent canvas={canvas} is_active={$is_active} />

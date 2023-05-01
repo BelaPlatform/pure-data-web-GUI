@@ -262,7 +262,6 @@
 
 <svelte:window on:keydown={on_keydown} on:keyup={on_keyup} />
 
-
 <div class="wrap">
   <PopUp canvas={canvas} />
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -285,9 +284,19 @@
 </div>
 
 <style lang="scss">
+  .wrap {
+    /* border: #00f solid thick; */
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    /* overflow: scroll; */
+  }
+
   svg {
     width: 100%;
-    height: 480px;
+    height: 100%;
+    /* border: #0f0 solid thick; */
+    box-sizing: border-box;
     user-select: none;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
