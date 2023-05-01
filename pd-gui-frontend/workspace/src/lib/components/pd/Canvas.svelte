@@ -33,22 +33,30 @@
     return node_id
   }
 
+  let canvas_container:HTMLDivElement
+  let canvas_svg_element:SVGSVGElement
+
+  function global_to_local(event:MouseEvent) {
+    const origin = get(canvas.origin)
+    const x = event.clientX - origin.x + canvas_container.scrollLeft
+    const y = event.clientY - origin.y + canvas_container.scrollTop
+    return {x, y}
+  }
+
+
   let popup_context_object_id = ""
   setContext('object-id', {
     getObjectId: () => popup_context_object_id
   })
 
   function on_contextmenu(event:MouseEvent) {
+    const {x, y} = global_to_local(event)
     popup_context_object_id = find_node_for_target(event.target)
-    canvas.send_mouse_down(event.offsetX, event.offsetY, 3, 8)
+    // add a small negative offset to make sure the popup is under the mouse
+    // and does not close when the mouse button is released
+    canvas.send_mouse_down(x - 2, y - 2, 3, 8)
   }
 
-  function global_to_local(event:MouseEvent) {
-    const origin = get(canvas.origin)
-    const x = event.clientX - origin.x
-    const y = event.clientY - origin.y
-    return {x, y}
-  }
 
   function on_mousedown(event:MouseEvent) {
     if (event.button != 0) {
@@ -210,7 +218,6 @@
     }
   }
 
-  let canvas_svg_element:SVGSVGElement
   function on_touchstart(event: TouchEvent) {
     event.preventDefault()
     for (let i = 0; i < event.changedTouches.length; ++i) {
@@ -263,7 +270,8 @@
 
 <svelte:window on:keydown={on_keydown} on:keyup={on_keyup} />
 
-<div class="wrap">
+<div class="wrap"
+  bind:this={canvas_container}>
   <PopUp canvas={canvas} />
   <svg xmlns="http://www.w3.org/2000/svg"
     on:mousedown={on_mousedown}

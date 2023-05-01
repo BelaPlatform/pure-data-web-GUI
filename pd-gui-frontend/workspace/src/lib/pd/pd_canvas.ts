@@ -49,19 +49,15 @@ export class PdCanvas {
       return ws
     })
 
-    // console.log('add_widget')
-    const wbox = get(widget.box)
-    const {x,y} = wbox.bottom_right()
-    let {width,height} = get(this.required_size)
-    if (x > width) {
-      width = x
-      console.log('require x-scroll')
+    const {x,y} = get(widget.box).bottom_right()
+    const {width,height} = get(this.required_size)
+    if (x > width || y > height) {
+      this.required_size.update(_ => new G.Size(x, y))
     }
-    if (y > height) {
-      height = y
-      console.log('require y-scroll')
-    }
-    this.required_size.update(_ => new G.Size(width, height))
+
+    /* const t = get(widget.text)
+    console.log(t) */
+    console.log(widget.klassname)
   }
 
   handle_create_connection(id: string) {
