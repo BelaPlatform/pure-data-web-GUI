@@ -1,31 +1,31 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@types/node': ^18.13.0
+  '@types/node': ^18.16.3
   '@types/ws': ^8.5.4
-  tsc-watch: ^6.0.0
-  typescript: ^4.9.5
-  ws: ^8.12.0
+  tsc-watch: ^6.0.4
+  typescript: ^5.0.4
+  ws: ^8.13.0
 
 dependencies:
-  ws: 8.12.0
+  ws: 8.13.0
 
 devDependencies:
-  '@types/node': 18.13.0
+  '@types/node': 18.16.3
   '@types/ws': 8.5.4
-  tsc-watch: 6.0.0_typescript@4.9.5
-  typescript: 4.9.5
+  tsc-watch: 6.0.4_typescript@5.0.4
+  typescript: 5.0.4
 
 packages:
 
-  /@types/node/18.13.0:
-    resolution: {integrity: sha512-gC3TazRzGoOnoKAhUx+Q0t8S9Tzs74z7m0ipwGpSqQrleP14hKxP4/JUeEQcD3W1/aIpnWl8pHowI7WokuZpXg==}
+  /@types/node/18.16.3:
+    resolution: {integrity: sha512-OPs5WnnT1xkCBiuQrZA4+YAV4HEJejmHneyraIaxsbev5yCEr6KMwINNFP9wQeFIw8FWcoTqF3vQsa5CDaI+8Q==}
     dev: true
 
   /@types/ws/8.5.4:
     resolution: {integrity: sha512-zdQDHKUgcX/zBc4GrwsE/7dVdAD8JR4EuiAXiiUhhfyIJXXb2+PrGshFyeXWQPMmmZ2XxgaqclgpIC7eTXc1mg==}
     dependencies:
-      '@types/node': 18.13.0
+      '@types/node': 18.16.3
     dev: true
 
   /cross-spawn/7.0.3:
@@ -121,8 +121,8 @@ packages:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
     dev: true
 
-  /tsc-watch/6.0.0_typescript@4.9.5:
-    resolution: {integrity: sha512-zgpju+/z5z29/kK5V28Nz16CMkX2voFOUxkTlCim/R25hxzbyUqu2NfTnmJBQfESBSPbEQUGqDdB9A8opAcB4A==}
+  /tsc-watch/6.0.4_typescript@5.0.4:
+    resolution: {integrity: sha512-cHvbvhjO86w2aGlaHgSCeQRl+Aqw6X6XN4sQMPZKF88GoP30O+oTuh5lRIJr5pgFWrRpF1AgXnJJ2DoFEIPHyg==}
     engines: {node: '>=12.12.0'}
     hasBin: true
     peerDependencies:
@@ -132,12 +132,12 @@ packages:
       node-cleanup: 2.1.2
       ps-tree: 1.2.0
       string-argv: 0.3.1
-      typescript: 4.9.5
+      typescript: 5.0.4
     dev: true
 
-  /typescript/4.9.5:
-    resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
-    engines: {node: '>=4.2.0'}
+  /typescript/5.0.4:
+    resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
+    engines: {node: '>=12.20'}
     hasBin: true
     dev: true
 
@@ -149,8 +149,8 @@ packages:
       isexe: 2.0.0
     dev: true
 
-  /ws/8.12.0:
-    resolution: {integrity: sha512-kU62emKIdKVeEIOIKVegvqpXMSTAMLJozpHZaJNDYqBjzlSYXQGviYwN1osDLJ9av68qHd4a2oSjd7yD4pacig==}
+  /ws/8.13.0:
+    resolution: {integrity: sha512-x9vcZYTrFPC7aSIbj7sRCYo7L/Xb8Iy+pW0ng0wt2vCJv7M9HOMy0UoN3rr+IFC7hb7vXoqS+P9ktyLLLhO+LA==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1

@@ -32,7 +32,7 @@ RUN useradd -m -u $UID -g $GID -o $USERNAME
 USER ${USERNAME}
 ENV PATH "/opt/nodejs/bin:/workspace/node_modules/.bin:$PATH"
 RUN corepack enable
-RUN corepack prepare pnpm@7.27.0 --activate
+RUN corepack prepare pnpm@8.3.1 --activate
 WORKDIR /workspace
 
 
