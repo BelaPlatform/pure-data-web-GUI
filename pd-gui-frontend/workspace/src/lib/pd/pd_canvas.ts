@@ -221,7 +221,7 @@ export class PdCanvas {
   on_set_size(size: G.Size) {
     this.size.update(_ => size)
     const origin = get(this.origin)
-    const message = `${this.id} setbounds ${origin.x} ${origin.y} ${size.width} ${size.height};`
+    const message = `${this.id} setbounds ${origin.x} ${origin.y} ${origin.x + size.width} ${origin.y + size.height};`
     this.pd.send(message)
   }
 

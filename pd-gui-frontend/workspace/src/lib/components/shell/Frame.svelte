@@ -122,6 +122,7 @@
     class:is_active={$is_active}
     >
     <span class="title">
+      <!-- {$box.size.width}/{$box.size.height}  -->
       {$title}
     </span>
     <span class="buttons">
