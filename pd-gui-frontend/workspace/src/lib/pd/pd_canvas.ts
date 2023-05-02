@@ -154,8 +154,7 @@ export class PdCanvas {
 
   on_save_as(name: string) {
     const directory = get(patch_directory)
-    console.log(directory)
-    const message = `${this.id} savetofile ${name}.pd /home/hase/Workspace/AIL/bela2-develop/proto/pd-gui/patches 0;`
+    const message = `${this.id} savetofile ${name}.pd ${directory} 0;`
     this.pd.send(message)
   }
 
