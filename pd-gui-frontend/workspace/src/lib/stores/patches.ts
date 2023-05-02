@@ -9,8 +9,10 @@ export async function enumerate_patches() {
   const response = await fetch('/patches', {
     method: 'GET'
   })
-  const patches = await response.json()
+  const {directory, patches} = await response.json()
   available_patches.update(_ => patches)
+  patch_directory.update(_ => directory)
 }
 
 export const available_patches = writable<PatchFile[]>([])
+export const patch_directory = writable<string>('')

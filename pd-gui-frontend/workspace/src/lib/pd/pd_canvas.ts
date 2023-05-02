@@ -4,6 +4,7 @@ import * as G from '../utils/geometry'
 import type { Pd } from './pd'
 import { PdConnection } from './pd_connection'
 import { PdWidget } from './pd_widget'
+import { patch_directory } from '../stores/patches'
 
 export type PopUp = {
   show: boolean
@@ -54,10 +55,6 @@ export class PdCanvas {
     if (x > width || y > height) {
       this.required_size.update(_ => new G.Size(x, y))
     }
-
-    /* const t = get(widget.text)
-    console.log(t) */
-    console.log(widget.klassname)
   }
 
   handle_create_connection(id: string) {
@@ -152,6 +149,13 @@ export class PdCanvas {
 
   on_save() {
     const message = `${this.id} menusave;`
+    this.pd.send(message)
+  }
+
+  on_save_as(name: string) {
+    const directory = get(patch_directory)
+    console.log(directory)
+    const message = `${this.id} savetofile ${name}.pd /home/hase/Workspace/AIL/bela2-develop/proto/pd-gui/patches 0;`
     this.pd.send(message)
   }
 

@@ -100,7 +100,7 @@
   $: is_active = frame.is_active
   $: is_resizable = frame.is_resizable
   $: is_maximized = frame.is_maximized
-
+  $: is_hideable = frame.is_hideable
 </script>
 
 <div class="wrap"
@@ -126,10 +126,14 @@
       {$title}
     </span>
     <span class="buttons">
+      {#if $is_hideable}
       <button
         on:click={_ => frame.hide()}>
         -
       </button>
+      {:else}
+        &nbsp;&nbsp;&nbsp;
+      {/if}
       {#if $is_resizable}
         <button
           on:click={_ => frame.maximize(window.innerWidth, window.innerHeight)}>

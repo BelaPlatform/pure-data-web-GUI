@@ -29,6 +29,14 @@ function on_save_patch() {
   }
 }
 
+function on_save_patch_as() {
+  const app_ = get(app)
+  const canvas = get(app_.pd.active_canvas)
+  if (canvas) {
+    get(app).wm.on_show_save_as_dialog_for_canvas(canvas)
+  }
+}
+
 function on_edit_cut() {
   const app_ = get(app)
   const canvas = get(app_.pd.active_canvas)
@@ -119,7 +127,7 @@ function build_file_menu() : MenuItem[] {
     new MenuItem('Open'),
     new MenuItem('-'),
     new MenuItem('Save', on_save_patch, [], 'Ctrl+S'),
-    // new MenuItem('SaveAs'),
+    new MenuItem('Save As...', on_save_patch_as, [], 'Ctrl+Shift+S'),
     new MenuItem('-'),
     new MenuItem('Message', on_show_message_dialog),
     new MenuItem('Preferences', on_show_preferences_dialog),

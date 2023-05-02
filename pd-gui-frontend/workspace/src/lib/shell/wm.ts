@@ -10,6 +10,7 @@ import PreferencesDialog from '$lib/components/pd/dialogs/PreferencesDialog.svel
 import AudioSettingsDialog from '$lib/components/pd/dialogs/AudioSettingsDialog.svelte'
 import PdDialog from '$lib/components/pd/dialogs/PdDialog.svelte'
 import AboutPdDialog from '$lib/components/pd/dialogs/AboutPdDialog.svelte'
+import SaveAsDialog from '$lib/components/pd/dialogs/SaveAsDialog.svelte'
 
 export type DialogType = 'pd' | 'message' | 'find' | 'preferences' | 'audio-settings' | 'about'
 
@@ -34,6 +35,7 @@ export class Frame {
   is_active = writable<boolean>(false)
   is_resizable = writable<boolean>(true)
   is_maximized = writable<boolean>(false)
+  is_hideable = writable<boolean>(true)
   dialogs: Frame[] = []
   parent: Frame|null = null
   view: View
@@ -101,6 +103,11 @@ export class Frame {
   set_is_resizable(is_resizable: boolean) {
     this.is_resizable.update(_ => is_resizable)
   }
+
+  set_is_hideable(is_hideable: boolean) {
+    this.is_hideable.update(_ => is_hideable)
+  }
+
 }
 
 export class WindowManager {
@@ -179,6 +186,13 @@ export class WindowManager {
       this.singleton_dialogs.push(dialog_frame)
     }
     this.stack_top(dialog_frame[1])
+  }
+
+  on_show_save_as_dialog_for_canvas(canvas: PdCanvas) {
+    const component = SaveAsDialog
+    const frame = this.new_dialog_frame(component)
+    frame.klass.props.canvas = canvas
+    this.stack_top(frame)
   }
 
   frame_for_canvas(canvas: PdCanvas) {
