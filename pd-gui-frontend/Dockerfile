@@ -1,7 +1,7 @@
-FROM debian:bookworm-20230109 AS base
+FROM debian:11.2 AS base
 
 LABEL author="Sebastian Stang <sebastian@chair.audio>"
-LABEL version="1.0"
+LABEL version="1.1"
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
@@ -14,7 +14,7 @@ RUN apt-get update && \
         xz-utils
 
 
-ARG NODE_VERSION=19.6.0
+ARG NODE_VERSION=18.16.0
 RUN curl -fsSL https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz --output /tmp/node.tar.xz
 RUN mkdir -p /opt/nodejs
 RUN tar -xJvf /tmp/node.tar.xz --strip 1 -C /opt/nodejs
@@ -32,7 +32,7 @@ RUN useradd -m -u $UID -g $GID -o $USERNAME
 USER ${USERNAME}
 ENV PATH "/opt/nodejs/bin:/workspace/node_modules/.bin:$PATH"
 RUN corepack enable
-RUN corepack prepare pnpm@8.3.1 --activate
+RUN corepack prepare pnpm@8.5.0 --activate
 WORKDIR /workspace
 
 
