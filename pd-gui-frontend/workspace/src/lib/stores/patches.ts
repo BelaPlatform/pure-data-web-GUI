@@ -6,8 +6,7 @@ export type PatchFile = {
 }
 
 export async function enumerate_patches() {
-  const dir = process.env.OVERRIDE_PATCH_DIRECTORY || "/patches"
-  const response = await fetch(dir, {
+  const response = await fetch('/patches', {
     method: 'GET'
   })
   const {directory, patches} = await response.json()
