@@ -2,10 +2,11 @@ import { writable, type Writable, get } from 'svelte/store'
 
 import type { App } from '../shell/app'
 import { PdCanvas } from './pd_canvas'
-import type { PatchFile } from '$lib/stores/patches'
+import { type PatchFile, patch_directory } from '$lib/stores/patches'
 import type { PdWidget } from './pd_widget'
 import type { PdConnection } from './pd_connection'
 import type * as G from '../utils/geometry'
+
 
 // events originating from pd are prefixed with handle_
 // events originating from user interaction with the frontend are prefixed with on_
@@ -46,7 +47,7 @@ export class Pd {
   }
 
   on_create_new_canvas() {
-    const message = `pd menunew PDUNTITLED-${this.next_untitled_id++} /patches;`
+    const message = `pd menunew PDUNTITLED-${this.next_untitled_id++} ${get(patch_directory)};`
     this.send(message)
   }
 
