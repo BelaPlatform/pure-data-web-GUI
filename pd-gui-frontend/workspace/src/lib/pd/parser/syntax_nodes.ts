@@ -1,4 +1,4 @@
-import type { TokenType } from "./tokens"
+import type { Token, TokenType } from "./tokens"
 
 export class SyntaxNode {}
 
@@ -15,10 +15,16 @@ export class StringNode extends ValueNode {
 }
 
 export class VectorNode extends ValueNode {
-  elements: SyntaxNode[] = []
 
-  constructor() { 
-    super() 
+  raw_text: string = ''
+
+  constructor(public start: Token, public end: Token, public elements: SyntaxNode[], src: string) { 
+    super()
+    this.raw_text = src.substring(start.start_idx!, end.start_idx! - 1)
+  }
+
+  as_text() : string {
+    return this.raw_text
   }
 }
 

@@ -61,23 +61,13 @@ export class Config extends Command {
       this.properties.forEach(p => {
         switch(p.key) {
           case 'text': {
-            // console.log('text!')
-            // console.log(p.value)
             if (p.value instanceof StringNode) {
               let text = (p.value as StringNode).value
               text = text.replace('\\[', '[')
               text = text.replace('\\]', ']')
               object.set_text(text)
             } else if (p.value instanceof VectorNode) {
-              // -text {}
-              if (p.value.elements.length == 0) {
-                object.set_text("")
-              }
-              // -text {0}
-              else {
-                const text = ((p.value as VectorNode).elements[0] as NumberNode).value
-                object.set_text(text)
-              }
+              object.set_text(p.value.as_text())
             }
           } break;
           case 'size': {

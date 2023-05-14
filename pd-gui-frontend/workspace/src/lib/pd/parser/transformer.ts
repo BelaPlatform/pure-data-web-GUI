@@ -128,7 +128,11 @@ export function transform(root: RootNode) : Command[] {
         origin.x = parseInt(xy[1])
         origin.y = parseInt(xy[2])
       } catch(e: unknown) {}
-      const set_edit_mode_on = parseInt((proc.arguments[4] as NumberNode).value) == 1
+
+      let set_edit_mode_on = false
+      try {
+        set_edit_mode_on = parseInt((proc.arguments[4] as NumberNode).value) == 1
+      } catch(e: unknown) {}
       commands.push(new CanvasCommands.NewCanvas(canvas_id, new G.Size(width, height), origin, set_edit_mode_on))
       return
     }

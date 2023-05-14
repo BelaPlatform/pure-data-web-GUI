@@ -50,26 +50,27 @@ describe('transform canvas procs with one arg', () => {
   })
 })
 
-describe('transform canvas procs with one arg', () => {
+describe('transform canvas procs with many args', () => {
   it('transforms pdtk_canvas_new', () => {
     const canvas_id = '.x2221af0.c'
     const id = new Identifier('pdtk_canvas_new')
     const proc = new Procedure(id)
     const arg = new Identifier(canvas_id)
+    const x = new NumberNode('0', 'IntegerLiteral')
+    const y = new NumberNode('0', 'IntegerLiteral')
     proc.arguments.push(arg)
+    proc.arguments.push(x)
+    proc.arguments.push(y)
     const root = new RootNode()
     root.procs.push(proc)
     const commands = transform(root)
     expect(commands.length).toBe(1)
     const command = commands[0] 
     expect(command).toBeInstanceOf(CanvasCommands.NewCanvas)
-    const get_scroll_command = command as CanvasCommands.NewCanvas
-    expect(get_scroll_command.canvas_id).toBe(canvas_id)
+    const new_canvas_command = command as CanvasCommands.NewCanvas
+    expect(new_canvas_command.canvas_id).toBe(canvas_id)
   })
-})
 
-
-describe('transform canvas procs with many args', () => {
   it('transforms ::pd::canvas::set_cursor .x2221af0.c runmode_nothing', () => {
     const canvas_id = '.x2221af0.c'
     const cleaned_canvas_id = canvas_id.split('.c')[0]

@@ -1,6 +1,6 @@
 export type TokenType =
   'BraceLeft' | 'BraceRight' | 'ParenLeft' | 'ParenRight' | 'BracketLeft' | 'BracketRight' | 'Semicolon' | 'Newline' |
-  'ColonColon' | 'Minus' | 'Plus' |
+  'ColonColon' | 'Minus' | 'Plus' | 'Dollar' |
   'Identifier' |
   'StringLiteral' | 'ColorLiteral' | 'IntegerLiteral' | 'FPLiteral' |
   'Unknown' | 
@@ -8,5 +8,6 @@ export type TokenType =
 
 export type Token = {
   type: TokenType
+  start_idx?: number
   lexeme?: string
 }

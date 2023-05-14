@@ -15,6 +15,10 @@ function is_alpha(char: string) {
   return /^[a-zA-Z]+$/.test(char)
 }
 
+function is_hex(char: string) {
+  return /^[a-fA-F0-9]+$/.test(char)
+}
+
 function is_alnum(char: string) {
   return is_digit(char) || is_alpha(char)
 }
@@ -50,7 +54,12 @@ export class Lexer {
 
     if (char == '+') {
       this.advance(1)
-      return {type: 'Plus'}  
+      return {type: 'Plus', lexeme: '+'}
+    }
+
+    if (char == '$') {
+      this.advance(1)
+      return {type: 'Dollar', lexeme: '$'}
     }
 
     if (char == '-') {
@@ -67,14 +76,14 @@ export class Lexer {
       let token = this.try_string()
       if (!token) {
         this.advance(1)
-        token = {type: 'BraceLeft'}
+        token = {type: 'BraceLeft', start_idx: this.rest.start}
       }
       return token
     }
 
     if (char == '}') {
       this.advance(1)
-      return {type: 'BraceRight'}
+      return {type: 'BraceRight', start_idx: this.rest.start}
     }
 
     if (char == '(') {
@@ -110,7 +119,12 @@ export class Lexer {
     // color literal, e.g. #fcfcfc
     // used with properties: "-bcolor #fcfcfc -fcolor #000000 -lcolor #000000"
     if (char == '#') {
-      return {type: 'ColorLiteral', lexeme: this.advance(7)}
+      let token = this.try_color_literal()
+      if (!token) {
+        this.advance(1)
+        token = {type: 'StringLiteral', lexeme: '#'}
+      }
+      return token
     }
 
     // identifiers
@@ -178,6 +192,23 @@ export class Lexer {
     // console.log(`advance ${count} ${eaten}`)
     this.rest.start += count
     return eaten
+  }
+
+  private try_color_literal() : Token|null {
+    let peek_count = 1
+    while(peek_count < 7) {
+      const char = this.peek_char(peek_count)
+      if (is_hex(char)) {
+        peek_count++
+        continue
+      }
+      break
+    }
+    if (peek_count == 7) {
+      return {type: 'ColorLiteral', lexeme: this.advance(peek_count)}
+    } else {
+      return null
+    }
   }
 
   private try_string() : Token|null {

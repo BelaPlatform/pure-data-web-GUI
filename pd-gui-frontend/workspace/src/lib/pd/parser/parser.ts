@@ -130,8 +130,9 @@ export class Parser {
   }
 
   parse_vector() : VectorNode {
-    let token = this.ts.next()
-    const vec = new VectorNode()
+    const start = this.ts.next()
+    let token = start
+    const elements = []
     while (true) {
       token = this.ts.next()
       if (token.type == 'BraceRight') {
@@ -140,15 +141,15 @@ export class Parser {
 
       if (token.type == 'IntegerLiteral'
         ||token.type == 'FPLiteral') {
-          vec.elements.push(new NumberNode(token.lexeme!, token.type))  
-      }
-
-      if (token.type == 'Identifier') {
-        vec.elements.push(new StringNode(token.lexeme!))
+          elements.push(new NumberNode(token.lexeme!, token.type))  
+      } else if (token.type == 'Identifier') {
+        elements.push(new StringNode(token.lexeme!))
+      } else {
+        elements.push(new StringNode(token.lexeme!))
       }
     }
-
-    return vec
+    const end = token
+    return new VectorNode(start, end, elements, this.ts.lexer.rest.ref)
   }
 
   parse_property() : PropertyNode {

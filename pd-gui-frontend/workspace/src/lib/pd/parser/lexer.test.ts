@@ -191,8 +191,8 @@ describe('Lex identifiers', () => {
 describe('Lex simple multiple tokens', () => {
   it('recognizes {}"', () => {
     const lexer = new Lexer('{}')
-    expect(lexer.next()).toStrictEqual({type: 'BraceLeft'})
-    expect(lexer.next()).toStrictEqual({type: 'BraceRight'})
+    expect(lexer.next().type).toEqual('BraceLeft')
+    expect(lexer.next().type).toEqual('BraceRight')
   })
 })
 
@@ -201,8 +201,8 @@ describe('Lex multiple tokens', () => {
     const lexer = new Lexer('pdtk_canvas_setparents .x2221af0 {} ;')
     expect(lexer.next()).toStrictEqual({type: 'Identifier', lexeme: 'pdtk_canvas_setparents'})
     expect(lexer.next()).toStrictEqual({type: 'Identifier', lexeme: '.x2221af0'})
-    expect(lexer.next()).toStrictEqual({type: 'BraceLeft'})
-    expect(lexer.next()).toStrictEqual({type: 'BraceRight'})
+    expect(lexer.next().type).toEqual('BraceLeft')
+    expect(lexer.next().type).toEqual('BraceRight')
     expect(lexer.next()).toStrictEqual({type: 'Semicolon'})
   })
 

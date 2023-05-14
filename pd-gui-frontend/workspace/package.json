@@ -14,7 +14,7 @@
 		"start:watch": "vite dev --host -d --port 8080",
 		"build": "vite build -d",
 		"preview": "vite preview",
-		"test": "playwright test",
+		"test": "vitest",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test:unit": "vitest"
