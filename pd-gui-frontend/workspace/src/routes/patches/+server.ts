@@ -6,8 +6,7 @@ import { json } from '@sveltejs/kit'
 export async function GET() {
   const directory = process.env.OVERRIDE_PATCH_DIRECTORY || "/patches"
   let patches: PatchFile[] = []
-  const files = fs.readdirSync('/patches')
-  fs.readdirSync('/patches').forEach(file => {
+  fs.readdirSync(directory).forEach(file => {
     file = `${directory}/${file}`
     const id = patches.length + 1
     patches.push({id, file})

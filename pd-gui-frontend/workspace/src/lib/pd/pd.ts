@@ -46,7 +46,8 @@ export class Pd {
   }
 
   on_create_new_canvas() {
-    const message = `pd menunew PDUNTITLED-${this.next_untitled_id++} /patches;`
+    const dir = process.env.OVERRIDE_PATCH_DIRECTORY || "/patches"
+    const message = `pd menunew PDUNTITLED-${this.next_untitled_id++} ${dir};`
     this.send(message)
   }
 
