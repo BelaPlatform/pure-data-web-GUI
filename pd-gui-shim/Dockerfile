@@ -1,7 +1,7 @@
 FROM debian:11.2 AS base
 
 LABEL author="Sebastian Stang <sebastian@chair.audio>"
-LABEL version="1.4"
+LABEL version="1.5"
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
@@ -36,10 +36,11 @@ RUN useradd -m -u $UID -g $GID -o $USERNAME
 USER ${USERNAME}
 ENV PATH "/opt/nodejs/bin:/workspace/node_modules/.bin:$PATH"
 RUN corepack enable
-RUN corepack prepare pnpm@8.5.0 --activate
+RUN corepack prepare pnpm@8.5.1 --activate
 WORKDIR /workspace
 COPY dockerfs/build-pd.sh /usr/local/bin/
 COPY dockerfs/run.sh /usr/local/bin/
+
 
 FROM dev as build
 
@@ -47,6 +48,9 @@ USER root
 COPY workspace /workspace/
 RUN pnpm install
 RUN pnpm run build
+
+CMD ["cp", "-r", "/workspace/", "/dist/"]
+
 
 FROM build as run
 

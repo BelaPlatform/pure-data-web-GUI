@@ -1,0 +1,14 @@
+[Unit]
+Description=Pd WebGui shim and frontend launcher
+DefaultDependencies=no
+After=network-pre.target
+Conflicts=shutdown.target
+Before=shutdown.target
+Requires=pd-webgui-shim.service pd-webgui-frontend.service
+
+[Service]
+ExecStart=/bin/true
+Type=oneshot
+
+[Install]
+WantedBy=default.target

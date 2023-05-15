@@ -1,0 +1,6 @@
+Package: pd-webgui
+Version: 0.1
+Architecture: armhf
+Depends: python3.9 (>= 3.9.2)
+Maintainer: Sebastian Stang <sebastian@chair.audio>
+Description: Pd WebGui
