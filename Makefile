@@ -7,7 +7,7 @@ DEB_CONTROL_DIRECTORY:=${DEB_DIRECTORY}/DEBIAN
 OPT_PD_WEBGUI_DIRECTORY:=${DEB_DIRECTORY}/opt/pd-webgui
 
 all: deb
-.PHONY: frontend shim clean
+.PHONY: frontend shim clean deb
 
 prep:
 	@mkdir -p ${OPT_PD_WEBGUI_DIRECTORY}
@@ -20,12 +20,14 @@ frontend:
 shim:
 	cd pd-gui-shim && ./build.sh
 
+RSYNC_OPTS:=-av --exclude "*.sw?" --exclude .DS_Store
 deb: prep frontend shim
-	rsync -av pd-gui-frontend/workspace/ ${OPT_PD_WEBGUI_DIRECTORY}/frontend
-	rsync -av pd-gui-shim/workspace/ ${OPT_PD_WEBGUI_DIRECTORY}/shim
-	rsync -av packaging/rootfs/ ${DEB_DIRECTORY}/
+	rsync ${RSYNC_OPTS} pd-gui-frontend/dist/ ${OPT_PD_WEBGUI_DIRECTORY}/frontend/
+	rsync ${RSYNC_OPTS} pd-gui-shim/dist/ ${OPT_PD_WEBGUI_DIRECTORY}/shim/
+	rsync ${RSYNC_OPTS} packaging/rootfs/ ${DEB_DIRECTORY}/
+	@rm -rf ${DEB_CONTROL_DIRECTORY}
 	@mkdir -p ${DEB_CONTROL_DIRECTORY}
-	rsync -av packaging/deb/ ${DEB_CONTROL_DIRECTORY}
+	rsync ${RSYNC_OPTS} packaging/deb/ ${DEB_CONTROL_DIRECTORY}
 	cd packaging && ./build.sh
 
 clean:

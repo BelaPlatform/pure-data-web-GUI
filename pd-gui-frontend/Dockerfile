@@ -41,9 +41,21 @@ FROM dev as build
 USER root
 COPY workspace /workspace/
 RUN pnpm install
+RUN pnpm config set store-dir /workspace/.pnpm-store
 RUN pnpm run build
 
-CMD ["cp", "-r", "/workspace/", "/dist/"]
+FROM build as build-pkg
+
+# get only the relevant files into pkg/
+RUN mkdir -p /workspace/pkg/
+RUN cp /workspace/package.json /workspace/pkg
+RUN cp -r /workspace/dist /workspace/pkg
+WORKDIR /workspace/pkg
+# only install production modules and without links
+RUN pnpm install --prod --shamefully-hoist --force
+
+# when running, we copy out the relevant files
+CMD ["cp", "-r", ".", "/dist/"]
 
 
 FROM build as run
