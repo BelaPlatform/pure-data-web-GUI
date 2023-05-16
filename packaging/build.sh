@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 docker build --tag pd-webgui/build .
 

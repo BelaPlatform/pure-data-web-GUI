@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
+set -e
 
-mkdir dist
+rm -rf dist
+mkdir -p dist
 
 docker build --tag pd-webgui-frontend/build --target build .
 
