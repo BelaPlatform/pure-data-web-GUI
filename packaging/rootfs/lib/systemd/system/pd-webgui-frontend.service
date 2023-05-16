@@ -6,7 +6,9 @@ Conflicts=shutdown.target
 Before=shutdown.target
 
 [Service]
-ExecStart=/usr/bin/env OVERRIDE_PATCH_DIRECTORY=/root/Documents/Pd /usr/bin/nodejs /opt/pd-webgui/frontend/
+Environment=OVERRIDE_PATCH_DIRECTORY=/root/patches
+EnvironmentFile=-/opt/pd-webgui-env
+ExecStart=/usr/bin/env /usr/bin/node /opt/pd-webgui/frontend/dist
 Type=simple
 Restart=always
 
