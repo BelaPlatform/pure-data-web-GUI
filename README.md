@@ -149,7 +149,7 @@ these are installed in the `/workspace` folder, which is the persistent storage 
 
 This will build the frontend and start a file server. If any files in `workspace/src` are modified, it will rebuild them.
 ```
-pnpm start:watch
+PORT=8080 pnpm start:watch
 ```
 
 Wait until you see the message `Local:   http://localhost:8080/`.
