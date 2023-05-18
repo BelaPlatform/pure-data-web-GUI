@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
-  
   import type { PdWidget, TextSelection } from '$lib/pd/pd_widget'
 
   export let widget: PdWidget
@@ -38,8 +36,6 @@
   }
 
   function update_cursor(text: string, selection: TextSelection) : Cursor {
-/*     console.log(text)
-    console.log(selection) */
     if (text.length == 0) {
       return {x: 0, y: 0}
     }
@@ -74,9 +70,9 @@
 {#each rows as row}
   {#each row.cells as cell}
     {#if $selection.start <= cell.idx_in_string && $selection.end > cell.idx_in_string}
-      <rect x={cell.idx_in_row * $fontsize / 1.8} y={row.idx  * $fontsize } width={$fontsize / 1.8 + 1} height={$fontsize + 4} class="bg" />
+      <rect x={cell.idx_in_row * $fontsize / 1.8} y={row.idx  * $fontsize } width={$fontsize / 1.8 + 1} height={$fontsize + 7} class="bg" />
     {/if}
-    <text x={cell.idx_in_row * $fontsize / 1.8} y={(row.idx + 1) * $fontsize + 1} 
+    <text x={cell.idx_in_row * $fontsize / 1.8} y={(row.idx + 1) * ($fontsize + 3)} 
       style:--fontsize="{$fontsize}px"
       class:selected={$selection.start <= cell.idx_in_string && $selection.end > cell.idx_in_string}>
       {cell.char}
@@ -85,7 +81,7 @@
 {/each}
 
 {#if $state == 'edit'}
-  <line x1={cursor.x * $fontsize / 1.8} x2={cursor.x * $fontsize / 1.8} y1={cursor.y * 12} y2={cursor.y * 12 + 16} class="cursor" />
+  <line x1={cursor.x * $fontsize / 1.8} x2={cursor.x * $fontsize / 1.8} y1={cursor.y * ($fontsize + 3) + 2} y2={cursor.y * ($fontsize + 3) + 18} class="cursor" />
 {/if}
 
 <style lang="scss">
