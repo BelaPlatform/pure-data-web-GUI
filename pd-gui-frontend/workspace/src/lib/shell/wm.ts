@@ -254,6 +254,10 @@ export class WindowManager {
     })
     frame.hidden.update(_ => false)
     this.active_frame = frame
+
+    if (frame.klass.props.canvas) {
+      this.app.pd.set_active_canvas(frame.klass.props.canvas)
+    }
   }
 
   on_keydown(event: KeyboardEvent) {

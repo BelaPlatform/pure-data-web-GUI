@@ -101,8 +101,12 @@ export class Pd {
     this.send(message)
     const canvas = this.canvas_with_id(canvas_id)
     if (canvas) {
-      this.active_canvas.update(_ => canvas)
+      this.set_active_canvas(canvas)
     }
+  }
+
+  set_active_canvas(canvas: PdCanvas) {
+    this.active_canvas.update(_ => canvas)
   }
 
   canvas_with_id(id: string) {
