@@ -57,7 +57,7 @@ export class Config extends Command {
   override eval(pd: Pd) {
     const object = pd.widget_or_connection_with_id(this.widget_id)
     if (object instanceof PdWidget) {
-      // console.log(object)
+      // console.log(object.id)
       this.properties.forEach(p => {
         switch(p.key) {
           case 'text': {

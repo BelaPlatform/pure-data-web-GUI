@@ -81,7 +81,7 @@ wss.on('connection', ws => {
   console.log('connection')
   ws_clients.push(ws)
   ws.on('message', data => {
-    console.log(`${data}`)
+    // console.log(`${data}`)
     pd_client.write(`${data}`)
   })
 })

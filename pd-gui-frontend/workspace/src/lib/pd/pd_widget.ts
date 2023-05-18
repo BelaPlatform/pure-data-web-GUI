@@ -31,7 +31,7 @@ export class IOLet {
 export type WidgetState = 'normal' | 'edit' | 'broken'
 export type WidgetFont = 'dejavu' | 'helvetica' | 'times'
 
-type TextSelection = {
+export type TextSelection = {
   start: number
   end: number
 }
@@ -70,6 +70,7 @@ export class PdWidget {
   }
 
   set_text(txt: string) {
+    // console.log(`set_text: ${txt}`)
     this.text.update(_ => txt)
   }
 

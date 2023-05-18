@@ -1,19 +1,19 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   
-  import type { PdWidget } from '$lib/pd/pd_widget'
+  import type { PdWidget, TextSelection } from '$lib/pd/pd_widget'
 
   export let widget: PdWidget
-
-  $: state = widget.state
-  $: text = widget.text
-  $: fontsize = widget.fontsize
-  $: selection = widget.text_selection
 
   type Cell = {
     idx_in_string: number
     idx_in_row: number
     char: string
+  }
+  
+  type Cursor = {
+    x: number
+    y: number
   }
 
   type Row = {
@@ -37,35 +37,36 @@
     return rows
   }
 
-  let rows: Row[] = []
-  let cursor: {x: number, y: number} = {x: 0, y: 0}
-  onMount(() => {
-    text.subscribe(t => {
-      rows = cellify_text(t)
-    })
-    selection.subscribe(s => {
-      if ($text.length == 0) {
-        cursor = {x: 0, y: 0}
-        return
-      }
-      if (s.start == $text.length) {
-        const last_row = rows[rows.length - 1]
-        const last_cell = last_row.cells[last_row.cells.length - 1]
-        cursor = {x: last_cell.idx_in_row + 1, y: rows.length - 1}
-        return
-      }
-      for (let row_idx = 0; row_idx < rows.length; ++row_idx) {
-        const row = rows[row_idx]
-        for(let cell_idx = 0; cell_idx < row.cells.length; ++cell_idx) {
-          const cell = row.cells[cell_idx]
-          if (cell.idx_in_string == s.start) {
-            cursor = {x: cell.idx_in_row, y: row_idx}
-            return
-          }
+  function update_cursor(text: string, selection: TextSelection) : Cursor {
+/*     console.log(text)
+    console.log(selection) */
+    if (text.length == 0) {
+      return {x: 0, y: 0}
+    }
+
+    if (selection.start == text.length) {
+      const last_row = rows[rows.length - 1]
+      const last_cell = last_row.cells[last_row.cells.length - 1]
+      return {x: last_cell.idx_in_row + 1, y: rows.length - 1}
+    }
+    for (let row_idx = 0; row_idx < rows.length; ++row_idx) {
+      const row = rows[row_idx]
+      for(let cell_idx = 0; cell_idx < row.cells.length; ++cell_idx) {
+        const cell = row.cells[cell_idx]
+        if (cell.idx_in_string == selection.start) {
+          return {x: cell.idx_in_row, y: row_idx}
         }
       }
-    })
-  })
+    }
+    return {x: 0, y: 0}
+  }
+ 
+  $: state = widget.state
+  $: text = widget.text
+  $: fontsize = widget.fontsize
+  $: selection = widget.text_selection
+  $: rows = cellify_text($text)
+  $: cursor = update_cursor($text, $selection)
 
 </script>
 
@@ -84,7 +85,7 @@
 {/each}
 
 {#if $state == 'edit'}
-  <line x1={cursor.x * 8} x2={cursor.x * 8} y1={cursor.y * 12} y2={cursor.y * 12 + 16} class="cursor" />
+  <line x1={cursor.x * $fontsize / 1.8} x2={cursor.x * $fontsize / 1.8} y1={cursor.y * 12} y2={cursor.y * 12 + 16} class="cursor" />
 {/if}
 
 <style lang="scss">
@@ -102,8 +103,9 @@
   }
 
   line.cursor {
-    width: 2px;
+    shape-rendering: crispEdges;
     stroke: #000;
+    stroke-width: 0.8;
     animation: blink 1s infinite;
     animation-timing-function: steps(1,3);
   }
