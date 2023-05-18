@@ -13,7 +13,7 @@ export type PopUp = {
   has_open: boolean
 }
 
-export type NodeType = 'obj' | 'msg' | 'floatatom' | 'symbolatom' | 'text' | 'bng' | 'toggle'
+export type NodeType = 'obj' | 'msg' | 'floatatom' | 'symbolatom' | 'text' | 'bng' | 'toggle' | 'vslider' | 'hslider'
 
 // events originating from pd are prefixed with handle_
 // events originating from user interaction with the frontend are prefixed with on_
@@ -174,6 +174,8 @@ export class PdCanvas {
         break
       case 'bng':
       case 'toggle':
+      case 'vslider':
+      case 'hslider':
         this.send_simple_command(`${node_type}`)
     }
   }

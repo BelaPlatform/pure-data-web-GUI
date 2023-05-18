@@ -185,8 +185,10 @@ export async function make_menu() {
     new MenuItem('Symbol', () => on_put('symbolatom'), [], 'Ctrl+4'),
     new MenuItem('Comment', () => on_put('text'), [], 'Ctrl+5'),
     new MenuItem('-'),
-    new MenuItem('Bang', () => on_put('bng')),
-    new MenuItem('Toggle', () => on_put('toggle'))
+    new MenuItem('Bang', () => on_put('bng'), [],'Alt+Shift+B'),
+    new MenuItem('Toggle', () => on_put('toggle'), [],'Alt+Shift+T'),
+    new MenuItem('Vslider', () => on_put('vslider'), [],'Alt+Shift+V'),
+    new MenuItem('Hslider', () => on_put('hslider'), [],'Alt+Shift+J'),
   ]
 
   let find_menu: MenuItem[] = [
