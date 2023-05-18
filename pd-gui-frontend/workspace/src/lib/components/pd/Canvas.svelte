@@ -332,11 +332,11 @@
     }
 
     &.editmode_connect {
-      cursor: grab;
+      cursor: cell;
     }
 
     &.editmode_disconnect {
-      cursor: no-drop;
+      cursor: crosshair;
     }
   }
 </style>
