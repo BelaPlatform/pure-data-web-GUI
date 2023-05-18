@@ -80,7 +80,7 @@
   }
 
   function on_keydown(event:KeyboardEvent) {
-    // console.log('Canvas::on_keydown')
+    console.log('Canvas::on_keydown')
     if (!is_active) { return }
 
     if (event.key == 'e' && event.ctrlKey) {
@@ -194,11 +194,10 @@
     if (event.key == 'Home' || event.key == 'End') {
       canvas.send_key_down(event.key)
     }
-    
-    
 
     if (event.key == ' ') {
       canvas.send_key_down('32')
+      return
     }
 
     // if event.key is of length 1, assume it's an ascii character
