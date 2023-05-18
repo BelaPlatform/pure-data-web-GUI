@@ -109,7 +109,7 @@
   style:--x="{$box.origin.x}px"
   style:--y="{$box.origin.y}px"
   style:--width="{$box.size.width}px"
-  style:--height="{$box.size.height}px"
+  style:--height="{$box.size.height + 16}px"
   style:--z_index={$z_index}
   on:mousedown={on_clicked_inside}
   on:touchstart={on_clicked_inside}

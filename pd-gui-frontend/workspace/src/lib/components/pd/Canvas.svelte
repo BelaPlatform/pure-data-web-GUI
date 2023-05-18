@@ -14,6 +14,7 @@
   $: widgets = canvas.widgets
   $: connections = canvas.connections
   $: cursor = canvas.cursor
+  $: size = canvas.size
   $: required_size = canvas.required_size
 
   function find_node_for_target(target:any) {
@@ -283,10 +284,13 @@
     class={$cursor}
     bind:this={canvas_svg_element}
     style:--min-width="{$required_size.width}px"
-    style:--min-height="{$required_size.height}px">
+    style:--min-height="{$required_size.height}px"
+    style:--width="{$size.width - 8}px"
+    style:--height="{$size.height - 16}px"
+    >
     {#each $widgets as widget(widget.id)}
       <Node {widget} />
-    {/each}
+    {/each}G
     {#each $connections as connection}
       <Noodle {connection} />
     {/each}
@@ -301,14 +305,16 @@
   }
 
   svg {
-    width: 99%;
-    height: 99%;
+    /* width: 100%;
+    height: 100%; */
+    // border: #def solid thin;
+    width: var(--width);
+    height: var(--height);
     min-width: var(--min-width);
     min-height: var(--min-height);
     user-select: none;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
-
     &.runmode_nothing {
       cursor: inherit;
     }
