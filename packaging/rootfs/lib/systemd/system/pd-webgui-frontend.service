@@ -4,6 +4,7 @@ DefaultDependencies=no
 After=network-pre.target
 Conflicts=shutdown.target
 Before=shutdown.target
+PartOf=pd-webgui.service
 
 [Service]
 Environment=OVERRIDE_PATCH_DIRECTORY=/root/patches
