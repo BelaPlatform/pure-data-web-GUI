@@ -8,7 +8,7 @@
     , "target": "dev"
     , "context": ".."
   }
-  , "runArgs": ["--name=pd-gui-frontend"]
+  , "runArgs": ["--name=pd-gui-frontend", "--rm"]
 
   , "customizations": {
       "vscode" : {
@@ -29,7 +29,8 @@
   , "forwardPorts": [5173]
 
   ,"containerEnv": {
-    "OVERRIDE_PATCH_DIRECTORY": "${localWorkspaceFolder}/../patches"
+    "OVERRIDE_PATCH_DIRECTORY": "${localWorkspaceFolder}/../patches",
+    "ARE_WE_DOCKERIZED": "1"
   }
 
   , "mounts": [
