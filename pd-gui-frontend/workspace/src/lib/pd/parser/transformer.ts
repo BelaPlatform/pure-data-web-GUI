@@ -122,6 +122,7 @@ export function transform(root: RootNode) : Command[] {
       const canvas_id = canvas_arg.name
       const width = parseInt((proc.arguments[1] as NumberNode).value)
       const height = parseInt((proc.arguments[2] as NumberNode).value)
+      // console.log(width, height)
       const origin = new G.Point(0, 0)
       try {
         const xy = (proc.arguments[3] as StringNode).value.split('+')
@@ -133,7 +134,7 @@ export function transform(root: RootNode) : Command[] {
       try {
         set_edit_mode_on = parseInt((proc.arguments[4] as NumberNode).value) == 1
       } catch(e: unknown) {}
-      commands.push(new CanvasCommands.NewCanvas(canvas_id, new G.Size(width, height), origin, set_edit_mode_on))
+      commands.push(new CanvasCommands.NewCanvas(canvas_id, new G.Size(width > 0 ? width : 480, height > 0 ? height: 360), origin, set_edit_mode_on))
       return
     }
 
