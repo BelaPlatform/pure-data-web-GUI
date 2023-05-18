@@ -11,8 +11,10 @@ export async function GET() {
   let patches: PatchFile[] = []
   fs.readdirSync(actual_directory).forEach(file => {
     file = `${virtual_directory}/${file}`
-    const id = patches.length + 1
-    patches.push({id, file})
+    if(file.match(/.*\.pd$/)) {
+      const id = patches.length + 1
+      patches.push({id, file})
+    }
   })
   return json({directory: virtual_directory, patches})
 }
