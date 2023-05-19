@@ -8,8 +8,9 @@ export class Ping extends Command {
 }
 
 export class Watchdog extends Command {
-  override eval(_: Pd) {
-    // console.log('Watchdog')
+  override eval(pd: Pd) {
+    console.log('Watchdog')
+    pd.enable_watchdog()
   }
 }
 

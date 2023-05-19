@@ -15,6 +15,7 @@ export class Pd {
   active_canvas: Writable<PdCanvas | null> = writable(null)
   dsp_is_on = writable<boolean>(false)
   next_untitled_id = 1
+  watchdog: NodeJS.Timer | null = null
 
   constructor(public app: App) {}
 
@@ -29,8 +30,13 @@ export class Pd {
   }
 
   send_ping() {
-    const message = "pd ping;"
-    this.send(message)
+    this.send('pd ping;')
+  }
+
+  enable_watchdog() {
+    this.watchdog = setInterval(() => {
+      this.send('pd watchdog;')
+    }, 2000)
   }
 
   send_refresh_gui() {
