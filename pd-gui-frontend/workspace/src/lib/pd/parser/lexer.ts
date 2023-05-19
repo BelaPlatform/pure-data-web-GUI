@@ -47,6 +47,11 @@ export class Lexer {
       return {type: 'Semicolon'}
     }
 
+    if (char == ',') {
+      this.advance(1)
+      return {type: 'Comma'}
+    }
+
     if (char == '\n') {
       this.advance(1)
       return {type: 'Newline'}
