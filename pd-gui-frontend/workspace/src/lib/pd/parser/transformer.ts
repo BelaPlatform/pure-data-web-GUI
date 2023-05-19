@@ -40,6 +40,13 @@ export function transform(root: RootNode) : Command[] {
       return
     }
 
+    if (proc.id.name == 'pdtk_pd_audio') {
+      const audio_arg = proc.arguments[0] as StringNode
+      const audio_is_on = audio_arg.value == "ON"
+      commands.push(new PdCommands.Audio(audio_is_on))
+      return
+    }
+
     if (proc.id.name == 'pdtk_undomenu') {
       commands.push(new IgnoredCommand('pdtk_undomenu'))
       return
