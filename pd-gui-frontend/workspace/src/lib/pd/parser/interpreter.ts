@@ -9,6 +9,11 @@ export class Interpreter {
   constructor(public context:Pd) {}
 
   interpret(message: string) {
+    console.log("interpret")
+    console.log(message)
+    if (message == '') {
+      return
+    }
     const commands = this.build_command_vec(message)
     this.eval(commands)
   }

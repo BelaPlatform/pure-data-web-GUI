@@ -3,7 +3,7 @@ import type { Pd } from '../../pd'
 
 export class Ping extends Command {
   override eval(pd: Pd) {
-    pd.send_ping()
+    // pd.send_ping()
   }
 }
 

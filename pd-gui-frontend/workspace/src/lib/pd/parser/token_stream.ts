@@ -24,4 +24,8 @@ export class TokenStream {
     }
     return this.peek_buffer[count - 1]
   }
+
+  skip_until_newline() {
+    this.lexer.skip_until_newline()
+  }
 }

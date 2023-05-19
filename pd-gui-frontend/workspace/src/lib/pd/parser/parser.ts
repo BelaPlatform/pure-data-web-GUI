@@ -35,7 +35,7 @@ export class Parser {
   }
 
   parse_identifier(parent: Identifier = new Identifier('', null)) : Identifier {
-    // console.log('parse_identifier')
+    console.log('parse_identifier')
     let token = this.ts.peek(1)
     if (token.type == 'ColonColon') {
       // console.log('eat ColonColon')
@@ -61,19 +61,27 @@ export class Parser {
   }
 
   parse_procedure() : Procedure | null {
-    // console.log('parse_procedure')
+    console.log('parse_procedure')
     const identifier = this.parse_identifier()
     if (identifier.name.length == 0) {
       console.log('identifier.name.length == 0')
       return null
     }
-    // console.log(`parse_procedure got identifier ${identifier.name} @ ${identifier.namespace?.name}`)
-    
+    console.log(`parse_procedure got identifier ${identifier.name} @ ${identifier.namespace?.name}`)
+
+    // pdtk_pd_startup has a nested list 
+    // { {OSS 2} {ALSA 1} {portaudio 4} } { {OSS-MIDI 0} {ALSA-MIDI 1} } {DejaVu Sans Mono}
+    // which we cannot yet parse
+    if (identifier.name == 'pdtk_pd_startup') {
+      this.ts.skip_until_newline()
+      return new Procedure(identifier)
+    }
+
     // console.log(t)
     const proc = new Procedure(identifier)
     while (true) {
       let peeked = this.ts.peek(1)
-
+      console.log(peeked)
       if (peeked.type == 'Identifier'
         || peeked.type == 'ColonColon') {
         proc.arguments.push(this.parse_identifier())
