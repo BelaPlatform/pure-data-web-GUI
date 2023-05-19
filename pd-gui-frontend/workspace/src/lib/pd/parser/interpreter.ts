@@ -9,8 +9,8 @@ export class Interpreter {
   constructor(public context:Pd) {}
 
   interpret(message: string) {
-    console.log("interpret")
-    console.log(message)
+    // console.log("interpret")
+    // console.log(message)
     if (message == '') {
       return
     }

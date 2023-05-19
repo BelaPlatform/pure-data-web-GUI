@@ -13,34 +13,24 @@ function is_unterminated(str: string) {
   return !(str.endsWith(';') || str.endsWith('\n'))
 }
 
-const server = net.createServer((client) => {
-  console.log('client connected')
-  
+const pd_server = net.createServer((client) => {
+  console.log('pd connected')
+
   pd_client = client
-  
+
+  const init_message = "pd init / 0  8 5 10 10 6 13 12 7 15 16 10 19 24 14 29 37 22 44 17 10 20 20 12 24 24 14 29 32 19 38 47 28 56 73 44 86;"
+  pd_client.write(init_message)
+
   client.on('end', () => {
-    console.log('client disconnected')
+    console.log('pd disconnected')
   })
 
   client.on('data', (data) => {
     console.log(`#--${data}--#`)
     const str = `${data}`
     buffer += str
-    // console.log(`#-- ${str.length} ${str[str.length-2]} ${str[str.length-1]} --#`)
 
-    /* if (str.includes("set ::sys_searchpath")) {
-      // ignore
-      console.log('!ignore!')
-      return
-    } */
-
-    // if ((str[str.length-2] != ';' || str[str.length-1] != '\n') && !(str.endsWith('pdtk_ping'))) {
-    const unterm = is_unterminated(str)
-/*     console.log(unterm)
-    console.log(str.endsWith('pdtk_ping'))
-    console.log(str.endsWith('pdtk_ping\n'))
-    console.log(str.endsWith('\n')) */
-    if (unterm && !str.endsWith('pdtk_ping')) {
+    if (is_unterminated(str) && !str.endsWith('pdtk_ping')) {
       console.log('buffer: unterminated')
     } else {
       if (ws_client) {
@@ -65,11 +55,11 @@ const server = net.createServer((client) => {
   */
 })
 
-server.on('error', (err) => {
+pd_server.on('error', (err) => {
   throw err
 })
 
-server.listen(config.GUI_PORT, () => {
+pd_server.listen(config.GUI_PORT, () => {
   console.log(`server bound on ${config.GUI_PORT}`)
 })
 
@@ -104,12 +94,7 @@ wss.on('connection', ws => {
   }
 
   ws_client = ws
-  if (buffer.length) {
-    console.log('sending buffer')
-    console.log(buffer)
-    ws_client.send(buffer)
-    buffer = ""
-  }
+  ws_client.send(buffer)
 
   ws.on('message', data => {
     console.log(`--#${data}#--`)
@@ -122,7 +107,7 @@ wss.on('connection', ws => {
   })
 
   ws.on("close", (code) => {
-    console.log('ws_client is gone')
+    // console.log('ws_client is gone')
     ws_client = null
   })
 })
