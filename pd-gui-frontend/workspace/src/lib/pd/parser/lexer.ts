@@ -181,7 +181,6 @@ export class Lexer {
       this.advance(1)
       skip_count += 1
     }
-    console.log(`skipped ${skip_count} characters`)
   }
 
   private eof() : boolean {

@@ -364,7 +364,7 @@ export function transform(root: RootNode) : Command[] {
         }
       }
     }
-    console.log(proc.id.name)
+    // console.log(proc.id.name)
     commands.push(new UnrecognizedCommand(proc.id.name))
   })
 

@@ -7,7 +7,8 @@ import * as config from './config.js'
 let pd_client: net.Socket|null = null
 let ws_client: WebSocket|null = null
 
-let buffer: string = ""
+let buffer_from_pd: string = ""
+let buffer_to_pd: string = ""
 
 function is_unterminated(str: string) {
   return !(str.endsWith(';') || str.endsWith('\n'))
@@ -26,17 +27,17 @@ const pd_server = net.createServer((client) => {
   })
 
   client.on('data', (data) => {
-    console.log(`#--${data}--#`)
+    // console.log(`#--${data}--#`)
     const str = `${data}`
-    buffer += str
+    buffer_from_pd += str
 
     if (is_unterminated(str) && !str.endsWith('pdtk_ping')) {
       console.log('buffer: unterminated')
     } else {
       if (ws_client) {
-        console.log(`sending #--${buffer}--#`)
-        ws_client.send(buffer)
-        buffer = ""
+        // console.log(`sending #--${buffer_from_pd}--#`)
+        ws_client.send(buffer_from_pd)
+        buffer_from_pd = ""
       } else {
         console.log('buffer: no client connected')
       }
@@ -85,7 +86,7 @@ const wss = new WebSocketServer({
 })
 
 wss.on('connection', ws => {
-  console.log('connection')
+  console.log('client connection')
 
   if (ws_client) {
     console.log('already have a client')
@@ -94,13 +95,15 @@ wss.on('connection', ws => {
   }
 
   ws_client = ws
-  ws_client.send(buffer)
+  ws_client.send(buffer_from_pd)
 
   ws.on('message', data => {
-    console.log(`--#${data}#--`)
+    // console.log(`--#${data}#--`)
+    buffer_to_pd += `${data}`
     if (pd_client) {
-      console.log('sending to pd')
-      pd_client.write(`${data}`)
+      // console.log('sending to pd')
+      pd_client.write(buffer_to_pd)
+      buffer_to_pd = ""
     } else {
       console.log('no pd')
     }

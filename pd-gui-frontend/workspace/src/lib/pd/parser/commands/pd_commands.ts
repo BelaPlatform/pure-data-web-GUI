@@ -9,7 +9,7 @@ export class Ping extends Command {
 
 export class Watchdog extends Command {
   override eval(_: Pd) {
-    console.log('Watchdog')
+    // console.log('Watchdog')
   }
 }
 
@@ -31,6 +31,7 @@ export class Dsp extends Command {
   }
 
   override eval(pd: Pd) {
+    console.log('Dsp::eval')
     pd.handle_dsp(this.dsp_is_on)
   }
 }
