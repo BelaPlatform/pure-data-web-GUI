@@ -52,6 +52,7 @@ export class PdWidget {
   labelpos = writable<G.Point>(G.NullPoint())
   fontsize = writable<number>(12)
   font = writable<string>('DejaVu Sans Mono')
+  activation_rect = writable<G.Rect>(G.NullRect())
   klass: Klass
 
   constructor(public id: string, public canvas: PdCanvas, public klassname: string, x: number = 0, y: number = 0) { 
@@ -146,6 +147,15 @@ export class PdWidget {
 
   set_font(font: string) {
     this.font.update(_ => font)
+  }
+
+  set_activation_rect(r: G.Rect) {
+    const box = get(this.box)
+    this.activation_rect.update(_ => {
+      r.origin.x -= box.origin.x
+      r.origin.y -= box.origin.y
+      return r
+    })
   }
 
   handle_text_selection(start: number, end: number) {

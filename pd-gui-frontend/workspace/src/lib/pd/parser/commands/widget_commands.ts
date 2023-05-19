@@ -260,3 +260,16 @@ export class TextSelect extends Command {
     widget.handle_text_selection(this.start, this.end)
   }
 }
+
+export class SliderActivate extends Command {
+  constructor(public widget_id: string,
+    public activation_rect: G.Rect) {
+    super()
+  }
+
+  override eval(pd: Pd) {
+    const widget = pd.widget_with_id(this.widget_id)
+    if (!widget) { return }
+    widget.set_activation_rect(this.activation_rect)
+  }
+}

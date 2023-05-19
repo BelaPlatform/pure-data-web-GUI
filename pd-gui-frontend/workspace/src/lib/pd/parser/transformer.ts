@@ -6,6 +6,7 @@ import * as CanvasCommands from './commands/canvas_commands'
 import * as WidgetCommands from './commands/widget_commands'
 import { type IOLetType, IOLetScope } from '../pd_widget'
 import * as G from '../../utils/geometry'
+import { prop_dev } from 'svelte/internal'
 
 
 function clean_canvas_id(cid: string) {
@@ -330,9 +331,25 @@ export function transform(root: RootNode) : Command[] {
 
     if (proc.id.name == 'activate') {
       const widget_id_arg = proc.arguments[0] as Identifier
+      const widget_id = widget_id_arg.name
+      if (proc.id.namespace?.name == 'slider') {
+        const x1_arg = proc.arguments[1] as NumberNode
+        const y1_arg = proc.arguments[2] as NumberNode
+        const x2_arg = proc.arguments[3] as NumberNode
+        const y2_arg = proc.arguments[4] as NumberNode
+        const x1 = parseInt(x1_arg.value)
+        const y1 = parseInt(y1_arg.value)
+        const x2 = parseInt(x2_arg.value)
+        const y2 = parseInt(y2_arg.value)
+        const width = x2 - x1
+        const height = y2 - y1
+        const activation_rect = new G.Rect(new G.Point(x1, y1), new G.Size(width > 0 ? width : 2, height > 0 ? height : 2))
+        commands.push(new WidgetCommands.SliderActivate(widget_id, activation_rect))
+        return
+      }
       const is_activated_arg = proc.arguments[1] as NumberNode
       const is_activated = parseInt(is_activated_arg.value) == 1
-      commands.push(new WidgetCommands.Activate(widget_id_arg.name, is_activated))
+      commands.push(new WidgetCommands.Activate(widget_id, is_activated))
       return
     }
 
@@ -347,8 +364,9 @@ export function transform(root: RootNode) : Command[] {
         }
       }
     }
-
+    console.log(proc.id.name)
     commands.push(new UnrecognizedCommand(proc.id.name))
   })
+
   return commands
 }

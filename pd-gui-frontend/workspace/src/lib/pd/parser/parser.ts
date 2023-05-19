@@ -64,10 +64,11 @@ export class Parser {
     // console.log('parse_procedure')
     const identifier = this.parse_identifier()
     if (identifier.name.length == 0) {
-      // console.log('identifier.name.length == 0')
+      console.log('identifier.name.length == 0')
       return null
     }
-    // console.log(`parse_procedure got identifier ${identifier.name}`)
+    // console.log(`parse_procedure got identifier ${identifier.name} @ ${identifier.namespace?.name}`)
+    
     // console.log(t)
     const proc = new Procedure(identifier)
     while (true) {
