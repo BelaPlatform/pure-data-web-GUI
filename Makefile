@@ -21,7 +21,10 @@ shim:
 	cd pd-gui-shim && ./build.sh
 
 RSYNC_OPTS:=-av --exclude "*.sw?" --exclude .DS_Store
-deb: prep frontend shim
+deb: prep frontend shim deb-fast
+
+# deb-fast assumes that the frontend and shim have been built
+deb-fast:
 	rsync ${RSYNC_OPTS} pd-gui-frontend/dist/ ${OPT_PD_WEBGUI_DIRECTORY}/frontend/
 	rsync ${RSYNC_OPTS} pd-gui-shim/dist/ ${OPT_PD_WEBGUI_DIRECTORY}/shim/
 	rsync ${RSYNC_OPTS} packaging/rootfs/ ${DEB_DIRECTORY}/
