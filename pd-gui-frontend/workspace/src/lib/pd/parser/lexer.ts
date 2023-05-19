@@ -175,6 +175,14 @@ export class Lexer {
     return {type: 'Unknown', lexeme: this.rest.ref}
   }
 
+  skip_until_newline() {
+    let skip_count = 0
+    while (this.peek_char(0) != '\n') {
+      this.advance(1)
+      skip_count += 1
+    }
+  }
+
   private eof() : boolean {
     return this.rest.start == this.rest.end
   }

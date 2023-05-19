@@ -33,6 +33,7 @@ export class App {
   pd: Pd
   io: WebSocketIO
   user_agent: UserAgent
+  init_sequence_sent = false
 
   constructor() {
     this.wm = new WindowManager(this)
@@ -40,10 +41,19 @@ export class App {
     this.io = new WebSocketIO(addr)
     this.pd = new Pd(this)
     this.io.on_message = (event:MessageEvent) => {
+      // console.log('io.on_message')
       const interpreter = new Interpreter(this.pd)
       interpreter.interpret(event.data)
+
+      if (!this.init_sequence_sent) {
+        this.init_sequence_sent = true
+        this.pd.send_init_sequence()
+      }
     }
-    this.io.on_open = () => this.pd.send_init_sequence()
+    this.io.on_open = () => {
+      // console.log('io.on_open')
+      // this.pd.send_init_sequence()
+    }
     this.user_agent = {is_mobile: false, platform: 'linux', browser: 'chrome'}
   }
 

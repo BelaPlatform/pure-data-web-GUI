@@ -8,8 +8,9 @@ export class Ping extends Command {
 }
 
 export class Watchdog extends Command {
-  override eval(_: Pd) {
-    console.log('Watchdog')
+  override eval(pd: Pd) {
+    // console.log('Watchdog')
+    pd.enable_watchdog()
   }
 }
 
@@ -31,7 +32,18 @@ export class Dsp extends Command {
   }
 
   override eval(pd: Pd) {
+    console.log(`Dsp::eval ${this.dsp_is_on}`)
     pd.handle_dsp(this.dsp_is_on)
+  }
+}
+
+export class Audio extends Command {
+  constructor(public audio_is_on: boolean) {
+    super()
+  }
+
+  override eval(pd: Pd) {
+    console.log(`Audio::eval ${this.audio_is_on}`)
   }
 }
 
