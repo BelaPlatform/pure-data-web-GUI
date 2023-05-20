@@ -35,7 +35,7 @@ const pd_server = net.createServer((client) => {
       console.log('buffer: unterminated')
     } else {
       if (ws_client) {
-        // console.log(`sending #--${buffer_from_pd}--#`)
+        console.log(`#--${buffer_from_pd}--#`)
         ws_client.send(buffer_from_pd)
         buffer_from_pd = ""
       } else {
@@ -91,10 +91,9 @@ wss.on('connection', ws => {
   ws_client.send(buffer_from_pd)
 
   ws.on('message', data => {
-    // console.log(`--#${data}#--`)
     buffer_to_pd += `${data}`
     if (pd_client) {
-      // console.log('sending to pd')
+      console.log(`--#${data}#--`)
       pd_client.write(buffer_to_pd)
       buffer_to_pd = ""
     } else {

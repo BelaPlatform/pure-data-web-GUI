@@ -57,8 +57,8 @@ export class Pd {
     this.send(message)
   }
 
-  on_close(canvas: PdCanvas) {
-    const message = `${canvas.id} menuclose 0;`
+  on_close(canvas: PdCanvas, arg: number = 0) {
+    const message = `${canvas.id} menuclose ${arg};`
     this.send(message)
   }
 
@@ -73,6 +73,7 @@ export class Pd {
   }
 
   handle_destroy(canvas: PdCanvas) {
+    console.log('handle_destroy')
     let map_other_canvas = false
 
     // is this the active canavs?

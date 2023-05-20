@@ -23,7 +23,6 @@
     })
 
     const size = get(canvas.size)
-    
     frame.set_size(size)
     frame.box.subscribe(box => {
       canvas.on_set_size(box.size)

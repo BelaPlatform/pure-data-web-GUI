@@ -154,3 +154,17 @@ export class TextEditing extends Command {
     canvas.handle_text_editing(this.text_editing_is_on)
   }
 }
+
+export class MenuClose extends Command {
+  constructor(public canvas_id: string) {
+    super()
+  }
+
+  override eval(pd: Pd) {
+    const canvas = pd.canvas_with_id(this.canvas_id)
+    if (!canvas) {
+      return
+    }
+    canvas.handle_menuclose()
+  }
+}

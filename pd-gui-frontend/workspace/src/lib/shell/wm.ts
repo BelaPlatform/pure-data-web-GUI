@@ -11,6 +11,7 @@ import AudioSettingsDialog from '$lib/components/pd/dialogs/AudioSettingsDialog.
 import PdDialog from '$lib/components/pd/dialogs/PdDialog.svelte'
 import AboutPdDialog from '$lib/components/pd/dialogs/AboutPdDialog.svelte'
 import SaveAsDialog from '$lib/components/pd/dialogs/SaveAsDialog.svelte'
+import SaveDialog from '$lib/components/pd/dialogs/SaveDialog.svelte'
 
 export type DialogType = 'pd' | 'message' | 'find' | 'preferences' | 'audio-settings' | 'about'
 
@@ -188,6 +189,13 @@ export class WindowManager {
     this.stack_top(dialog_frame[1])
   }
 
+  on_show_save_dialog_for_canvas(canvas: PdCanvas) {
+    const component = SaveDialog
+    const frame = this.new_dialog_frame(component)
+    frame.klass.props.canvas = canvas
+    this.stack_top(frame)
+  }
+
   on_show_save_as_dialog_for_canvas(canvas: PdCanvas) {
     const component = SaveAsDialog
     const frame = this.new_dialog_frame(component)
@@ -217,7 +225,12 @@ export class WindowManager {
 
     // does it have a side effect?
     if (frame.close_effect) {
+      /* const cancel_close = frame.close_effect()
+      if (cancel_close) {
+        return
+      } */
       frame.close_effect()
+      return
     }
 
     this.frames.update(fs => {

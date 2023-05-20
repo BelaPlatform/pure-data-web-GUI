@@ -5,6 +5,7 @@ import type { Pd } from './pd'
 import { PdConnection } from './pd_connection'
 import { PdWidget } from './pd_widget'
 import { patch_directory } from '../stores/patches'
+import { app } from '$lib/stores/app'
 
 export type PopUp = {
   show: boolean
@@ -114,6 +115,11 @@ export class PdCanvas {
   handle_raise() {
     this.pd.handle_raise_canvas(this)
   }
+
+  handle_menuclose() {
+    get(app).wm.on_show_save_dialog_for_canvas(this)
+  }
+
   // modifers:
   // SHIFT = 1
   // CTRL = 2
@@ -156,6 +162,10 @@ export class PdCanvas {
     const directory = get(patch_directory)
     const message = `${this.id} savetofile ${name}.pd ${directory} 0;`
     this.pd.send(message)
+  }
+
+  get is_dirty() {
+    return get(this.title).includes('.pd* ')
   }
 
   private send_simple_command(command: string) {
