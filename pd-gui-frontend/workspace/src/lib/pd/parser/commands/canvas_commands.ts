@@ -1,6 +1,9 @@
+import { get } from 'svelte/store'
+
 import { Command } from './command'
 import type { Pd } from '../../pd'
 import type * as G from '../../../utils/geometry'
+import { app } from '$lib/stores/app'
 
 export class ReflectTitle extends Command {
   constructor(public canvas_id: string,
@@ -37,7 +40,6 @@ export class SetParents extends Command {
   override eval(pd: Pd) { }
 }
 
-
 export class NewCanvas extends Command {
   constructor(public canvas_id: string, public size: G.Size, public origin: G.Point, public set_edit_mode_on: boolean) {
     super()
@@ -48,6 +50,19 @@ export class NewCanvas extends Command {
   }
 }
 
+export class SaveAs extends Command {
+  constructor(public canvas_id: string) {
+    super()
+  }
+
+  override eval(pd: Pd) { 
+    const canvas = pd.canvas_with_id(this.canvas_id)
+    if (!canvas) {
+      return
+    }
+    get(app).wm.on_show_save_as_dialog_for_canvas(canvas)
+  }
+}
 
 export class GetScroll extends Command {
   constructor(public canvas_id: string) {
@@ -111,7 +126,6 @@ export class SetEditMode extends Command {
     canvas.handle_set_editmode(this.use_edit_mode)
   }
 }
-
 
 export class Raise extends Command {
   constructor(public canvas_id: string) {

@@ -6,7 +6,6 @@ import * as CanvasCommands from './commands/canvas_commands'
 import * as WidgetCommands from './commands/widget_commands'
 import { type IOLetType, IOLetScope } from '../pd_widget'
 import * as G from '../../utils/geometry'
-import { prop_dev } from 'svelte/internal'
 
 
 function clean_canvas_id(cid: string) {
@@ -193,6 +192,15 @@ export function transform(root: RootNode) : Command[] {
           parseInt(show_properties_arg.value) == 1,
           parseInt(show_open_arg.value) == 1
           ))
+      return
+    }
+
+    if (proc.id.name == 'pdtk_canvas_saveas') {
+      const canvas_arg = proc.arguments[0] as Identifier
+      const canvas_id = canvas_arg.name
+      // console.log(canvas_id)
+      // console.log(proc.arguments)
+      commands.push(new CanvasCommands.SaveAs(canvas_id))
       return
     }
 
