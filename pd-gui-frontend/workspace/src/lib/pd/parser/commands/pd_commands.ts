@@ -54,7 +54,7 @@ export class DeleteCanvas extends Command {
   }
 
   override eval(pd: Pd) {
-    console.log('DeleteCanvas::eval')
+    // console.log(`DeleteCanvas::eval ${this.canvas_id}`)
     const canvas = pd.canvas_with_id(this.canvas_id)
     if (!canvas) {
       return

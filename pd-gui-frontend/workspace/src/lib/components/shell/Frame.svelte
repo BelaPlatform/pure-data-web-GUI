@@ -123,6 +123,7 @@
     >
     <span class="title">
       <!-- {$box.size.width}/{$box.size.height}  -->
+      <!-- {frame.id} -->
       {$title}
     </span>
     <span class="buttons">

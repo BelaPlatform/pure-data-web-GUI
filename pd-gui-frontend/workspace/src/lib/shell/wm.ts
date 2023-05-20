@@ -43,6 +43,7 @@ export class Frame {
   close_effect: Function|null = null
 
   constructor(public id: number, public klass: ViewKlass, box: G.Rect) {
+    // console.log('Frame()', id, klass)
     this.box.set(box)
     this.view = new View(this, klass)
   }
@@ -125,23 +126,30 @@ export class WindowManager {
   }
 
   new_canvas_frame(canvas: PdCanvas) {
-    const box = DefaultBox()
-    box.origin.x = get(canvas.origin).x
-    box.origin.y = get(canvas.origin).y
-    if (box.origin.x == 0) {
-      box.origin.x = this.next_id * 24
-    }
-    if (box.origin.y == 0) {
-      box.origin.y = this.next_id * 24
+    // console.log(`new_canvas_frame ${canvas.id}`)
+
+    // do we already have a frame for this canvas?
+    let frame = this.frame_for_canvas(canvas)
+    if (!frame) {
+      const box = DefaultBox()
+      box.origin.x = get(canvas.origin).x
+      box.origin.y = get(canvas.origin).y
+      if (box.origin.x == 0) {
+        box.origin.x = this.next_id * 24
+      }
+      if (box.origin.y == 0) {
+        box.origin.y = this.next_id * 24
+      }
+
+      frame = new Frame(this.next_id++, new ViewKlass(PatchView, {canvas}), box)
+      this.frames.update(ws => {
+        ws.push(frame!)
+        return ws
+      })
+      this.n_frames++
     }
 
-    const w = new Frame(this.next_id++, new ViewKlass(PatchView, {canvas}), box)
-    this.frames.update(ws => {
-      ws.push(w)
-      return ws
-    })
-    this.n_frames++
-    this.stack_top(w)
+    this.stack_top(frame)
   }
 
   new_dialog_frame(component: any) {
@@ -208,7 +216,7 @@ export class WindowManager {
     return frames_.find(f => {
       if (f.klass.component == PatchView) {
         if (f.klass.props.canvas !== undefined) {
-          return f.klass.props.canvas === canvas
+          return f.klass.props.canvas.id === canvas.id
         }
       } else {
         return false
@@ -225,16 +233,15 @@ export class WindowManager {
 
     // does it have a side effect?
     if (frame.close_effect) {
-      /* const cancel_close = frame.close_effect()
-      if (cancel_close) {
-        return
-      } */
       frame.close_effect()
       return
     }
 
     this.frames.update(fs => {
-      return fs.filter(f => f.id != frame.id)
+      return fs.filter(f => {
+        // console.log(`${f.id} vs ${frame.id}`)
+        return f.id != frame.id
+      })
     })
 
     // is there another frame we could activate?

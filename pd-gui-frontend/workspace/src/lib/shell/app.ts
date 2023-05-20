@@ -86,14 +86,19 @@ export class App {
   }
 
   did_create_canvas(canvas: PdCanvas) {
+    // console.log(`did_create_canvas ${canvas.id}`)
     this.wm.new_canvas_frame(canvas)
   }
 
   handle_did_destroy_canvas(canvas: PdCanvas) {
+    // console.log('handle_did_destroy_canvas')
     const frame = this.wm.frame_for_canvas(canvas)
     if (frame) {
+      // console.log('have a frame_for_canvas')
       frame.close_effect = null
       this.wm.close_frame(frame)
+    } else {
+      // console.log('have no frame')
     }
   }
 
