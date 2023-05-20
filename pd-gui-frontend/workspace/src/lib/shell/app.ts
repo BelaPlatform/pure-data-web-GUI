@@ -58,9 +58,7 @@ export class App {
   }
 
   async on_startup() {
-    await enumerate_patches()
-    const m = await make_menu()
-    this.menu.update(_ => m)
+    await this.on_update_menu()
     this.wm.on_show_singleton_dialog('pd')
     PdMessages.push(navigator.userAgent, Direction.Internal)
     if (navigator.userAgent.search('Macintosh') != -1) {
@@ -101,5 +99,15 @@ export class App {
 
   log(message: string) {
     PdMessages.push(message, Direction.Internal)
+  }
+
+  handle_update_window_menu() {
+    this.on_update_menu()
+  }
+
+  async on_update_menu() {
+    await enumerate_patches()
+    const m = await make_menu()
+    this.menu.update(_ => m)
   }
 }

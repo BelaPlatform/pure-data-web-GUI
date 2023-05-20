@@ -1,9 +1,11 @@
 import { UnrecognizedCommand, IgnoredCommand, type Command } from './commands/command'
 import { type Identifier, NumberNode, type RootNode, StringNode, VectorNode, type PropertyNode, type ValueNode } from './syntax_nodes'
+import * as ShellCommands from './commands/shell_commands'
 import * as PdCommands from './commands/pd_commands'
 import * as PdWindowCommands from './commands/pd_window_commands'
 import * as CanvasCommands from './commands/canvas_commands'
 import * as WidgetCommands from './commands/widget_commands'
+
 import { type IOLetType, IOLetScope } from '../pd_widget'
 import * as G from '../../utils/geometry'
 
@@ -19,6 +21,15 @@ export function transform(root: RootNode) : Command[] {
   const commands : Command[] = []
   root.procs.forEach(proc => {
     
+    // *******
+    // shell commands
+    // *******
+    if (proc.id.name == 'update_window_menu') {
+      commands.push(new ShellCommands.UpdateWindowMenu(''))
+      return
+    }
+
+
     // *******
     // pd commands
     // *******
