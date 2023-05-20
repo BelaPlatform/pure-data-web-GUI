@@ -4,9 +4,11 @@ import WebSocket, { WebSocketServer } from 'ws'
 
 import * as config from './config.js'
 
+type LogLevel = 'TRACE' | 'INFO'
+const LOG_LEVEL: LogLevel = process.env.LOG_LEVEL == 'TRACE' ? 'TRACE' : 'INFO'
+
 let pd_client: net.Socket|null = null
 let ws_client: WebSocket|null = null
-
 let buffer_from_pd: string = ""
 let buffer_to_pd: string = ""
 
@@ -32,14 +34,20 @@ const pd_server = net.createServer((client) => {
     buffer_from_pd += str
 
     if (is_unterminated(str) && !str.endsWith('pdtk_ping')) {
-      console.log('buffer: unterminated')
+      if (LOG_LEVEL == 'TRACE') {
+        console.log('buffer: unterminated')
+      }
     } else {
       if (ws_client) {
-        console.log(`#--${buffer_from_pd}--#`)
+        if (LOG_LEVEL == 'TRACE') {
+          console.log(`#--${buffer_from_pd}--#`)
+        }
         ws_client.send(buffer_from_pd)
         buffer_from_pd = ""
       } else {
-        console.log('buffer: no client connected')
+        if (LOG_LEVEL == 'TRACE') {
+          console.log('buffer: no client connected')
+        }
       }
     }
   })
@@ -93,7 +101,9 @@ wss.on('connection', ws => {
   ws.on('message', data => {
     buffer_to_pd += `${data}`
     if (pd_client) {
-      console.log(`--#${data}#--`)
+      if (LOG_LEVEL == 'TRACE') {
+        console.log(`--#${data}#--`)
+      }
       pd_client.write(buffer_to_pd)
       buffer_to_pd = ""
     } else {
