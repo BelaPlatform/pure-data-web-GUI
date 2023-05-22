@@ -276,12 +276,16 @@ export class WindowManager {
     this.active_frame = frame
 
     if (frame.klass.props.canvas) {
-      this.app.pd.set_active_canvas(frame.klass.props.canvas)
+      get(this.app.pd)!.set_active_canvas(frame.klass.props.canvas)
     }
   }
 
   on_keydown(event: KeyboardEvent) {
     // console.log(event)
+    const maybe_pd = get(this.app.pd)
+    if (!maybe_pd) { return }
+    
+    const pd = maybe_pd!
     // is it a shortcut?
     if (event.key == '#' && event.ctrlKey) {
       event.preventDefault()
@@ -291,7 +295,7 @@ export class WindowManager {
 
     if (event.key == 'r' && event.altKey) {
       event.preventDefault()
-      this.app.pd.send_refresh_gui()
+      pd.send_refresh_gui()
       return
     }
 
@@ -308,7 +312,7 @@ export class WindowManager {
     }
 
     // do we have an open canvas?
-    const canvas = get(this.app.pd.active_canvas)
+    const canvas = get(pd.active_canvas)
     if (canvas) {
       if (event.key == 's' && event.ctrlKey) {
         event.preventDefault()

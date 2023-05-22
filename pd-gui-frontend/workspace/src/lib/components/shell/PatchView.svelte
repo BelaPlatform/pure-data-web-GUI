@@ -31,7 +31,7 @@
       })
     })
     frame.close_effect = () => {
-      pd.on_close(canvas)
+      $pd!.on_close(canvas)
     }
   })
 </script>

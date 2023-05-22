@@ -1,4 +1,4 @@
-import { writable } from "svelte/store"
+import { writable, get } from "svelte/store"
 
 import { WindowManager } from './wm'
 import type { PdCanvas } from '../pd/pd_canvas'
@@ -9,6 +9,7 @@ import { WebSocketIO } from '$lib/utils/io'
 import { Interpreter } from '$lib/pd/parser/interpreter'
 import { Pd } from "$lib/pd/pd"
 import { make_menu, type MenuItem } from "./menu"
+import { type RpcMessage, PushRxRpcId, PushTxRpcId } from './rpc'
 
 export enum Theme {
   Vanilla,
@@ -25,32 +26,77 @@ export type UserAgent = {
   browser: Browser
 }
 
+type Error = 'pd_unavailable' | 'service_unavailable'
+
 export class App {
   show_debug = writable<boolean>(false)
   theme = writable<Theme>(Theme.Vanilla)
   menu = writable<MenuItem[]>([])
   wm: WindowManager
-  pd: Pd
-  pd_io: WebSocketIO
+  pd = writable<Pd|null>(null)
+  pd_io: WebSocketIO|null = null
   push_io: WebSocketIO
   user_agent: UserAgent
   init_sequence_sent = false
+  error = writable<Error|null>(null)
 
   constructor() {
     this.wm = new WindowManager(this)
-    let addr = 'ws://' + window.location.hostname +':8081';
-    this.pd_io = new WebSocketIO(`ws://${window.location.hostname}:8081/pd`)
-    this.push_io = new WebSocketIO(`ws://${window.location.hostname}:8081/push`)
-    this.pd = new Pd(this)
 
+    this.push_io = new WebSocketIO(`ws://${window.location.hostname}:8081/push`)
+
+    this.push_io.on_message = async (event:MessageEvent) => {
+      console.log(event.data)
+      const message: RpcMessage = JSON.parse(event.data)
+      switch (message.rpcid) {
+        case PushTxRpcId.Close:
+          console.log('Close')
+          // display an error message and shut down
+          this.error.update(() => 'service_unavailable')
+          break
+        case PushTxRpcId.Continue:
+          console.log('Continue')
+          // ask if Pd is available
+          this.push_io.send(JSON.stringify({rpcid: PushRxRpcId.PdAvailable}))
+          break
+        case PushTxRpcId.PdAvailable:
+          console.log('PdAvailable')
+          // initialize the pd message stream
+          await this.initialize_pd()
+          break
+        case PushTxRpcId.PdUnavailable:
+          console.log('PdUnavailable')
+          // reset all pd-related state and display an error message
+          this.pd.update((pd) => {
+            if (pd) {
+              pd.teardown()
+            }
+            return null
+          })
+
+          if (this.pd_io) {
+            this.pd_io.socket.close()
+            this.pd_io = null
+          }
+          this.error.update(() => 'pd_unavailable')
+          break
+      }
+    }
+
+    this.user_agent = {is_mobile: false, platform: 'linux', browser: 'chrome'}
+  }
+
+  private async initialize_pd() {
+    const pd = new Pd(this)
+    this.pd_io = new WebSocketIO(`ws://${window.location.hostname}:8081/pd`)
     this.pd_io.on_message = (event:MessageEvent) => {
       // console.log('io.on_message')
-      const interpreter = new Interpreter(this.pd)
+      const interpreter = new Interpreter(pd)
       interpreter.interpret(event.data)
 
       if (!this.init_sequence_sent) {
         this.init_sequence_sent = true
-        this.pd.send_init_sequence()
+        pd.send_init_sequence()
       }
     }
 
@@ -59,11 +105,7 @@ export class App {
       // this.pd.send_init_sequence()
     }
 
-    this.push_io.on_message = async (event:MessageEvent) => {
-      console.log(event.data)
-    }
-
-    this.user_agent = {is_mobile: false, platform: 'linux', browser: 'chrome'}
+    this.pd.update(() => pd)
   }
 
   async on_startup() {
@@ -83,11 +125,13 @@ export class App {
   }
 
   on_new_patch() {
-    this.pd.on_create_new_canvas()
+    const pd = get(this.pd)
+    pd!.on_create_new_canvas()
   }
 
   on_open_patch(patch: PatchFile) {
-    this.pd.on_open_patch(patch)
+    const pd = get(this.pd)
+    pd!.on_open_patch(patch)
   }
 
   on_toggle_debug() {

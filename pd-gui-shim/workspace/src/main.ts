@@ -9,6 +9,10 @@ import * as config from './config.js'
 type LogLevel = 'TRACE' | 'INFO'
 const LOG_LEVEL: LogLevel = process.env.LOG_LEVEL == 'TRACE' ? 'TRACE' : 'INFO'
 
+type RpcMessage = {
+  rpcid: number
+}
+
 enum PushTxRpcId {
   Close,          // there's already a frontend connected
   Continue,       // you are the only frontend, continue and connect to the Pd message stream
@@ -44,13 +48,15 @@ const pd_server = net.createServer((client) => {
 
   client.on('end', () => {
     console.log('pd disconnected')
+    pd_client = null
     if (push_wss_client) {
       push_wss_client.send(JSON.stringify({rpcid: PushTxRpcId.PdUnavailable}))
     }
   })
 
   client.on('error', (data) => {
-    console.log(`ERROR ${data} `)
+    console.log(`pd ws error ${data} `)
+    pd_client = null
     if (push_wss_client) {
       push_wss_client.send(JSON.stringify({rpcid: PushTxRpcId.PdUnavailable}))
     }
@@ -158,6 +164,17 @@ push_wss.on('connection', ws => {
   ws.on("close", () => {
     console.log('push_wss_client is gone')
     push_wss_client = null
+  })
+
+  ws.on("message", (data) => {
+    console.log('push_wss_client is gone')
+    const message: RpcMessage = JSON.parse(`${data}`)
+    console.log(message)
+    switch(message.rpcid) {
+      case PushRxRpcId.PdAvailable:
+        ws.send(JSON.stringify({rpcid: pd_client ? PushTxRpcId.PdAvailable : PushTxRpcId.PdUnavailable}))
+        break
+    }
   })
 })
 

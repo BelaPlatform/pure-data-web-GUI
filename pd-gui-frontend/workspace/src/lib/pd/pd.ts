@@ -19,8 +19,14 @@ export class Pd {
 
   constructor(public app: App) {}
 
+  teardown() {
+    if (this.watchdog) {
+      clearInterval(this.watchdog)
+    }
+  }
+
   send(message: string) {
-    this.app.pd_io.send(message)
+    this.app.pd_io?.send(message)
   }
 
   send_init_sequence() {

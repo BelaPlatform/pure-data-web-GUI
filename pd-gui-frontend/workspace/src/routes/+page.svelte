@@ -12,20 +12,50 @@
   $: wm = $app.wm
   $: frames = wm.frames
   $: pd = $app.pd
-  $: dsp = pd.dsp_is_on
+  $: dsp = $pd?.dsp_is_on
+  $: error_ = $app.error
 </script>
 
 <svelte:window on:keydown={(event) => $app.wm.on_keydown(event)} />
 
-<Headerbar>
-  <input type="checkbox" 
-    id="dsp"
-    bind:checked={$dsp} 
-    on:click={_ => pd.on_toggle_dsp()}
-    />
-  <label for="dsp">DSP</label>
-</Headerbar>
+{#if $pd}
+  <Headerbar>
+    <input type="checkbox" 
+      id="dsp"
+      bind:checked={$dsp} 
+      on:click={_ => $pd?.on_toggle_dsp()}
+      />
+    <label for="dsp">DSP</label>
+  </Headerbar>
 
-{#each $frames as frame(frame.id)}
-  <Frame {frame} />
-{/each}
+  {#each $frames as frame(frame.id)}
+    <Frame {frame} />
+  {/each}
+{:else}
+  <div id="splash">
+    {#if $error_ == 'pd_unavailable'}
+      <h1>PD is disconnected</h1>
+    {:else}
+      <h1>Client connection already taken</h1>
+    {/if}
+  </div>
+{/if}
+
+<style lang="scss">
+  #splash {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+      background-color: #999;
+      color: transparent;
+      text-shadow: 0px 2px 3px rgba(255,255,255,0.5);
+      -webkit-background-clip: text;
+        -moz-background-clip: text;
+              background-clip: text;
+    }
+  }
+</style>
