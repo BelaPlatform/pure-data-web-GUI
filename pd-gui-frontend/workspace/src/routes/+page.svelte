@@ -37,6 +37,8 @@
       <h1>PD is disconnected</h1>
     {:else if $error_ == 'client_connected'}
       <h1>Client connection already taken</h1>
+    {:else if $error_ == 'service_unavailable'}
+      <h1>Service unavilable. Time to start the backend!</h1>
     {/if}
   </div>
 {/if}

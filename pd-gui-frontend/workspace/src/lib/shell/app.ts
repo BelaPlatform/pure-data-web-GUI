@@ -26,7 +26,7 @@ export type UserAgent = {
   browser: Browser
 }
 
-type Error = 'pd_unavailable' | 'client_connected'
+type Error = 'pd_unavailable' | 'client_connected' | 'service_unavailable'
 
 export class App {
   show_debug = writable<boolean>(false)
@@ -44,7 +44,6 @@ export class App {
     this.wm = new WindowManager(this)
 
     this.push_io = new WebSocketIO(`ws://${window.location.hostname}:8081/push`)
-
     this.push_io.on_message = async (event:MessageEvent) => {
       console.log(event.data)
       const message: RpcMessage = JSON.parse(event.data)
@@ -71,6 +70,16 @@ export class App {
           await this.teardown_pd()
           break
       }
+    }
+
+    this.push_io.socket.onerror = () => {
+      console.log('push_io.onerror')
+      this.error.update(() => 'service_unavailable')
+    }
+
+    this.push_io.socket.onclose = () => {
+      console.log('push_io.onclose')
+      this.error.update(() => 'service_unavailable')
     }
 
     this.user_agent = {is_mobile: false, platform: 'linux', browser: 'chrome'}
