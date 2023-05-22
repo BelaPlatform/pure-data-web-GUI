@@ -23,7 +23,7 @@ export class WebSocketIO extends IO {
   }
 
   send(message:string) {
-    console.log('WebSocketIO::send', message)
+    // console.log('WebSocketIO::send', message)
     this.socket.send(message)
   }
 }

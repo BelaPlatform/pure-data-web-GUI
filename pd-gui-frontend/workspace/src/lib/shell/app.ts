@@ -26,7 +26,7 @@ export type UserAgent = {
   browser: Browser
 }
 
-type Error = 'pd_unavailable' | 'service_unavailable'
+type Error = 'pd_unavailable' | 'client_connected'
 
 export class App {
   show_debug = writable<boolean>(false)
@@ -52,7 +52,7 @@ export class App {
         case PushTxRpcId.Close:
           console.log('Close')
           // display an error message and shut down
-          this.error.update(() => 'service_unavailable')
+          this.error.update(() => 'client_connected')
           break
         case PushTxRpcId.Continue:
           console.log('Continue')
@@ -61,24 +61,14 @@ export class App {
           break
         case PushTxRpcId.PdAvailable:
           console.log('PdAvailable')
-          // initialize the pd message stream
+          // this.wm = new WindowManager(this)
           await this.initialize_pd()
           break
         case PushTxRpcId.PdUnavailable:
           console.log('PdUnavailable')
           // reset all pd-related state and display an error message
-          this.pd.update((pd) => {
-            if (pd) {
-              pd.teardown()
-            }
-            return null
-          })
-
-          if (this.pd_io) {
-            this.pd_io.socket.close()
-            this.pd_io = null
-          }
-          this.error.update(() => 'pd_unavailable')
+          this.wm.destroy_canvas_frames()
+          await this.teardown_pd()
           break
       }
     }
@@ -87,28 +77,44 @@ export class App {
   }
 
   private async initialize_pd() {
-    const pd = new Pd(this)
     this.pd_io = new WebSocketIO(`ws://${window.location.hostname}:8081/pd`)
     this.pd_io.on_message = (event:MessageEvent) => {
       // console.log('io.on_message')
+      const pd = get(this.pd)!
       const interpreter = new Interpreter(pd)
       interpreter.interpret(event.data)
 
       if (!this.init_sequence_sent) {
         this.init_sequence_sent = true
-        pd.send_init_sequence()
+        pd.send_refresh_gui()
       }
     }
 
     this.pd_io.on_open = () => {
       // console.log('io.on_open')
       // this.pd.send_init_sequence()
+      const pd = new Pd(this)
+      this.pd.update(() => pd)
     }
+  }
 
-    this.pd.update(() => pd)
+  private async teardown_pd() {
+    this.pd.update((pd) => {
+      if (pd) {
+        pd.teardown()
+      }
+      return null
+    })
+
+    if (this.pd_io) {
+      this.pd_io.socket.close()
+      this.pd_io = null
+    }
+    this.error.update(() => 'pd_unavailable')
   }
 
   async on_startup() {
+    console.log('on_startup')
     await this.on_update_menu()
     this.wm.on_show_singleton_dialog('pd')
     PdMessages.push(navigator.userAgent, Direction.Internal)

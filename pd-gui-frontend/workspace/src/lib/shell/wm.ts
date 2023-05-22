@@ -121,8 +121,12 @@ export class WindowManager {
 
   constructor(public app: App) {}
 
-  use_app(app: App) {
-    this.app = app
+  destroy_canvas_frames() {
+    this.frames.update(fs => {
+      const ws = fs.filter(f => f.klass.component != PatchView)
+      return ws
+    })
+    this.active_frame = null
   }
 
   new_canvas_frame(canvas: PdCanvas) {

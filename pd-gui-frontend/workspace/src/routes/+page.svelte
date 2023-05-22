@@ -35,7 +35,7 @@
   <div id="splash">
     {#if $error_ == 'pd_unavailable'}
       <h1>PD is disconnected</h1>
-    {:else}
+    {:else if $error_ == 'client_connected'}
       <h1>Client connection already taken</h1>
     {/if}
   </div>

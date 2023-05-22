@@ -22,6 +22,7 @@ export class Pd {
   teardown() {
     if (this.watchdog) {
       clearInterval(this.watchdog)
+      this.watchdog = null
     }
   }
 
@@ -29,17 +30,12 @@ export class Pd {
     this.app.pd_io?.send(message)
   }
 
-  send_init_sequence() {
-    /* const message = "pd init / 0  8 5 10 10 6 13 12 7 15 16 10 19 24 14 29 37 22 44 17 10 20 20 12 24 24 14 29 32 19 38 47 28 56 73 44 86;"
-    this.send(message) */
-    this.send_refresh_gui()
-  }
-
   send_ping() {
     this.send('pd ping;')
   }
 
   enable_watchdog() {
+    if (this.watchdog) { return }
     this.watchdog = setInterval(() => {
       this.send('pd watchdog;')
     }, 2000)
