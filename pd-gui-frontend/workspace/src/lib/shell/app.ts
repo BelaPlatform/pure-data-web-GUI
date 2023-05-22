@@ -31,16 +31,19 @@ export class App {
   menu = writable<MenuItem[]>([])
   wm: WindowManager
   pd: Pd
-  io: WebSocketIO
+  pd_io: WebSocketIO
+  push_io: WebSocketIO
   user_agent: UserAgent
   init_sequence_sent = false
 
   constructor() {
     this.wm = new WindowManager(this)
     let addr = 'ws://' + window.location.hostname +':8081';
-    this.io = new WebSocketIO(addr)
+    this.pd_io = new WebSocketIO(`ws://${window.location.hostname}:8081/pd`)
+    this.push_io = new WebSocketIO(`ws://${window.location.hostname}:8081/push`)
     this.pd = new Pd(this)
-    this.io.on_message = (event:MessageEvent) => {
+
+    this.pd_io.on_message = (event:MessageEvent) => {
       // console.log('io.on_message')
       const interpreter = new Interpreter(this.pd)
       interpreter.interpret(event.data)
@@ -50,10 +53,16 @@ export class App {
         this.pd.send_init_sequence()
       }
     }
-    this.io.on_open = () => {
+
+    this.pd_io.on_open = () => {
       // console.log('io.on_open')
       // this.pd.send_init_sequence()
     }
+
+    this.push_io.on_message = async (event:MessageEvent) => {
+      console.log(event.data)
+    }
+
     this.user_agent = {is_mobile: false, platform: 'linux', browser: 'chrome'}
   }
 

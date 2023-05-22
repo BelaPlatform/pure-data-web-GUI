@@ -20,7 +20,7 @@ export class Pd {
   constructor(public app: App) {}
 
   send(message: string) {
-    this.app.io.send(message)
+    this.app.pd_io.send(message)
   }
 
   send_init_sequence() {
