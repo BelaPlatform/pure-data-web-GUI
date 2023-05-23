@@ -42,6 +42,10 @@
         Service unavailable.<br>
         Start the backend and refresh your browser window.
       </h1>
+    {:else}
+      <h1>
+        Waiting for a response
+      </h1>
     {/if}
   </div>
 {/if}
@@ -53,6 +57,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 
     h1 {
       text-align: center;
