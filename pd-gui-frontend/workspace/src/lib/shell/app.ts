@@ -74,12 +74,12 @@ export class App {
 
     this.push_io.socket.onerror = () => {
       console.log('push_io.onerror')
-      this.error.update(() => 'service_unavailable')
+      // this.error.update(() => 'service_unavailable')
     }
 
     this.push_io.socket.onclose = () => {
       console.log('push_io.onclose')
-      this.error.update(() => 'service_unavailable')
+      // this.error.update(() => 'service_unavailable')
     }
 
     this.user_agent = {is_mobile: false, platform: 'linux', browser: 'chrome'}
