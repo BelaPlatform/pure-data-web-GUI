@@ -38,7 +38,10 @@
     {:else if $error_ == 'client_connected'}
       <h1>Client connection already taken</h1>
     {:else if $error_ == 'service_unavailable'}
-      <h1>Service unavilable. Time to start the backend!</h1>
+      <h1>
+        Service unavailable.<br>
+        Start the backend and refresh your browser window.
+      </h1>
     {/if}
   </div>
 {/if}
@@ -52,6 +55,7 @@
     justify-content: center;
 
     h1 {
+      text-align: center;
       background-color: #999;
       color: transparent;
       text-shadow: 0px 2px 3px rgba(255,255,255,0.5);

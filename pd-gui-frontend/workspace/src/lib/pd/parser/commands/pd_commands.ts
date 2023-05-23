@@ -31,7 +31,7 @@ export class Dsp extends Command {
   }
 
   override eval(pd: Pd) {
-    console.log(`Dsp::eval ${this.dsp_is_on}`)
+    // console.log(`Dsp::eval ${this.dsp_is_on}`)
     pd.handle_dsp(this.dsp_is_on)
   }
 }
@@ -42,7 +42,7 @@ export class Audio extends Command {
   }
 
   override eval(pd: Pd) {
-    console.log(`Audio::eval ${this.audio_is_on}`)
+    // console.log(`Audio::eval ${this.audio_is_on}`)
   }
 }
 
