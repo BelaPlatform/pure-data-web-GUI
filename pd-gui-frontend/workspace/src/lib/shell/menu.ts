@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 
 import { app } from '../stores/app'
 import { available_patches, type PatchFile } from '../stores/patches'
-import type { NodeType } from '../pd/pd_canvas'
+import type { PdCanvas, NodeType } from '../pd/pd_canvas'
 import type { DialogType } from './wm'
 
 export class MenuItem {
@@ -11,6 +11,16 @@ export class MenuItem {
     public children: MenuItem[] = [],
     public shortcut: string = "") {
     }
+}
+
+function active_canvas(): PdCanvas|null {
+  const app_ = get(app)
+  const canvas_ = get(app_.pd)?.active_canvas
+  if (canvas_) {
+    const canvas = get(canvas_)
+    return canvas
+  }
+  return null
 }
 
 function on_new_patch() {
@@ -22,67 +32,42 @@ function on_open_patch(patch: PatchFile) {
 }
 
 function on_save_patch() {
-  const app_ = get(app)
-  const canvas = get(app_.pd.active_canvas)
-  if (canvas) {
-    canvas.on_save()
-  }
+  active_canvas()?.on_save()
 }
 
 function on_save_patch_as() {
-  const app_ = get(app)
-  const canvas = get(app_.pd.active_canvas)
+  const canvas = active_canvas()
   if (canvas) {
     get(app).wm.on_show_save_as_dialog_for_canvas(canvas)
   }
 }
 
 function on_edit_cut() {
-  const app_ = get(app)
-  const canvas = get(app_.pd.active_canvas)
-  if (canvas) {
-    canvas.on_cut()
-  }
+  active_canvas()?.on_cut()
 }
 
 function on_edit_copy() {
-  const app_ = get(app)
-  const canvas = get(app_.pd.active_canvas)
-  if (canvas) {
-    canvas.on_copy()
-  }
+  active_canvas()?.on_copy()
 }
 
 function on_edit_paste() {
-  const app_ = get(app)
-  const canvas = get(app_.pd.active_canvas)
-  if (canvas) {
-    canvas.on_paste()
-  }
+  active_canvas()?.on_paste()
 }
 
 function on_edit_toggle_edit_mode() {
-  const app_ = get(app)
-  const canvas = get(app_.pd.active_canvas)
-  canvas?.on_toggle_edit_mode()
+  active_canvas()?.on_paste()
 }
 
 function on_edit_connect_selection() {
-  const app_ = get(app)
-  const canvas = get(app_.pd.active_canvas)
-  canvas?.on_connect_selection()
+  active_canvas()?.on_connect_selection()
 }
 
 function on_edit_select_all() {
-  const app_ = get(app)
-  const canvas = get(app_.pd.active_canvas)
-  canvas?.on_select_all()
+  active_canvas()?.on_select_all()
 }
 
-function on_edit_dulicate() {
-  const app_ = get(app)
-  const canvas = get(app_.pd.active_canvas)
-  canvas?.on_duplicate()
+function on_edit_duplicate() {
+  active_canvas()?.on_duplicate()
 }
 
 function on_close_frame() {
@@ -155,8 +140,7 @@ function build_file_menu() : MenuItem[] {
 }
 
 function on_put(what: NodeType) {
-  const app_ = get(app)
-  const canvas = get(app_.pd.active_canvas)
+  const canvas = active_canvas()
   if (!canvas) { return }
   canvas.on_put(what)
 }
@@ -170,7 +154,7 @@ export async function make_menu() {
     new MenuItem('Cut', on_edit_cut, [], 'Ctrl+X'),
     new MenuItem('Copy', on_edit_copy, [], 'Ctrl+C'),
     new MenuItem('Paste', on_edit_paste, [], 'Ctrl+V'),
-    new MenuItem('Duplicate', on_edit_dulicate, [], 'Ctrl+D'),
+    new MenuItem('Duplicate', on_edit_duplicate, [], 'Ctrl+D'),
     new MenuItem('SelectAll', on_edit_select_all, [], 'Ctrl+A'),
     new MenuItem('-'),
     new MenuItem('Connect Selection', on_edit_connect_selection, [], 'Ctrl+K'),

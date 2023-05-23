@@ -10,13 +10,15 @@
   export let frame: Frame
   export let canvas: PdCanvas
 
+  $: pd = $app.pd
+
   let text: string = get(canvas.title).split(' ')[0]
   function on_submit(event: SubmitEvent) {
     if (event.submitter?.textContent === 'Yes') {
       canvas.on_save()
-      $app.pd.on_close(canvas)
+      $pd?.on_close(canvas)
     } else if (event.submitter?.textContent === 'No') {
-      $app.pd.on_close(canvas, 2)
+      $pd?.on_close(canvas, 2)
     }
     $app.wm.close_frame(frame)
     text = ''
