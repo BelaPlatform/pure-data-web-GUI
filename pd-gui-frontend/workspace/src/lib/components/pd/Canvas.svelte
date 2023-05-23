@@ -116,13 +116,13 @@
 
     // brave grabs ctrl+shift keys and does not let us handle it
     // use altKey for now
-    if (event.key == 'B' && event.altKey && event.shiftKey) {
+    if (event.code == 'KeyB' && event.altKey && event.shiftKey) {
       event.preventDefault()
       canvas.on_put('bng')
       return
     }
 
-    if (event.key == 'T' && event.altKey && event.shiftKey) {
+    if (event.code == 'KeyT' && event.altKey && event.shiftKey) {
       event.preventDefault()
       canvas.on_put('toggle')
       return

@@ -297,19 +297,19 @@ export class WindowManager {
       return
     }
 
-    if (event.key == 'r' && event.altKey) {
+    if (event.code == 'KeyR' && event.altKey) {
       event.preventDefault()
       pd.send_refresh_gui()
       return
     }
 
-    if (event.key == 'n' && event.altKey) {
+    if (event.code == 'KeyN' && event.altKey) {
       this.app.on_new_patch()
       event.preventDefault()
       return
     }
 
-    if (event.key == 'w' && event.altKey) {
+    if (event.code == 'KeyW' && event.altKey) {
       this.close_active_frame()
       event.preventDefault()
       return
