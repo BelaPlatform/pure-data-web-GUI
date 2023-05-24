@@ -290,7 +290,7 @@
     >
     {#each $widgets as widget(widget.id)}
       <Node {widget} />
-    {/each}G
+    {/each}
     {#each $connections as connection}
       <Noodle {connection} />
     {/each}

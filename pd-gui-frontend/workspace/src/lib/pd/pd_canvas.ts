@@ -41,6 +41,10 @@ export class PdCanvas {
   }
 
   handle_create_widget(id:string, klassname:string, x:number, y:number) {
+    // does a widget with that id already exist?
+    if (get(this.widgets).find((w) => w.id == id)) {
+      return
+    }
     const widget = new PdWidget(id, this, klassname, x, y)
     this.add_widget(widget)
   }
