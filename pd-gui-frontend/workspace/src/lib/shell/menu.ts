@@ -106,6 +106,16 @@ function on_print() {
   window.print()
 }
 
+function on_dsp_on() {
+  const app_ = get(app)
+  get(app_.pd)?.on_set_dsp_on()
+}
+
+function on_dsp_off() {
+  const app_ = get(app)
+  get(app_.pd)?.on_set_dsp_off()
+}
+
 function build_file_menu() : MenuItem[] {
   const pre = [
     new MenuItem('New', on_new_patch, [], 'Alt+N'),
@@ -182,9 +192,10 @@ export async function make_menu() {
   ]
 
   let media_menu: MenuItem[] = [
-    /* new MenuItem('DSP On'),
-    new MenuItem('DSP Off'),
-    new MenuItem('Test Audio and Midi...'), */
+    new MenuItem('DSP On', on_dsp_on, [], 'Ctrl+/'),
+    new MenuItem('DSP Off', on_dsp_off, [], 'Ctrl+.'),
+    // new MenuItem('Test Audio and Midi...'),
+    new MenuItem('-'),
     new MenuItem('Audio Settings...', on_show_audio_settings_dialog),
     // new MenuItem('...')
   ]

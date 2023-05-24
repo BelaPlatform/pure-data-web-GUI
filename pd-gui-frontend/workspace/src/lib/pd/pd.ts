@@ -154,10 +154,15 @@ export class Pd {
   }
 
   on_toggle_dsp() {
-    this.dsp_is_on.update(value => {
-      this.send_dsp(!value)
-      return value
-    })
+    this.send_dsp(!get(this.dsp_is_on))
+  }
+
+  on_set_dsp_on() {
+    this.send_dsp(true)
+  }
+
+  on_set_dsp_off() {
+    this.send_dsp(false)
   }
 
   handle_dsp(value: boolean) {
