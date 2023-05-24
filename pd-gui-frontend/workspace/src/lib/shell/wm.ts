@@ -288,12 +288,26 @@ export class WindowManager {
     // console.log(event)
     const maybe_pd = get(this.app.pd)
     if (!maybe_pd) { return }
-    
+
     const pd = maybe_pd!
+
+
     // is it a shortcut?
     if (event.key == '#' && event.ctrlKey) {
       event.preventDefault()
       this.app.on_toggle_debug()
+      return
+    }
+
+    if (event.key == '/' && event.ctrlKey) {
+      event.preventDefault()
+      pd.on_set_dsp_on()
+      return
+    }
+
+    if (event.key == '.' && event.ctrlKey) {
+      event.preventDefault()
+      pd.on_set_dsp_off()
       return
     }
 
