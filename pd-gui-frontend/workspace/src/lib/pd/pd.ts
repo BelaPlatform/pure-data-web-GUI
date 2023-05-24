@@ -124,10 +124,9 @@ export class Pd {
 
   widget_with_id(id: string): PdWidget | null {
     for(let canvas of get(this.canvases)) {
-      for (let widget of get(canvas.widgets)) {
-        if (widget.id == id) {
-          return widget
-        }
+      const widget = canvas.widget_with_id(id)
+      if (widget) {
+        return widget
       }
     }
     return null

@@ -40,13 +40,17 @@ export class PdCanvas {
     this.edit_mode.set(set_edit_mode_on)
   }
 
-  handle_create_widget(id:string, klassname:string, x:number, y:number) {
+  handle_create_widget(id: string, klassname: string, x: number, y: number) {
     // does a widget with that id already exist?
-    if (get(this.widgets).find((w) => w.id == id)) {
+    if (this.widget_with_id(id)) {
       return
     }
     const widget = new PdWidget(id, this, klassname, x, y)
     this.add_widget(widget)
+  }
+
+  widget_with_id(id: string): PdWidget | null {
+    return get(this.widgets).find((w) => w.id == id) || null
   }
 
   private add_widget(widget: PdWidget) {

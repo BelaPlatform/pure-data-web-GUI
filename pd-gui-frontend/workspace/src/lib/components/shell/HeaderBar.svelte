@@ -75,6 +75,7 @@
     width: 100vw;
     background-color: #ddd;
     justify-content: space-between;
+    user-select: none;
   }
 
   ul {
@@ -83,7 +84,6 @@
     padding: 0;
     display: flex;
     font-family: monospace;
-    user-select: none;
     background-color: #ddd;
   }
 
