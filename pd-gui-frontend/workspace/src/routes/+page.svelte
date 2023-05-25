@@ -44,7 +44,7 @@
       </h1>
     {:else}
       <h1>
-        Waiting for a response
+        Waiting for the shim to connect.
       </h1>
     {/if}
   </div>
