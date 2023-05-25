@@ -128,6 +128,18 @@
       return
     }
 
+    if (event.code == 'KeyJ' && event.altKey && event.shiftKey) {
+      event.preventDefault()
+      canvas.on_put('hslider')
+      return
+    }
+
+    if (event.code == 'KeyV' && event.altKey && event.shiftKey) {
+      event.preventDefault()
+      canvas.on_put('vslider')
+	  return
+    }
+
     if (event.key == 'z' && event.ctrlKey) {
       event.preventDefault()
       canvas.on_undo()
