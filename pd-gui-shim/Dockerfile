@@ -45,9 +45,19 @@ COPY dockerfs/run.sh /usr/local/bin/
 FROM dev as build
 
 USER root
-COPY workspace /workspace/
+RUN mkdir -p /workspace/
+# first copy only what's needed for pnpm install, so Docker can cache it in
+# future runs
+COPY workspace/package.json /workspace/
+COPY workspace/pnpm-lock.yaml /workspace/
 RUN pnpm install
 RUN pnpm config set store-dir /workspace/.pnpm-store
+# now copy the actual sources. For some reason
+# COPY workspace/* /workspace
+# results in the _contents_ of src to be placed into /workspace/
+# so we resort to copying the folder separately:
+COPY workspace/src /workspace/src
+COPY workspace/tsconfig.json /workspace/
 RUN pnpm run build
 
 FROM build as build-pkg
