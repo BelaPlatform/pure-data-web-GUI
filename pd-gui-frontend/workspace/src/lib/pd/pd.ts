@@ -65,12 +65,24 @@ export class Pd {
   }
 
   handle_new_canvas_with_id(id: string, size: G.Size, origin: G.Point, set_edit_mode_on: boolean) {
-    if (origin.x > this.app.wm.desktop_size.width) {
+    // fix up origin
+    if (origin.x + size.width > this.app.wm.desktop_size.width) {
       origin.x = 24
     }
-    if (origin.y > this.app.wm.desktop_size.height) {
-      origin.y = 24
+
+    if (origin.y + size.height > this.app.wm.desktop_size.height) {
+      origin.x = 24
     }
+
+    // fix up size
+    if (origin.x + size.width > this.app.wm.desktop_size.width) {
+      size.width = this.app.wm.desktop_size.width - 48
+    }
+
+    if (origin.y + size.height > this.app.wm.desktop_size.height) {
+      size.height = this.app.wm.desktop_size.height - 48
+    }
+
     const canvas = new PdCanvas(id, this, size, origin, set_edit_mode_on)
     this.canvases.update((cs: PdCanvas[]) => {
       cs = cs.concat([canvas])
