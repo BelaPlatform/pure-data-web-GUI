@@ -183,4 +183,14 @@ export class App {
     const m = await make_menu()
     this.menu.update(_ => m)
   }
+
+  on_beforeunload(event: BeforeUnloadEvent) {
+    if (get(this.pd)?.has_dirty_patches()) {
+      event.preventDefault()
+      event.returnValue = 'Save?'
+      return 'Save?'
+    }
+
+    return null
+  }
 }

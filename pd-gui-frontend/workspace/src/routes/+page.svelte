@@ -16,7 +16,7 @@
   $: error_ = $app.error
 </script>
 
-<svelte:window on:keydown={(event) => $app.wm.on_keydown(event)} />
+<svelte:window on:keydown={(event) => $app.wm.on_keydown(event)} on:beforeunload={(event) => $app.on_beforeunload(event) } />
 
 {#if $pd}
   <Headerbar>

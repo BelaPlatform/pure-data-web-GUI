@@ -173,7 +173,8 @@ export class PdCanvas {
   }
 
   get is_dirty() {
-    return get(this.title).includes('.pd* ')
+    const title = get(this.title)
+    return title.includes('* ')
   }
 
   private send_simple_command(command: string) {

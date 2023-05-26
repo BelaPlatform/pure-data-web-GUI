@@ -169,5 +169,9 @@ export class Pd {
     this.dsp_is_on.update(_ => {
       return value
     })
-  }  
+  }
+
+  has_dirty_patches() {
+    return get(this.canvases).some(canvas => canvas.is_dirty)
+  }
 }
