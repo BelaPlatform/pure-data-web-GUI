@@ -4,6 +4,7 @@ import { TokenStream } from './token_stream'
 import { Parser } from './parser'
 import type { Pd } from '../pd'
 import { transform } from './transformer'
+import { PdMessages } from '../pd_messages'
 
 export class Interpreter {
   constructor(public context:Pd) {}
@@ -35,4 +36,14 @@ export class Interpreter {
       c.eval(this.context)
     })
   }
+}
+if(typeof io !== "undefined")
+{
+  let belaIdeSocket = io(location.protocol + '//' + location.hostname + '/IDE');
+  belaIdeSocket.on('status', function (data) {
+    if(data && data.belaLog)
+      PdMessages.push(data.belaLog + '\n')
+    if(data && data.belaLogErr)
+      PdMessages.push(data.belaLogErr + '\n')
+  });
 }
