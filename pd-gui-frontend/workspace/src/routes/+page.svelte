@@ -5,8 +5,18 @@
   import Headerbar from '$lib/components/shell/HeaderBar.svelte'
   import Frame from '$lib/components/shell/Frame.svelte'
 
+  let desktop_size = {width: 0, height: 0}
+  let desktop: HTMLDivElement
+
+  function on_resize() {
+    wm.desktop_size.width = desktop_size.width
+    wm.desktop_size.height = desktop_size.height
+  }
+
   onMount(async ()  => {
     $app.on_startup()
+    wm.desktop_size.width = desktop_size.width
+    wm.desktop_size.height = desktop_size.height
   })
 
   $: wm = $app.wm
@@ -16,41 +26,56 @@
   $: error_ = $app.error
 </script>
 
-<svelte:window on:keydown={(event) => $app.wm.on_keydown(event)} on:beforeunload={(event) => $app.on_beforeunload(event) } />
+<svelte:window
+  on:keydown={(event) => $app.wm.on_keydown(event)}
+  on:beforeunload={(event) => $app.on_beforeunload(event) }
+  on:resize={on_resize} />
 
-{#if $pd}
-  <Headerbar>
-    <input type="checkbox" 
-      id="dsp"
-      bind:checked={$dsp} 
-      on:click={_ => $pd?.on_toggle_dsp()}
-      />
-    <label for="dsp">DSP</label>
-  </Headerbar>
+<div id="desktop"
+  bind:this={desktop}
+  bind:clientWidth={desktop_size.width}
+  bind:clientHeight={desktop_size.height}>
 
-  {#each $frames as frame(frame.id)}
-    <Frame {frame} />
-  {/each}
-{:else}
-  <div id="splash">
-    {#if $error_ == 'pd_unavailable'}
-      <h1>PD is disconnected</h1>
-    {:else if $error_ == 'client_connected'}
-      <h1>Client connection already taken</h1>
-    {:else if $error_ == 'service_unavailable'}
-      <h1>
-        Service unavailable.<br>
-        Start the backend and refresh your browser window.
-      </h1>
-    {:else}
-      <h1>
-        Waiting for the shim to connect.
-      </h1>
-    {/if}
-  </div>
-{/if}
+  {#if $pd}
+    <Headerbar>
+      <input type="checkbox"
+        id="dsp"
+        bind:checked={$dsp}
+        on:click={_ => $pd?.on_toggle_dsp()}
+        />
+      <label for="dsp">DSP</label>
+    </Headerbar>
+
+    {#each $frames as frame(frame.id)}
+      <Frame {frame} />
+    {/each}
+  {:else}
+    <div id="splash">
+      {#if $error_ == 'pd_unavailable'}
+        <h1>PD is disconnected</h1>
+      {:else if $error_ == 'client_connected'}
+        <h1>Client connection already taken</h1>
+      {:else if $error_ == 'service_unavailable'}
+        <h1>
+          Service unavailable.<br>
+          Start the backend and refresh your browser window.
+        </h1>
+      {:else}
+        <h1>
+          Waiting for the shim to connect.
+        </h1>
+      {/if}
+    </div>
+  {/if}
+</div>
 
 <style lang="scss">
+  #desktop {
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+  }
+
   #splash {
     width: 100vw;
     height: 100vh;

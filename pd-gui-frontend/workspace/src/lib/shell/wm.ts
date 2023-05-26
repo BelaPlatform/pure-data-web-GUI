@@ -118,6 +118,7 @@ export class WindowManager {
   n_frames = 0
   active_frame: Frame | null = null
   singleton_dialogs: [DialogType, Frame][] = []
+  desktop_size: G.Size = new G.Size(0, 0)
 
   constructor(public app: App) {}
 
