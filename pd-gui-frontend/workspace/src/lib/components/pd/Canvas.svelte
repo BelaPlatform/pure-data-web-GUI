@@ -215,7 +215,9 @@
 
     // if event.key is of length 1, assume it's an ascii character
     if (event.key.length == 1) {
-      const ascii = event.key.charCodeAt(0)
+      let ascii = event.key.charCodeAt(0)
+      if(732 === ascii) // some keyboards create a high-tilde. We pass it down as a regular tilde
+        ascii = 126;
       canvas.send_key_down(`${ascii}`)
     }
   }
