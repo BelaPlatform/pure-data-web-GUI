@@ -318,7 +318,7 @@ export class WindowManager {
       return
     }
 
-    if (event.code == 'KeyN' && event.altKey) {
+    if (event.code == 'KeyN' && event.altKey && !event.shiftKey) {
       this.app.on_new_patch()
       event.preventDefault()
       return
