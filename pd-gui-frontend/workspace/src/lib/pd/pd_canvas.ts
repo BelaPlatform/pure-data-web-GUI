@@ -219,6 +219,10 @@ export class PdCanvas {
     this.send_simple_command('undo')
   }
 
+  on_redo() {
+    this.send_simple_command('redo')
+  }
+
   on_duplicate() {
     this.send_simple_command('duplicate')
   }

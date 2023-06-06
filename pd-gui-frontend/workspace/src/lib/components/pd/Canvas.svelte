@@ -146,6 +146,12 @@
       return
     }
 
+    if (event.key == 'Z' && event.ctrlKey) {
+      event.preventDefault()
+      canvas.on_redo()
+      return
+    }
+
     if (event.key == 'a' && event.ctrlKey) {
       event.preventDefault()
       canvas.on_select_all()

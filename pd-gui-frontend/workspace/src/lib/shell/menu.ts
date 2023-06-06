@@ -42,6 +42,14 @@ function on_save_patch_as() {
   }
 }
 
+function on_edit_undo() {
+  active_canvas()?.on_undo()
+}
+
+function on_edit_redo() {
+  active_canvas()?.on_redo()
+}
+
 function on_edit_cut() {
   active_canvas()?.on_cut()
 }
@@ -159,8 +167,9 @@ export async function make_menu() {
   let file_menu: MenuItem[] = build_file_menu()
 
   let edit_menu: MenuItem[] = [
-  /*   new MenuItem('Undo'),
-    new MenuItem('Redo'), */
+    new MenuItem('Undo', on_edit_undo, [], 'Ctrl+Z'),
+    new MenuItem('Redo', on_edit_redo, [], 'Ctrl+Shift+Z'),
+    new MenuItem('-'),
     new MenuItem('Cut', on_edit_cut, [], 'Ctrl+X'),
     new MenuItem('Copy', on_edit_copy, [], 'Ctrl+C'),
     new MenuItem('Paste', on_edit_paste, [], 'Ctrl+V'),

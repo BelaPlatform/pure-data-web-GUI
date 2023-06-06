@@ -37,7 +37,7 @@ export class Interpreter {
     })
   }
 }
-if(typeof io !== "undefined")
+/* if(typeof io !== "undefined")
 {
   let belaIdeSocket = io(location.protocol + '//' + location.hostname + '/IDE');
   belaIdeSocket.on('status', function (data) {
@@ -47,3 +47,4 @@ if(typeof io !== "undefined")
       PdMessages.push(data.belaLogErr + '\n')
   });
 }
+ */
