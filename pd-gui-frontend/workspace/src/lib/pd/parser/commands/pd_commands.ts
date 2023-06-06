@@ -46,7 +46,6 @@ export class Audio extends Command {
   }
 }
 
-
 export class DeleteCanvas extends Command {
   constructor(public canvas_id: string) {
     super()

@@ -245,10 +245,12 @@ export function transform(root: RootNode) : Command[] {
     }
 
     if (proc.id.name == 'destroy') {
-      const widget_id_arg = proc.arguments[0] as Identifier
-      const widget_id = widget_id_arg.name
-      commands.push(new WidgetCommands.Destroy(widget_id))
-      return
+      if (proc.id.namespace?.name == 'pdwidget') {
+        const widget_id_arg = proc.arguments[0] as Identifier
+        const widget_id = widget_id_arg.name
+        commands.push(new WidgetCommands.Destroy(widget_id))
+        return
+      }
     }
 
     if (proc.id.name == 'config') {
@@ -386,18 +388,28 @@ export function transform(root: RootNode) : Command[] {
       return
     }
 
-    // legacy style canvas command
+    // ----------------
+    // legacy style commands
+    // ----------------
     if (proc.id.name.startsWith('.x') && proc.id.name.endsWith('.c')) {
       if (proc.arguments.length >= 2) {
         const action = proc.arguments[0] as Identifier
         const what = proc.arguments[1] as StringNode
         if(action.name == 'delete' && what.value == "all") {
-          commands.push(new PdCommands.DeleteCanvas(clean_canvas_id(proc.id.name)))
+          commands.push(new CanvasCommands.DeleteAll(clean_canvas_id(proc.id.name)))
           return
         }
       }
     }
-    // console.log(proc.id.name)
+
+    if (proc.id.name == 'destroy') {
+      if (proc.arguments.length >= 1) {
+        const canvas_id_arg = proc.arguments[0] as Identifier
+        commands.push(new PdCommands.DeleteCanvas(clean_canvas_id(canvas_id_arg.name)))
+        return
+      }
+    }
+
     commands.push(new UnrecognizedCommand(proc.id.name))
   })
 

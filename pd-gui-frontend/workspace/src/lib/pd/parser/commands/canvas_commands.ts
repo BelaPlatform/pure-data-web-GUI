@@ -168,3 +168,17 @@ export class MenuClose extends Command {
     canvas.handle_menuclose()
   }
 }
+
+export class DeleteAll extends Command {
+  constructor(public canvas_id: string) {
+    super()
+  }
+
+  override eval(pd: Pd) {
+    const canvas = pd.canvas_with_id(this.canvas_id)
+    if (!canvas) {
+      return
+    }
+    canvas.handle_delete_all()
+  }
+}

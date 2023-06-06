@@ -98,6 +98,11 @@ export class PdCanvas {
     }
   }
 
+  handle_delete_all() {
+    this.widgets.update(_ => [])
+    this.connections.update(_ => [])
+  }
+
   handle_set_cursor(cursor_name: string) {
     this.cursor.update(_ => cursor_name)
   }

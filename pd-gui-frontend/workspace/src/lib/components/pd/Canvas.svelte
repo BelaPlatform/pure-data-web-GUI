@@ -137,7 +137,7 @@
     if (event.code == 'KeyV' && event.altKey && event.shiftKey) {
       event.preventDefault()
       canvas.on_put('vslider')
-	  return
+      return
     }
 
     if (event.key == 'z' && event.ctrlKey) {
