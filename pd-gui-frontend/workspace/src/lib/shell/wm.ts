@@ -50,8 +50,8 @@ export class Frame {
 
   move_to(x: number, y: number) {
     this.box.update(box => {
-      box.origin.x = x
-      box.origin.y = y
+      box.origin.x = x > 0 ? x : 0
+      box.origin.y = y > 0 ? y : 0
       return box
     })
   }
