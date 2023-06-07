@@ -20,6 +20,7 @@
   }
 
   function cellify_text(t: string) {
+    // console.log('cellify_text', t)
     let rows: Row[] = []
     const lines = t.split('\n')
     let row_idx = 0
@@ -66,7 +67,6 @@
 
 </script>
 
-<!-- <text>{$fontsize}</text> -->
 {#each rows as row}
   {#each row.cells as cell}
     {#if $selection.start <= cell.idx_in_string && $selection.end > cell.idx_in_string}
@@ -82,6 +82,12 @@
 
 {#if $state == 'edit'}
   <line x1={cursor.x * $fontsize / 1.8} x2={cursor.x * $fontsize / 1.8} y1={cursor.y * ($fontsize + 3) + 2} y2={cursor.y * ($fontsize + 3) + 18} class="cursor" />
+{:else}
+  <!-- <foreignObject x="0" y="0" width="600" height="480">
+    <div>
+      {$text}
+    </div>
+  </foreignObject> -->
 {/if}
 
 <style lang="scss">
@@ -117,4 +123,16 @@
       opacity: 1;
     }
   }
+
+  /*
+  div {
+    font-family: 'DejaVu Sans Mono', 'Courier New', Courier, monospace;
+    font-size: 12px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  } */
+
 </style>

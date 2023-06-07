@@ -119,6 +119,8 @@ export class PdWidget {
       }
       return b
     })
+
+    this.canvas.handle_widget_size_change(this)
   }
 
   set_bcolor(color: string) {

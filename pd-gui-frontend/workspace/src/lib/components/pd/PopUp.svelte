@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getContext, onMount } from 'svelte'
+  import { getContext } from 'svelte'
 
   import OutClick from 'svelte-outclick'
 

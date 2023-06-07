@@ -234,6 +234,8 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
+    /* border: #f00 solid thin; */
+    box-sizing: border-box;
   }
 
   .resize_grip {

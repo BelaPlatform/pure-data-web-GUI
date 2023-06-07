@@ -23,9 +23,10 @@
     })
 
     const size = get(canvas.size)
-    frame.set_size(size)
+    // add some wiggle room for the scrollbars
+    frame.set_size(new Geometry.Size(size.width + 12, size.height + 12))
     frame.box.subscribe(box => {
-      canvas.on_set_size(box.size)
+      canvas.on_set_size(new Geometry.Size(box.size.width - 12, box.size.height - 12))
       canvas.origin.update(_ => {
         return new Geometry.Point(box.origin.x, box.origin.y + 24)
       })

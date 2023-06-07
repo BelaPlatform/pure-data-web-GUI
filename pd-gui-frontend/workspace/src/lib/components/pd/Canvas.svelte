@@ -292,6 +292,9 @@
 
 <div class="wrap"
   bind:this={canvas_container}>
+  <div class="debug">
+    {`${$required_size.width}px x ${$required_size.height}px`}
+  </div>
   <PopUp canvas={canvas} />
   <svg xmlns="http://www.w3.org/2000/svg"
     on:mousedown={on_mousedown}
@@ -322,12 +325,22 @@
     width: 100%;
     height: 100%;
     overflow: auto;
+    /* border: #0f0 solid thin; */
+    box-sizing: border-box;
+  }
+
+  .debug {
+    position: absolute;
+    border: #00f solid thin;
+    display: inline-block;
+    visibility: hidden;
   }
 
   svg {
     /* width: 100%;
     height: 100%; */
-    // border: #def solid thin;
+    /* border: #f0f solid thick; */
+    box-sizing: border-box;
     width: var(--width);
     height: var(--height);
     min-width: var(--min-width);

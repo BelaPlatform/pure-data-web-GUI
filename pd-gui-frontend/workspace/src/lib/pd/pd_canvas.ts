@@ -59,10 +59,21 @@ export class PdCanvas {
       return ws
     })
 
-    const {x,y} = get(widget.box).bottom_right()
+    const {x, y} = get(widget.box).bottom_right()
     const {width,height} = get(this.required_size)
     if (x > width || y > height) {
       this.required_size.update(_ => new G.Size(x, y))
+    }
+  }
+
+  handle_widget_size_change(widget: PdWidget) {
+    const {x, y} = get(widget.box).bottom_right()
+    const {width,height} = get(this.required_size)
+    let required_width = (x + 24) > width ? (x + 24) : width
+    let required_height = (y + 24) > height ? (y + 24) : height
+    if (required_width > width || required_height > height) {
+      // console.log(`inc required_size ${required_width}, ${required_height}`)
+      this.required_size.update(_ => new G.Size(required_width, required_height))
     }
   }
 
@@ -241,6 +252,8 @@ export class PdCanvas {
   }
   
   handle_popup(x: number, y: number, has_properties: boolean, has_open: boolean) {
+    // take scroll into account
+    console.log(get(this.origin))
     const origin = new G.Point(x, y)
     const show = true
     this.popup.update(_ => {
