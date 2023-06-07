@@ -13,6 +13,18 @@
     wm.desktop_size.height = desktop_size.height
   }
 
+  function on_mousemove(event: MouseEvent) {
+    wm.on_mousemove(event)
+  }
+
+  function on_mousedown(event: MouseEvent) {
+    wm.on_mousedown(event)
+  }
+
+  function on_mouseup(event: MouseEvent) {
+    wm.on_mouseup(event)
+  }
+
   onMount(async ()  => {
     $app.on_startup()
     wm.desktop_size.width = desktop_size.width
@@ -34,7 +46,10 @@
 <div id="desktop"
   bind:this={desktop}
   bind:clientWidth={desktop_size.width}
-  bind:clientHeight={desktop_size.height}>
+  bind:clientHeight={desktop_size.height}
+  on:mousemove={on_mousemove}
+  on:mousedown={on_mousedown}
+  on:mouseup={on_mouseup}>
 
   {#if $pd}
     <Headerbar>

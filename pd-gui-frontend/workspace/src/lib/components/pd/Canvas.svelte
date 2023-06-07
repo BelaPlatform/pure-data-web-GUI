@@ -34,8 +34,8 @@
     return node_id
   }
 
-  let canvas_container:HTMLDivElement
-  let canvas_svg_element:SVGSVGElement
+  let canvas_container: HTMLDivElement
+  let canvas_svg_element: SVGSVGElement
 
   function global_to_local(event:MouseEvent) {
     const origin = get(canvas.origin)
@@ -56,28 +56,6 @@
     // add a small negative offset to make sure the popup is under the mouse
     // and does not close when the mouse button is released
     canvas.send_mouse_down(x - 2, y - 2, 3, 8)
-  }
-
-
-  function on_mousedown(event:MouseEvent) {
-    if (event.button != 0) {
-      return
-    }
-    const {x, y} = global_to_local(event)
-    const button = 1
-    const modifiers = (event.ctrlKey ? 2 : 0) + (event.altKey ? 4 : 0)
-    canvas.send_mouse_down(x, y, button, modifiers)
-  }
-
-  function on_mouseup(event:MouseEvent) {
-    const {x, y} = global_to_local(event)
-    canvas.send_mouse_up(x, y, event.button)
-  }
-
-  function on_mousemove(event:MouseEvent) {
-    const modifiers = (event.ctrlKey ? 2 : 0) + (event.altKey ? 4 : 0)
-    const {x, y} = global_to_local(event)
-    canvas.send_motion(x, y, modifiers)
   }
 
   function on_keydown(event:KeyboardEvent) {
@@ -304,9 +282,7 @@
   </div>
   <PopUp canvas={canvas} />
   <svg xmlns="http://www.w3.org/2000/svg"
-    on:mousedown={on_mousedown}
-    on:mousemove={on_mousemove}
-    on:mouseup={on_mouseup}
+    data-canvas-id="{canvas.id}"
     on:touchstart={on_touchstart}
     on:touchmove={on_touchmove}
     on:touchend={on_touchend}

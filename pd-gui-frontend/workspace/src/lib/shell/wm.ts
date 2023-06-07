@@ -13,6 +13,7 @@ import AboutPdDialog from '$lib/components/pd/dialogs/AboutPdDialog.svelte'
 import SaveAsDialog from '$lib/components/pd/dialogs/SaveAsDialog.svelte'
 import SaveDialog from '$lib/components/pd/dialogs/SaveDialog.svelte'
 
+
 export type DialogType = 'pd' | 'message' | 'find' | 'preferences' | 'audio-settings' | 'about'
 
 function DefaultBox() { 
@@ -119,6 +120,7 @@ export class WindowManager {
   active_frame: Frame | null = null
   singleton_dialogs: [DialogType, Frame][] = []
   desktop_size: G.Size = new G.Size(0, 0)
+  target_canvas: PdCanvas|null = null
 
   constructor(public app: App) {}
 
@@ -356,6 +358,68 @@ export class WindowManager {
         canvas.on_cut()
         return
       }
+    }
+  }
+
+  private find_svg_element(event: MouseEvent) : SVGSVGElement|null {
+    let element: Element | null = event.target as Element
+    while (element) {
+      if (element instanceof SVGSVGElement) {
+        return element as SVGSVGElement
+      }
+      element = element.parentElement
+    }
+    return null
+  }
+
+  private canvas_from_event(event: MouseEvent) {
+    const element = this.find_svg_element(event)
+    if (element) {
+      if (element.hasAttribute('data-canvas-id')) {
+        const canvas_id = element.getAttribute('data-canvas-id')!
+        const pd = get(this.app.pd)
+        return pd!.canvas_with_id(canvas_id) || null
+      }
+    }
+    return null
+  }
+
+  private global_to_canvas_local(event: MouseEvent, canvas: PdCanvas) {
+    const origin = get(canvas.origin)
+    const scroll_pos = get(canvas.scroll_pos)
+    const x = event.clientX - origin.x + scroll_pos.x
+    const y = event.clientY - origin.y + scroll_pos.y
+    return {x, y}
+  }
+
+  on_mousemove(event: MouseEvent) {
+    const canvas = this.target_canvas != null ? this.target_canvas : this.canvas_from_event(event)
+    if (canvas) {
+      const {x, y} = this.global_to_canvas_local(event, canvas)
+      const modifiers = (event.ctrlKey ? 2 : 0) + (event.altKey ? 4 : 0)
+      canvas.send_motion(x, y, modifiers)
+      return
+    }
+  }
+
+  on_mousedown(event: MouseEvent) {
+    const canvas = this.canvas_from_event(event)
+    if (canvas) {
+      this.target_canvas = canvas
+      const {x, y} = this.global_to_canvas_local(event, canvas)
+      const button = 1
+      const modifiers = (event.ctrlKey ? 2 : 0) + (event.altKey ? 4 : 0)
+      this.target_canvas.send_mouse_down(x, y, button, modifiers)
+      return
+    }
+  }
+
+  on_mouseup(event: MouseEvent) {
+    if (this.target_canvas) {
+      const {x, y} = this.global_to_canvas_local(event, this.target_canvas)
+      this.target_canvas.send_mouse_up(x, y, event.button)
+      this.target_canvas = null
+      return
     }
   }
 }

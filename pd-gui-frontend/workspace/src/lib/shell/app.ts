@@ -123,7 +123,7 @@ export class App {
   }
 
   async on_startup() {
-    console.log('on_startup')
+    // console.log('on_startup')
     await this.on_update_menu()
     this.wm.on_show_singleton_dialog('pd')
     PdMessages.push(navigator.userAgent, Direction.Internal)
