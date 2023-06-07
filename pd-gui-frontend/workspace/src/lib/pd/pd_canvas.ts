@@ -30,6 +30,7 @@ export class PdCanvas {
   size = writable<G.Size>(G.NullSize())
   required_size = writable<G.Size>(G.NullSize())
   origin = writable<G.Point>(G.NullPoint())
+  scroll_pos = writable<G.Point>(G.NullPoint())
 
   constructor(public id: string, public pd: Pd, size: G.Size, origin: G.Point, set_edit_mode_on: boolean) {
     this.size.set(size)
@@ -253,8 +254,8 @@ export class PdCanvas {
   
   handle_popup(x: number, y: number, has_properties: boolean, has_open: boolean) {
     // take scroll into account
-    console.log(get(this.origin))
-    const origin = new G.Point(x, y)
+    const scroll_pos = get(this.scroll_pos)
+    const origin = new G.Point(x - scroll_pos.x, y - scroll_pos.y)
     const show = true
     this.popup.update(_ => {
       return {show, origin, has_properties, has_open}
@@ -284,5 +285,13 @@ export class PdCanvas {
 
   handle_text_editing(text_edit_mode_is_enabled: boolean) {
     this.text_edit_mode_enabled.update(_ => text_edit_mode_is_enabled)
+  }
+
+  on_scroll(x: number, y: number) {
+    this.scroll_pos.update(pos => {
+      pos.x = x
+      pos.y = y
+      return pos
+   })
   }
 }

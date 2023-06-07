@@ -275,6 +275,12 @@
     }
   }
 
+  function on_scroll() {
+    const x = canvas_container.scrollLeft
+    const y = canvas_container.scrollTop
+    canvas.on_scroll(x, y)
+  }
+
   onMount(() => {
     canvas.text_edit_mode_enabled.subscribe(is_enabled => {
       if (is_enabled && $app.user_agent.is_mobile) {
@@ -291,7 +297,8 @@
 <svelte:window on:keydown={on_keydown} on:keyup={on_keyup} />
 
 <div class="wrap"
-  bind:this={canvas_container}>
+  bind:this={canvas_container}
+  on:scroll={on_scroll}>
   <div class="debug">
     {`${$required_size.width}px x ${$required_size.height}px`}
   </div>
