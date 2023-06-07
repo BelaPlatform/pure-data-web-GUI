@@ -71,7 +71,6 @@ export class PdWidget {
   }
 
   set_text(txt: string) {
-    // console.log(`set_text: ${txt}`)
     this.text.update(_ => txt)
   }
 
@@ -93,6 +92,7 @@ export class PdWidget {
       b.origin.y = y
       return b
     })
+    this.canvas.handle_widget_box_change(this)
   }
 
   displace_origin(x: number, y: number) {
@@ -101,6 +101,7 @@ export class PdWidget {
       b.origin.y += y
       return b
     })
+    this.canvas.handle_widget_box_change(this)
   }
 
   set_size(width: number, height: number) {
@@ -120,7 +121,7 @@ export class PdWidget {
       return b
     })
 
-    this.canvas.handle_widget_size_change(this)
+    this.canvas.handle_widget_box_change(this)
   }
 
   set_bcolor(color: string) {

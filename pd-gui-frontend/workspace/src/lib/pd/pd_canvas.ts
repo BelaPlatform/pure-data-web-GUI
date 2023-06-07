@@ -67,13 +67,12 @@ export class PdCanvas {
     }
   }
 
-  handle_widget_size_change(widget: PdWidget) {
+  handle_widget_box_change(widget: PdWidget) {
     const {x, y} = get(widget.box).bottom_right()
     const {width,height} = get(this.required_size)
     let required_width = (x + 24) > width ? (x + 24) : width
     let required_height = (y + 24) > height ? (y + 24) : height
     if (required_width > width || required_height > height) {
-      // console.log(`inc required_size ${required_width}, ${required_height}`)
       this.required_size.update(_ => new G.Size(required_width, required_height))
     }
   }
