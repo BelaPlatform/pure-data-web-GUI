@@ -67,27 +67,27 @@
 
 </script>
 
-{#each rows as row}
-  {#each row.cells as cell}
-    {#if $selection.start <= cell.idx_in_string && $selection.end > cell.idx_in_string}
-      <rect x={cell.idx_in_row * $fontsize / 1.8} y={row.idx  * $fontsize } width={$fontsize / 1.8 + 1} height={$fontsize + 7} class="bg" />
-    {/if}
-    <text x={cell.idx_in_row * $fontsize / 1.8} y={(row.idx + 1) * ($fontsize + 3)} 
-      style:--fontsize="{$fontsize}px"
-      class:selected={$selection.start <= cell.idx_in_string && $selection.end > cell.idx_in_string}>
-      {cell.char}
-    </text>
-  {/each}
-{/each}
-
 {#if $state == 'edit'}
   <line x1={cursor.x * $fontsize / 1.8} x2={cursor.x * $fontsize / 1.8} y1={cursor.y * ($fontsize + 3) + 2} y2={cursor.y * ($fontsize + 3) + 18} class="cursor" />
+  {#each rows as row}
+    {#each row.cells as cell}
+      {#if $selection.start <= cell.idx_in_string && $selection.end > cell.idx_in_string}
+        <rect x={cell.idx_in_row * $fontsize / 1.8} y={row.idx * ($fontsize + 3)} width={$fontsize / 1.8 + 1} height={$fontsize + 7} class="bg" />
+      {/if}
+      <text x={cell.idx_in_row * $fontsize / 1.8} y={(row.idx + 1) * ($fontsize + 3)} 
+        style:--fontsize="{$fontsize}px"
+        class:selected={$selection.start <= cell.idx_in_string && $selection.end > cell.idx_in_string}>
+        {cell.char}
+      </text>
+    {/each}
+  {/each}
 {:else}
-  <!-- <foreignObject x="0" y="0" width="600" height="480">
+  <!-- TODO: calculate text extent -->
+  <foreignObject x="0" y="0" width="600" height="480">
     <div>
       {$text}
     </div>
-  </foreignObject> -->
+  </foreignObject>
 {/if}
 
 <style lang="scss">
@@ -124,7 +124,6 @@
     }
   }
 
-  /*
   div {
     font-family: 'DejaVu Sans Mono', 'Courier New', Courier, monospace;
     font-size: 12px;
@@ -133,6 +132,8 @@
     overflow: hidden;
     white-space: pre-wrap;
     word-wrap: break-word;
-  } */
+    padding-top: 3px;
+    letter-spacing: -1px;
+  }
 
 </style>
