@@ -17,21 +17,26 @@
   type Row = {
     idx: number
     cells: Cell[]
+    range_start: number
+    range_end: number
   }
 
   function cellify_text(t: string) {
-    // console.log('cellify_text', t)
     let rows: Row[] = []
     const lines = t.split('\n')
+    console.log(`cellify_text: ${t} ${lines.length} lines`)
     let row_idx = 0
     let cell_idx = 0
     lines.forEach(line => {
       const cells: Cell[] = []
-      const row = {idx: row_idx++, cells}
+      const range_start = cell_idx
+      const range_end = cell_idx + line.length
+      const row = {idx: row_idx++, cells, range_start, range_end}
       for(let idx = 0; idx < line.length; ++idx) {
         row.cells.push({idx_in_string: cell_idx++, idx_in_row: idx, char: line.charAt(idx)})
       }
       rows.push(row)
+      cell_idx++
     })
     return rows
   }
@@ -41,21 +46,20 @@
       return {x: 0, y: 0}
     }
 
-    if (selection.start == text.length) {
-      const last_row = rows[rows.length - 1]
-      const last_cell = last_row.cells[last_row.cells.length - 1]
-      return {x: last_cell.idx_in_row + 1, y: rows.length - 1}
-    }
     for (let row_idx = 0; row_idx < rows.length; ++row_idx) {
       const row = rows[row_idx]
-      for(let cell_idx = 0; cell_idx < row.cells.length; ++cell_idx) {
-        const cell = row.cells[cell_idx]
-        if (cell.idx_in_string == selection.start) {
-          return {x: cell.idx_in_row, y: row_idx}
+      if (row.range_start <= selection.start && row.range_end >= selection.start) {
+        for(let cell_idx = 0; cell_idx < row.cells.length; ++cell_idx) {
+          const cell = row.cells[cell_idx]
+          if (cell.idx_in_string == selection.start) {
+            return {x: cell.idx_in_row, y: row_idx}
+          }
         }
+        return {x: row.range_end - row.range_start, y: row_idx}
       }
     }
-    return {x: 0, y: 0}
+
+    return {x: 0, y: rows.length}
   }
  
   $: state = widget.state
